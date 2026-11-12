@@ -9,6 +9,12 @@
   <link rel="icon" type="image/jpeg" href="images/logo.jpg">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://challenges.cloudflare.com">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <style>
+    .form-error { color: #f87171; background: rgba(248, 113, 113, 0.1); border: 1px solid #f87171; padding: 12px 16px; border-radius: 8px; }
+    .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  </style>
 </head>
 <body>
   <nav class="nav">
@@ -39,10 +45,14 @@
       <div class="contact-grid">
         <div>
           <h2 style="margin-bottom: 24px;">Start a Conversation</h2>
-          <form id="contact-form" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required aria-label="Name">
-            <input type="email" name="email" placeholder="Work Email" required aria-label="Email">
-            <input type="text" name="company" placeholder="Company" aria-label="Company">
+          <form id="contact-form" class="contact-form" action="/api/contact" method="post">
+            <div class="hp" hidden aria-hidden="true">
+              <label for="website">Leave this field empty</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <input type="text" name="name" placeholder="Your Name" required aria-label="Name" autocomplete="name" maxlength="100">
+            <input type="email" name="email" placeholder="Work Email" required aria-label="Email" autocomplete="email" maxlength="200">
+            <input type="text" name="company" placeholder="Company" aria-label="Company" autocomplete="organization" maxlength="150">
             <select name="interest" aria-label="Area of interest">
               <option value="">Area of Interest</option>
               <option value="cloud">Cloud Architecture</option>
@@ -51,10 +61,13 @@
               <option value="security">Cybersecurity</option>
               <option value="other">Other / Not Sure</option>
             </select>
-            <textarea name="message" rows="5" placeholder="Tell us about your challenge or project..." required aria-label="Message"></textarea>
+            <textarea name="message" rows="5" placeholder="Tell us about your challenge or project..." required aria-label="Message" maxlength="5000"></textarea>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAF8HJhDrsUWEA8c6" data-action="contact" data-theme="dark"></div>
+            <noscript>
+              <p>JavaScript is required to send this form. Email us at <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>.</p>
+            </noscript>
             <button type="submit" class="btn btn-primary">Send Message</button>
           </form>
-          <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">This form is a demonstration. Connect it to your preferred form service (Formspree, Netlify Forms, etc.) for production use.</p>
         </div>
         <div class="contact-info">
           <div class="contact-item">
