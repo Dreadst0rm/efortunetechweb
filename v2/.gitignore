@@ -1,0 +1,5 @@
+node_modules/
+dist/
+worker/contact-html.js
+.wrangler/
+*.log
