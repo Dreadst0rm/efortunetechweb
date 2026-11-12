@@ -17,27 +17,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Contact Form Handling
+  // Contact form posts to /api/contact (native submit so the Turnstile
+  // token is included). Disable the button to prevent double sends.
   const form = document.getElementById('contact-form');
   if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+    form.addEventListener('submit', function() {
       const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.textContent;
-      btn.textContent = 'Sending...';
-      btn.disabled = true;
-
-      // Simulate form submission (replace with real endpoint)
-      setTimeout(() => {
-        btn.textContent = 'Message Sent ✓';
-        btn.style.background = '#00c2b8';
-        form.reset();
-        setTimeout(() => {
-          btn.textContent = originalText;
-          btn.disabled = false;
-          btn.style.background = '';
-        }, 3000);
-      }, 1200);
+      if (btn) {
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+      }
     });
   }
 
@@ -57,4 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
   });
+});
+
+// Back-forward cache can restore the page with the submit button still
+// disabled after a 303. Re-enable it only for persisted (bfcache) restores.
+window.addEventListener('pageshow', function (e) {
+  if (!e.persisted) return;
+  const form = document.getElementById('contact-form');
+  const btn = form && form.querySelector('button[type="submit"]');
+  if (!btn) return;
+  btn.disabled = false;
+  btn.textContent = 'Send Message';
 });
