@@ -1,0 +1,13 @@
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}
+
+.bp-vt-root {
+  view-transition-name: none;
+}

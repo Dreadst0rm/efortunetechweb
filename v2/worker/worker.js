@@ -5,6 +5,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { handleContact } from './contact-handler.js';
 import { digestLegacyRedirectUrl } from './digest-redirect.js';
+import { handleQuickCheck } from './quick-check.js';
 
 async function defaultSendEmail(env, { from, to, raw }) {
   await env.CONTACT_EMAIL.send(new EmailMessage(from, to, raw));
@@ -37,6 +38,10 @@ export default {
 
     if (url.pathname === '/api/contact') {
       return handleContact(request, env, { sendEmail: defaultSendEmail });
+    }
+
+    if (url.pathname === '/api/quick-check') {
+      return handleQuickCheck(request, env);
     }
 
     let pathname = assetPathname(url.pathname);

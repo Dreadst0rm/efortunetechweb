@@ -16,10 +16,17 @@ export default function DigestIndexPage({ updates }: { updates: DigestUpdate[] }
         </p>
       </header>
 
+      <div id="digest-filters" className="bp-digest-filters-mount" />
+
       {latest ? (
         <section className="bp-digest__section" aria-labelledby="digest-latest">
           <h2 id="digest-latest">Latest</h2>
-          <a className="bp-digest__card bp-digest__card--featured" href={digestUpdatePath(latest.data.date)}>
+          <a
+            className="bp-digest__card bp-digest__card--featured"
+            href={digestUpdatePath(latest.data.date)}
+            data-digest-date={latest.data.date}
+            data-vt-date={latest.data.date}
+          >
             <p className="bp-digest__meta">
               <time dateTime={latest.data.date}>{formatDisplayDate(latest.data.date)}</time>
               {latest.data.tone ? <span> · {latest.data.tone}</span> : null}
@@ -38,7 +45,12 @@ export default function DigestIndexPage({ updates }: { updates: DigestUpdate[] }
           <ol className="bp-digest__archive">
             {archive.map((update) => (
               <li key={update.id}>
-                <a className="bp-digest__card" href={digestUpdatePath(update.data.date)}>
+                <a
+                  className="bp-digest__card"
+                  href={digestUpdatePath(update.data.date)}
+                  data-digest-date={update.data.date}
+                  data-vt-date={update.data.date}
+                >
                   <p className="bp-digest__meta">
                     <time dateTime={update.data.date}>{formatDisplayDate(update.data.date)}</time>
                   </p>

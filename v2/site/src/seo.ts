@@ -6,6 +6,7 @@ export type PageSeo = {
   robots?: string
   extraHead?: string
   scripts?: string[]
+  moduleScripts?: string[]
 }
 
 const origin = 'https://efortune.tech'
@@ -20,6 +21,7 @@ export const TURNSTILE_HEAD = `
 export const pages: Record<string, PageSeo> = {
   'index.html': {
     title: 'efortune.tech | Expert Cloud, AI & Software Architecture',
+    moduleScripts: ['/assets/islands/hero.js'],
     description:
       'Chicago-based technical consulting firm specializing in cloud architecture, software engineering, AI strategy, and digital transformation.',
     canonicalPath: '/',
@@ -32,6 +34,13 @@ export const pages: Record<string, PageSeo> = {
     canonicalPath: '/contact.html',
     extraHead: TURNSTILE_HEAD,
     scripts: ['/js/contact.js'],
+    moduleScripts: ['/assets/islands/quick-check.js'],
+  },
+  'case-studies.html': {
+    title: 'Case Studies | efortune.tech',
+    description: 'Selected architecture and strategy engagements from efortune.tech.',
+    canonicalPath: '/case-studies.html',
+    moduleScripts: ['/assets/islands/case-studies.js'],
   },
   'thanks.html': {
     title: 'Message sent | efortune.tech',
@@ -50,11 +59,6 @@ export const pages: Record<string, PageSeo> = {
     description:
       'Cloud architecture, software design, AI strategy, cybersecurity, and digital transformation consulting.',
     canonicalPath: '/services.html',
-  },
-  'case-studies.html': {
-    title: 'Case Studies | efortune.tech',
-    description: 'Selected architecture and strategy engagements from efortune.tech.',
-    canonicalPath: '/case-studies.html',
   },
   'about.html': {
     title: 'About efortune.tech | Chicago Technology Experts',

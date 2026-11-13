@@ -1,0 +1,91 @@
+.bp-qc {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  border: 1px dashed rgba(89, 242, 255, 0.35);
+  border-radius: 8px;
+}
+
+.bp-qc__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+  margin: 1rem 0;
+}
+
+@media (max-width: 640px) {
+  .bp-qc__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bp-qc input {
+  background: #0c1020;
+  border: 1px solid #2a355c;
+  border-radius: 6px;
+  color: #e8eef7;
+  padding: 0.65rem;
+  font: inherit;
+}
+
+.bp-qc button {
+  background: #ffd166;
+  color: #05060f;
+  border: none;
+  border-radius: 6px;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bp-qc button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bp-qc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bp-qc__item {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  color: #c5d0e6;
+  line-height: 1.45;
+}
+
+.bp-qc__badge {
+  font-family: ui-monospace, Consolas, monospace;
+  width: 1.25rem;
+  flex-shrink: 0;
+}
+
+.bp-qc__item--pass .bp-qc__badge {
+  color: #4ade80;
+}
+
+.bp-qc__item--warn .bp-qc__badge {
+  color: #ffd166;
+}
+
+.bp-qc__item--fail .bp-qc__badge {
+  color: #f87171;
+}
+
+.bp-qc__error {
+  color: #f87171;
+}
+
+.bp-qc__link {
+  background: none;
+  border: none;
+  color: #59f2ff;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+}

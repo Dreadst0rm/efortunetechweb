@@ -22,6 +22,7 @@ const requiredPages = [
   'assets/site.css',
   'digest/index.html',
   'digest/rss.xml',
+  'digest/index.json',
 ]
 
 describe('build output', () => {
@@ -38,14 +39,9 @@ describe('build output', () => {
     expect(issues).toHaveLength(25)
   })
 
-  it('does not ship a client React bundle', () => {
-    const assetsDir = path.join(dist, 'assets')
-    const assets = existsSync(assetsDir) ? readdirSync(assetsDir) : []
-    const jsBundles = assets.filter((f) => f.endsWith('.js') && !f.endsWith('.map'))
-    expect(jsBundles).toEqual([])
-
+  it('does not ship a global client app bundle', () => {
     const index = readFileSync(path.join(dist, 'index.html'), 'utf8')
-    expect(index).not.toMatch(/react|vite|\/assets\/index-.*\.js/i)
+    expect(index).not.toMatch(/\/assets\/index-.*\.js/i)
     expect(index).toMatch(/\/assets\/site\.css/)
   })
 })

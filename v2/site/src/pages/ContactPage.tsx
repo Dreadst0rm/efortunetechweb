@@ -10,6 +10,7 @@ export default function ContactPage() {
           outcomes.
         </p>
       </header>
+      <div id="quick-check-island" className="bp-qc-mount" tabIndex={-1} />
       <div className="bp-contact-grid">
         <div>
           <h2>Start a Conversation</h2>

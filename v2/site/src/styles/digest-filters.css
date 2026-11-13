@@ -1,0 +1,64 @@
+.bp-digest-filters {
+  border: 1px solid #2a355c;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.bp-digest-filters input[type='search'],
+.bp-digest-filters input[type='date'] {
+  background: #0c1020;
+  border: 1px solid #2a355c;
+  border-radius: 6px;
+  color: #e8eef7;
+  padding: 0.5rem;
+  font: inherit;
+  width: 100%;
+}
+
+.bp-digest-filters__field span,
+.bp-digest-filters legend {
+  display: block;
+  font-size: 0.85rem;
+  color: #93a5c0;
+  margin-bottom: 0.35rem;
+}
+
+.bp-digest-filters__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.bp-chip {
+  border: 1px solid #59f2ff;
+  background: transparent;
+  color: #9aa8c3;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  font: inherit;
+}
+
+.bp-chip--on {
+  background: rgba(89, 242, 255, 0.15);
+  color: #e8eef7;
+}
+
+.bp-chip:focus-visible {
+  outline: 2px solid #ffd166;
+  outline-offset: 2px;
+}
+
+.bp-digest-filters__dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bp-digest-filters__status {
+  font-size: 0.85rem;
+  color: #93a5c0;
+}

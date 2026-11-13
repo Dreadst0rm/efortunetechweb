@@ -18,7 +18,9 @@ export default function DigestIssuePage({
         <time dateTime={date}>{formatDisplayDate(date)}</time>
         {tone ? <span> · {tone}</span> : null}
       </p>
-      <h1>{title}</h1>
+      <div className="bp-digest__vt-header" data-vt-date={date}>
+        <h1>{title}</h1>
+      </div>
 
       <section className="bp-digest__callout" aria-labelledby="digest-summary">
         <h2 id="digest-summary" className="bp-digest__visually-hidden">

@@ -28,6 +28,10 @@
   margin-bottom: 0.5rem;
 }
 
+.bp-digest__vt-header {
+  contain: layout;
+}
+
 .bp-digest__card {
   display: block;
   border: 1px solid #2a355c;

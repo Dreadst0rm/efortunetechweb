@@ -10,7 +10,8 @@ import HomePage from '../src/pages/HomePage'
 import LegacyArticlePage from '../src/pages/LegacyArticlePage'
 import NotFoundPage from '../src/pages/NotFoundPage'
 import ThanksPage from '../src/pages/ThanksPage'
-import { caseStudies, services } from '../src/content'
+import CaseStudiesPage from '../src/pages/CaseStudiesPage'
+import { services } from '../src/content'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { renderDigest } from './render-digest'
 import { digestUpdatePath } from '../src/digest/dates'
@@ -58,22 +59,7 @@ const routes: Route[] = [
       </p>
     </LegacyArticlePage>,
   ),
-  route(
-    'case-studies.html',
-    'case-studies',
-    <LegacyArticlePage
-      title="Case Studies"
-      lead="Selected engagements where clear architecture direction improved cost, speed, or reliability."
-    >
-      {caseStudies.map((c) => (
-        <section key={c.title}>
-          <h2>{c.tag}</h2>
-          <h3>{c.title}</h3>
-          <p>{c.blurb}</p>
-        </section>
-      ))}
-    </LegacyArticlePage>,
-  ),
+  route('case-studies.html', 'case-studies', <CaseStudiesPage />),
   route(
     'about.html',
     'about',
@@ -154,15 +140,18 @@ const routes: Route[] = [
 
 function writePage({ out, active, body, seo }: Route) {
   const inner = renderToStaticMarkup(createElement(Shell, { active, children: body }))
-  const scripts = (seo.scripts ?? [])
-    .map((src) => `<script src="${src}"></script>`)
-    .join('\n  ')
+  const scripts = [
+    ...(seo.scripts ?? []).map((src) => `<script src="${src}"></script>`),
+    ...(seo.moduleScripts ?? []).map(
+      (src) => `<script type="module" src="${src}"></script>`,
+    ),
+  ].join('\n  ')
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
   ${renderHead(seo)}
 </head>
-<body>
+<body class="bp-vt-root">
   ${inner}
   ${scripts}
 </body>

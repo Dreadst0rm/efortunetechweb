@@ -1,0 +1,85 @@
+.bp-cs-mount:not(:empty) + .bp-cs-fallback {
+  display: none;
+}
+
+.bp-cs-explorer {
+  margin: 2rem 0 3rem;
+  padding: 1.25rem;
+  border: 1px solid #2a355c;
+  border-radius: 8px;
+}
+
+.bp-cs-explorer__toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.bp-cs-toggle {
+  background: transparent;
+  border: 1px solid #59f2ff;
+  color: #9aa8c3;
+  padding: 0.45rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.bp-cs-toggle--active {
+  background: rgba(89, 242, 255, 0.15);
+  color: #e8eef7;
+}
+
+.bp-cs-diagram__svg {
+  width: 100%;
+  max-width: 400px;
+  display: block;
+  margin: 0 auto;
+}
+
+.bp-cs-diagram__edge {
+  stroke: rgba(89, 242, 255, 0.4);
+  stroke-width: 2;
+}
+
+.bp-cs-diagram__node {
+  fill: #0c1020;
+  stroke: #59f2ff;
+  stroke-width: 1.5;
+  transition: fill 0.2s ease, stroke 0.2s ease;
+}
+
+.bp-cs-diagram__node--active {
+  fill: rgba(89, 242, 255, 0.12);
+  stroke: #ffd166;
+}
+
+.bp-cs-diagram__node:focus-visible {
+  outline: 2px solid #ffd166;
+  outline-offset: 2px;
+}
+
+.bp-cs-diagram__node-label {
+  fill: #e8eef7;
+  font-size: 11px;
+  font-family: ui-monospace, Consolas, monospace;
+  pointer-events: none;
+}
+
+.bp-cs-diagram__hint,
+.bp-cs-diagram__detail {
+  font-size: 0.9rem;
+  color: #9aa8c3;
+  margin-top: 0.75rem;
+}
+
+.bp-cs-diagram-stage {
+  transition: opacity 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-cs-diagram__node,
+  .bp-cs-diagram-stage {
+    transition: none;
+  }
+}

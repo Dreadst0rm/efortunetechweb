@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "build:css": "vite build --config site/vite.css.config.ts && node site/scripts/strip-build-junk.mjs",
+    "build:islands": "node site/scripts/build-islands.mjs",
     "prerender": "tsx site/scripts/prerender.tsx",
     "copy:public": "node site/scripts/copy-public.mjs",
     "bundle-contact-html": "SITE_ROOT=../dist node worker/scripts/bundle-contact-html.js",
-    "build": "node site/scripts/clean-dist.mjs && npm run copy:public && npm run build:css && npm run prerender && npm run bundle-contact-html",
+    "build": "node site/scripts/clean-dist.mjs && npm run copy:public && npm run build:css && npm run build:islands && npm run prerender && npm run bundle-contact-html",
     "test": "vitest run && node --test worker/test/*.test.js",
     "lint": "oxlint site",
     "dev:css": "vite build --config site/vite.css.config.ts --watch",
