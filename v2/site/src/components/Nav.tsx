@@ -24,6 +24,17 @@ export default function Nav({ active }: { active: NavPage }) {
         efortune<span className="site-nav__dot">.</span>tech
       </a>
       <nav className="site-nav__links" aria-label="Main">
+        <button
+          type="button"
+          id="theme-toggle"
+          className="site-nav__theme"
+          aria-pressed="false"
+          aria-label="Switch color theme"
+        >
+          <span className="site-nav__theme-label" aria-hidden="true">
+            Theme
+          </span>
+        </button>
         {links.map((link) =>
           link.page === 'contact' ? (
             <a

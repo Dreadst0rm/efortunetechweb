@@ -8,7 +8,7 @@
 }
 
 .bp-draw {
-  stroke: rgba(89, 242, 255, 0.55);
+  stroke: var(--color-hero-line);
   stroke-width: 1.5;
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
@@ -16,12 +16,12 @@
 }
 
 .bp-draw-stamp {
-  stroke: rgba(255, 65, 97, 0.85);
+  stroke: var(--color-hero-stamp);
   stroke-width: 3;
 }
 
 .bp-draw-label {
-  fill: rgba(255, 65, 97, 0.9);
+  fill: var(--color-hero-stamp);
   font-family: ui-monospace, Consolas, monospace;
   font-size: 14px;
   font-weight: 700;
@@ -35,7 +35,7 @@
 }
 
 .bp-draw-label--note {
-  fill: rgba(147, 165, 192, 0.9);
+  fill: var(--color-text-subtle);
   font-size: 12px;
   text-anchor: start;
 }

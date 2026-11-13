@@ -1,3 +1,4 @@
+import './styles/theme.css'
 import './index.css'
 import './App.css'
 import './remixes/BlueprintRemix.css'

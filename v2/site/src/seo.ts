@@ -16,6 +16,11 @@ const defaultImage = `${origin}/icons.svg`
 const cfAnalyticsToken = process.env.CF_WEB_ANALYTICS_TOKEN
 const webAnalyticsHead = buildWebAnalyticsHead(cfAnalyticsToken)
 
+export const THEME_HEAD = `
+  <script src="/js/theme-init.js"></script>
+  <script src="/js/theme-toggle.js" defer></script>
+`.trim()
+
 export const TURNSTILE_HEAD = `
   <base href="/">
   <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -115,6 +120,7 @@ export function renderHead(seo: PageSeo): string {
   <meta name="twitter:description" content="${escapeHtml(seo.description)}">
   <meta name="twitter:image" content="${escapeHtml(ogImage)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  ${THEME_HEAD}
   <link rel="stylesheet" href="/assets/site.css">
   ${webAnalyticsHead}
   ${seo.extraHead ?? ''}

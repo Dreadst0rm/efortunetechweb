@@ -5,8 +5,9 @@
 .bp-cs-explorer {
   margin: 2rem 0 3rem;
   padding: 1.25rem;
-  border: 1px solid #2a355c;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
+  background: var(--color-surface);
 }
 
 .bp-cs-explorer__toggle {
@@ -17,8 +18,8 @@
 
 .bp-cs-toggle {
   background: transparent;
-  border: 1px solid #59f2ff;
-  color: #9aa8c3;
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-muted);
   padding: 0.45rem 0.9rem;
   border-radius: 6px;
   cursor: pointer;
@@ -26,8 +27,8 @@
 }
 
 .bp-cs-toggle--active {
-  background: rgba(89, 242, 255, 0.15);
-  color: #e8eef7;
+  background: var(--color-diagram-node-active);
+  color: var(--color-text);
 }
 
 .bp-cs-diagram__svg {
@@ -38,29 +39,29 @@
 }
 
 .bp-cs-diagram__edge {
-  stroke: rgba(89, 242, 255, 0.4);
+  stroke: color-mix(in srgb, var(--color-accent) 45%, transparent);
   stroke-width: 2;
 }
 
 .bp-cs-diagram__node {
-  fill: #0c1020;
-  stroke: #59f2ff;
+  fill: var(--color-diagram-node);
+  stroke: var(--color-accent);
   stroke-width: 1.5;
   transition: fill 0.2s ease, stroke 0.2s ease;
 }
 
 .bp-cs-diagram__node--active {
-  fill: rgba(89, 242, 255, 0.12);
-  stroke: #ffd166;
+  fill: var(--color-diagram-node-active);
+  stroke: var(--color-diagram-focus);
 }
 
 .bp-cs-diagram__node:focus-visible {
-  outline: 2px solid #ffd166;
+  outline: 2px solid var(--color-diagram-focus);
   outline-offset: 2px;
 }
 
 .bp-cs-diagram__node-label {
-  fill: #e8eef7;
+  fill: var(--color-text);
   font-size: 11px;
   font-family: ui-monospace, Consolas, monospace;
   pointer-events: none;
@@ -69,7 +70,7 @@
 .bp-cs-diagram__hint,
 .bp-cs-diagram__detail {
   font-size: 0.9rem;
-  color: #9aa8c3;
+  color: var(--color-text-muted);
   margin-top: 0.75rem;
 }
 

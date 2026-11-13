@@ -1,18 +1,19 @@
 .bp-digest-filters {
-  border: 1px solid #2a355c;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1.5rem;
   display: grid;
   gap: 1rem;
+  background: var(--color-surface);
 }
 
 .bp-digest-filters input[type='search'],
 .bp-digest-filters input[type='date'] {
-  background: #0c1020;
-  border: 1px solid #2a355c;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 6px;
-  color: #e8eef7;
+  color: var(--color-text);
   padding: 0.5rem;
   font: inherit;
   width: 100%;
@@ -22,7 +23,7 @@
 .bp-digest-filters legend {
   display: block;
   font-size: 0.85rem;
-  color: #93a5c0;
+  color: var(--color-text-subtle);
   margin-bottom: 0.35rem;
 }
 
@@ -33,9 +34,9 @@
 }
 
 .bp-chip {
-  border: 1px solid #59f2ff;
+  border: 1px solid var(--color-accent);
   background: transparent;
-  color: #9aa8c3;
+  color: var(--color-text-muted);
   border-radius: 999px;
   padding: 0.35rem 0.75rem;
   cursor: pointer;
@@ -43,12 +44,12 @@
 }
 
 .bp-chip--on {
-  background: rgba(89, 242, 255, 0.15);
-  color: #e8eef7;
+  background: var(--color-diagram-node-active);
+  color: var(--color-text);
 }
 
 .bp-chip:focus-visible {
-  outline: 2px solid #ffd166;
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
@@ -60,5 +61,5 @@
 
 .bp-digest-filters__status {
   font-size: 0.85rem;
-  color: #93a5c0;
+  color: var(--color-text-subtle);
 }
