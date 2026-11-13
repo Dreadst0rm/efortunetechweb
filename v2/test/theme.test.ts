@@ -6,7 +6,6 @@ import { describe, expect, it } from 'vitest'
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const dist = path.join(root, 'dist')
 
-/** WCAG relative luminance for sRGB hex */
 function luminance(hex: string): number {
   const r = parseInt(hex.slice(1, 3), 16) / 255
   const g = parseInt(hex.slice(3, 5), 16) / 255
@@ -23,36 +22,43 @@ function contrastRatio(fg: string, bg: string): number {
 }
 
 describe('color theme', () => {
-  it('ships theme scripts and nav toggle in prerendered HTML', () => {
+  it('loads site-init before CSS and site-prefs in production', () => {
     const index = readFileSync(path.join(dist, 'index.html'), 'utf8')
-    expect(index).toMatch(/theme-init\.js/)
-    expect(index).toMatch(/theme-toggle\.js/)
-    expect(index).toMatch(/id="theme-toggle"/)
-    expect(index.indexOf('theme-init.js')).toBeLessThan(index.indexOf('site.css'))
+    expect(index).toMatch(/site-init\.js/)
+    expect(index).toMatch(/site-prefs\.js/)
+    expect(index.indexOf('site-init.js')).toBeLessThan(index.indexOf('site.css'))
+    expect(index).not.toMatch(/theme-toggle\.js/)
+    expect(index).not.toMatch(/id="theme-toggle"/)
+    expect(index).not.toMatch(/data-staging-bg/)
   })
 
-  it('defines light and dark token sets in theme CSS', () => {
-    const css = readFileSync(
-      path.join(root, 'site/src/styles/theme.css'),
-      'utf8',
-    )
-    expect(css).toContain('--color-bg: #f5f6f7')
+  it('defines soft grey light theme and midnight dark tokens', () => {
+    const css = readFileSync(path.join(root, 'site/src/styles/theme.css'), 'utf8')
+    expect(css).toContain('--color-bg: #e9ecef')
+    expect(css).toContain('--color-surface: #f3f4f6')
     expect(css).toContain('--color-bg: #0b1220')
     expect(css).toContain('data-theme')
   })
 
-  it('meets WCAG AA contrast for primary buttons (4.5:1)', () => {
+  it('meets WCAG AA contrast for primary buttons and body text', () => {
     const pairs: [string, string][] = [
       ['#ffffff', '#0a7375'],
       ['#ffffff', '#2563eb'],
+      ['#1c1f23', '#e9ecef'],
     ]
     for (const [fg, bg] of pairs) {
       expect(contrastRatio(fg, bg)).toBeGreaterThanOrEqual(4.5)
     }
   })
 
-  it('exposes theme init in public/', () => {
-    expect(existsSync(path.join(root, 'public/js/theme-init.js'))).toBe(true)
-    expect(existsSync(path.join(root, 'public/js/theme-toggle.js'))).toBe(true)
+  it('exposes preference scripts in public/', () => {
+    expect(existsSync(path.join(root, 'public/js/site-init.js'))).toBe(true)
+    expect(existsSync(path.join(root, 'public/js/site-prefs.js'))).toBe(true)
+    const prefs = readFileSync(path.join(root, 'public/js/site-prefs.js'), 'utf8')
+    expect(prefs).toContain('efortune-theme')
+    expect(prefs).toContain('efortune-bg')
+    expect(prefs).toContain('Grey')
+    expect(prefs).toContain('Slate')
+    expect(prefs).toContain('syncTurnstile')
   })
 })

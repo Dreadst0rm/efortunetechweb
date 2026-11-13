@@ -7,18 +7,14 @@ export default function HeroBlueprintDraw() {
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
     >
-      <rect className="bp-draw bp-draw-frame" x="24" y="24" width="432" height="272" fill="none" />
-      <circle className="bp-draw bp-draw-cross" cx="240" cy="160" r="36" fill="none" />
-      <line className="bp-draw bp-draw-cross" x1="240" y1="118" x2="240" y2="202" />
-      <line className="bp-draw bp-draw-cross" x1="198" y1="160" x2="282" y2="160" />
+      <circle className="bp-draw bp-draw-cross" cx="400" cy="72" r="28" fill="none" />
+      <line className="bp-draw bp-draw-cross" x1="400" y1="52" x2="400" y2="92" />
+      <line className="bp-draw bp-draw-cross" x1="380" y1="72" x2="420" y2="72" />
       <rect className="bp-draw bp-draw-stamp" x="332" y="32" width="112" height="40" rx="4" fill="none" />
       <text className="bp-draw bp-draw-label" x="388" y="50">
         APPROVED
       </text>
       <text className="bp-draw bp-draw-label bp-draw-label--sm" x="388" y="64">
-        REV A
-      </text>
-      <text className="bp-draw bp-draw-label bp-draw-label--note" x="36" y="302">
         REV A
       </text>
     </svg>

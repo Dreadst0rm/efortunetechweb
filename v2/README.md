@@ -18,7 +18,7 @@ Contact Origin and Turnstile hostname checks use Wrangler var **`ALLOWED_HOSTS`*
 
 **Web Analytics:** CSP-safe manual beacon via build env `CF_WEB_ANALYTICS_TOKEN` (see `docs/ANALYTICS.md`). Disable dashboard automatic JS injection.
 
-**Hero backgrounds (staging):** `SHOW_BG_SWITCHER=true` at build enables the bottom-right background pill (`dots` default). Remove the flag at cutover. `?bg=dots|mesh|topo|clean` and `localStorage` key `efortune-bg`.
+**Appearance:** Bottom-right pill (always on): **Grey/Slate** fill (`efortune-theme`) and **Dots/Mesh** hero (`efortune-bg`, default dots). `?bg=dots|mesh` overrides background on first load. `site-init.js` runs in `<head>` before CSS to avoid flash.
 
 ## Layout
 

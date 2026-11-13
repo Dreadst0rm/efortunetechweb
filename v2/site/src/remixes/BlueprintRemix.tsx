@@ -13,7 +13,9 @@ export default function BlueprintRemix() {
         <HeroBlueprintDraw />
         <div className="bp-hero__content">
           <p className="bp-kicker">{site.kicker}</p>
-          <h1 className="bp-title">{site.h1}</h1>
+          <div className="bp-title-frame">
+            <h1 className="bp-title">{site.h1}</h1>
+          </div>
           <p className="bp-sub">
             I help organizations turn technology strategy into executable outcomes.
           </p>

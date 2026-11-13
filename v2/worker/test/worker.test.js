@@ -339,8 +339,9 @@ describe('widget markup, client script, and CSP', () => {
     assert.match(CONTACT_HTML, /https:\/\/challenges\.cloudflare\.com\/turnstile\/v0\/api\.js/);
     assert.match(CONTACT_HTML, new RegExp(`data-sitekey="${SITEKEY}"`));
     assert.match(CONTACT_HTML, /data-action="contact"/);
-    assert.match(CONTACT_HTML, /data-theme="auto"/);
-    assert.match(CONTACT_HTML, /theme-init\.js/);
+    assert.match(CONTACT_HTML, /class="cf-turnstile"/);
+    assert.doesNotMatch(CONTACT_HTML, /data-theme="auto"/);
+    assert.match(CONTACT_HTML, /site-init\.js/);
     assert.match(CONTACT_HTML, /rel="preconnect" href="https:\/\/challenges\.cloudflare\.com"/);
     assert.match(CONTACT_HTML, /action="\/api\/contact"/);
     assert.match(CONTACT_HTML, /method="post"/i);

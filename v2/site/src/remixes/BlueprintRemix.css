@@ -32,11 +32,24 @@
   margin-bottom: 1.5rem;
 }
 
+.bp-title-frame {
+  display: inline-block;
+  max-width: min(100%, 40rem);
+  margin: 0 auto;
+  padding: 0.85rem 1.15rem;
+  border: 2px solid color-mix(in srgb, var(--color-accent) 65%, var(--color-border));
+  border-radius: 6px;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-accent) 15%, transparent) inset;
+}
+
 .bp-title {
-  font-size: clamp(2.2rem, 6.5vw, 5rem);
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-hero-title-stroke);
+  font-size: clamp(1.85rem, 5.5vw, 4.25rem);
+  color: var(--color-text);
   letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin: 0;
 }
 
 .bp-sub {

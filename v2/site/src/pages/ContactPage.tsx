@@ -69,7 +69,6 @@ export default function ContactPage() {
               className="cf-turnstile"
               data-sitekey={SITEKEY}
               data-action="contact"
-              data-theme="auto"
             />
             <noscript>
               <p>

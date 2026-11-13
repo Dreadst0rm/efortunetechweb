@@ -9,7 +9,7 @@
   z-index: 0;
 }
 
-/* 1 — dot matrix with edge fade */
+/* dot matrix with edge fade */
 html[data-bg='dots'] .bp-hero__bg,
 html:not([data-bg]) .bp-hero__bg {
   background-color: var(--color-hero-bg);
@@ -27,7 +27,7 @@ html:not([data-bg]) .bp-hero__bg {
   mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 15%, transparent 72%);
 }
 
-/* 2 — soft mesh glow */
+/* soft mesh glow */
 html[data-bg='mesh'] .bp-hero__bg {
   background: var(--color-hero-bg);
 }
@@ -77,69 +77,35 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   }
 }
 
-/* 3 — topo contours, corner only */
-html[data-bg='topo'] .bp-hero__bg {
-  background-color: var(--color-hero-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%230F8B8D' stroke-opacity='.35' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 100% 0;
-  background-size: min(42vw, 320px) auto;
-  opacity: 0.55;
-}
-
-html[data-theme='dark'][data-bg='topo'] .bp-hero__bg {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%2334D399' stroke-opacity='.32' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-@media (prefers-color-scheme: dark) {
-  html:not([data-theme='light'])[data-bg='topo'] .bp-hero__bg {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%2334D399' stroke-opacity='.32' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
-  }
-}
-
-/* 4 — clean: rule + corner mark */
-html[data-bg='clean'] .bp-hero__bg {
-  background: var(--color-hero-bg);
-}
-
-html[data-bg='clean'] .bp-hero__bg::before {
-  content: '';
-  position: absolute;
-  top: 18%;
-  left: 10%;
-  width: min(36vw, 280px);
-  height: 1px;
-  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
-}
-
-html[data-bg='clean'] .bp-hero__bg::after {
-  content: '';
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  width: 28px;
-  height: 28px;
-  border-top: 2px solid var(--color-accent);
-  border-right: 2px solid var(--color-accent);
-  opacity: 0.55;
-}
-
-.bp-bg-switcher {
+.bp-site-prefs {
   position: fixed;
   right: 1rem;
   bottom: 1rem;
   z-index: 50;
   display: flex;
-  gap: 0.25rem;
-  padding: 0.35rem;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.45rem;
   border-radius: 999px;
   border: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
   box-shadow: 0 4px 20px color-mix(in srgb, var(--color-primary) 12%, transparent);
   backdrop-filter: blur(8px);
 }
 
-.bp-bg-switcher__btn {
+.bp-site-prefs__sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 0.2rem 0;
+  background: var(--color-border);
+}
+
+.bp-site-prefs__bg {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.bp-site-prefs__btn {
   border: none;
   background: transparent;
   color: var(--color-text-muted);
@@ -151,12 +117,16 @@ html[data-bg='clean'] .bp-hero__bg::after {
   cursor: pointer;
 }
 
-.bp-bg-switcher__btn[aria-pressed='true'] {
+.bp-site-prefs__btn[aria-pressed='true'] {
   background: var(--color-diagram-node-active);
   color: var(--color-text);
 }
 
-.bp-bg-switcher__btn:focus-visible {
+.bp-site-prefs__btn--fill {
+  min-width: 3.25rem;
+}
+
+.bp-site-prefs__btn:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }

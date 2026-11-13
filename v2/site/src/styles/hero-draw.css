@@ -1,15 +1,14 @@
 .bp-hero-draw {
   position: absolute;
   inset: 0;
-  width: min(72%, 520px);
+  width: min(40%, 320px);
   height: auto;
-  max-height: 58%;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 12%;
+  margin: 0;
+  left: auto;
+  right: 1.5rem;
+  top: 1.5rem;
   pointer-events: none;
-  opacity: 0.42;
+  opacity: 0.38;
   z-index: 1;
 }
 
