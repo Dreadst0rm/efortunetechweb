@@ -81,8 +81,6 @@ export default function ContactPage() {
           <p>
             <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>
           </p>
-          <h3>Phone</h3>
-          <p>+1 (312) 555-0180</p>
           <h3>Location</h3>
           <p>
             Chicago, Illinois
