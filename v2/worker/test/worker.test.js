@@ -129,6 +129,16 @@ describe('handleContact status paths', () => {
 });
 
 describe('origin, referer, and honeypot', () => {
+  it('accepts a v2 staging Origin when ALLOWED_HOSTS includes v2.efortune.tech', async () => {
+    const { response, sent } = await submit({
+      origin: 'https://v2.efortune.tech',
+      env: { TURNSTILE_SECRET: 'test-secret', ALLOWED_HOSTS: 'efortune.tech,www.efortune.tech,v2.efortune.tech' },
+      fetchImpl: passFetch('v2.efortune.tech'),
+    });
+    assert.equal(response.status, 303);
+    assert.equal(sent.length, 1);
+  });
+
   it('accepts a www Origin at the worker and sends mail', async () => {
     const { response, sent } = await submit({ origin: `https://www.${DOMAIN}` });
     assert.equal(response.status, 303);
@@ -377,5 +387,7 @@ describe('wrangler.jsonc', () => {
     assert.match(raw, /"destination_address":\s*"ed@efortune\.tech"/);
     assert.match(raw, /"allowed_sender_addresses":\s*\[\s*"noreply@fortwarp\.com"\s*\]/);
     assert.doesNotMatch(raw, /noreply@efortune\.tech/);
+    assert.match(raw, /"ALLOWED_HOSTS":\s*"efortune\.tech,www\.efortune\.tech,v2\.efortune\.tech"/);
+    assert.doesNotMatch(raw, /"routes"/);
   });
 });

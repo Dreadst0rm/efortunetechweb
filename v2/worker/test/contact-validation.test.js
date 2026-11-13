@@ -6,11 +6,13 @@ import assert from 'node:assert/strict';
 
 import {
   CONTENT_SECURITY_POLICY,
+  DEFAULT_ALLOWED_HOSTS,
   DOMAIN,
   EMAIL_RE,
   EXPECTED_ACTION,
   EXPECTED_HOSTNAMES,
   MAX_BODY_BYTES,
+  parseAllowedHosts,
   OFFICIAL_TEST_SECRETS,
   escapeHtml,
   isAllowedOrigin,
@@ -25,10 +27,31 @@ import {
 const SITEVERIFY = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
+describe('parseAllowedHosts', () => {
+  it('defaults to apex and www when unset or empty', () => {
+    assert.deepEqual(parseAllowedHosts(undefined), [DOMAIN, `www.${DOMAIN}`]);
+    assert.deepEqual(parseAllowedHosts(DEFAULT_ALLOWED_HOSTS), [DOMAIN, `www.${DOMAIN}`]);
+    assert.deepEqual(parseAllowedHosts('  '), [DOMAIN, `www.${DOMAIN}`]);
+  });
+
+  it('parses comma-separated hostnames and lowercases', () => {
+    assert.deepEqual(parseAllowedHosts('v2.efortune.tech, Efortune.Tech '), [
+      'v2.efortune.tech',
+      'efortune.tech',
+    ]);
+  });
+});
+
 describe('isAllowedOrigin', () => {
   it('accepts the apex and www production origins', () => {
     assert.equal(isAllowedOrigin(`https://${DOMAIN}`), true);
     assert.equal(isAllowedOrigin(`https://www.${DOMAIN}`), true);
+  });
+
+  it('accepts staging hostnames when included in allowedHosts', () => {
+    const hosts = parseAllowedHosts('efortune.tech,www.efortune.tech,v2.efortune.tech');
+    assert.equal(isAllowedOrigin('https://v2.efortune.tech', undefined, hosts), true);
+    assert.equal(isAllowedOrigin('https://evil.example', undefined, hosts), false);
   });
 
   it('rejects missing, null, http, and foreign origins', () => {

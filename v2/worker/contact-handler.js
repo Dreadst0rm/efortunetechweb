@@ -12,8 +12,8 @@ import {
   CONTENT_SECURITY_POLICY,
   EMAIL_RE,
   EXPECTED_ACTION,
-  EXPECTED_HOSTNAMES,
   isAllowedOrigin,
+  parseAllowedHosts,
   isGibberishMessage,
   readBoundedFormData,
   renderContactFormError,
@@ -71,6 +71,8 @@ function successRedirect() {
 }
 
 export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs, contactHtml = CONTACT_HTML } = {}) {
+  const allowedHosts = parseAllowedHosts(env?.ALLOWED_HOSTS);
+
   if (req.method !== 'POST') {
     return new Response('Method not allowed', {
       status: 405,
@@ -92,7 +94,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
   // allowed, swallow the request. If both headers are missing, continue
   // and rely on Turnstile plus the siteverify hostname check.
   const clientOrigin = requestClientOrigin(req);
-  if (clientOrigin !== null && !isAllowedOrigin(clientOrigin, req.url)) {
+  if (clientOrigin !== null && !isAllowedOrigin(clientOrigin, req.url, allowedHosts)) {
     return successRedirect();
   }
 
@@ -135,7 +137,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
     token: field('cf-turnstile-response'),
     remoteip: req.headers.get('cf-connecting-ip') || '',
     expectedAction: EXPECTED_ACTION,
-    expectedHostnames: EXPECTED_HOSTNAMES,
+    expectedHostnames: allowedHosts,
     fetchImpl,
     timeoutMs,
   });

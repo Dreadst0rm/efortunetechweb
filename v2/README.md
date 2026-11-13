@@ -14,6 +14,8 @@ npm run preview:worker # wrangler dev after build
 
 During `wrangler dev`, open the printed URL. Set `TURNSTILE_SECRET` in the dashboard or via `wrangler secret put TURNSTILE_SECRET` for live Turnstile checks.
 
+Contact Origin and Turnstile hostname checks use Wrangler var **`ALLOWED_HOSTS`** (comma-separated hostnames). When unset, the default is `efortune.tech,www.efortune.tech`. `wrangler.jsonc` currently also lists **`v2.efortune.tech`** for staging—remove that hostname after production cutover.
+
 ## Layout
 
 | Path | Role |

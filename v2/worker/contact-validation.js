@@ -5,8 +5,28 @@
 
 export const DOMAIN = 'efortune.tech';
 export const EXPECTED_ACTION = 'contact';
-export const EXPECTED_HOSTNAMES = [DOMAIN, `www.${DOMAIN}`];
+/** Default when `env.ALLOWED_HOSTS` is unset (comma-separated hostnames, no scheme). */
+export const DEFAULT_ALLOWED_HOSTS = 'efortune.tech,www.efortune.tech';
 export const MAX_BODY_BYTES = 20_000;
+
+/**
+ * Parse ALLOWED_HOSTS (Wrangler var or test override). Hostnames only, lowercase.
+ */
+export function parseAllowedHosts(value) {
+  const raw = String(value ?? DEFAULT_ALLOWED_HOSTS).trim();
+  if (!raw) return parseAllowedHosts(DEFAULT_ALLOWED_HOSTS);
+  const hosts = raw
+    .split(',')
+    .map((h) => h.trim().toLowerCase())
+    .filter(Boolean);
+  return hosts.length ? hosts : parseAllowedHosts(DEFAULT_ALLOWED_HOSTS);
+}
+
+export const EXPECTED_HOSTNAMES = parseAllowedHosts(DEFAULT_ALLOWED_HOSTS);
+
+function productionOriginsForHosts(hosts) {
+  return new Set(hosts.map((h) => `https://${h}`));
+}
 export const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "img-src 'self' data:",
@@ -20,17 +40,12 @@ export const CONTENT_SECURITY_POLICY = [
   "base-uri 'self'",
 ].join('; ');
 
-const PRODUCTION_ORIGINS = new Set([
-  `https://${DOMAIN}`,
-  `https://www.${DOMAIN}`,
-]);
-
 /**
- * Accept only https://efortune.tech or https://www.efortune.tech.
+ * Accept https origins whose host is in allowedHosts (from ALLOWED_HOSTS).
  * http://localhost and http://127.0.0.1 are allowed only when the
  * request itself is also local (wrangler dev with Cloudflare test keys).
  */
-export function isAllowedOrigin(origin, requestUrl) {
+export function isAllowedOrigin(origin, requestUrl, allowedHosts = EXPECTED_HOSTNAMES) {
   if (!origin || origin === 'null') return false;
   let originUrl;
   try {
@@ -38,7 +53,8 @@ export function isAllowedOrigin(origin, requestUrl) {
   } catch {
     return false;
   }
-  if (PRODUCTION_ORIGINS.has(originUrl.origin)) return true;
+  const hosts = Array.isArray(allowedHosts) ? allowedHosts : parseAllowedHosts(allowedHosts);
+  if (productionOriginsForHosts(hosts).has(originUrl.origin)) return true;
 
   if (!requestUrl) return false;
   let reqUrl;

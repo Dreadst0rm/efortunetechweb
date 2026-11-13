@@ -9,6 +9,11 @@
 
   // No custom routes or domains until Ed approves cutover (preview via workers.dev).
 
+  "vars": {
+    // Staging hostname for Worker preview; remove v2.efortune.tech after production cutover.
+    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech,v2.efortune.tech"
+  },
+
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
