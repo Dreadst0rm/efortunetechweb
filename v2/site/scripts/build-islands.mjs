@@ -1,8 +1,8 @@
 import { build } from 'vite'
-import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { mkdirSync } from 'node:fs'
+import { islandEntries, preactIslandConfig } from '../vite.islands.shared.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 const siteRoot = path.join(root, '..')
@@ -11,30 +11,39 @@ const islandsDir = path.join(outDir, 'assets', 'islands')
 
 mkdirSync(islandsDir, { recursive: true })
 
-const entries = [
-  { name: 'hero', file: 'hero-island.ts', react: false },
-  { name: 'case-studies', file: 'case-studies-island.tsx', react: true },
-  { name: 'digest', file: 'digest-island.tsx', react: true },
-  { name: 'quick-check', file: 'quick-check-island.tsx', react: true },
-]
-
-for (const entry of entries) {
-  await build({
-    root: siteRoot,
-    plugins: entry.react ? [react()] : [],
-    build: {
-      outDir,
-      emptyOutDir: false,
-      lib: undefined,
-      rollupOptions: {
-        input: path.join(siteRoot, 'src/islands', entry.file),
-        output: {
-          entryFileNames: `assets/islands/${entry.name}.js`,
-          inlineDynamicImports: true,
-          format: 'es',
+await build({
+  ...preactIslandConfig,
+  build: {
+    outDir,
+    emptyOutDir: false,
+    minify: 'esbuild',
+    rollupOptions: {
+      input: islandEntries,
+      output: {
+        entryFileNames: 'assets/islands/[name].js',
+        chunkFileNames: 'assets/islands/chunks/[name].js',
+        manualChunks(id) {
+          if (id.includes('node_modules/preact')) return 'preact'
         },
       },
     },
-  })
-  console.log('built island', entry.name)
-}
+  },
+})
+console.log('built Preact islands (shared preact chunk)')
+
+await build({
+  root: siteRoot,
+  build: {
+    outDir,
+    emptyOutDir: false,
+    rollupOptions: {
+      input: path.join(siteRoot, 'src/islands/hero-island.ts'),
+      output: {
+        entryFileNames: 'assets/islands/hero.js',
+        codeSplitting: false,
+        format: 'es',
+      },
+    },
+  },
+})
+console.log('built island hero')

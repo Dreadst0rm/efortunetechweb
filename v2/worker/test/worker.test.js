@@ -359,9 +359,14 @@ describe('widget markup, client script, and CSP', () => {
   it('uses a Worker CSP that allows Turnstile plus the existing contact-page assets', () => {
     assert.equal(BASE_HEADERS['content-security-policy'], CONTENT_SECURITY_POLICY);
     assert.match(CONTENT_SECURITY_POLICY, /script-src[^;]*https:\/\/challenges\.cloudflare\.com/);
+    assert.match(
+      CONTENT_SECURITY_POLICY,
+      /script-src[^;]*https:\/\/static\.cloudflareinsights\.com/,
+    );
     assert.doesNotMatch(CONTENT_SECURITY_POLICY, /script-src[^;]*'unsafe-inline'/);
     assert.match(CONTENT_SECURITY_POLICY, /frame-src[^;]*https:\/\/challenges\.cloudflare\.com/);
     assert.match(CONTENT_SECURITY_POLICY, /connect-src[^;]*https:\/\/challenges\.cloudflare\.com/);
+    assert.match(CONTENT_SECURITY_POLICY, /connect-src[^;]*https:\/\/cloudflareinsights\.com/);
     assert.match(CONTENT_SECURITY_POLICY, /style-src[^;]*https:\/\/fonts\.googleapis\.com/);
     assert.match(CONTENT_SECURITY_POLICY, /font-src[^;]*https:\/\/fonts\.gstatic\.com/);
   });

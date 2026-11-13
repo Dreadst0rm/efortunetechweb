@@ -16,6 +16,8 @@ During `wrangler dev`, open the printed URL. Set `TURNSTILE_SECRET` in the dashb
 
 Contact Origin and Turnstile hostname checks use Wrangler var **`ALLOWED_HOSTS`** (comma-separated hostnames). When unset, the default is `efortune.tech,www.efortune.tech`. `wrangler.jsonc` currently also lists **`v2.efortune.tech`** for staging—remove that hostname after production cutover.
 
+**Web Analytics:** CSP-safe manual beacon via build env `CF_WEB_ANALYTICS_TOKEN` (see `docs/ANALYTICS.md`). Disable dashboard automatic JS injection.
+
 ## Layout
 
 | Path | Role |

@@ -9,8 +9,12 @@ export type PageSeo = {
   moduleScripts?: string[]
 }
 
+import { buildWebAnalyticsHead } from './analytics'
+
 const origin = 'https://efortune.tech'
 const defaultImage = `${origin}/icons.svg`
+const cfAnalyticsToken = process.env.CF_WEB_ANALYTICS_TOKEN
+const webAnalyticsHead = buildWebAnalyticsHead(cfAnalyticsToken)
 
 export const TURNSTILE_HEAD = `
   <base href="/">
@@ -112,6 +116,7 @@ export function renderHead(seo: PageSeo): string {
   <meta name="twitter:image" content="${escapeHtml(ogImage)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/site.css">
+  ${webAnalyticsHead}
   ${seo.extraHead ?? ''}
   `.trim()
 }

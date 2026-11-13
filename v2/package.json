@@ -16,6 +16,7 @@
     "preview:worker": "npm run build && wrangler dev"
   },
   "dependencies": {
+    "preact": "^10.29.8",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "zod": "^4.3.6"
