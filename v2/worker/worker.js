@@ -27,9 +27,19 @@ function assetPathname(pathname) {
   return `${pathname}/index.html`;
 }
 
+function isLocalHostname(hostname) {
+  return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    if (url.protocol === 'http:' && !isLocalHostname(url.hostname)) {
+      const httpsUrl = new URL(request.url);
+      httpsUrl.protocol = 'https:';
+      return Response.redirect(httpsUrl.toString(), 301);
+    }
 
     const legacyRedirect = digestLegacyRedirectUrl(url, siteOrigin(env, url));
     if (legacyRedirect) {

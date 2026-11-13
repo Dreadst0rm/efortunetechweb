@@ -42,9 +42,11 @@ describe('color theme', () => {
 
   it('meets WCAG AA contrast for primary buttons and body text', () => {
     const pairs: [string, string][] = [
-      ['#ffffff', '#0a7375'],
+      ['#ffffff', '#054a4c'],
       ['#ffffff', '#2563eb'],
       ['#1c1f23', '#e9ecef'],
+      ['#054a4c', '#f3f4f6'],
+      ['#065e60', '#f3f4f6'],
     ]
     for (const [fg, bg] of pairs) {
       expect(contrastRatio(fg, bg)).toBeGreaterThanOrEqual(4.5)

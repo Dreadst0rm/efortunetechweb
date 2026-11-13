@@ -413,16 +413,17 @@ describe('handleRequest routing', () => {
 });
 
 describe('wrangler.jsonc', () => {
-  it('names efortune-site, enables preview URLs, has no routes, and locks send_email', () => {
+  it('names efortune-site, disables workers.dev preview, has no routes, and locks send_email', () => {
     const raw = readFileSync(join(root, '../wrangler.jsonc'), 'utf8');
     assert.match(raw, /"name":\s*"efortune-site"/);
-    assert.match(raw, /"workers_dev":\s*true/);
-    assert.match(raw, /"preview_urls":\s*true/);
+    assert.match(raw, /"workers_dev":\s*false/);
+    assert.match(raw, /"preview_urls":\s*false/);
     assert.doesNotMatch(raw, /"routes"/);
     assert.match(raw, /"destination_address":\s*"ed@efortune\.tech"/);
     assert.match(raw, /"allowed_sender_addresses":\s*\[\s*"noreply@fortwarp\.com"\s*\]/);
     assert.doesNotMatch(raw, /noreply@efortune\.tech/);
-    assert.match(raw, /"ALLOWED_HOSTS":\s*"efortune\.tech,www\.efortune\.tech,v2\.efortune\.tech"/);
+    assert.match(raw, /"ALLOWED_HOSTS":\s*"efortune\.tech,www\.efortune\.tech"/);
+    assert.doesNotMatch(raw, /v2\.efortune\.tech/);
     assert.match(raw, /"SITE_ORIGIN":\s*"https:\/\/efortune\.tech"/);
     assert.doesNotMatch(raw, /"routes"/);
   });

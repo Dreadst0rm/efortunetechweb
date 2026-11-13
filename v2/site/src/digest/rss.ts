@@ -12,6 +12,7 @@ function escapeXml(text: string): string {
 export function renderDigestRss(updates: DigestUpdate[], siteOrigin: string): string {
   const origin = siteOrigin.replace(/\/$/, '')
   const channelLink = `${origin}/digest/`
+  const feedUrl = `${origin}/digest/rss.xml`
   const items = updates
     .map((update) => {
       const link = `${origin}${digestUpdatePath(update.data.date)}`
@@ -27,11 +28,12 @@ export function renderDigestRss(updates: DigestUpdate[], siteOrigin: string): st
     .join('\n')
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(`efortune.tech ${digestSiteName()}`)}</title>
     <description>${escapeXml(digestSiteDescription())}</description>
     <link>${escapeXml(channelLink)}</link>
+    <atom:link href="${escapeXml(feedUrl)}" rel="self" type="application/rss+xml" />
     <language>en-us</language>
 ${items}
   </channel>

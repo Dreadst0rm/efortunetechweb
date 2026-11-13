@@ -176,8 +176,8 @@ export const contactInterests = [
 
 export const companySizes = [
   { value: '1-59', label: '1–59 employees' },
-  { value: '60-199', label: '60–199' },
-  { value: '200-499', label: '200–499' },
-  { value: '500-900', label: '500–900' },
-  { value: '900+', label: '900+' },
+  { value: '60-199', label: '60–199 employees' },
+  { value: '200-499', label: '200–499 employees' },
+  { value: '500-899', label: '500–899 employees' },
+  { value: '900+', label: '900+ employees' },
 ] as const

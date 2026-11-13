@@ -4,14 +4,14 @@
   "main": "worker/worker.js",
   "compatibility_date": "2026-11-10",
 
-  "workers_dev": true,
-  "preview_urls": true,
+  "workers_dev": false,
+  "preview_urls": false,
 
-  // No custom routes or domains until Ed approves cutover (preview via workers.dev).
+  // Production: attach custom domains efortune.tech and www.efortune.tech in the
+  // Cloudflare dashboard (routes / workers routes), not in this file until cutover is finalized.
 
   "vars": {
-    // Staging hostname for Worker preview; remove v2.efortune.tech after production cutover.
-    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech,v2.efortune.tech",
+    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech",
     "SITE_ORIGIN": "https://efortune.tech"
   },
 

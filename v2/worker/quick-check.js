@@ -3,6 +3,15 @@ import { isQuickCheckHostname } from './quick-check-hostname.js';
 
 const DOH = 'https://cloudflare-dns.com/dns-query';
 
+export const QUICK_CHECK_JSON_HEADERS = {
+  'content-type': 'application/json; charset=utf-8',
+  'cache-control': 'no-store',
+  'x-content-type-options': 'nosniff',
+  'content-security-policy': "default-src 'none'",
+};
+
+const RATE_LIMIT_RETRY_SEC = 60;
+
 const CHECK_COPY = {
   spf: {
     pass: 'We found an SPF record. Mail providers can see which servers may send for this domain.',
@@ -35,6 +44,97 @@ const CHECK_COPY = {
     fail: 'We could not read DNSSEC status for this domain.',
   },
 };
+
+/**
+ * @param {unknown} body
+ * @param {number} status
+ * @param {Record<string, string>} [extra]
+ */
+export function jsonQuickCheckResponse(body, status, extra = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...QUICK_CHECK_JSON_HEADERS, ...extra },
+  });
+}
+
+/** @param {string} data */
+export function isNullMxRdata(data) {
+  const raw = String(data ?? '').trim().replace(/\s+/g, ' ');
+  if (raw === '0 .' || raw === '0' || raw === '0 .') return true;
+  const parts = raw.split(' ');
+  if (parts.length >= 2) {
+    const pref = parts[0];
+    const host = parts.slice(1).join(' ').replace(/\.$/, '').trim();
+    return pref === '0' && (host === '' || host === '.');
+  }
+  return false;
+}
+
+/** @param {unknown[]} answers */
+export function classifyMxAnswers(answers) {
+  if (!Array.isArray(answers) || answers.length === 0) {
+    return { status: 'warn', message: CHECK_COPY.mx.warn };
+  }
+  const rdatas = answers
+    .filter((a) => a && a.type === 15)
+    .map((a) => String(a.data ?? ''));
+
+  if (rdatas.length === 0) {
+    return { status: 'warn', message: CHECK_COPY.mx.warn };
+  }
+
+  const allNull = rdatas.every((d) => isNullMxRdata(d));
+  if (allNull) {
+    return {
+      status: 'fail',
+      message: 'Null MX is set (0 .). This domain does not accept email.',
+    };
+  }
+
+  const hasReal = rdatas.some((d) => !isNullMxRdata(d));
+  if (hasReal) {
+    return { status: 'pass', message: CHECK_COPY.mx.pass };
+  }
+
+  return { status: 'warn', message: CHECK_COPY.mx.warn };
+}
+
+/** @param {string[]} txts */
+export function classifyDmarcTxts(txts) {
+  const record = txts.find((t) => /v=DMARC1/i.test(t));
+  if (!record) {
+    return { status: 'warn', message: CHECK_COPY.dmarc.warn };
+  }
+
+  const policyMatch = /(?:^|;)\s*p\s*=\s*(none|quarantine|reject)/i.exec(record);
+  const policy = policyMatch ? policyMatch[1].toLowerCase() : null;
+
+  if (!policy) {
+    return {
+      status: 'warn',
+      message: 'DMARC is published but has no p= policy (none, quarantine, or reject).',
+    };
+  }
+
+  const label =
+    policy === 'none'
+      ? 'none (monitoring only)'
+      : policy === 'quarantine'
+        ? 'quarantine'
+        : 'reject';
+
+  if (policy === 'none') {
+    return {
+      status: 'warn',
+      message: `DMARC policy is ${label}. Spoofed mail may still be delivered.`,
+    };
+  }
+
+  return {
+    status: 'pass',
+    message: `DMARC policy is ${label}.`,
+  };
+}
 
 /**
  * @param {string} name
@@ -81,8 +181,9 @@ export async function runQuickCheck(domain, { fetchImpl = fetch, timeoutMs = 500
 
   const results = [];
 
-  const push = (id, status) => {
-    results.push({ id, status, message: CHECK_COPY[id][status] });
+  const push = (id, status, message) => {
+    const msg = message ?? CHECK_COPY[id][status];
+    results.push({ id, status, message: msg });
   };
 
   try {
@@ -94,11 +195,12 @@ export async function runQuickCheck(domain, { fetchImpl = fetch, timeoutMs = 500
 
     const dmarc = await dohQuery(`_dmarc.${domain}`, 'TXT', fetchImpl, timeoutMs);
     const dmarcTxts = txtAnswers(dmarc.Answer);
-    const hasDmarc = dmarcTxts.some((t) => /v=DMARC1/i.test(t));
-    push('dmarc', hasDmarc ? 'pass' : 'warn');
+    const dmarcResult = classifyDmarcTxts(dmarcTxts);
+    push('dmarc', dmarcResult.status, dmarcResult.message);
 
     const mx = await dohQuery(domain, 'MX', fetchImpl, timeoutMs);
-    push('mx', Array.isArray(mx.Answer) && mx.Answer.length > 0 ? 'pass' : 'warn');
+    const mxResult = classifyMxAnswers(mx.Answer);
+    push('mx', mxResult.status, mxResult.message);
 
     const mta = await dohQuery(`_mta-sts.${domain}`, 'TXT', fetchImpl, timeoutMs);
     const mtaTxts = txtAnswers(mta.Answer);
@@ -138,35 +240,23 @@ export async function handleQuickCheck(req, env, { fetchImpl } = {}) {
   const allowedHosts = parseAllowedHosts(env?.ALLOWED_HOSTS);
   const origin = req.headers.get('origin');
   if (origin && !isAllowedOrigin(origin, req.url, allowedHosts)) {
-    return new Response(JSON.stringify({ error: 'forbidden' }), {
-      status: 403,
-      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-    });
+    return jsonQuickCheckResponse({ error: 'forbidden' }, 403);
   }
 
   if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ error: 'method_not_allowed' }), {
-      status: 405,
-      headers: { 'content-type': 'application/json', allow: 'POST', 'cache-control': 'no-store' },
-    });
+    return jsonQuickCheckResponse({ error: 'method_not_allowed' }, 405, { allow: 'POST' });
   }
 
   let payload;
   try {
     payload = await req.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'invalid_json' }), {
-      status: 400,
-      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-    });
+    return jsonQuickCheckResponse({ error: 'invalid_json' }, 400);
   }
 
   const domain = typeof payload?.domain === 'string' ? payload.domain.trim().toLowerCase() : '';
   if (!isQuickCheckHostname(domain)) {
-    return new Response(JSON.stringify({ error: 'invalid_domain' }), {
-      status: 400,
-      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-    });
+    return jsonQuickCheckResponse({ error: 'invalid_domain' }, 400);
   }
 
   const ip = req.headers.get('cf-connecting-ip') || 'unknown';
@@ -178,10 +268,11 @@ export async function handleQuickCheck(req, env, { fetchImpl } = {}) {
     count = Number(await prior.text()) || 0;
   }
   if (count >= 12) {
-    return new Response(JSON.stringify({ error: 'rate_limited' }), {
-      status: 429,
-      headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-    });
+    return jsonQuickCheckResponse(
+      { error: 'rate_limited' },
+      429,
+      { 'retry-after': String(RATE_LIMIT_RETRY_SEC) },
+    );
   }
   await cache.put(
     rateKey,
@@ -191,8 +282,5 @@ export async function handleQuickCheck(req, env, { fetchImpl } = {}) {
   );
 
   const result = await runQuickCheck(domain, { fetchImpl, cache });
-  return new Response(JSON.stringify(result), {
-    status: 200,
-    headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
-  });
+  return jsonQuickCheckResponse(result, 200);
 }
