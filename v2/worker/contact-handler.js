@@ -15,6 +15,8 @@ import {
   isAllowedOrigin,
   parseAllowedHosts,
   isGibberishMessage,
+  isValidCompanySize,
+  isValidInterest,
   readBoundedFormData,
   renderContactFormError,
   requestClientOrigin,
@@ -28,7 +30,15 @@ const HELLO = 'hello@efortune.tech';
 const DEST = 'ed@efortune.tech';
 const FROM = 'noreply@fortwarp.com';
 
-const LIM = { name: 100, email: 200, company: 150, interest: 60, message: 5000 };
+const LIM = {
+  name: 100,
+  email: 200,
+  company: 150,
+  company_size: 20,
+  interest: 60,
+  driving: 2000,
+  message: 5000,
+};
 
 export const BASE_HEADERS = {
   'x-content-type-options': 'nosniff',
@@ -41,7 +51,7 @@ export const BASE_HEADERS = {
 const TURNSTILE_TOKEN_ERROR =
   'Please complete the check and send your message again.';
 const TURNSTILE_VERIFY_ERROR =
-  'We could not verify the check right now. Please try sending your message again, or email us directly.';
+  'I could not verify the check right now. Please try sending your message again, or email hello@efortune.tech directly.';
 
 const esc = (s) => s.replace(/[\r\n]+/g, ' ').trim();
 const b64 = (s) => {
@@ -129,6 +139,12 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
   if (!EMAIL_RE.test(d.email)) {
     return fail('Please enter a valid email address.');
   }
+  if (!isValidInterest(d.interest)) {
+    return fail('Please choose a valid interest option.');
+  }
+  if (!isValidCompanySize(d.company_size)) {
+    return fail('Please choose a valid company size.');
+  }
 
   const possibleSpam = isGibberishMessage(d.message);
 
@@ -145,7 +161,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
     if (turnstile.reason === 'missing_secret') {
       console.error('TURNSTILE_SECRET is not set; rejecting contact submission');
       return fail(
-        'Sorry, we could not send your message right now. Please email us directly.',
+        'Sorry, I could not send your message right now. Please email hello@efortune.tech directly.',
         502,
       );
     }
@@ -158,7 +174,9 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
 
   const body =
     `New contact form message from ${DOMAIN}\n\nName: ${d.name}\nEmail: ${d.email}\nCompany: ${d.company || '-'}\n` +
+    (d.company_size ? `Company size: ${d.company_size}\n` : '') +
     (d.interest ? `Interest: ${d.interest}\n` : '') +
+    (d.driving ? `What's driving this now:\n${d.driving}\n\n` : '') +
     `IP: ${req.headers.get('cf-connecting-ip') || '-'}\n\nMessage:\n${d.message}\n`;
   const from = FROM;
   const mid = `<${crypto.randomUUID()}@${DOMAIN}>`;
@@ -183,7 +201,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
   } catch (e) {
     console.error('send_email failed', e);
     return fail(
-      'Sorry, we could not send your message right now. Please email us directly.',
+      'Sorry, I could not send your message right now. Please email hello@efortune.tech directly.',
       502,
     );
   }

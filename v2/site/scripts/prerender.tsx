@@ -11,7 +11,9 @@ import LegacyArticlePage from '../src/pages/LegacyArticlePage'
 import NotFoundPage from '../src/pages/NotFoundPage'
 import ThanksPage from '../src/pages/ThanksPage'
 import CaseStudiesPage from '../src/pages/CaseStudiesPage'
-import { services } from '../src/content'
+import ServicesPage from '../src/pages/ServicesPage'
+import PricingPage from '../src/pages/PricingPage'
+import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
 import { renderDigest } from './render-digest'
@@ -42,47 +44,10 @@ const routes: Route[] = [
   route('contact.html', 'contact', <ContactPage />),
   route('thanks.html', 'contact', <ThanksPage />),
   route('404.html', 'home', <NotFoundPage />),
-  route(
-    'services.html',
-    'services',
-    <LegacyArticlePage
-      title="Technical Consulting Services"
-      lead="Strategic guidance and hands-on architecture expertise across the technology landscape."
-    >
-      {services.map((s) => (
-        <section key={s.title}>
-          <h2>{s.title}</h2>
-          <p>{s.blurb}</p>
-        </section>
-      ))}
-      <p>
-        <a href="/contact.html">Get in touch</a> to discuss your priorities.
-      </p>
-    </LegacyArticlePage>,
-  ),
+  route('services.html', 'services', <ServicesPage />),
+  route('pricing.html', 'pricing', <PricingPage />),
   route('case-studies.html', 'case-studies', <CaseStudiesPage />),
-  route(
-    'about.html',
-    'about',
-    <LegacyArticlePage
-      title="About Ed Fortune"
-      lead="Turning technology strategy into measurable business outcomes."
-    >
-      <h2>What I Do for Customers</h2>
-      <p>
-        I help organizations convert technology strategy into disciplined, executable results.
-        Over 20 years I have developed and delivered technology strategy across enterprise
-        environments—guiding architecture decisions, modernizing infrastructure, and aligning
-        technical choices with business value.
-      </p>
-      <p>
-        Clients engage me when they need clear direction on cloud and infrastructure
-        modernization, identity and access architecture, resilient data center and network
-        designs, legacy system transitions, and pragmatic guidance on secure AI adoption.
-      </p>
-      <p>Based in the Chicago area, I work with leadership and engineering teams nationwide.</p>
-    </LegacyArticlePage>,
-  ),
+  route('about.html', 'about', <AboutPage />),
   route(
     'insights.html',
     'insights',
@@ -115,11 +80,11 @@ const routes: Route[] = [
     'home',
     <LegacyArticlePage
       title="Security"
-      lead="How we handle vulnerability reports for efortune.tech."
+      lead="How I handle vulnerability reports for efortune.tech."
     >
       <p>
         Report security issues to{' '}
-        <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>. We respond as quickly as
+        <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>. I respond as quickly as
         possible and coordinate disclosure with reporters.
       </p>
       <p>

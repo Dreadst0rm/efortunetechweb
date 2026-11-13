@@ -1,6 +1,7 @@
 export type NavPage =
   | 'home'
   | 'services'
+  | 'pricing'
   | 'case-studies'
   | 'about'
   | 'insights'
@@ -10,10 +11,10 @@ export type NavPage =
 const links: { page: NavPage; href: string; label: string }[] = [
   { page: 'home', href: '/index.html', label: 'Home' },
   { page: 'services', href: '/services.html', label: 'Services' },
-  { page: 'case-studies', href: '/case-studies.html', label: 'Case Studies' },
-  { page: 'about', href: '/about.html', label: 'About' },
-  { page: 'insights', href: '/insights.html', label: 'Insights' },
+  { page: 'pricing', href: '/pricing.html', label: 'Pricing' },
+  { page: 'case-studies', href: '/case-studies.html', label: 'Case studies' },
   { page: 'digest', href: '/digest/', label: 'Digest' },
+  { page: 'about', href: '/about.html', label: 'About' },
   { page: 'contact', href: '/contact.html', label: 'Contact' },
 ]
 

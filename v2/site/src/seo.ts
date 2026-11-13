@@ -25,31 +25,31 @@ export const TURNSTILE_HEAD = `
 
 export const pages: Record<string, PageSeo> = {
   'index.html': {
-    title: 'efortune.tech | Expert Cloud, AI & Software Architecture',
+    title: 'Fractional CIO & vCIO | efortune.tech',
     moduleScripts: ['/assets/islands/hero.js'],
     description:
-      'Chicago-based technical consulting firm specializing in cloud architecture, software engineering, AI strategy, and digital transformation.',
+      'Senior technology leadership without the full-time hire. Fractional CIO and vCIO services for companies of 60 to 900 people.',
     canonicalPath: '/',
     ogImage: defaultImage,
   },
   'contact.html': {
-    title: 'Contact efortune.tech | Chicago',
+    title: 'Contact Ed Fortune | Fractional CIO',
     description:
-      'Contact efortune.tech for cloud architecture, software design, AI strategy, and digital transformation consulting.',
+      'Book a conversation about fractional CIO, vCIO, or project work. Free Keystone domain check included.',
     canonicalPath: '/contact.html',
     extraHead: TURNSTILE_HEAD,
     scripts: ['/js/contact.js'],
     moduleScripts: ['/assets/islands/quick-check.js'],
   },
   'case-studies.html': {
-    title: 'Case Studies | efortune.tech',
-    description: 'Selected architecture and strategy engagements from efortune.tech.',
+    title: 'Case studies | efortune.tech',
+    description:
+      'Before Efortune: development, infrastructure, operations, and security outcomes described by company type.',
     canonicalPath: '/case-studies.html',
-    moduleScripts: ['/assets/islands/case-studies.js'],
   },
   'thanks.html': {
     title: 'Message sent | efortune.tech',
-    description: 'Thanks for contacting efortune.tech. We typically respond within one business day.',
+    description: 'Thanks for reaching out. I typically respond within one business day.',
     canonicalPath: '/thanks.html',
     robots: 'noindex, follow',
   },
@@ -60,15 +60,21 @@ export const pages: Record<string, PageSeo> = {
     robots: 'noindex, follow',
   },
   'services.html': {
-    title: 'Technical Consulting Services | efortune.tech',
+    title: 'Services | Fractional CIO & vCIO',
     description:
-      'Cloud architecture, software design, AI strategy, cybersecurity, and digital transformation consulting.',
+      'Development, infrastructure, operations, and security leadership—with proof points and pricing summary.',
     canonicalPath: '/services.html',
   },
-  'about.html': {
-    title: 'About efortune.tech | Chicago Technology Experts',
+  'pricing.html': {
+    title: 'Pricing | Fractional CIO & vCIO',
     description:
-      'Ed Fortune helps organizations turn technology strategy into executable outcomes.',
+      'Hourly, advisory, fractional, vCIO, project, and interim CIO options from $150/hour through $20,000+/month.',
+    canonicalPath: '/pricing.html',
+  },
+  'about.html': {
+    title: 'About Ed Fortune | Fractional CIO',
+    description:
+      '20+ years leading technology across development, infrastructure, operations, and security. Keystone builder.',
     canonicalPath: '/about.html',
   },
   'insights.html': {

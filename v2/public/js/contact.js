@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('contact-form');
   if (!form) return;
 
+  const params = new URLSearchParams(window.location.search);
+  const interest = params.get('interest');
+  if (interest) {
+    const sel = form.querySelector('select[name="interest"]');
+    if (sel && sel.querySelector(`option[value="${CSS.escape(interest)}"]`)) {
+      sel.value = interest;
+    }
+  }
+
   form.addEventListener('submit', function () {
     const btn = form.querySelector('button[type="submit"]');
     if (btn) {
@@ -18,5 +27,5 @@ window.addEventListener('pageshow', function (e) {
   const btn = form && form.querySelector('button[type="submit"]');
   if (!btn) return;
   btn.disabled = false;
-  btn.textContent = 'Send Message';
+  btn.textContent = 'Send message';
 });

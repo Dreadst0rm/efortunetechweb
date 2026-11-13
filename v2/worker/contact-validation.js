@@ -103,6 +103,30 @@ export const OFFICIAL_TEST_SECRETS = new Set([
 /** Email addresses may not contain whitespace, quotes, or ASCII controls. */
 export const EMAIL_RE = /^[^\s@<>()",;:\x00-\x1f]+@[^\s@<>()",;:\x00-\x1f]+\.[A-Za-z]{2,}$/;
 
+export const VALID_INTERESTS = new Set([
+  'hourly',
+  'advisory-retainer',
+  'fractional-cio',
+  'vcio-msp',
+  'project',
+  'interim-cio',
+  'not-sure',
+]);
+
+export const VALID_COMPANY_SIZES = new Set(['1-59', '60-199', '200-499', '500-900', '900+']);
+
+export function isValidInterest(value) {
+  const v = String(value ?? '').trim();
+  if (!v) return true;
+  return VALID_INTERESTS.has(v);
+}
+
+export function isValidCompanySize(value) {
+  const v = String(value ?? '').trim();
+  if (!v) return true;
+  return VALID_COMPANY_SIZES.has(v);
+}
+
 export function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')

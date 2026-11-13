@@ -16,7 +16,8 @@ const CONTACT_JS = readFileSync(join(siteRoot, 'js/contact.js'), 'utf8');
 const SITEKEY = '0x4AAAAAAF8HJhDrsUWEA8c6';
 const CONTACT_URL = `https://${DOMAIN}/api/contact`;
 const TOKEN_MSG = 'Please complete the check and send your message again.';
-const VERIFY_MSG = 'We could not verify the check right now. Please try sending your message again, or email us directly.';
+const VERIFY_MSG =
+  'I could not verify the check right now. Please try sending your message again, or email hello@efortune.tech directly.';
 
 function passFetch(hostname = DOMAIN, action = 'contact') {
   return async () =>
@@ -30,7 +31,7 @@ function fields(extra = {}) {
     name: 'Ed Fortune',
     email: 'ed@example.com',
     company: 'Efortune',
-    interest: 'cloud',
+    interest: 'fractional-cio',
     message: 'We would like a consultation about cloud architecture.',
     'cf-turnstile-response': 'tok',
     ...extra,
@@ -260,7 +261,7 @@ describe('field handling', () => {
         name: 'Ed\r\nBcc: evil@x.com',
         email: 'ed\x00@example.com',
         company: 'Acme\x00Corp',
-        interest: 'clo\noud',
+        interest: 'fractional-\ncio',
         message: 'Please call me about architecture.\x07',
       }),
     });
@@ -274,7 +275,7 @@ describe('field handling', () => {
     assert.match(sent[0].raw, /^Reply-To: ed@example\.com\r$/m);
     assert.match(sent[0].text, /Name: EdBcc: evil@x.com/);
     assert.match(sent[0].text, /Company: AcmeCorp/);
-    assert.match(sent[0].text, /Interest: clooud/);
+    assert.match(sent[0].text, /Interest: fractional-cio/);
     assert.match(sent[0].text, /Email: ed@example.com/);
     assert.match(sent[0].text, /Please call me about architecture\./);
   });
@@ -303,7 +304,28 @@ describe('field handling', () => {
     assert.equal(response.status, 303);
     assert.equal(sent.length, 1);
     assert.match(sent[0].text, /Name: Ed Fortune/);
-    assert.match(sent[0].text, /Interest: cloud/);
+    assert.match(sent[0].text, /Interest: fractional-cio/);
+  });
+
+  it('includes company size and driving fields in the notification email', async () => {
+    const { response, sent } = await submit({
+      data: fields({
+        company_size: '200-499',
+        driving: 'New CIO left and board wants a roadmap review.',
+      }),
+    });
+    assert.equal(response.status, 303);
+    assert.match(sent[0].text, /Company size: 200-499/);
+    assert.match(sent[0].text, /What's driving this now:/);
+    assert.match(sent[0].text, /roadmap review/);
+  });
+
+  it('rejects an unknown interest value', async () => {
+    const { response, sent } = await submit({
+      data: fields({ interest: 'cloud' }),
+    });
+    assert.equal(response.status, 400);
+    assert.equal(sent.length, 0);
   });
 
   it('re-renders the contact form with escaped submitted values on a visible error', async () => {

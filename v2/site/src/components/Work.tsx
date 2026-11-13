@@ -1,4 +1,4 @@
-import { caseStudies } from '../content'
+import { featuredUseCases } from '../content'
 import type { RemixVariant } from '../remixes/types'
 
 export default function Work({
@@ -11,11 +11,10 @@ export default function Work({
   return (
     <section className={`${variant}-work`} id="engagements">
       {kicker && <p className={`${variant}-work__kicker`}>{kicker}</p>}
-      <h2 className={`${variant}-work__title`}>Featured Engagements</h2>
+      <h2 className={`${variant}-work__title`}>Featured use cases</h2>
       <div className={`${variant}-work__grid`}>
-        {caseStudies.map((c) => (
+        {featuredUseCases.map((c) => (
           <article key={c.title} className={`${variant}-work-card`}>
-            <span className={`${variant}-work-card__tag`}>{c.tag}</span>
             <h3>{c.title}</h3>
             <p>{c.blurb}</p>
           </article>

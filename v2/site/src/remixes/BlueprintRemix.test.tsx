@@ -8,7 +8,7 @@ describe('BlueprintRemix', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /technology strategy that delivers results/i,
+        name: /senior technology leadership, without the full-time hire/i,
       }),
     ).toBeInTheDocument()
   })

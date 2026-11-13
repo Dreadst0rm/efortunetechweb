@@ -12,7 +12,8 @@ export default function DigestIndexPage({ updates }: { updates: DigestUpdate[] }
         <p className="bp-kicker">{digestSite.tagline}</p>
         <h1>{digestSite.name}</h1>
         <p className="bp-lead">
-          Short research and reception briefs, with the latest up top and earlier days below.
+          Short research and reception briefs for growing companies—what changed in infrastructure,
+          security, and AI that might affect your roadmap, with the latest up top.
         </p>
       </header>
 

@@ -11,6 +11,7 @@ const requiredPages = [
   'thanks.html',
   '404.html',
   'services.html',
+  'pricing.html',
   'case-studies.html',
   'about.html',
   'insights.html',

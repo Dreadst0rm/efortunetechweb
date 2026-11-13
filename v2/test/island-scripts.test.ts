@@ -64,6 +64,6 @@ describe('per-page island bundles', () => {
     expect(contact).toContain('/js/contact.js')
 
     const cs = readFileSync(path.join(dist, 'case-studies.html'), 'utf8')
-    expect(cs).toContain('assets/islands/case-studies.js')
+    expect(cs).not.toContain('assets/islands/case-studies.js')
   })
 })

@@ -5,8 +5,8 @@ export default function Footer() {
         <div>
           <strong>efortune.tech</strong>
           <p>
-            Helping organizations turn technology strategy into executable outcomes and
-            measurable value.
+            Fractional CIO and vCIO leadership for companies of 60 to 900 people—where your
+            technology money should go to grow the business.
           </p>
         </div>
         <div>
@@ -19,7 +19,10 @@ export default function Footer() {
               <a href="/services.html">Services</a>
             </li>
             <li>
-              <a href="/case-studies.html">Case Studies</a>
+              <a href="/pricing.html">Pricing</a>
+            </li>
+            <li>
+              <a href="/case-studies.html">Case studies</a>
             </li>
             <li>
               <a href="/insights.html">Insights</a>

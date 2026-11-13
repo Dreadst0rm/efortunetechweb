@@ -17,6 +17,8 @@ import {
   escapeHtml,
   isAllowedOrigin,
   isGibberishMessage,
+  isValidCompanySize,
+  isValidInterest,
   readBoundedFormData,
   renderContactFormError,
   requestClientOrigin,
@@ -310,6 +312,20 @@ describe('readBoundedFormData', () => {
     });
     const form = await readBoundedFormData(request);
     assert.equal(form.get('name'), 'Ed');
+  });
+});
+
+describe('interest and company_size validation', () => {
+  it('accepts empty or known interest values', () => {
+    assert.equal(isValidInterest(''), true);
+    assert.equal(isValidInterest('fractional-cio'), true);
+    assert.equal(isValidInterest('cloud'), false);
+  });
+
+  it('accepts empty or known company size values', () => {
+    assert.equal(isValidCompanySize(''), true);
+    assert.equal(isValidCompanySize('60-199'), true);
+    assert.equal(isValidCompanySize('huge'), false);
   });
 });
 

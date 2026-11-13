@@ -9,6 +9,6 @@ describe('Testimonials', () => {
       screen.getByRole('heading', { level: 2, name: /what clients say/i })
     ).toBeInTheDocument()
     expect(screen.getByText('03 · In Their Words')).toBeInTheDocument()
-    expect(screen.getAllByRole('figure')).toHaveLength(3)
+    expect(screen.getAllByRole('figure')).toHaveLength(2)
   })
 })
