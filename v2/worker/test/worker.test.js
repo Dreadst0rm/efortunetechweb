@@ -349,6 +349,8 @@ describe('widget markup, client script, and CSP', () => {
     assert.doesNotMatch(CONTACT_HTML, /tel:/i);
     assert.doesNotMatch(CONTACT_HTML, /555-0180/);
     assert.doesNotMatch(CONTACT_HTML, /<h3>Phone<\/h3>/);
+    assert.match(CONTACT_HTML, /bp-contact-layout/);
+    assert.match(CONTACT_HTML, /bp-contact-keystone/);
   });
 
   it('lets the browser submit the form natively so the Turnstile token is included', () => {

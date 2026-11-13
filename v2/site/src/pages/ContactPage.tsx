@@ -10,11 +10,15 @@ export default function ContactPage() {
           outcomes.
         </p>
       </header>
-      <div id="quick-check-island" className="bp-qc-mount" tabIndex={-1} />
-      <div className="bp-contact-grid">
-        <div>
-          <h2>Start a Conversation</h2>
-          <form id="contact-form" className="bp-contact-form" action="/api/contact" method="post">
+      <div className="bp-contact-layout">
+        <aside className="bp-contact-keystone" aria-label="Email DNS quick check">
+          <div id="quick-check-island" className="bp-qc-mount" tabIndex={-1} />
+        </aside>
+        <div className="bp-contact-main">
+          <div className="bp-contact-grid">
+            <div>
+              <h2>Start a Conversation</h2>
+              <form id="contact-form" className="bp-contact-form" action="/api/contact" method="post">
             <div className="hp" hidden aria-hidden="true">
               <label htmlFor="website">Leave this field empty</label>
               <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
@@ -73,23 +77,25 @@ export default function ContactPage() {
                 <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>.
               </p>
             </noscript>
-            <button type="submit">Send Message</button>
-          </form>
+                <button type="submit">Send Message</button>
+              </form>
+            </div>
+            <aside className="bp-contact-aside">
+              <h3>Email</h3>
+              <p>
+                <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>
+              </p>
+              <h3>Location</h3>
+              <p>
+                Chicago, Illinois
+                <br />
+                Serving clients across North America
+              </p>
+              <h3>Response Time</h3>
+              <p>We typically respond to inquiries within one business day.</p>
+            </aside>
+          </div>
         </div>
-        <aside className="bp-contact-aside">
-          <h3>Email</h3>
-          <p>
-            <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>
-          </p>
-          <h3>Location</h3>
-          <p>
-            Chicago, Illinois
-            <br />
-            Serving clients across North America
-          </p>
-          <h3>Response Time</h3>
-          <p>We typically respond to inquiries within one business day.</p>
-        </aside>
       </div>
     </>
   )

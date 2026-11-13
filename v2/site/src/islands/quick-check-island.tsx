@@ -3,6 +3,22 @@ import { createRoot } from 'react-dom/client'
 
 type Check = { id: string; status: 'pass' | 'warn' | 'fail'; message: string }
 
+const CHECK_LABELS: Record<string, string> = {
+  spf: 'SPF',
+  dmarc: 'DMARC',
+  mx: 'MX',
+  mta_sts: 'MTA-STS',
+  tls_rpt: 'TLS-RPT',
+  dnssec: 'DNSSEC',
+}
+
+function shortLine(c: Check): string {
+  const name = CHECK_LABELS[c.id] ?? c.id
+  if (c.status === 'pass') return `${name} — OK`
+  if (c.status === 'warn') return `${name} — review`
+  return `${name} — unavailable`
+}
+
 function QuickCheckApp() {
   const [domain, setDomain] = useState('')
   const [checks, setChecks] = useState<Check[] | null>(null)
@@ -21,7 +37,11 @@ function QuickCheckApp() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error === 'invalid_domain' ? 'Enter a public domain name.' : 'Check could not run. Try again.')
+        setError(
+          data.error === 'invalid_domain'
+            ? 'Enter a public domain name.'
+            : 'Check could not run. Try again.',
+        )
         return
       }
       setChecks(data.checks ?? [])
@@ -34,18 +54,16 @@ function QuickCheckApp() {
 
   const scrollToForm = () => {
     const form = document.getElementById('contact-form')
-    form?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    form?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })
     const first = form?.querySelector<HTMLInputElement>('input[name="name"]')
     first?.focus()
   }
 
   return (
     <section className="bp-qc" aria-labelledby="qc-title">
-      <h2 id="qc-title">Quick email DNS check</h2>
-      <p className="bp-lead">
-        A short look at public DNS signals for outbound and inbound mail. This is advice only—not a full
-        audit.
-      </p>
+      <h2 id="qc-title">Quick DNS check</h2>
+      <p className="bp-qc__intro">Public mail DNS signals only—not a full audit.</p>
       <div className="bp-qc__row">
         <label className="bp-qc__field" htmlFor="qc-domain">
           Domain
@@ -59,8 +77,13 @@ function QuickCheckApp() {
           value={domain}
           onChange={(e) => setDomain(e.target.value)}
         />
-        <button type="button" disabled={loading || !domain.trim()} onClick={runScan}>
-          {loading ? 'Checking…' : 'Run check'}
+        <button
+          type="button"
+          className="bp-qc__run"
+          disabled={loading || !domain.trim()}
+          onClick={runScan}
+        >
+          {loading ? 'Checking…' : 'Check'}
         </button>
       </div>
       {error ? (
@@ -69,13 +92,17 @@ function QuickCheckApp() {
         </p>
       ) : null}
       {checks ? (
-        <ul className="bp-qc__list">
+        <ul className="bp-qc__list" aria-label="DNS check results">
           {checks.map((c) => (
-            <li key={c.id} className={`bp-qc__item bp-qc__item--${c.status}`}>
+            <li
+              key={c.id}
+              className={`bp-qc__item bp-qc__item--${c.status}`}
+              aria-label={c.message}
+            >
               <span className="bp-qc__badge" aria-hidden="true">
                 {c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '×'}
               </span>
-              {c.message}
+              <span className="bp-qc__line">{shortLine(c)}</span>
             </li>
           ))}
         </ul>
