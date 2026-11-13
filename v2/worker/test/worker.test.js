@@ -388,6 +388,7 @@ describe('wrangler.jsonc', () => {
     assert.match(raw, /"allowed_sender_addresses":\s*\[\s*"noreply@fortwarp\.com"\s*\]/);
     assert.doesNotMatch(raw, /noreply@efortune\.tech/);
     assert.match(raw, /"ALLOWED_HOSTS":\s*"efortune\.tech,www\.efortune\.tech,v2\.efortune\.tech"/);
+    assert.match(raw, /"SITE_ORIGIN":\s*"https:\/\/efortune\.tech"/);
     assert.doesNotMatch(raw, /"routes"/);
   });
 });
