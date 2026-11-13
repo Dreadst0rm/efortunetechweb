@@ -11,6 +11,7 @@ import DigestIndexPage from '../src/pages/DigestIndexPage'
 import DigestIssuePage from '../src/pages/DigestIssuePage'
 import { renderHead, type PageSeo } from '../src/seo'
 import { buildDigestIndexEntry } from '../src/digest/digestFilter'
+import { htmlRootAttrs } from '../src/siteBuild'
 
 export function renderDigest(dist: string, contentRoot: string, siteOrigin: string) {
   const updatesDir = path.join(contentRoot, 'digest', 'updates')
@@ -37,7 +38,7 @@ export function renderDigest(dist: string, contentRoot: string, siteOrigin: stri
       ),
     ].join('\n  ')
     const html = `<!DOCTYPE html>
-<html lang="en">
+<html ${htmlRootAttrs()}>
 <head>
   ${renderHead(seo)}
 </head>

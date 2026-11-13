@@ -1,0 +1,169 @@
+.bp-hero {
+  isolation: isolate;
+}
+
+.bp-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 1 — dot matrix with edge fade */
+html[data-bg='dots'] .bp-hero__bg,
+html:not([data-bg]) .bp-hero__bg {
+  background-color: var(--color-hero-bg);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-accent) 28%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 75% at 50% 42%,
+    #000 15%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 15%, transparent 72%);
+}
+
+/* 2 — soft mesh glow */
+html[data-bg='mesh'] .bp-hero__bg {
+  background: var(--color-hero-bg);
+}
+
+html[data-bg='mesh'] .bp-hero__bg::before,
+html[data-bg='mesh'] .bp-hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: blur(48px);
+  opacity: 0.85;
+}
+
+html[data-bg='mesh'] .bp-hero__bg::before {
+  background: radial-gradient(
+    ellipse 55% 45% at 22% 35%,
+    color-mix(in srgb, var(--color-accent) 35%, transparent),
+    transparent 70%
+  );
+  animation: bp-mesh-drift-a 140s ease-in-out infinite alternate;
+}
+
+html[data-bg='mesh'] .bp-hero__bg::after {
+  background: radial-gradient(
+    ellipse 50% 40% at 78% 68%,
+    color-mix(in srgb, var(--color-primary) 30%, transparent),
+    transparent 72%
+  );
+  animation: bp-mesh-drift-b 160s ease-in-out infinite alternate;
+}
+
+@keyframes bp-mesh-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(4%, 3%) scale(1.04);
+  }
+}
+
+@keyframes bp-mesh-drift-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-3%, -2%) scale(1.03);
+  }
+}
+
+/* 3 — topo contours, corner only */
+html[data-bg='topo'] .bp-hero__bg {
+  background-color: var(--color-hero-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%230F8B8D' stroke-opacity='.35' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  background-size: min(42vw, 320px) auto;
+  opacity: 0.55;
+}
+
+html[data-theme='dark'][data-bg='topo'] .bp-hero__bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%2334D399' stroke-opacity='.32' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light'])[data-bg='topo'] .bp-hero__bg {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 200'%3E%3Cg fill='none' stroke='%2334D399' stroke-opacity='.32' stroke-width='1'%3E%3Cpath d='M0 160 Q60 120 120 150 T240 130'/%3E%3Cpath d='M0 130 Q70 90 140 120 T240 100'/%3E%3Cpath d='M0 100 Q50 60 110 85 T240 70'/%3E%3Cpath d='M20 180 Q90 150 160 175 T240 155'/%3E%3C/g%3E%3C/svg%3E");
+  }
+}
+
+/* 4 — clean: rule + corner mark */
+html[data-bg='clean'] .bp-hero__bg {
+  background: var(--color-hero-bg);
+}
+
+html[data-bg='clean'] .bp-hero__bg::before {
+  content: '';
+  position: absolute;
+  top: 18%;
+  left: 10%;
+  width: min(36vw, 280px);
+  height: 1px;
+  background: color-mix(in srgb, var(--color-accent) 55%, transparent);
+}
+
+html[data-bg='clean'] .bp-hero__bg::after {
+  content: '';
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 28px;
+  height: 28px;
+  border-top: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+  opacity: 0.55;
+}
+
+.bp-bg-switcher {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: flex;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.bp-bg-switcher__btn {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.bp-bg-switcher__btn[aria-pressed='true'] {
+  background: var(--color-diagram-node-active);
+  color: var(--color-text);
+}
+
+.bp-bg-switcher__btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bg='mesh'] .bp-hero__bg::before,
+  html[data-bg='mesh'] .bp-hero__bg::after {
+    animation: none;
+  }
+}

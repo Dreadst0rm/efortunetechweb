@@ -13,6 +13,7 @@ import ThanksPage from '../src/pages/ThanksPage'
 import CaseStudiesPage from '../src/pages/CaseStudiesPage'
 import { services } from '../src/content'
 import { pages, renderHead, type PageSeo } from '../src/seo'
+import { htmlRootAttrs } from '../src/siteBuild'
 import { renderDigest } from './render-digest'
 import { digestUpdatePath } from '../src/digest/dates'
 
@@ -147,7 +148,7 @@ function writePage({ out, active, body, seo }: Route) {
     ),
   ].join('\n  ')
   const html = `<!DOCTYPE html>
-<html lang="en">
+<html ${htmlRootAttrs()}>
 <head>
   ${renderHead(seo)}
 </head>

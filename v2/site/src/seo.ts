@@ -10,6 +10,7 @@ export type PageSeo = {
 }
 
 import { buildWebAnalyticsHead } from './analytics'
+import { BG_HEAD } from './siteBuild'
 
 const origin = 'https://efortune.tech'
 const defaultImage = `${origin}/icons.svg`
@@ -121,6 +122,7 @@ export function renderHead(seo: PageSeo): string {
   <meta name="twitter:image" content="${escapeHtml(ogImage)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   ${THEME_HEAD}
+  ${BG_HEAD}
   <link rel="stylesheet" href="/assets/site.css">
   ${webAnalyticsHead}
   ${seo.extraHead ?? ''}

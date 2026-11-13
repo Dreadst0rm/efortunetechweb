@@ -9,6 +9,7 @@ export default function BlueprintRemix() {
   return (
     <div className="bp-page">
       <section className="bp-hero" id="top">
+        <div className="bp-hero__bg" aria-hidden="true" />
         <HeroBlueprintDraw />
         <div className="bp-hero__content">
           <p className="bp-kicker">{site.kicker}</p>
