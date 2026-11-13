@@ -16,19 +16,19 @@ html[data-theme='light'] {
   --color-text-muted: #4b535c;
   --color-text-subtle: #5c636a;
   --color-primary: #2b2f36;
-  --color-accent: #0f8b8d;
-  --color-accent-strong: #0a7375;
+  --color-accent: #065e60;
+  --color-accent-strong: #054a4c;
   --color-border: #d8dce0;
   --color-border-dashed: #c5cad1;
-  --color-focus: #0a7375;
-  --color-link: #0a7375;
-  --color-link-hover: #0f8b8d;
-  --color-cta-bg: #0a7375;
+  --color-focus: #054a4c;
+  --color-link: #054a4c;
+  --color-link-hover: #065e60;
+  --color-cta-bg: #054a4c;
   --color-cta-text: #ffffff;
   --color-nav-bg: rgba(243, 244, 246, 0.94);
   --color-hero-bg: #e9ecef;
-  --color-hero-line: rgba(15, 139, 141, 0.55);
-  --color-hero-line-faint: rgba(15, 139, 141, 0.22);
+  --color-hero-line: rgba(5, 74, 76, 0.55);
+  --color-hero-line-faint: rgba(5, 74, 76, 0.22);
   --color-hero-stamp: #b4233a;
   --color-hero-title-stroke: #4b535c;
   --color-card-bg: #f3f4f6;
@@ -36,9 +36,9 @@ html[data-theme='light'] {
   --color-pass: #0d7a4b;
   --color-warn: #9a6700;
   --color-fail: #c41e3a;
-  --color-selection: rgba(15, 139, 141, 0.25);
+  --color-selection: rgba(5, 74, 76, 0.25);
   --color-diagram-node: #f3f4f6;
-  --color-diagram-node-active: rgba(15, 139, 141, 0.12);
+  --color-diagram-node-active: rgba(5, 74, 76, 0.12);
   --color-diagram-focus: var(--color-accent-strong);
 }
 
@@ -51,19 +51,19 @@ html[data-theme='light'] {
     --color-text-muted: #4b535c;
     --color-text-subtle: #5c636a;
     --color-primary: #2b2f36;
-    --color-accent: #0f8b8d;
-    --color-accent-strong: #0a7375;
+    --color-accent: #065e60;
+    --color-accent-strong: #054a4c;
     --color-border: #d8dce0;
     --color-border-dashed: #c5cad1;
-    --color-focus: #0a7375;
-    --color-link: #0a7375;
-    --color-link-hover: #0f8b8d;
-    --color-cta-bg: #0a7375;
+    --color-focus: #054a4c;
+    --color-link: #054a4c;
+    --color-link-hover: #065e60;
+    --color-cta-bg: #054a4c;
     --color-cta-text: #ffffff;
     --color-nav-bg: rgba(243, 244, 246, 0.94);
     --color-hero-bg: #e9ecef;
-    --color-hero-line: rgba(15, 139, 141, 0.55);
-    --color-hero-line-faint: rgba(15, 139, 141, 0.22);
+    --color-hero-line: rgba(5, 74, 76, 0.55);
+    --color-hero-line-faint: rgba(5, 74, 76, 0.22);
     --color-hero-stamp: #b4233a;
     --color-hero-title-stroke: #4b535c;
     --color-card-bg: #f3f4f6;
@@ -71,9 +71,9 @@ html[data-theme='light'] {
     --color-pass: #0d7a4b;
     --color-warn: #9a6700;
     --color-fail: #c41e3a;
-    --color-selection: rgba(15, 139, 141, 0.25);
+    --color-selection: rgba(5, 74, 76, 0.25);
     --color-diagram-node: #f3f4f6;
-    --color-diagram-node-active: rgba(15, 139, 141, 0.12);
+    --color-diagram-node-active: rgba(5, 74, 76, 0.12);
     --color-diagram-focus: var(--color-accent-strong);
   }
 }

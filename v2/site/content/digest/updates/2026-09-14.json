@@ -49,11 +49,11 @@
       "sources": [
         {
           "label": "Coolify API introduction",
-          "url": "https://coolify.io/docs/api-reference/introduction"
+          "url": "https://coolify.io/docs/api/overview"
         },
         {
           "label": "Coolify API authorization (scoped tokens)",
-          "url": "https://coolify.io/docs/api-reference/authorization"
+          "url": "https://coolify.io/docs/api/authorization"
         },
         {
           "label": "Coolify API IP allowlist",

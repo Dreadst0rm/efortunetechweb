@@ -16,7 +16,7 @@ function shortLine(c: Check): string {
   const name = CHECK_LABELS[c.id] ?? c.id
   if (c.status === 'pass') return `${name} — OK`
   if (c.status === 'warn') return `${name} — review`
-  return `${name} — unavailable`
+  return `${name} — issue`
 }
 
 function QuickCheckApp() {
@@ -37,6 +37,15 @@ function QuickCheckApp() {
       })
       const data = await res.json()
       if (!res.ok) {
+        if (res.status === 429 || data.error === 'rate_limited') {
+          const retry = res.headers.get('Retry-After')
+          setError(
+            retry
+              ? `Too many checks from your network. Wait ${retry} seconds and try again.`
+              : 'Too many checks from your network. Wait a minute and try again.',
+          )
+          return
+        }
         setError(
           data.error === 'invalid_domain'
             ? 'Enter a public domain name.'
@@ -64,28 +73,31 @@ function QuickCheckApp() {
     <section className="bp-qc" aria-labelledby="qc-title">
       <h2 id="qc-title">Quick DNS check</h2>
       <p className="bp-qc__intro">Public mail DNS signals only—not a full audit.</p>
-      <div className="bp-qc__row">
-        <label className="bp-qc__field" htmlFor="qc-domain">
-          Domain
-        </label>
-        <input
-          id="qc-domain"
-          type="text"
-          inputMode="url"
-          autoComplete="off"
-          placeholder="yourcompany.com"
-          value={domain}
-          onChange={(e) => setDomain(e.target.value)}
-        />
-        <button
-          type="button"
-          className="bp-qc__run"
-          disabled={loading || !domain.trim()}
-          onClick={runScan}
-        >
-          {loading ? 'Checking…' : 'Check'}
-        </button>
-      </div>
+      <form
+        className="bp-qc__form"
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (!loading && domain.trim()) void runScan()
+        }}
+      >
+        <div className="bp-qc__row">
+          <label className="bp-qc__field" htmlFor="qc-domain">
+            Domain
+          </label>
+          <input
+            id="qc-domain"
+            type="text"
+            inputMode="url"
+            autoComplete="off"
+            placeholder="yourcompany.com"
+            value={domain}
+            onChange={(e) => setDomain(e.target.value)}
+          />
+          <button type="submit" className="bp-qc__run" disabled={loading || !domain.trim()}>
+            {loading ? 'Checking…' : 'Check'}
+          </button>
+        </div>
+      </form>
       {error ? (
         <p className="bp-qc__error" role="alert">
           {error}
@@ -94,15 +106,14 @@ function QuickCheckApp() {
       {checks ? (
         <ul className="bp-qc__list" aria-label="DNS check results">
           {checks.map((c) => (
-            <li
-              key={c.id}
-              className={`bp-qc__item bp-qc__item--${c.status}`}
-              aria-label={c.message}
-            >
+            <li key={c.id} className={`bp-qc__item bp-qc__item--${c.status}`}>
               <span className="bp-qc__badge" aria-hidden="true">
                 {c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '×'}
               </span>
-              <span className="bp-qc__line">{shortLine(c)}</span>
+              <span className="bp-qc__text">
+                <span className="bp-qc__line">{shortLine(c)}</span>
+                <span className="bp-qc__detail">{c.message}</span>
+              </span>
             </li>
           ))}
         </ul>
