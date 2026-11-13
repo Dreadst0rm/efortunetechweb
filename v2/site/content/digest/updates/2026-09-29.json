@@ -1,0 +1,37 @@
+{
+  "date": "2026-09-29",
+  "title": "OpenAI's Decisions API on Luna, in limited preview",
+  "summary": "OpenAI's Decisions API, built on Luna, is in limited preview, with a broader release \"in the coming days.\" OpenAI says it returns in 150 ms, compared with 1.6 s for GPT-6 Luna, via Frederic Lardinois, The New Stack, 29 Sep 2026. The use is to classify, route, or choose a next action from a fixed list. Price, how many candidate answers, and whether you can tune it on your own data are unstated. The New Stack sets the announcement next to TypeSafe's Jev. That is the reporter's framing, not an OpenAI quote.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "OpenAI's Decisions API",
+      "bullets": [
+        "OpenAI announced a Decisions API built on Luna. It is in limited preview, with a broader release \"in the coming days.\"",
+        "The New Stack sets the announcement next to TypeSafe's Jev. That is the reporter's framing, not an OpenAI quote.",
+        "OpenAI says results come back in 150 ms, compared with 1.6 s for GPT-6 Luna. That contrast is OpenAI's, via Frederic Lardinois, The New Stack, 29 Sep 2026.",
+        "The use is to classify, route, or choose a next action from a fixed list.",
+        "Price, how many candidate answers, and whether you can tune it on your own data are unstated."
+      ],
+      "sources": [
+        {
+          "label": "The New Stack \u2014 Frederic Lardinois, OpenAI's Decisions API on Luna, 29 Sep 2026",
+          "url": "https://thenewstack.io/openai-decision-api-luna/"
+        }
+      ]
+    },
+    {
+      "heading": "On Secure",
+      "bullets": [
+        "Our ideas get you 50% of the way there, and the knowledge on Secure gives you 100% of what you need to make the jump to the future. The guide is Decisions API and the fast decision model: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
+      ],
+      "sources": [
+        {
+          "label": "Secure \u2014 Decisions API and the fast decision model",
+          "url": "https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Our ideas get you 50% of the way there, and the knowledge on Secure gives you 100% of what you need to make the jump to the future. The guide is Decisions API and the fast decision model: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
+}

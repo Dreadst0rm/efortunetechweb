@@ -11,7 +11,8 @@
 
   "vars": {
     // Staging hostname for Worker preview; remove v2.efortune.tech after production cutover.
-    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech,v2.efortune.tech"
+    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech,v2.efortune.tech",
+    "SITE_ORIGIN": "https://efortune.tech"
   },
 
   "assets": {

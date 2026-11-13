@@ -4,6 +4,7 @@ export type NavPage =
   | 'case-studies'
   | 'about'
   | 'insights'
+  | 'digest'
   | 'contact'
 
 const links: { page: NavPage; href: string; label: string }[] = [
@@ -12,6 +13,7 @@ const links: { page: NavPage; href: string; label: string }[] = [
   { page: 'case-studies', href: '/case-studies.html', label: 'Case Studies' },
   { page: 'about', href: '/about.html', label: 'About' },
   { page: 'insights', href: '/insights.html', label: 'Insights' },
+  { page: 'digest', href: '/digest/', label: 'Digest' },
   { page: 'contact', href: '/contact.html', label: 'Contact' },
 ]
 

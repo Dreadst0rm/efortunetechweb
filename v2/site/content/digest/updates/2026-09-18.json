@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-18",
+  "title": "Profiling long-horizon agents, MCP tool hallucination, harness design for coding agents — plus Kubernetes inference costs and buildpack supply-chain controls",
+  "summary": "Digest for Sep 18: three arXiv cs.AI papers announced that day (AgentPProf semantic profiler, Closed-World Resolution against tool hallucination including MCP, an empirical study of coding-agent harness design) and two New Stack pieces (whether Kubernetes can count the real cost of AI inference, and how buildpacks make container security controls enforceable at scale).",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "arXiv cs.AI — curated recent",
+      "bullets": [
+        "AgentPProf — semantic profiler for long-horizon AI agents (Zheng et al.; arXiv:2609.20301). Thesis: agent observability needs cross-run profiling, not just per-run tracing, with task-intent operation stacks standing in for call stacks. Evidence: it emits pprof-compatible profiles for flame graphs, reaches 0.764 B³ F1 against human annotations on CodeTraceBench, and raises problem-localization MAP by up to 56%.",
+        "Closed-World Resolution against tool hallucination in LLM agents (Iyer; arXiv:2609.19425). Thesis: agents call tools that don’t exist or pass undeclared arguments, and no selection or gating defense catches that, so a registry-plus-signature check must sit before any gate. Evidence: 322 hallucinations across ten hosted models, concentrated on raw-JSON invocation, with scale not helping; merging several MCP servers into one namespace produced 154 more, including from frontier models that were clean on a single registry.",
+        "An empirical study of harness design for coding agents (Fan et al.; arXiv:2609.20804). Thesis: harness components should be judged separately, not as one monolith. Evidence: across 176 matched settings on SWE-Bench Verified and Terminal-Bench 2.1, context management mattered most as budgets tightened, rule-based elision before LLM summarization was the most efficient strategy, planning became a cost saver for stronger models, and bash-capable models did well with a bash-only interface at lower cost."
+      ],
+      "sources": [
+        {
+          "label": "arXiv cs.AI — Sep 18 listing",
+          "url": "https://arxiv.org/catchup/cs.AI/2026-09-18"
+        },
+        {
+          "label": "2609.20301 — AgentPProf",
+          "url": "https://arxiv.org/abs/2609.20301"
+        },
+        {
+          "label": "2609.19425 — Closed-World Resolution (tool hallucination)",
+          "url": "https://arxiv.org/abs/2609.19425"
+        },
+        {
+          "label": "2609.20804 — Harness design for coding agents",
+          "url": "https://arxiv.org/abs/2609.20804"
+        }
+      ]
+    },
+    {
+      "heading": "The New Stack — agent infrastructure & supply chain",
+      "bullets": [
+        "Kubernetes can run AI inference. But can it count the real cost? Thesis: China Merchants Bank’s CNCF case study (Kueue, KEDA, Prometheus, HAMi and Fluid) lifted accelerator utilization from 35% to more than 60% and cut the cost of processing a million tokens by 60%. WEKA’s Val Bercovici counters that inference cost depends on state Kubernetes doesn’t model, such as request mix, KV-cache occupancy and the prefill/decode balance, so without a new cost-aware layer the platform becomes “a tax on inference economics.”",
+        "How buildpacks help enterprises finally operate container security controls at scale. Thesis: container controls fail less for lack of scanners than because every repo builds images differently through its own Dockerfile, so patched base images never reach production evenly. The piece argues Cloud Native Buildpacks move base images, runtime, SBOMs and rebuilds into a governed builder the platform team controls."
+      ],
+      "sources": [
+        {
+          "label": "TNS — Kubernetes AI inference costs",
+          "url": "https://thenewstack.io/kubernetes-ai-inference-costs/"
+        },
+        {
+          "label": "TNS — buildpacks and container security",
+          "url": "https://thenewstack.io/buildpacks-container-security-scale/"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "Profile agents like services: AgentPProf’s cross-run flame graphs and the inference-cost debate both say agent cost and latency hide in aggregates, not single traces or pod metrics.",
+        "Resolve before you gate: tool hallucination, especially across merged MCP servers, is a registry problem that allow-lists and policy gates never see.",
+        "Harness choices are budget choices: context management, planning and tool surface should be tuned per model and budget, not copied wholesale.",
+        "Supply chain is a build-path problem: one governed image path beats hundreds of hand-maintained Dockerfiles when a patch has to land everywhere.",
+        "Want the observability playbooks for profiling and gating agent workloads? Members unlock them on https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
+      ],
+      "sources": [
+        {
+          "label": "Secure — member library",
+          "url": "https://secure.efortune.tech"
+        },
+        {
+          "label": "Secure — Observability series",
+          "url": "https://secure.efortune.tech/series/observability/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Sep 18 is an operations day for agents: profile them across runs, resolve tool calls against a closed registry before any gate, tune harness components per model and budget, measure what inference really costs per token, and put container builds on one governed path. Read the links, then unlock Secure when you’re ready to instrument and harden: https://secure.efortune.tech"
+}

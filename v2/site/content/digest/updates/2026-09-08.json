@@ -1,0 +1,96 @@
+{
+  "date": "2026-09-08",
+  "title": "Coolify “plugins” — what’s real, and Authentik SSO settings",
+  "summary": "Coolify has no plugin marketplace. Extensibility is one-click services, Traefik middleware, and CLI/MCP. Same day: recommended Authentik SSO for Coolify dashboard login with exact callback and Base URL values. Also: Astra Portal clear, Anthropic–Decart walkaway, Mistral mega-round.",
+  "tone": "practical",
+  "sections": [
+    {
+      "heading": "Coolify plugins (reality check)",
+      "bullets": [
+        "No official Coolify plugin system or marketplace (community FR exists; theme experiments are separate).",
+        "What people call plugins: ~280+ one-click service templates, Traefik middlewares (Authentik forward-auth, CrowdSec), coolify-cli, built-in MCP, community coolify-mcp, Terraform.",
+        "High-value next services for this stack: Uptime Kuma, Umami/Plausible, MinIO/Garage, Vaultwarden, n8n, Outline, Grafana/Prometheus."
+      ],
+      "sources": [
+        {
+          "label": "Coolify plugins/themes discussion #10655",
+          "url": "https://github.com/coollabsio/coolify/discussions/10655"
+        },
+        {
+          "label": "Coolify services docs",
+          "url": "https://coolify.io/docs/services"
+        },
+        {
+          "label": "Protect services with Authentik (Traefik)",
+          "url": "https://coolify.io/docs/knowledge-base/proxy/traefik/protect-services-with-authentik"
+        },
+        {
+          "label": "Coolify MCP integration",
+          "url": "https://coolify.io/docs/integrations/mcp"
+        },
+        {
+          "label": "coolify-cli",
+          "url": "https://github.com/coollabsio/coolify-cli"
+        }
+      ]
+    },
+    {
+      "heading": "Authentik SSO for Coolify (what to put where)",
+      "bullets": [
+        "Use Settings → OAuth → Authentik (named card), Coolify ≥ v4.3.0.",
+        "Redirect URI (both sides): `{Coolify origin}/auth/authentik/callback`.",
+        "Coolify Base URL: the Authentik origin only — no `/application/o/slug/`.",
+        "Authentik: Confidential OAuth2/OIDC client; scopes openid profile email; bind coolify-admins group; MFA on Authentik flow.",
+        "After accounts exist: Coolify Registration Allowed = off; keep break-glass local admin password.",
+        "Dashboard SSO ≠ Traefik forward-auth (different Authentik provider type)."
+      ],
+      "sources": [
+        {
+          "label": "Coolify Authentik SSO",
+          "url": "https://next.coolify.io/docs/core/security/authentication/sso/authentik"
+        },
+        {
+          "label": "Coolify SSO overview",
+          "url": "https://next.coolify.io/docs/core/security/authentication/sso/overview"
+        },
+        {
+          "label": "Authentik create OAuth2 provider",
+          "url": "https://docs.goauthentik.io/add-secure-apps/providers/oauth2/create-oauth2-provider/"
+        }
+      ]
+    },
+    {
+      "heading": "Overheard — Astra, Anthropic, Mistral",
+      "bullets": [
+        "Hobbyist run: GPT-6 Astra clears Portal on its own in under 24h for about $571 in tokens.",
+        "TNW on Jensen Huang’s “AGI has arrived” Astra post vs Pachocki’s caution and ARC dual-harness scores.",
+        "Anthropic walked away after diligence on a ~$6B Decart buy (chip-efficiency; collab still possible).",
+        "Mistral closed €3B Series D at >€21B, Samsung-led; open-weight sovereign pitch; Nvidia among backers.",
+        "HN: Mistral raises €3B — 627 points, ~448 comments (sovereign/open-weight, Nvidia constraints, coding vs Anthropic/Astra)."
+      ],
+      "sources": [
+        {
+          "label": "The Verge — Astra clears Portal ~$571",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/990897/gpt-6-astra-beat-portal-and-it-only-cost-571-18"
+        },
+        {
+          "label": "TNW — Huang AGI vs ARC",
+          "url": "https://thenextweb.com/news/jensen-huang-agi-has-arrived-gpt-6-astra"
+        },
+        {
+          "label": "TNW — Anthropic walks from Decart",
+          "url": "https://thenextweb.com/news/anthropic-walks-away-decart-6bn-acquisition"
+        },
+        {
+          "label": "CNBC — Mistral €3B Series D",
+          "url": "https://www.cnbc.com/2026/09/08/mistral-ai-funding-valuation-samsung.html"
+        },
+        {
+          "label": "HN — Mistral raise",
+          "url": "https://news.ycombinator.com/item?id=49605767"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Skip waiting for a Coolify plugin store; wire Authentik SSO for Coolify login next, then forward-auth and curated one-clicks as needed. Overheard: Astra’s cheap Portal clear, Anthropic’s Decart walkaway, and Mistral’s €3B round."
+}

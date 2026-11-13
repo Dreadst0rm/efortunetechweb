@@ -1,0 +1,153 @@
+{
+  "date": "2026-09-13",
+  "title": "Coolify vs Dokploy and peers, NetBird h2c routing fix, Authentik forward-auth, Origin SSH deploy keys",
+  "summary": "Self-hosted ops Digest for Sep 13: why Coolify stays the SMB Docker host (Dokploy as the staged alternative), the Traefik gRPC/h2c split that fixes NetBird ManagementService on Coolify, Authentik forward-auth for Coolify apps, and why Origin SSH deploy keys beat GitHub mirrors when the source lives in Origin.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "Coolify alternatives for SMB Docker hosting",
+      "bullets": [
+        "Coolify still holds the widest peer match for SMB self-hosting (Compose, one-click catalog, multi-server, backups, teams) plus a documented REST API and MCP server for agent automation. The trade-off is a steady 2026 security-advisory stream, so aggressive patching is part of the job, not an option.",
+        "Dokploy is the closest Coolify-like alternative, with Swarm-native multi-node, an API, CLI and official MCP package. It is still pre-1.0 and open-core: SSO, SCIM, custom roles and audit logs sit in the Enterprise editions, per its own Cloud vs Self-Hosted page.",
+        "CapRover, Dokku and EasyPanel fit narrower cases: CapRover for simple Swarm apps (source-available license with an appendix, not plain Apache-2.0), Dokku for a CLI-first minimal footprint, EasyPanel for a polished closed-source UI. None is a better wholesale replacement for a typical Coolify setup.",
+        "For most SMB teams: stay on Coolify, patch fast, and keep agent automation on the Coolify API/MCP; stage Dokploy on a spare VPS only if Swarm clustering or lighter overhead becomes a real requirement."
+      ],
+      "sources": [
+        {
+          "label": "GitHub — Coolify",
+          "url": "https://github.com/coollabsio/coolify"
+        },
+        {
+          "label": "Coolify security advisories",
+          "url": "https://github.com/coollabsio/coolify/security/advisories"
+        },
+        {
+          "label": "Coolify — API overview",
+          "url": "https://coolify.io/docs/api/overview"
+        },
+        {
+          "label": "Coolify — MCP overview",
+          "url": "https://coolify.io/docs/mcp/overview"
+        },
+        {
+          "label": "GitHub — Dokploy",
+          "url": "https://github.com/Dokploy/dokploy"
+        },
+        {
+          "label": "Dokploy — Cloud vs Self-Hosted (editions)",
+          "url": "https://docs.dokploy.com/docs/core/differences"
+        },
+        {
+          "label": "Dokploy — open-source license update",
+          "url": "https://dokploy.com/blog/we-are-updating-dokploys-open-source-license"
+        },
+        {
+          "label": "GitHub — Dokploy MCP",
+          "url": "https://github.com/Dokploy/mcp"
+        },
+        {
+          "label": "CapRover LICENSE",
+          "url": "https://github.com/caprover/caprover/blob/master/LICENSE"
+        },
+        {
+          "label": "GitHub — Dokku",
+          "url": "https://github.com/dokku/dokku"
+        },
+        {
+          "label": "EasyPanel pricing",
+          "url": "https://easypanel.io/pricing"
+        }
+      ]
+    },
+    {
+      "heading": "NetBird on Coolify — Traefik gRPC/h2c ManagementService fix",
+      "bullets": [
+        "Symptom: clients calling /management.ManagementService/GetServerKey get dashboard HTML, a 404 or a TLS EOF, because Traefik has no h2c router and gRPC falls through to the dashboard catch-all. The dashboard looks healthy while clients stay broken.",
+        "Fix per NetBird’s external reverse-proxy docs: for the combined netbird-server container (v0.65.0+), run two Traefik routers, one sending the gRPC service paths to an h2c backend and one sending relay, WebSocket, API and OAuth paths over plain HTTP, with the dashboard as a low-priority catch-all.",
+        "Coolify watchouts: let the Coolify Domains UI own dashboard TLS, keep the NetBird hostname DNS-only (no Cloudflare proxy) so gRPC and STUN work, publish UDP 3478 for the embedded STUN server, and re-check custom labels after redeploys."
+      ],
+      "sources": [
+        {
+          "label": "NetBird — external reverse proxy (Traefik gRPC/h2c)",
+          "url": "https://docs.netbird.io/selfhosted/external-reverse-proxy"
+        },
+        {
+          "label": "NetBird — configuration files reference",
+          "url": "https://docs.netbird.io/selfhosted/maintenance/configuration-files"
+        },
+        {
+          "label": "NetBird — enable reverse proxy migration",
+          "url": "https://docs.netbird.io/selfhosted/migration/enable-reverse-proxy"
+        }
+      ]
+    },
+    {
+      "heading": "Authentik Traefik forward-auth for Coolify apps",
+      "bullets": [
+        "Two different jobs: Coolify’s Authentik SSO (OAuth2/OpenID provider, Coolify v4.3.0+) logs people into the Coolify dashboard, while Traefik forwardAuth with an Authentik Proxy provider gates each app before traffic reaches the container.",
+        "Coolify’s own guide covers the pattern: an Authentik Proxy provider in forward-auth mode (cookie on the parent domain for cross-subdomain SSO), a shared Traefik middleware pointing at the Authentik outpost, and that middleware attached to each protected app’s HTTPS router.",
+        "Watchouts: a broken middleware locks everyone out, so keep the Coolify dashboard on a separate domain and know how to remove the middleware; make sure the outpost is reachable on the proxy’s network, and verify in a private window after each redeploy."
+      ],
+      "sources": [
+        {
+          "label": "Coolify — Protect with Authentik (Traefik)",
+          "url": "https://coolify.io/docs/core/networking/proxy/traefik/protect-services-with-authentik"
+        },
+        {
+          "label": "Coolify — Authentik dashboard SSO",
+          "url": "https://coolify.io/docs/core/security/authentication/sso/authentik"
+        },
+        {
+          "label": "authentik — Traefik forward auth",
+          "url": "https://docs.goauthentik.io/add-secure-apps/providers/proxy/server_traefik/"
+        },
+        {
+          "label": "authentik — Integrate with Coolify",
+          "url": "https://integrations.goauthentik.io/infrastructure/coolify/"
+        }
+      ]
+    },
+    {
+      "heading": "Coolify deploys: Origin SSH deploy keys vs GitHub mirrors",
+      "bullets": [
+        "Coolify now documents a first-class Cursor Origin path: store a private key in Coolify, register the matching public key with origin ssh-key add, then create a Private Repository (with deploy key) resource using the SSH clone URL. HTTPS URLs won’t use the deploy key.",
+        "A GitHub mirror buys the GitHub App UX and native webhooks, but it adds a second source of truth that has to be pushed before Coolify sees a commit. Deploy keys clone the real source, with one read-only key per repo and a webhook, API or manual redeploy for auto-deploy.",
+        "Rule of thumb: when the app lives in Origin, use Coolify deploy keys and keep a GitHub mirror only when you want GitHub collaboration or non-Coolify CI for its own sake."
+      ],
+      "sources": [
+        {
+          "label": "Coolify — Cursor Origin",
+          "url": "https://coolify.io/docs/applications/sources/cursor-origin"
+        },
+        {
+          "label": "Coolify — Deploy keys",
+          "url": "https://coolify.io/docs/applications/sources/deploy-keys"
+        },
+        {
+          "label": "Coolify — SSH keys (credentials)",
+          "url": "https://coolify.io/docs/core/security/credentials/ssh-keys"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "A self-hosted PaaS is only as safe as its patch cadence: pick the platform with the automation surface you’ll actually use, then treat its advisory feed as a standing work queue.",
+        "Most “it’s up but broken” failures on Coolify are routing and identity edges: gRPC needs h2c, forward-auth needs the right outpost address, and dashboard SSO is not app protection.",
+        "Fewer sources of truth means fewer drift incidents: deploy from where the code lives, and add mirrors only on purpose.",
+        "Want the observability and recovery playbooks that keep a self-hosted stack honest? Members unlock them on https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
+      ],
+      "sources": [
+        {
+          "label": "Secure — member library",
+          "url": "https://secure.efortune.tech"
+        },
+        {
+          "label": "Secure — Observability series",
+          "url": "https://secure.efortune.tech/series/observability/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "For most small teams, Coolify stays the pick as long as you patch aggressively, with Dokploy as the staged alternative only if Swarm or overhead forces the move. Give NetBird a Traefik h2c router for gRPC, gate apps with Authentik forward-auth (separate from dashboard SSO), and deploy Origin-hosted apps with SSH deploy keys instead of mirrors. Read the docs linked above, then unlock Secure when you’re ready to operationalize: https://secure.efortune.tech"
+}

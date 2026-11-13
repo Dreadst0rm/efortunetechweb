@@ -20,6 +20,8 @@ const requiredPages = [
   'sitemap.xml',
   'robots.txt',
   'assets/site.css',
+  'digest/index.html',
+  'digest/rss.xml',
 ]
 
 describe('build output', () => {
@@ -27,6 +29,13 @@ describe('build output', () => {
     for (const page of requiredPages) {
       expect(existsSync(path.join(dist, page)), `missing ${page}`).toBe(true)
     }
+  })
+
+  it('prerenders 25 digest issue pages', () => {
+    const dir = path.join(dist, 'digest', 'updates')
+    expect(existsSync(dir)).toBe(true)
+    const issues = readdirSync(dir).filter((d) => existsSync(path.join(dir, d, 'index.html')))
+    expect(issues).toHaveLength(25)
   })
 
   it('does not ship a client React bundle', () => {

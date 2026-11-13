@@ -24,6 +24,9 @@ export default function Footer() {
             <li>
               <a href="/insights.html">Insights</a>
             </li>
+            <li>
+              <a href="/digest/">Digest</a>
+            </li>
           </ul>
         </div>
         <div>

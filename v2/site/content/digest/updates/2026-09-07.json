@@ -1,0 +1,41 @@
+{
+  "date": "2026-09-07",
+  "title": "Huang calls Astra AGI; ARC dual-harness undercuts 99.9%",
+  "summary": "Huang calls Astra AGI; ARC’s dual-harness scores undercut the 99.9% claim.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "What cleared the bar",
+      "bullets": [
+        "Nvidia CEO Jensen Huang says GPT-6 Astra is AGI (“AGI has arrived”); Brockman says we’re moving into the AGI era.",
+        "TNW: ARC Prize standard harness scores Astra 62.7% vs OpenAI Provider Adapter 99.9%; ARC declines AGI claim; post-launch metric edits documented.",
+        "Pachocki’s “An Alien Mind” asks labs for shared slowdown bars as OpenAI hits automated research-intern goal.",
+        "Inside Anthropic Labs (~20 people, Ben Mann): Claude Code / MCP / Claude Design incubator as IPO nears.",
+        "NYT: Blacklisted Inspur’s Aivres arm routed $5.6B+ advanced tech incl. $3B+ Nvidia Blackwell servers via SE Asia."
+      ],
+      "sources": [
+        {
+          "label": "India Today — Huang AGI claim",
+          "url": "https://www.indiatoday.in/technology/news/story/nvidia-ceo-jensen-huang-claims-gpt-6-astra-is-agi-2988584-2026-09-07"
+        },
+        {
+          "label": "TNW — ARC harness 62.7% vs 99.9%",
+          "url": "https://thenextweb.com/news/openai-astra-arc-agi-3-harness-62-7-vs-99-9-benchmark-revisions"
+        },
+        {
+          "label": "Runtime Wire — Pachocki safety pact",
+          "url": "https://runtimewire.com/article/openai-chief-scientist-seeks-safety-pact-as-lab-scales-agent-research"
+        },
+        {
+          "label": "Business Insider — Anthropic Labs",
+          "url": "https://www.businessinsider.com/anthropic-labs-team-ai-innovation-ipo-2026-9"
+        },
+        {
+          "label": "NYT — Inspur/Aivres chip routing",
+          "url": "https://www.nytimes.com/2026/09/06/technology/ai-chips-china-blacklist.html"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "AGI rhetoric from Nvidia collided with ARC’s much lower standard-harness score, while safety and chip-export stories kept stacking."
+}
