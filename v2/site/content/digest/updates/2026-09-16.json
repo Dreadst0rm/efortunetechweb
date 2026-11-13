@@ -1,0 +1,71 @@
+{
+  "date": "2026-09-16",
+  "title": "Trajectory-level agent safety, KG-grounded telemetry agents, replayable GUI memory — plus Perplexity’s agent-built database and embedded AI evaluators",
+  "summary": "Digest for Sep 16: three arXiv cs.AI papers announced that day (BLINDSPOT trajectory safety benchmark, Symbolic Separation for telemetry analytics agents, EchoPath replayable GUI memory) and two New Stack pieces (Perplexity’s agent-built CobbleDB that agents weren’t allowed to run, and who fills the proposed embedded AI evaluator role).",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "arXiv cs.AI — curated recent",
+      "bullets": [
+        "BLINDSPOT — safety and refusal calibration in long-horizon tool-using agents (Asif et al.; arXiv:2609.16305). Thesis: agent safety is a property of the whole trajectory, not a single turn or a binary attack-success score. Evidence: 22 attack families and 35 scenarios across seven domains produced more than 2,500 trajectories over 13 models, and failures often appeared only after several initially safe steps.",
+        "Symbolic Separation — grounding deep agents in knowledge graphs for operational data analytics (Davletiyarov, Khan, Bartolini; arXiv:2609.17107). Thesis: let the agent reason freely but touch telemetry only through an ontology-constrained virtual knowledge graph with deterministic pre-execution validation. Evidence: on 49.9 TB of supercomputer telemetry, end-to-end task success rose from 43% to 86%, silent data-integrity errors were prevented, and token cost fell 2.4×, letting a smaller on-prem model beat a larger one.",
+        "EchoPath — execution-level replayable memory for GUI agents (Zhao et al.; arXiv:2609.16635). Thesis: validated GUI runs should become parameterized, MCP-style callable procedures that replay only when preconditions match, not loose experience notes. Evidence: on real computer-use tasks, median token cost fell by more than 90% and median execution time by about 60%."
+      ],
+      "sources": [
+        {
+          "label": "arXiv cs.AI — Sep 16 listing",
+          "url": "https://arxiv.org/catchup/cs.AI/2026-09-16"
+        },
+        {
+          "label": "2609.16305 — BLINDSPOT",
+          "url": "https://arxiv.org/abs/2609.16305"
+        },
+        {
+          "label": "2609.17107 — Symbolic Separation",
+          "url": "https://arxiv.org/abs/2609.17107"
+        },
+        {
+          "label": "2609.16635 — EchoPath",
+          "url": "https://arxiv.org/abs/2609.16635"
+        }
+      ]
+    },
+    {
+      "heading": "The New Stack — agent boundaries & oversight",
+      "bullets": [
+        "Perplexity’s AI agents helped build a database. They weren’t allowed to run it. Thesis: two engineers used hundreds of persistent coding agents to ship CobbleDB, a Rust key-value store now serving part of Perplexity’s search traffic, but kept architecture and production control human-owned. The piece flags that the latency gains weren’t measured side by side and the projected savings exclude the cost of maintaining a custom datastore.",
+        "AI evaluator: the most important AI job in history? Thesis: Amodei’s call for embedded third-party evaluators with employee-like access at frontier labs creates a real job, and the piece asks who can fill it. Practitioners argue engineering depth and the independence to raise inconvenient findings matter more than credentials, or the role becomes “another layer of process.”"
+      ],
+      "sources": [
+        {
+          "label": "TNS — Perplexity CobbleDB",
+          "url": "https://thenewstack.io/perplexity-cobbledb-ai-database/"
+        },
+        {
+          "label": "TNS — embedded AI evaluator jobs",
+          "url": "https://thenewstack.io/ai-embedded-evaluator-jobs/"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "Judge agents on whole runs: BLINDSPOT’s late-emerging failures are the research version of Perplexity’s rule that agents can build the system but humans run production.",
+        "Telemetry agents need a semantic contract: Symbolic Separation’s gains came from constraining how the agent joins data, not from a bigger model — the same ontology-first bet behind guarded observability.",
+        "Validated procedures beat re-planning: EchoPath shows repeat work gets cheaper and more predictable when the harness replays checked steps and falls back to planning only when preconditions fail.",
+        "Want the ontology-first and guarded-observability playbooks behind this cluster? Members unlock them on https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
+      ],
+      "sources": [
+        {
+          "label": "Secure — member library",
+          "url": "https://secure.efortune.tech"
+        },
+        {
+          "label": "Secure — AI Maturity Starter Pack",
+          "url": "https://secure.efortune.tech/series/ai-maturity/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Sep 16 is about where agent control actually lives: trajectory-level safety checks, knowledge-graph contracts for telemetry, replayable validated procedures, humans holding production keys, and independent evaluators with real access. Read the links, then unlock Secure when you’re ready to put those controls into practice: https://secure.efortune.tech"
+}

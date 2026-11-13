@@ -1,0 +1,68 @@
+{
+  "date": "2026-09-19",
+  "title": "Astra Critical cyber & Law, Claude’s R&D share, Anthropic wet lab, Claude→OpenAI bounty",
+  "summary": "Five Overheard picks Ed ranked for Sep 19: GPT-6 Astra hits OpenAI Preparedness Critical for cybersecurity (InfoQ); Astra for Law ships with a US legal search index (TNW); Anthropic says Claude now leads about a quarter of its own R&D (Reuters); TechCrunch confirms Anthropic’s Bay Area wet biology lab; Tom’s Hardware covers white-hats using Claude to chain forum/SSO flaws into OpenAI employee ChatGPT/Codex access (bounty paid).",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "InfoQ (Sep 17): GPT-6 Astra is OpenAI’s first Preparedness “Critical” cybersecurity model — expert-supervised zero-day / exploit-chain evals, with a note that chain-of-thought is harder to monitor than earlier Sol-class models.",
+        "The Next Web (Sep 18; launch Sep 17): Astra for Law pairs GPT-6 Astra with a ~230M-URL US legal search index, Trusted Access, and a partner plugin wave (Harvey/Legora building on it). Strong HN discussion the same day.",
+        "Reuters (Sep 17): Anthropic says Claude now leads about 26% of internal R&D work building its next models (up from ~1% in March), with wide agent collaboration on research — figures as reported by Reuters from Anthropic.",
+        "TechCrunch (Sep 18): Anthropic confirms it operates a Bay Area wet lab that runs physical biology experiments for AI work (not positioned as a drug-discovery shop) — infrastructure signal beside frontier-model pacing debates.",
+        "Tom’s Hardware (Sep 18): Hacktron white-hats used Claude Opus 5 (cyber-oriented) to chain a Discourse/libheif RCE with an OpenAI SSO flaw, reaching employee ChatGPT/Codex accounts and proving impact with a harmless internal PR; OpenAI paid a $6,500 bounty after a fast fix."
+      ],
+      "sources": [
+        {
+          "label": "InfoQ — GPT-6 Astra Preparedness Critical cyber",
+          "url": "https://www.infoq.com/news/2026/09/gpt-6-astra-critical-cyber/"
+        },
+        {
+          "label": "TNW — Astra for Law",
+          "url": "https://thenextweb.com/news/openai-astra-for-law-gpt-6-legal-search-index"
+        },
+        {
+          "label": "HN — Astra for Law discussion",
+          "url": "https://news.ycombinator.com/item?id=49745940"
+        },
+        {
+          "label": "Reuters — Claude leads ~26% of Anthropic R&D",
+          "url": "https://www.reuters.com/business/anthropic-says-claude-now-leads-quarter-work-building-its-next-ai-models-2026-09-17/"
+        },
+        {
+          "label": "TechCrunch — Anthropic wet biology lab",
+          "url": "https://techcrunch.com/2026/09/18/anthropic-is-operating-a-lab-that-conducts-biology-experiments/"
+        },
+        {
+          "label": "Tom’s Hardware — Claude tools used in OpenAI employee-account breach (bug bounty)",
+          "url": "https://www.tomshardware.com/tech-industry/cyber-security/hackers-breach-openai-using-claude-tools-gaining-access-to-employee-accounts-and-the-companys-internal-codebase-initiating-a-harmless-pull-request-as-proof-of-the-hack"
+        }
+      ]
+    },
+    {
+      "heading": "What this week means for operators",
+      "bullets": [
+        "Astra is no longer just a coding demo — Critical cyber evals plus a vertical Law product show capability and distribution moving together.",
+        "Anthropic’s week stacks recursive-internal-use claims (Claude on Claude R&D), physical-world bio tooling, and AI-assisted offensive research that landed inside a peer lab’s employee accounts — all via reputable third-party outlets.",
+        "Treat frontier-model helpfulness in security and research workflows as a dual-use control problem: SSO blast radius, forum/image pipelines, agent connectors — not only a model-card footnote.",
+        "Ready to turn that control problem into Monday moves? The AI Maturity Starter Pack — primer, practice checklist, and relationship scorecard — is live for members on https://secure.efortune.tech/series/ai-maturity/"
+      ],
+      "sources": [
+        {
+          "label": "InfoQ — GPT-6 Astra Critical cyber",
+          "url": "https://www.infoq.com/news/2026/09/gpt-6-astra-critical-cyber/"
+        },
+        {
+          "label": "Hacktron AI — Hacking OpenAI (primary write-up)",
+          "url": "https://www.hacktron.ai/blog/hacking-openai"
+        },
+        {
+          "label": "Secure — AI Maturity Starter Pack",
+          "url": "https://secure.efortune.tech/series/ai-maturity/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Sep 19 Overheard: Astra Critical cyber + Astra for Law; Claude’s rising share of Anthropic R&D; Anthropic’s wet lab; and a Claude-assisted bug-bounty path into OpenAI employee ChatGPT/Codex. Read the primary links, then unlock the Starter Pack on Secure when you want the maturity path — not just the headlines: https://secure.efortune.tech/series/ai-maturity/"
+}

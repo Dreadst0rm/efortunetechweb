@@ -1,0 +1,33 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "efortune-site",
+  "main": "worker/worker.js",
+  "compatibility_date": "2026-11-10",
+
+  "workers_dev": true,
+  "preview_urls": true,
+
+  // No custom routes or domains until Ed approves cutover (preview via workers.dev).
+
+  "vars": {
+    // Staging hostname for Worker preview; remove v2.efortune.tech after production cutover.
+    "ALLOWED_HOSTS": "efortune.tech,www.efortune.tech,v2.efortune.tech",
+    "SITE_ORIGIN": "https://efortune.tech"
+  },
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "none"
+  },
+
+  "send_email": [
+    {
+      "name": "CONTACT_EMAIL",
+      "destination_address": "ed@efortune.tech",
+      "allowed_sender_addresses": ["noreply@fortwarp.com"]
+    }
+  ]
+
+  // TURNSTILE_SECRET — set at deploy: npx wrangler secret put TURNSTILE_SECRET
+}

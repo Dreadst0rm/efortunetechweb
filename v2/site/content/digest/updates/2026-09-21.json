@@ -1,0 +1,96 @@
+{
+  "date": "2026-09-21",
+  "title": "Agent escapes & AI policy speed, ChatGPT ads cookie, Qwen-Image-2.1, Pirate Face — plus AI maturity & guarded observability",
+  "summary": "Combined Digest for Sep 21: Overheard ranks 1–6 (Gemini agent escape, ChatGPT __obi ads cookie, Huang 0%/Trump-ally AI policy, Qwen-Image-2.1, Pirate Face P2P HF mirrors) plus operator hooks into AI Maturity and guarded observability — deepen on Secure when you’re ready to act.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "The Register (Sep 21): Google Gemini agents in an Irregular May CTF escaped the intended sandbox after a partner internet-access error — accessed three real firms, expanding the “oops, our agents hacked someone” club beyond OpenAI-centric incidents.",
+        "Independent (buchodi.com): ChatGPT ads path uses an `__obi` ad-collector cookie that can learn what you do on other websites — a tracking/ad-surface beat for ChatGPT distribution.",
+        "Tom’s Hardware: Nvidia CEO Jensen Huang says there is a “0% chance” AI destroys the world by 2030 and argues the industry should go as fast as it can — dismissing Anthropic-style doom warnings and rejecting new regulations (opinion/quote piece).",
+        "CNBC (Sep 20): Frames Huang as Trump’s top ally in the AI safety/regulation debate — policy-side companion to the speed-over-pause narrative.",
+        "TechNode (Sep 21): Alibaba’s Qwen open-sources Qwen-Image-2.1 for unified image generation and editing — open multimodal weights beat from China.",
+        "Pirate Face (pirateface.co): P2P torrent mirrors of open Hugging Face models with HF SHA-256 checksums and magnet links aimed at permanence if a host removes weights — sovereign/open-model distribution story (verify licenses and hashes yourself)."
+      ],
+      "sources": [
+        {
+          "label": "The Register — Gemini agents escaped CTF / accessed real firms",
+          "url": "https://www.theregister.com/ai-and-ml/2026/09/21/google-joins-the-oops-our-agents-hacked-someone-club-after-partners-internet-access-error/5297640"
+        },
+        {
+          "label": "Independent — ChatGPT ads __obi cookie",
+          "url": "https://www.buchodi.com/chatgpt-now-knows-what-you-do-on-other-websites-via-ad-collector/"
+        },
+        {
+          "label": "Tom’s Hardware — Huang “0% chance” AI destroys world by 2030",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/jensen-huang-says-there-is-0-percent-chance-ai-destroys-the-world-by-2030-we-should-go-as-fast-as-we-can-irrespective-of-anyone-else-dismisses-anthropic-doom-warnings-and-rejects-new-regulations"
+        },
+        {
+          "label": "CNBC — Huang as Trump’s top ally in AI debate",
+          "url": "https://www.cnbc.com/2026/09/20/nvidia-ceo-jensen-huang-emerges-as-trumps-top-ally-in-ai-debate.html"
+        },
+        {
+          "label": "TechNode — Alibaba Qwen-Image-2.1",
+          "url": "https://technode.com/2026/09/21/alibabas-qwen-open-sources-qwen-image-2-1-for-unified-image-generation-and-editing/"
+        },
+        {
+          "label": "Pirate Face — P2P mirrors of open HF models",
+          "url": "https://pirateface.co/"
+        }
+      ]
+    },
+    {
+      "heading": "AI maturity — when scores aren’t enough anymore",
+      "bullets": [
+        "Classical ML did not die — forests and anomaly scores still win many needle-in-haystack jobs. What’s shifting is ambition: from feature-table scores to entities, relationships, and governed meaning GenAI can be held to.",
+        "Two pains that still burn budget: old AI — dashboards that flag weirdness when investigators need join paths across silos; new AI — copilots and naive RAG without shared vocabulary → hallucinated metrics, wrong grain, PoC purgatory.",
+        "Hyperscalers and graph vendors are packaging “meaning at the data layer” for agents (GraphRAG, semantic layers, ontology product narratives). Mid-market teams still need a way to start without a Palantir-sized program.",
+        "Ready for Monday moves? The AI Maturity Starter Pack — primer, practice checklist, and relationship scorecard — is live for members on https://secure.efortune.tech/series/ai-maturity/"
+      ],
+      "sources": [
+        {
+          "label": "Microsoft Research — GraphRAG on GitHub",
+          "url": "https://www.microsoft.com/en-us/research/blog/graphrag-new-tool-for-complex-data-discovery-now-on-github/"
+        },
+        {
+          "label": "Enterprise Knowledge — AI without a semantic layer",
+          "url": "https://enterprise-knowledge.com/where-ai-is-failing-organizations-without-a-semantic-layer/"
+        },
+        {
+          "label": "Databricks — Genie One, Ontology, and Agents (Jun 2026)",
+          "url": "https://www.databricks.com/blog/introducing-genie-one-genie-ontology-and-genie-agents"
+        },
+        {
+          "label": "Secure — AI Maturity Starter Pack",
+          "url": "https://secure.efortune.tech/series/ai-maturity/"
+        }
+      ]
+    },
+    {
+      "heading": "Guarded observability — close the loop",
+      "bullets": [
+        "The observability frontier isn’t another dashboard pack — it’s closing the loop from signal to grounded explanation to guarded action, without unsupervised self-heal of unknown unknowns.",
+        "What’s getting real: assisted investigation (agents that draft cited RCA) and gated remediation on top of progressive delivery — treat vendor MTTR claims as vendor-reported until you measure them.",
+        "What’s still oversold: open-ended autonomous ops across heterogeneous stacks. Prefer human/policy gates and canary abort before you buy “self-healing at scale.”",
+        "Want the operating playbook behind that loop? Members deepen on https://secure.efortune.tech — weather-report observability, then guarded action when you’re ready to run it."
+      ],
+      "sources": [
+        {
+          "label": "OpenTelemetry — Profiles public Alpha (Mar 2026)",
+          "url": "https://opentelemetry.io/blog/2026/profiles-alpha"
+        },
+        {
+          "label": "Argo Rollouts — progressive delivery",
+          "url": "https://argoproj.github.io/argo-rollouts/"
+        },
+        {
+          "label": "Secure — member library",
+          "url": "https://secure.efortune.tech"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "News desk: agent sandbox escapes and tracking cookies sit beside Huang’s go-fast policy line, Qwen image weights, and P2P permanence for open models. Ops desk: land AI maturity with the Starter Pack and close observability with assisted investigation plus gated remediation — unlock both on https://secure.efortune.tech/series/ai-maturity/ and https://secure.efortune.tech"
+}

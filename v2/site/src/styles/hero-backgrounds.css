@@ -1,0 +1,139 @@
+.bp-hero {
+  isolation: isolate;
+}
+
+.bp-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* dot matrix with edge fade */
+html[data-bg='dots'] .bp-hero__bg,
+html:not([data-bg]) .bp-hero__bg {
+  background-color: var(--color-hero-bg);
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-accent) 28%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 85% 75% at 50% 42%,
+    #000 15%,
+    transparent 72%
+  );
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 15%, transparent 72%);
+}
+
+/* soft mesh glow */
+html[data-bg='mesh'] .bp-hero__bg {
+  background: var(--color-hero-bg);
+}
+
+html[data-bg='mesh'] .bp-hero__bg::before,
+html[data-bg='mesh'] .bp-hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  filter: blur(48px);
+  opacity: 0.85;
+}
+
+html[data-bg='mesh'] .bp-hero__bg::before {
+  background: radial-gradient(
+    ellipse 55% 45% at 22% 35%,
+    color-mix(in srgb, var(--color-accent) 35%, transparent),
+    transparent 70%
+  );
+  animation: bp-mesh-drift-a 140s ease-in-out infinite alternate;
+}
+
+html[data-bg='mesh'] .bp-hero__bg::after {
+  background: radial-gradient(
+    ellipse 50% 40% at 78% 68%,
+    color-mix(in srgb, var(--color-primary) 30%, transparent),
+    transparent 72%
+  );
+  animation: bp-mesh-drift-b 160s ease-in-out infinite alternate;
+}
+
+@keyframes bp-mesh-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(4%, 3%) scale(1.04);
+  }
+}
+
+@keyframes bp-mesh-drift-b {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(-3%, -2%) scale(1.03);
+  }
+}
+
+.bp-site-prefs {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-primary) 12%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.bp-site-prefs__sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 0.2rem 0;
+  background: var(--color-border);
+}
+
+.bp-site-prefs__bg {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.bp-site-prefs__btn {
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.bp-site-prefs__btn[aria-pressed='true'] {
+  background: var(--color-diagram-node-active);
+  color: var(--color-text);
+}
+
+.bp-site-prefs__btn--fill {
+  min-width: 3.25rem;
+}
+
+.bp-site-prefs__btn:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-bg='mesh'] .bp-hero__bg::before,
+  html[data-bg='mesh'] .bp-hero__bg::after {
+    animation: none;
+  }
+}

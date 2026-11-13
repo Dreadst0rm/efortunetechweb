@@ -1,0 +1,138 @@
+{
+  "date": "2026-09-11",
+  "title": "Coolify hardening, NetBird-on-Coolify ops, and hosting Daily Digest",
+  "summary": "Practical runbook notes: keep Coolify patched and locked down, operate NetBird ZTNA safely on Coolify (mounts, Cloudflare DNS-only, no exit-node on the VPS), and host the Astro Daily Digest as a Dockerfile static app.",
+  "tone": "practical",
+  "sections": [
+    {
+      "heading": "Coolify ops & hardening",
+      "bullets": [
+        "Treat Coolify as a high-privilege control plane \u2014 patch aggressively; mid-2026 advisories often needed only an authenticated Member for host RCE.",
+        "Target floor after that wave: stay current (e.g. \u2265 beta.474 in that series; verify against your live version such as v4.3.x).",
+        "Lock down dashboard/realtime/terminal ports (8000/6001/6002) at the cloud firewall; keep 80/443 for apps. UFW alone may not hide Docker-published ports.",
+        "Enable 2FA for Owner/Admin; disable open registration; do not invite SMB customers as Members on a shared plane.",
+        "Set strong webhook secrets on every app; rotate API tokens; use scoped tokens + IP allowlist.",
+        "Isolate customers by server/destination; back up instance + APP_KEY/.env and off-site DB/volumes before upgrades."
+      ],
+      "sources": [
+        {
+          "label": "Coolify security advisories",
+          "url": "https://github.com/coollabsio/coolify/security/advisories"
+        },
+        {
+          "label": "Coolify Security Model",
+          "url": "https://next.coolify.io/docs/core/security-model"
+        },
+        {
+          "label": "Coolify 2FA",
+          "url": "https://next.coolify.io/docs/core/security/authentication/2fa"
+        }
+      ]
+    },
+    {
+      "heading": "NetBird on Coolify \u2014 ops & recovery",
+      "bullets": [
+        "Data durability: bind-mount a host path outside Docker volume internals (for example `/data/netbird:/var/lib/netbird`) \u2014 do not bind into /var/lib/docker/volumes/.../_data.",
+        "Healthchecks should verify DB files (store.db, 1dp.db) plus management HTTP \u2014 not TCP alone. Preserve NETBIRD_STORE_ENCRYPTION_KEY.",
+        "Cloudflare must be DNS-only (grey cloud) for the NetBird hostname (gRPC + STUN/UDP 3478). Publish UDP 3478; ensure public TCP 443 to origin if CF IP allowlists block grey-cloud TLS.",
+        "Prefer Coolify Domains UI for dashboard TLS; avoid hand-rolled Traefik labels that fight Coolify.",
+        "Never enroll the Coolify VPS as an exit node (0.0.0.0/0) shared with All \u2014 it can blackhole public traffic and take Coolify offline.",
+        "Login failures: AUTH_SUPPORTED_SCOPES should match IdP (openid profile email groups); remove unrecognized scopes like api; confirm which IdP NetBird is actually using."
+      ],
+      "sources": [
+        {
+          "label": "NetBird self-host quickstart",
+          "url": "https://docs.netbird.io/selfhosted/selfhosted-quickstart"
+        },
+        {
+          "label": "NetBird configuration files",
+          "url": "https://docs.netbird.io/selfhosted/maintenance/configuration-files"
+        },
+        {
+          "label": "NetBird Authentik IdP",
+          "url": "https://docs.netbird.io/selfhosted/identity-providers/authentik"
+        },
+        {
+          "label": "NetBird backup",
+          "url": "https://docs.netbird.io/selfhosted/maintenance/backup"
+        },
+        {
+          "label": "Coolify Netbird-Client",
+          "url": "https://coolify.io/docs/services/netbird-client"
+        }
+      ]
+    },
+    {
+      "heading": "Astro Daily Digest hosting on Coolify",
+      "bullets": [
+        "Content is the source of truth: content/updates/YYYY-MM-DD.json (Zod-validated); daily work = append one file.",
+        "Best Coolify deploy path: Dockerfile app (multi-stage build \u2192 static nginx on port 80), not a long-running Node SSR process.",
+        "Set PUBLIC_SITE_URL to the public domain (e.g. https://digest.efortune.tech); auto-deploy on main.",
+        "Publish a day by adding one JSON file and triggering a Coolify rebuild from the git source.",
+        "If Coolify needs GitHub/GitLab, mirror Origin or deploy via image \u2014 verify git connectivity in Coolify UI."
+      ],
+      "sources": [
+        {
+          "label": "Astro content collections",
+          "url": "https://docs.astro.build/en/guides/content-collections/"
+        },
+        {
+          "label": "Daily Digest live site",
+          "url": "https://digest.efortune.tech"
+        },
+        {
+          "label": "Coolify docs (applications / Docker)",
+          "url": "https://coolify.io/docs"
+        }
+      ]
+    },
+    {
+      "heading": "Overheard \u2014 picks of the day",
+      "bullets": [
+        "InfoQ: GPT-6 Astra coding/computer-use; Critical-cyber; harder-to-monitor reasoning",
+        "CIO: OpenAI pauses new $200 Pro sign-ups as Astra demand strains capacity",
+        "Ronacher: Astra coding slop / long-horizon factory critique (HN ~390)",
+        "Cognition SWE-2 near Fable/Astra at lower cost; Devin-only (HN ~427)",
+        "BBC: Anthropic blocked Claude misuse for bio-weapons, weapons software, espionage",
+        "Reuters: Altman open to pacing frontier AI development with other labs",
+        "CNBC: Anthropic/OpenAI researchers warn on recursive self-improvement risks",
+        "Marketing Dive: Amazon DSP pilots ChatGPT Ads (OpenAI places inventory)"
+      ],
+      "sources": [
+        {
+          "label": "InfoQ \u2014 GPT-6 Astra coding and Critical-cyber",
+          "url": "https://www.infoq.com/news/2026/09/openai-gpt6-astra/"
+        },
+        {
+          "label": "CIO \u2014 OpenAI pauses $200 Pro sign-ups",
+          "url": "https://www.cio.com/article/4221092/openai-pauses-200-pro-tier-as-astra-demand-strains-capacity.html"
+        },
+        {
+          "label": "HN \u2014 Ronacher on Astra coding slop",
+          "url": "https://news.ycombinator.com/item?id=49654229"
+        },
+        {
+          "label": "Cognition \u2014 SWE-2 vs Fable/Astra",
+          "url": "https://cognition.com/blog/swe-2"
+        },
+        {
+          "label": "BBC \u2014 Anthropic blocked Claude misuse",
+          "url": "https://www.bbc.com/news/articles/cx2zrrpkx20o"
+        },
+        {
+          "label": "Reuters \u2014 Altman open to pacing frontier AI",
+          "url": "https://www.reuters.com/business/altman-tells-staff-openai-is-open-slowing-ai-development-bloomberg-news-reports-2026-09-11/"
+        },
+        {
+          "label": "CNBC \u2014 RSI / existential concerns",
+          "url": "https://www.cnbc.com/2026/09/11/anthropic-openai-ai-existential-concerns.html"
+        },
+        {
+          "label": "Marketing Dive \u2014 Amazon DSP \u00d7 ChatGPT Ads",
+          "url": "https://www.marketingdive.com/news/amazon-pilots-ad-services-in-chatgpt-what-marketers-need-to-know/829945/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Harden Coolify like a control plane, run NetBird on Coolify with safe mounts and no VPS exit-node, and keep Daily Digest as a static Dockerfile deploy fed by JSON updates. Overheard: Astra capacity/critique, Anthropic misuse blocks, Altman pacing, RSI warnings, and ChatGPT Ads."
+}

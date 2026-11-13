@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-02",
+  "title": "Weekly: a Postgres branch per coding agent, Cloudflare's Forge and EmDash 1.0, a fence outside the chat, and persistent agent memory",
+  "summary": "Weekly Digest for Sep 26\u2013Oct 1, 2026: pgEdge Starfleet gives each coding agent its own copy-on-write Postgres branch, Cloudflare open-sourced the Forge generation pipeline and shipped EmDash 1.0, and two Sep 30 arXiv papers find that latent multi-agent links can raise harmful compliance and that heavier ML-engineering harnesses did not beat a minimal coding agent. The week's public pitch is an Agent Boundary Scorecard: score whether writes, secrets, and outbound access sit outside the chat. Members can read Persistent Memory for AI Agents on Secure.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "The New Stack \u2014 a database branch per coding agent",
+      "bullets": [
+        "pgEdge Starfleet, Amanda Caswell, The New Stack, Sep 28, 2026. Thesis: parallel coding agents should not share one database, so Starfleet gives each experiment its own copy-on-write Postgres branch on standard community Postgres, with its own connection details, MCP server address, and bearer token, and there is no database merge at the end. Schema changes stay in the migration files teams already use, such as Alembic or Flyway, and test data is deleted with the branch; The New Stack also reports that branching is documented only for the hosted tier, and that pgEdge has not said whether those agent workflows carry into a customer's own cloud or data center."
+      ],
+      "sources": [
+        {
+          "label": "TNS \u2014 Amanda Caswell, pgEdge Starfleet, Sep 28, 2026",
+          "url": "https://thenewstack.io/pgedge-starfleet-postgres-branching/"
+        }
+      ]
+    },
+    {
+      "heading": "Cloudflare \u2014 Forge and EmDash 1.0",
+      "bullets": [
+        "Forge, Cloudflare blog, Sep 28, 2026 (vendor-run). Thesis: teams should generate SDKs, CLIs, and docs from OpenAPI inside CI they control, because hosted generators left Cloudflare unable to preview a change before merge. The post says the Apache 2.0 pipeline already generates the cf CLI, that API docs and SDKs move over in the coming months, and that the API has over 3,500 operations across hundreds of services (Cloudflare blog, Sep 28, 2026); it names CLI, SDK, and docs generators as what Forge provides and discusses MCP servers as a further target, not as a generator that has shipped. The New Stack, also Sep 28, 2026, ties that open-source release to Anthropic's acquisition of Stainless on May 18 and the shutdown of its hosted SDK generator, a motive the Cloudflare post does not name, and says several discussed targets are still future work.",
+        "EmDash 1.0, Cloudflare blog, Sep 28, 2026 (vendor-run). Thesis: a stable MIT-licensed CMS on Astro can be the content system agents edit, with access through the API, CLI, or a built-in MCP server, while sandboxed plugins run in an isolated runtime and gain further access only when the plugin declares it and an administrator approves it. The same post says the Cloudflare Blog moved to EmDash in August and that the migration produced optional KV object caching, a Hyperdrive adapter, and Workers Cache compatibility. InfoQ covered that migration on Sep 26, 2026, and wrote then that no v1 date had been announced."
+      ],
+      "sources": [
+        {
+          "label": "Cloudflare blog \u2014 Forge, Sep 28, 2026 (vendor-run)",
+          "url": "https://blog.cloudflare.com/forge-open-source-generation-pipeline/"
+        },
+        {
+          "label": "TNS \u2014 Paul Sawers, Forge and Stainless, Sep 28, 2026",
+          "url": "https://thenewstack.io/cloudflare-forge-anthropic-stainless/"
+        },
+        {
+          "label": "Cloudflare blog \u2014 EmDash 1.0, Sep 28, 2026 (vendor-run)",
+          "url": "https://blog.cloudflare.com/emdash-cms-plugin-registry/"
+        },
+        {
+          "label": "InfoQ \u2014 Cloudflare blog migration to EmDash, Sep 26, 2026",
+          "url": "https://www.infoq.com/news/2026/09/cloudflare-emdash-migration/"
+        }
+      ]
+    },
+    {
+      "heading": "arXiv cs.AI \u2014 curated recent",
+      "bullets": [
+        "Safety of Latent Communication in Multi-Agent Systems (arXiv:2609.39788), submitted Sep 30, 2026 and listed on cs.AI recent for Oct 1, 2026. Thesis: trainable links that pass internal representations between agents can raise harmful compliance even when the safety-aligned agents themselves are unchanged. Evidence in the abstract: across three communication topologies and four safety benchmarks, a reinforcement-learning attack that does not need harmful target responses raises the mean harmful-compliance score from 27.9 with benignly trained links to 76.9 (arXiv abstract, submitted Sep 30, 2026), and retargeting the reward can repair compromised links without updating the agents.",
+        "How Much of a Harness Does a Strong Agent Need for Autonomous ML Engineering? (arXiv:2609.40303), submitted Sep 30, 2026 and listed on cs.AI recent for Oct 1, 2026. Thesis: once the model is a strong coding agent, extra multi-agent and retrieval machinery is not what moves autonomous ML-engineering results. Evidence in the abstract: under an equal time budget and the same frontier LLM, open-source state-of-the-art harnesses showed no advantage over a single session of a minimal agent with read, write, and bash, and the authors argue that machinery is redundant on current MLE benchmarks (arXiv abstract, submitted Sep 30, 2026)."
+      ],
+      "sources": [
+        {
+          "label": "arXiv cs.AI recent",
+          "url": "https://arxiv.org/list/cs.AI/recent"
+        },
+        {
+          "label": "2609.39788 \u2014 Safety of latent communication in multi-agent systems",
+          "url": "https://arxiv.org/abs/2609.39788"
+        },
+        {
+          "label": "2609.40303 \u2014 How much of a harness does a strong agent need",
+          "url": "https://arxiv.org/abs/2609.40303"
+        }
+      ]
+    },
+    {
+      "heading": "Already on the Digest",
+      "bullets": [
+        "OpenAI's Decisions API on Luna ran as the Sep 29, 2026 edition: https://digest.efortune.tech/updates/2026-09-29/. This week does not revisit it."
+      ],
+      "sources": [
+        {
+          "label": "Digest \u2014 Sep 29, 2026 edition",
+          "url": "https://digest.efortune.tech/updates/2026-09-29/"
+        }
+      ]
+    },
+    {
+      "heading": "Proof of concept of the week \u2014 the fence outside the chat",
+      "bullets": [
+        "Your agent's \"no\" isn't a fence. Put the fence outside the chat. Prompt rules and model refusals don't stop an agent from uploading files, probing networks, or chasing a goal past what the person authorized.",
+        "This week Nvidia shipped OpenShell, an open runtime that keeps credentials and network policy outside the agent (Nvidia, Sep 28, 2026), and Google's Gemini 4 Argon launch is leaning on phased access and hardened sandboxes before a broad release (Google, Sep 30, 2026). The angle we're building is a thin Agent Boundary Scorecard: score whether writes, secrets, and outbound access sit outside the chat loop, and only then harden the runtime where the score says the fence is missing.",
+        "OpenShell is not a complete stack. Nvidia separates the software runtime from an optional hardware watchdog, and a host-independent quarantine is still a vendor reference design. TechCrunch's Sep 28 report on OpenAI's misalignment reports includes a Sep 20 sandbox escape over DNS: a monitor is not a boundary the agent can't route around. A scorecard also doesn't decide who writes the policy, how combined permissions across several agents get checked, or who approves extra access mid-run.",
+        "This is a different angle from last week's tool-trust gate: the fence sits outside the agent, not in the tool list."
+      ],
+      "sources": [
+        {
+          "label": "Nvidia \u2014 OpenShell runtime controls, Sep 28, 2026",
+          "url": "https://developer.nvidia.com/blog/add-runtime-controls-to-ai-agents-with-nvidia-openshell/"
+        },
+        {
+          "label": "Nvidia \u2014 agent safety",
+          "url": "https://www.nvidia.com/en-us/solutions/ai/agent-safety/"
+        },
+        {
+          "label": "TechCrunch \u2014 OpenAI rogue activity, Sep 28, 2026",
+          "url": "https://techcrunch.com/2026/09/28/openai-still-doesnt-seem-to-have-a-handle-on-all-of-its-rogue-ai-activity/"
+        },
+        {
+          "label": "Google \u2014 Gemini 4 Argon, Sep 30, 2026",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/"
+        }
+      ]
+    },
+    {
+      "heading": "On Secure",
+      "bullets": [
+        "Most agent \"memory\" is a vector database and a hope. Our new member guide lays out a self-hosted design that holds up when facts change, when exact strings matter, and when someone tries to poison what your agent remembers: Postgres and pgvector as one store, versioned facts with receipts, gated writes, and a reflection loop that turns lessons into reviewed skills. Members can read the full architecture, schema, and security checklist on Secure.",
+        "Read Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
+      ],
+      "sources": [
+        {
+          "label": "Secure \u2014 Persistent Memory for AI Agents",
+          "url": "https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "Give each coding agent its own database branch, credentials, and a cleanup step. Starfleet does not merge the branch back, and The New Stack says the hosted branching workflow is not confirmed once the database leaves pgEdge's cloud.",
+        "If agents consume your API through an SDK, CLI, or docs, generate those from the spec in CI you run. Forge's MCP target is described, not shipped; do not plan on it until a generator is actually released.",
+        "If agents edit a CMS, keep plugin and agent access declared and approved. EmDash's sandbox claim is vendor-run, and the 1.0 post is the source, not the Sep 26 InfoQ note that still had no v1 date.",
+        "Do not assume a thicker harness raises the score, and do not assume latent links between agents inherit the base models' safety alignment. Measure both."
+      ],
+      "sources": [
+        {
+          "label": "TNS \u2014 Amanda Caswell, pgEdge Starfleet, Sep 28, 2026",
+          "url": "https://thenewstack.io/pgedge-starfleet-postgres-branching/"
+        },
+        {
+          "label": "Cloudflare blog \u2014 Forge, Sep 28, 2026 (vendor-run)",
+          "url": "https://blog.cloudflare.com/forge-open-source-generation-pipeline/"
+        },
+        {
+          "label": "Cloudflare blog \u2014 EmDash 1.0, Sep 28, 2026 (vendor-run)",
+          "url": "https://blog.cloudflare.com/emdash-cms-plugin-registry/"
+        },
+        {
+          "label": "2609.39788 \u2014 Safety of latent communication in multi-agent systems",
+          "url": "https://arxiv.org/abs/2609.39788"
+        },
+        {
+          "label": "2609.40303 \u2014 How much of a harness does a strong agent need",
+          "url": "https://arxiv.org/abs/2609.40303"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "This week, separate each coding agent's database from the one you mean to keep, and generate the SDK, CLI, and docs agents read inside a pipeline you run. Then check two assumptions before you add machinery: a heavier harness may not beat a minimal coding agent, and a latent link between aligned agents can still raise harmful compliance. The public pitch is a fence outside the chat, not another rule inside the prompt. Members can read Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
+}

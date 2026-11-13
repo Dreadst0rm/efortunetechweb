@@ -1,0 +1,105 @@
+.bp-hero-draw {
+  position: absolute;
+  inset: 0;
+  width: min(40%, 320px);
+  height: auto;
+  margin: 0;
+  left: auto;
+  right: 1.5rem;
+  top: 1.5rem;
+  pointer-events: none;
+  opacity: 0.38;
+  z-index: 1;
+}
+
+.bp-draw {
+  stroke: var(--color-hero-line);
+  stroke-width: 1;
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  fill: none;
+}
+
+.bp-draw-stamp {
+  stroke: var(--color-hero-stamp);
+  stroke-width: 3;
+}
+
+.bp-draw-label {
+  fill: var(--color-hero-stamp);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  text-anchor: middle;
+  stroke: none;
+  opacity: 0;
+}
+
+.bp-draw-label--sm {
+  font-size: 11px;
+}
+
+.bp-draw-label--note {
+  fill: var(--color-text-subtle);
+  font-size: 12px;
+  text-anchor: start;
+}
+
+.bp-hero--ready .bp-draw,
+.bp-hero--draw-active .bp-draw {
+  animation: bp-draw-in 2.4s ease forwards;
+}
+
+.bp-hero--draw-active .bp-draw-grid {
+  animation-delay: 0.1s;
+}
+
+.bp-hero--draw-active .bp-draw-cross {
+  animation-delay: 0.5s;
+}
+
+.bp-hero--draw-active .bp-draw-frame {
+  animation-delay: 0.2s;
+}
+
+.bp-hero--draw-active .bp-draw-stamp {
+  animation-delay: 1.4s;
+}
+
+.bp-hero--ready .bp-draw-label,
+.bp-hero--draw-active .bp-draw-label {
+  animation: bp-label-in 0.6s ease forwards;
+  animation-delay: 2s;
+}
+
+.bp-hero--ready .bp-draw {
+  stroke-dashoffset: 0;
+}
+
+.bp-hero--ready .bp-draw-label {
+  opacity: 1;
+}
+
+@keyframes bp-draw-in {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes bp-label-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-draw {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+
+  .bp-draw-label {
+    opacity: 1;
+    animation: none !important;
+  }
+}
