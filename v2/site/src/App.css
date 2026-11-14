@@ -68,37 +68,6 @@ html[data-theme='dark'] .site-nav__cta {
   }
 }
 
-@media (max-width: 480px) {
-  .bp-hero__actions {
-    margin-bottom: 0.25rem;
-    max-width: calc(100vw - 11rem);
-    margin-inline: auto;
-  }
-}
-
-@media (max-width: 330px) {
-  .bp-hero__content {
-    align-items: stretch;
-    text-align: left;
-    padding-inline: 0.65rem;
-  }
-
-  .bp-hero__actions {
-    width: calc(100vw - 11.5rem);
-    max-width: calc(100vw - 11.5rem);
-    margin-inline: 0;
-    align-self: flex-start;
-  }
-
-  .bp-hero__actions .bp-hero__btn {
-    max-width: 100%;
-    box-sizing: border-box;
-    font-size: 0.82rem;
-    padding: 0.65rem 0.7rem;
-    line-height: 1.25;
-  }
-}
-
 .site-footer {
   border-top: 1px solid var(--color-border);
   padding: 2rem;

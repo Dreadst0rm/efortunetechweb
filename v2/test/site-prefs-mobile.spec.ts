@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test'
 
-const WIDTHS = [320, 360, 375, 390, 480] as const
+const WIDTHS = [320, 360, 375, 390, 414, 480] as const
+const HEIGHTS = [568, 667, 740] as const
 
 type Box = { x: number; y: number; width: number; height: number }
 
@@ -19,53 +20,70 @@ function toBox(raw: { x: number; y: number; width: number; height: number } | nu
 }
 
 for (const width of WIDTHS) {
-  test(`site prefs pill and panel at ${width}x740`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 740 })
-    await page.goto('/')
-    await page.waitForSelector('.bp-site-prefs')
+  for (const height of HEIGHTS) {
+    test(`mobile display options at ${width}x${height}`, async ({ page }) => {
+      await page.setViewportSize({ width, height })
+      await page.goto('/')
+      await page.waitForSelector('.bp-site-prefs__toggle')
 
-    const pill = toBox(await page.locator('.bp-site-prefs').boundingBox())
-    expect(pill).toBeTruthy()
-    expect(pill!.y + pill!.height).toBeGreaterThan(640)
+      const header = toBox(await page.locator('header.site-nav').boundingBox())
+      const kicker = toBox(await page.locator('.bp-kicker').boundingBox())
+      expect(header).toBeTruthy()
+      expect(kicker).toBeTruthy()
+      expect(kicker!.y).toBeGreaterThanOrEqual(header!.y + header!.height - 1)
 
-    const heroCta = toBox(await page.locator('a.bp-hero__btn--primary').boundingBox())
-    const navCta = toBox(await page.locator('.site-nav__cta').boundingBox())
-    if (heroCta) expect(overlaps(pill!, heroCta), 'pill vs hero CTA').toBe(false)
-    if (navCta) expect(overlaps(pill!, navCta), 'pill vs nav Contact').toBe(false)
+      await page.evaluate(() => window.scrollTo(0, 0))
 
-    const navLinks = page.locator('.site-nav__links a')
-    const linkCount = await navLinks.count()
-    for (let i = 0; i < linkCount; i++) {
-      const linkBox = toBox(await navLinks.nth(i).boundingBox())
-      if (linkBox) expect(overlaps(pill!, linkBox), `pill vs nav link ${i}`).toBe(false)
-    }
+      const toggle = toBox(await page.locator('.bp-site-prefs__toggle').boundingBox())
+      expect(toggle).toBeTruthy()
+      expect(toggle!.width).toBeGreaterThanOrEqual(44)
+      expect(toggle!.height).toBeGreaterThanOrEqual(44)
+      expect(toggle!.y + toggle!.height).toBeLessThanOrEqual(height + 1)
 
-    await page.locator('.bp-site-prefs__btn--palette').click()
-    const panel = page.locator('.bp-site-prefs__palette-panel')
-    await expect(panel).toBeVisible()
+      const primary = toBox(await page.locator('a.bp-hero__btn--primary').boundingBox())
+      const secondary = toBox(await page.locator('a.bp-hero__btn--secondary').boundingBox())
+      const sub = toBox(await page.locator('.bp-sub').boundingBox())
+      const linkedIn = toBox(await page.locator('.bp-hero__track a').boundingBox())
 
-    const panelBox = toBox(await panel.boundingBox())
-    expect(panelBox).toBeTruthy()
-    expect(panelBox!.y).toBeGreaterThanOrEqual(0)
-    expect(panelBox!.y + panelBox!.height).toBeLessThanOrEqual(740 + 1)
+      if (primary) expect(overlaps(toggle!, primary), 'toggle vs primary CTA').toBe(false)
+      if (secondary) expect(overlaps(toggle!, secondary), 'toggle vs secondary CTA').toBe(false)
+      if (sub) expect(overlaps(toggle!, sub), 'toggle vs subhead').toBe(false)
+      if (linkedIn) expect(overlaps(toggle!, linkedIn), 'toggle vs LinkedIn').toBe(false)
 
-    const swatches = panel.locator('.bp-site-prefs__swatch')
-    const swatchCount = await swatches.count()
-    expect(swatchCount).toBeGreaterThanOrEqual(4)
-    for (let i = 0; i < swatchCount; i++) {
-      const sw = toBox(await swatches.nth(i).boundingBox())
-      expect(sw, `swatch ${i} visible`).toBeTruthy()
-      expect(sw!.y).toBeGreaterThanOrEqual(0)
-      expect(sw!.x).toBeGreaterThanOrEqual(0)
-      expect(sw!.x + sw!.width).toBeLessThanOrEqual(width + 1)
-      expect(sw!.y + sw!.height).toBeLessThanOrEqual(740 + 1)
-    }
+      await page.locator('.bp-site-prefs__toggle').click()
+      await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
 
-    const meshBtn = page.locator('.bp-site-prefs__btn[data-bg-opt="mesh"]')
-    const meshBox = toBox(await meshBtn.boundingBox())
-    if (meshBox) {
-      expect(meshBox.width).toBeGreaterThanOrEqual(24)
-      expect(meshBox.height).toBeGreaterThanOrEqual(24)
-    }
-  })
+      const panel = toBox(await page.locator('.bp-site-prefs__panel').boundingBox())
+      expect(panel).toBeTruthy()
+      expect(panel!.y).toBeGreaterThanOrEqual(0)
+      expect(panel!.x).toBeGreaterThanOrEqual(0)
+      expect(panel!.x + panel!.width).toBeLessThanOrEqual(width + 1)
+      expect(panel!.y + panel!.height).toBeLessThanOrEqual(height + 1)
+
+      await page.locator('.bp-site-prefs__btn--palette').click()
+      const palettePanel = page.locator('.bp-site-prefs__palette-panel')
+      await expect(palettePanel).toBeVisible()
+
+      const swatches = palettePanel.locator('.bp-site-prefs__swatch')
+      const swatchCount = await swatches.count()
+      expect(swatchCount).toBeGreaterThanOrEqual(4)
+      for (let i = 0; i < swatchCount; i++) {
+        const sw = toBox(await swatches.nth(i).boundingBox())
+        expect(sw, `swatch ${i} visible`).toBeTruthy()
+        expect(sw!.y).toBeGreaterThanOrEqual(0)
+        expect(sw!.x).toBeGreaterThanOrEqual(0)
+        expect(sw!.x + sw!.width).toBeLessThanOrEqual(width + 1)
+        expect(sw!.y + sw!.height).toBeLessThanOrEqual(height + 1)
+        await swatches.nth(i).click({ trial: true })
+      }
+
+      const meshBtn = page.locator('.bp-site-prefs__btn[data-bg-opt="mesh"]')
+      const meshBox = toBox(await meshBtn.boundingBox())
+      if (meshBox) {
+        expect(meshBox.width).toBeGreaterThanOrEqual(24)
+        expect(meshBox.height).toBeGreaterThanOrEqual(24)
+        await meshBtn.click({ trial: true })
+      }
+    })
+  }
 }

@@ -210,22 +210,20 @@ describe('remix palettes', () => {
       if (m[1] !== 'default') ids.push(m[1])
     }
     const required = ['hero-title-stroke', 'pass', 'warn', 'fail', 'diagram-focus'] as const
-    const themes = ['light', 'dark'] as const
     for (const id of ids) {
       const tokens = parsePaletteBlock(palettesCss, id)
       for (const key of required) {
         expect(tokens[key], `${id} --color-${key}`).toBeTruthy()
       }
-      const bg = tokens.bg
-      for (const theme of themes) {
-        expect(
-          contrastRatio(tokens['hero-title-stroke'], bg),
-          `${id} stroke on bg (${theme} theme saved)`,
-        ).toBeGreaterThanOrEqual(4.5)
-        expect(contrastRatio(tokens.pass, bg), `${id} pass on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
-        expect(contrastRatio(tokens.warn, bg), `${id} warn on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
-        expect(contrastRatio(tokens.fail, bg), `${id} fail on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
-      }
+      const heroBg = tokens['hero-bg'] ?? tokens.bg
+      const badgeBg = tokens.surface ?? tokens.bg
+      expect(
+        contrastRatio(tokens['hero-title-stroke'], heroBg),
+        `${id} stroke on hero-bg`,
+      ).toBeGreaterThanOrEqual(4.5)
+      expect(contrastRatio(tokens.pass, badgeBg), `${id} pass on surface`).toBeGreaterThanOrEqual(4.5)
+      expect(contrastRatio(tokens.warn, badgeBg), `${id} warn on surface`).toBeGreaterThanOrEqual(4.5)
+      expect(contrastRatio(tokens.fail, badgeBg), `${id} fail on surface`).toBeGreaterThanOrEqual(4.5)
     }
   })
 

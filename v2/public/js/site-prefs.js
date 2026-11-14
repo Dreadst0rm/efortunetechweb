@@ -2,6 +2,11 @@ document.addEventListener('DOMContentLoaded', function () {
   var themeKey = 'efortune-theme'
   var paletteKey = 'efortune-palette'
   var bgKey = 'efortune-bg'
+  var mobileMq = window.matchMedia('(max-width: 768px)')
+
+  function isMobilePrefs() {
+    return mobileMq.matches
+  }
 
   function paletteIds() {
     return window.EFORTUNE_PALETTE_IDS || ['default']
@@ -109,10 +114,47 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function closePaletteSubpanel() {
+    palettePanel.hidden = true
+    paletteToggle.setAttribute('aria-expanded', 'false')
+  }
+
+  function closeMobilePanel() {
+    host.classList.remove('bp-site-prefs--open')
+    mobileToggle.setAttribute('aria-expanded', 'false')
+    closePaletteSubpanel()
+  }
+
+  function openMobilePanel() {
+    host.classList.add('bp-site-prefs--open')
+    mobileToggle.setAttribute('aria-expanded', 'true')
+  }
+
   var host = document.createElement('div')
   host.className = 'bp-site-prefs'
   host.setAttribute('role', 'group')
   host.setAttribute('aria-label', 'Site appearance')
+
+  var mobileToggle = document.createElement('button')
+  mobileToggle.type = 'button'
+  mobileToggle.className = 'bp-site-prefs__toggle'
+  mobileToggle.textContent = '◐'
+  mobileToggle.setAttribute('aria-label', 'Display options')
+  mobileToggle.setAttribute('aria-expanded', 'false')
+  mobileToggle.setAttribute('aria-controls', 'bp-site-prefs-panel')
+  mobileToggle.addEventListener('click', function (ev) {
+    ev.stopPropagation()
+    if (host.classList.contains('bp-site-prefs--open')) {
+      closeMobilePanel()
+      mobileToggle.focus()
+    } else {
+      openMobilePanel()
+    }
+  })
+
+  var controlsPanel = document.createElement('div')
+  controlsPanel.id = 'bp-site-prefs-panel'
+  controlsPanel.className = 'bp-site-prefs__panel'
 
   var fillBtn = document.createElement('button')
   fillBtn.type = 'button'
@@ -137,7 +179,8 @@ document.addEventListener('DOMContentLoaded', function () {
   paletteToggle.setAttribute('aria-expanded', 'false')
   paletteToggle.setAttribute('aria-haspopup', 'true')
   paletteToggle.setAttribute('aria-controls', 'bp-site-prefs-palette-panel')
-  paletteToggle.addEventListener('click', function () {
+  paletteToggle.addEventListener('click', function (ev) {
+    ev.stopPropagation()
     var open = palettePanel.hidden
     palettePanel.hidden = !open
     paletteToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
@@ -167,8 +210,9 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.style.setProperty('--bp-swatch-ink', sw[2])
     btn.addEventListener('click', function () {
       applyPalette(id)
-      palettePanel.hidden = true
-      paletteToggle.setAttribute('aria-expanded', 'false')
+      closePaletteSubpanel()
+      if (isMobilePrefs()) closeMobilePanel()
+      mobileToggle.focus()
     })
     palettePanel.appendChild(btn)
     paletteButtons.push(btn)
@@ -201,17 +245,42 @@ document.addEventListener('DOMContentLoaded', function () {
     bgButtons.push(btn)
   })
 
-  host.appendChild(fillBtn)
-  host.appendChild(paletteWrap)
-  host.appendChild(sep)
-  host.appendChild(bgRow)
+  controlsPanel.appendChild(fillBtn)
+  controlsPanel.appendChild(paletteWrap)
+  controlsPanel.appendChild(sep)
+  controlsPanel.appendChild(bgRow)
+
+  host.appendChild(controlsPanel)
+  host.appendChild(mobileToggle)
   document.body.appendChild(host)
 
   document.addEventListener('click', function (ev) {
-    if (!palettePanel.hidden && !host.contains(ev.target)) {
-      palettePanel.hidden = true
-      paletteToggle.setAttribute('aria-expanded', 'false')
+    if (host.contains(ev.target)) return
+    if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
+      closeMobilePanel()
+      mobileToggle.focus()
+      return
     }
+    if (!palettePanel.hidden) closePaletteSubpanel()
+  })
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Escape') return
+    if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
+      ev.preventDefault()
+      closeMobilePanel()
+      mobileToggle.focus()
+      return
+    }
+    if (!palettePanel.hidden) {
+      closePaletteSubpanel()
+      paletteToggle.focus()
+    }
+  })
+
+  mobileMq.addEventListener('change', function () {
+    closeMobilePanel()
+    closePaletteSubpanel()
   })
 
   refreshFillLabel()
