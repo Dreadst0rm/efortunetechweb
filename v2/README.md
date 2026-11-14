@@ -20,7 +20,7 @@ Contact Origin and Turnstile hostname checks use Wrangler var **`ALLOWED_HOSTS`*
 
 **Web Analytics:** CSP-safe manual beacon via build env `CF_WEB_ANALYTICS_TOKEN` (see `docs/ANALYTICS.md`). Disable dashboard automatic JS injection.
 
-**Appearance:** Bottom-right pill (always on): **Grey/Slate** fill (`efortune-theme`) and **Dots/Mesh** hero (`efortune-bg`, default dots). `?bg=dots|mesh` overrides background on first load. `site-init.js` runs in `<head>` before CSS to avoid flash.
+**Appearance:** Bottom-right pill (always on): **Grey/Slate** default (`efortune-theme`), **remix palettes** (`efortune-palette`, from `palette-catalog.js`), and **Dots/Mesh** hero (`efortune-bg`, default dots). `?bg=dots|mesh` overrides background on first load. `palette-catalog.js` and `site-init.js` run in `<head>` before CSS to avoid flash.
 
 ## Layout
 
