@@ -13,6 +13,23 @@ export function generateCspNonce() {
 }
 
 /**
+ * Strict CSP for static `_headers` fallback (Worker overwrites on HTML when it runs).
+ * No `unsafe-inline` in script-src — external scripts only until nonces apply.
+ */
+export const STATIC_FALLBACK_CONTENT_SECURITY_POLICY = [
+  "default-src 'self'",
+  "img-src 'self' data:",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com",
+  "frame-src https://challenges.cloudflare.com",
+  "connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+].join('; ');
+
+/**
  * Build CSP for HTML responses. Requires a nonce in script-src (no unsafe-inline).
  * Same-origin `/cdn-cgi/challenge-platform/` is covered by `'self'`.
  *
@@ -66,6 +83,7 @@ export function applyHtmlNonceTransform(response, nonce) {
   const headers = new Headers(response.headers);
   headers.delete('content-security-policy');
   headers.set('content-security-policy', buildContentSecurityPolicy(nonce));
+  headers.set('cache-control', 'private, no-cache');
 
   if (typeof HTMLRewriter === 'undefined') {
     throw new Error('HTMLRewriter is required to apply CSP nonces to HTML responses');
@@ -96,6 +114,7 @@ export function htmlSecurityResponse(html, status = 200, extraHeaders = {}) {
   const nonce = generateCspNonce();
   const headers = new Headers({
     'content-type': 'text/html; charset=utf-8',
+    'cache-control': 'private, no-cache',
     ...extraHeaders,
     'content-security-policy': buildContentSecurityPolicy(nonce),
   });

@@ -418,5 +418,6 @@ describe('wrangler.jsonc', () => {
     assert.doesNotMatch(raw, /v2\.efortune\.tech/);
     assert.match(raw, /"SITE_ORIGIN":\s*"https:\/\/efortune\.tech"/);
     assert.doesNotMatch(raw, /"routes"/);
+    assert.match(raw, /"run_worker_first":\s*true/);
   });
 });

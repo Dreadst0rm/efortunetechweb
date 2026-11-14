@@ -50,6 +50,11 @@ describe('addNonceToScriptOpenTags', () => {
 });
 
 describe('htmlSecurityResponse', () => {
+  it('sets private, no-cache on HTML responses', () => {
+    const res = htmlSecurityResponse('<html><body></body></html>', 200);
+    assert.equal(res.headers.get('cache-control'), 'private, no-cache');
+  });
+
   it('matches CSP header nonce to every script tag', async () => {
     const html =
       '<html><head><script src="/js/site-init.js"></script>' +
