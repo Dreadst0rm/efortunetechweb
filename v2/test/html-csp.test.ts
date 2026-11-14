@@ -17,9 +17,12 @@ describe('HTML CSP (static build)', () => {
     expect(headers).toMatch(/X-Content-Type-Options:/i)
   })
 
-  it('configures assets.run_worker_first in wrangler.jsonc', () => {
+  it('configures selective assets.run_worker_first in wrangler.jsonc', () => {
     const raw = readFileSync(path.join(root, 'wrangler.jsonc'), 'utf8')
-    expect(raw).toMatch(/"run_worker_first":\s*true/)
+    expect(raw).toMatch(/"run_worker_first":\s*\[/)
+    expect(raw).toMatch(/"!\/js\/\*\*"/)
+    expect(raw).toMatch(/"!\/assets\/\*\*"/)
+    expect(raw).not.toMatch(/"run_worker_first":\s*true/)
   })
 
   it('prerenders HTML without inline script bodies', () => {

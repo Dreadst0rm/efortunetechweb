@@ -19,7 +19,28 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "html_handling": "none",
-    "run_worker_first": true
+    "run_worker_first": [
+      "/",
+      "/**",
+      "!/assets/**",
+      "!/js/**",
+      "!/**/*.css",
+      "!/**/*.js",
+      "!/**/*.mjs",
+      "!/**/*.map",
+      "!/**/*.woff2",
+      "!/**/*.woff",
+      "!/**/*.ttf",
+      "!/**/*.png",
+      "!/**/*.jpg",
+      "!/**/*.jpeg",
+      "!/**/*.gif",
+      "!/**/*.svg",
+      "!/**/*.ico",
+      "!/**/*.webp",
+      "!/**/*.json",
+      "!/**/*.xml"
+    ]
   },
 
   "send_email": [

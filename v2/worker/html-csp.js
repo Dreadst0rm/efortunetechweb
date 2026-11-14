@@ -16,6 +16,20 @@ export function generateCspNonce() {
  * Strict CSP for static `_headers` fallback (Worker overwrites on HTML when it runs).
  * No `unsafe-inline` in script-src — external scripts only until nonces apply.
  */
+/** Headers mirrored from `public/_headers` for HTML when the User Worker serves first. */
+export const HTML_SECURITY_HEADERS = Object.freeze({
+  'x-content-type-options': 'nosniff',
+  'referrer-policy': 'strict-origin-when-cross-origin',
+  'x-frame-options': 'DENY',
+  'strict-transport-security': 'max-age=31536000',
+});
+
+export function applyHtmlSecurityHeaders(headers) {
+  for (const [key, value] of Object.entries(HTML_SECURITY_HEADERS)) {
+    headers.set(key, value);
+  }
+}
+
 export const STATIC_FALLBACK_CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "img-src 'self' data:",
@@ -84,6 +98,7 @@ export function applyHtmlNonceTransform(response, nonce) {
   headers.delete('content-security-policy');
   headers.set('content-security-policy', buildContentSecurityPolicy(nonce));
   headers.set('cache-control', 'private, no-cache');
+  applyHtmlSecurityHeaders(headers);
 
   if (typeof HTMLRewriter === 'undefined') {
     throw new Error('HTMLRewriter is required to apply CSP nonces to HTML responses');
@@ -118,6 +133,7 @@ export function htmlSecurityResponse(html, status = 200, extraHeaders = {}) {
     ...extraHeaders,
     'content-security-policy': buildContentSecurityPolicy(nonce),
   });
+  applyHtmlSecurityHeaders(headers);
   const body = addNonceToScriptOpenTags(html, nonce);
   return new Response(body, { status, headers });
 }
