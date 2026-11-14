@@ -374,3 +374,15 @@
     font-size: 0.88rem;
   }
 }
+
+@media (max-width: 360px) {
+  .bp-hero__actions {
+    flex-direction: column;
+    align-items: center;
+    max-width: calc(100% - 5.25rem);
+  }
+
+  .bp-hero__actions .bp-hero__btn {
+    width: 100%;
+  }
+}
