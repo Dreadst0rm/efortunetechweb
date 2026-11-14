@@ -200,6 +200,35 @@ describe('remix palettes', () => {
     expect(init).not.toMatch(/setAttribute\('data-theme',\s*meta\.mode\)/)
   })
 
+  it('defines semantic contrast tokens on every remix palette', () => {
+    const palettesCss = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
+    const catalogSrc = readFileSync(path.join(root, 'public/js/palette-catalog.js'), 'utf8')
+    const idRe = /id:\s*'([^']+)'/g
+    const ids: string[] = []
+    let m: RegExpExecArray | null
+    while ((m = idRe.exec(catalogSrc))) {
+      if (m[1] !== 'default') ids.push(m[1])
+    }
+    const required = ['hero-title-stroke', 'pass', 'warn', 'fail', 'diagram-focus'] as const
+    const themes = ['light', 'dark'] as const
+    for (const id of ids) {
+      const tokens = parsePaletteBlock(palettesCss, id)
+      for (const key of required) {
+        expect(tokens[key], `${id} --color-${key}`).toBeTruthy()
+      }
+      const bg = tokens.bg
+      for (const theme of themes) {
+        expect(
+          contrastRatio(tokens['hero-title-stroke'], bg),
+          `${id} stroke on bg (${theme} theme saved)`,
+        ).toBeGreaterThanOrEqual(4.5)
+        expect(contrastRatio(tokens.pass, bg), `${id} pass on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
+        expect(contrastRatio(tokens.warn, bg), `${id} warn on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
+        expect(contrastRatio(tokens.fail, bg), `${id} fail on bg (${theme})`).toBeGreaterThanOrEqual(4.5)
+      }
+    }
+  })
+
   it('persists palette key in site-prefs', () => {
     const prefs = readFileSync(path.join(root, 'public/js/site-prefs.js'), 'utf8')
     expect(prefs).toContain('efortune-palette')

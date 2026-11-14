@@ -174,13 +174,18 @@ html[data-bg='mesh'] .bp-hero__bg::after {
 }
 
 @media (max-width: 480px) {
+  body {
+    padding-bottom: 5.25rem;
+  }
+
   .bp-site-prefs {
-    top: calc(var(--nav-sticky-offset, 4.5rem) + 0.35rem);
-    right: 0.5rem;
-    bottom: auto;
-    gap: 0.2rem;
-    padding: 0.25rem 0.32rem;
-    max-width: min(11rem, calc(100vw - 1rem));
+    right: 0.65rem;
+    bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+    top: auto;
+    gap: 0.22rem;
+    padding: 0.28rem 0.4rem;
+    max-width: none;
+    z-index: 40;
   }
 
   .bp-site-prefs__btn {
@@ -195,27 +200,28 @@ html[data-bg='mesh'] .bp-hero__bg::after {
     min-width: 2.35rem;
   }
 
-  .bp-site-prefs__btn--palette {
-    max-width: 3.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
   .bp-site-prefs__palette-panel {
-    min-width: 9rem;
-    grid-template-columns: repeat(4, 1.75rem);
+    right: 0;
+    bottom: calc(100% + 0.45rem);
+    top: auto;
+    min-width: 10.5rem;
+    max-width: calc(100vw - 1.3rem);
+    max-height: min(14rem, calc(100dvh - 5.5rem));
+    grid-template-columns: repeat(4, minmax(1.75rem, 2.25rem));
     gap: 0.28rem;
-    padding: 0.4rem;
+    padding: 0.45rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .bp-site-prefs__swatch {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 2rem;
+    height: 2rem;
     min-width: 24px;
     min-height: 24px;
   }
 }
+
 
 .bp-site-prefs__swatch:focus-visible {
   outline: 2px solid var(--color-focus);

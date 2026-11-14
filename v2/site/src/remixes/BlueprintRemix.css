@@ -23,6 +23,33 @@
   max-width: 60rem;
 }
 
+@media (max-width: 480px) {
+  .bp-hero {
+    min-height: auto;
+    align-items: center;
+    padding-top: 1.5rem;
+    padding-bottom: 7rem;
+    box-sizing: border-box;
+  }
+
+  .bp-hero__content {
+    padding-bottom: 0.5rem;
+    transform: translateY(-4.5rem);
+  }
+}
+
+@media (max-width: 390px) {
+  .bp-hero__content {
+    transform: translateY(-6.25rem);
+  }
+}
+
+@media (max-width: 330px) {
+  .bp-hero__content {
+    transform: translateY(-13.5rem);
+  }
+}
+
 .bp-kicker {
   font-family: ui-monospace, Consolas, monospace;
   text-transform: uppercase;
