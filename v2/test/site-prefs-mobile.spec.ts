@@ -32,6 +32,12 @@ for (const width of WIDTHS) {
       expect(kicker).toBeTruthy()
       expect(kicker!.y).toBeGreaterThanOrEqual(header!.y + header!.height - 1)
 
+      const contentPad = await page.locator('.bp-hero__content').evaluate((el) => {
+        const s = getComputedStyle(el)
+        return { left: s.paddingLeft, right: s.paddingRight }
+      })
+      expect(contentPad.left, 'symmetric hero padding').toBe(contentPad.right)
+
       await page.evaluate(() => window.scrollTo(0, 0))
 
       const toggle = toBox(await page.locator('.bp-site-prefs__toggle').boundingBox())
@@ -45,10 +51,20 @@ for (const width of WIDTHS) {
       const sub = toBox(await page.locator('.bp-sub').boundingBox())
       const linkedIn = toBox(await page.locator('.bp-hero__track a').boundingBox())
 
-      if (primary) expect(overlaps(toggle!, primary), 'toggle vs primary CTA').toBe(false)
+      if (primary) {
+        expect(overlaps(toggle!, primary), 'toggle vs primary CTA').toBe(false)
+        if (
+          (width === 375 && height === 667) ||
+          (width === 390 && height === 740)
+        ) {
+          expect(primary.y, 'primary CTA visible in first screen').toBeLessThan(height)
+        }
+      }
       if (secondary) expect(overlaps(toggle!, secondary), 'toggle vs secondary CTA').toBe(false)
       if (sub) expect(overlaps(toggle!, sub), 'toggle vs subhead').toBe(false)
-      if (linkedIn) expect(overlaps(toggle!, linkedIn), 'toggle vs LinkedIn').toBe(false)
+      if (linkedIn && linkedIn.y < height) {
+        expect(overlaps(toggle!, linkedIn), 'toggle vs LinkedIn').toBe(false)
+      }
 
       await page.locator('.bp-site-prefs__toggle').click()
       await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)

@@ -195,7 +195,7 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   outline-offset: 2px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   body {
     padding-bottom: max(3.75rem, calc(44px + 1.25rem + env(safe-area-inset-bottom, 0px)));
   }

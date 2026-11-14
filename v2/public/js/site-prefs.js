@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var themeKey = 'efortune-theme'
   var paletteKey = 'efortune-palette'
   var bgKey = 'efortune-bg'
-  var mobileMq = window.matchMedia('(max-width: 768px)')
+  var mobileMq = window.matchMedia('(max-width: 1024px)')
 
   function isMobilePrefs() {
     return mobileMq.matches
@@ -125,9 +125,19 @@ document.addEventListener('DOMContentLoaded', function () {
     closePaletteSubpanel()
   }
 
+  function canTakeFocus(el) {
+    if (!el || el === document.documentElement) return false
+    if (el.closest && el.closest('.bp-site-prefs')) return true
+    if (typeof el.matches !== 'function') return false
+    return el.matches(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    )
+  }
+
   function openMobilePanel() {
     host.classList.add('bp-site-prefs--open')
     mobileToggle.setAttribute('aria-expanded', 'true')
+    fillBtn.focus()
   }
 
   var host = document.createElement('div')
@@ -212,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function () {
       applyPalette(id)
       closePaletteSubpanel()
       if (isMobilePrefs()) closeMobilePanel()
-      mobileToggle.focus()
     })
     palettePanel.appendChild(btn)
     paletteButtons.push(btn)
@@ -250,15 +259,15 @@ document.addEventListener('DOMContentLoaded', function () {
   controlsPanel.appendChild(sep)
   controlsPanel.appendChild(bgRow)
 
-  host.appendChild(controlsPanel)
   host.appendChild(mobileToggle)
+  host.appendChild(controlsPanel)
   document.body.appendChild(host)
 
   document.addEventListener('click', function (ev) {
     if (host.contains(ev.target)) return
     if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
       closeMobilePanel()
-      mobileToggle.focus()
+      if (!canTakeFocus(ev.target)) mobileToggle.focus()
       return
     }
     if (!palettePanel.hidden) closePaletteSubpanel()
