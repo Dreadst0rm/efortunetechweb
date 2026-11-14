@@ -175,20 +175,31 @@ html[data-bg='mesh'] .bp-hero__bg::after {
 
 @media (max-width: 480px) {
   .bp-site-prefs {
-    right: 0.65rem;
-    bottom: 0.65rem;
+    top: calc(var(--nav-sticky-offset, 4.5rem) + 0.35rem);
+    right: 0.5rem;
+    bottom: auto;
     gap: 0.2rem;
-    padding: 0.28rem 0.35rem;
-    max-width: calc(100vw - 1.3rem);
+    padding: 0.25rem 0.32rem;
+    max-width: min(11rem, calc(100vw - 1rem));
   }
 
   .bp-site-prefs__btn {
     font-size: 0.65rem;
-    padding: 0.28rem 0.4rem;
+    padding: 0.3rem 0.45rem;
+    min-height: 24px;
+    min-width: 24px;
+    line-height: 1.2;
   }
 
   .bp-site-prefs__btn--fill {
     min-width: 2.35rem;
+  }
+
+  .bp-site-prefs__btn--palette {
+    max-width: 3.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .bp-site-prefs__palette-panel {
@@ -201,6 +212,8 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   .bp-site-prefs__swatch {
     width: 1.75rem;
     height: 1.75rem;
+    min-width: 24px;
+    min-height: 24px;
   }
 }
 

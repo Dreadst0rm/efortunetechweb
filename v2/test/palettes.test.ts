@@ -22,6 +22,18 @@ function contrastRatio(fg: string, bg: string): number {
   return (hi + 0.05) / (lo + 0.05)
 }
 
+function parseCssBlock(css: string, selector: string): Record<string, string> {
+  const re = new RegExp(`${selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*\\{([^}]+)\\}`)
+  const match = re.exec(css)
+  if (!match) throw new Error(`missing block: ${selector}`)
+  const tokens: Record<string, string> = {}
+  for (const line of match[1].split('\n')) {
+    const m = /--color-([\w-]+):\s*([^;]+);/.exec(line)
+    if (m) tokens[m[1]] = m[2].trim()
+  }
+  return tokens
+}
+
 function parsePaletteBlock(css: string, id: string): Record<string, string> {
   const re = new RegExp(`html\\[data-palette='${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'\\]\\s*\\{([^}]+)\\}`)
   const match = re.exec(css)
@@ -146,9 +158,27 @@ describe('remix palettes', () => {
     }
   })
 
-  it('meets WCAG AA contrast for nav Contact CTA in every remix palette', () => {
-    const css = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
+  it('remix nav Contact CTA rule uses --color-cta-bg (not accent)', () => {
+    const palettes = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
+    expect(palettes).toMatch(
+      /html\[data-palette\]:not\(\[data-palette='default'\]\)\s*\.site-nav__cta\s*\{[^}]*background:\s*var\(--color-cta-bg\)/,
+    )
+    expect(palettes).not.toMatch(
+      /html\[data-palette\]:not\(\[data-palette='default'\]\)\s*\.site-nav__cta\s*\{[^}]*background:\s*var\(--color-accent\)/,
+    )
+  })
+
+  it('meets WCAG AA contrast for nav Contact CTA (remix palettes and default Grey/Slate)', () => {
+    const palettesCss = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
+    const themeCss = readFileSync(path.join(root, 'site/src/styles/theme.css'), 'utf8')
     const catalogSrc = readFileSync(path.join(root, 'public/js/palette-catalog.js'), 'utf8')
+
+    const light = parseCssBlock(themeCss, "html[data-theme='light']")
+    expect(contrastRatio(light['cta-text'], light['cta-bg'])).toBeGreaterThanOrEqual(4.5)
+
+    const darkTheme = parseCssBlock(themeCss, "html[data-theme='dark']")
+    expect(contrastRatio('#0b1220', darkTheme.accent)).toBeGreaterThanOrEqual(4.5)
+
     const idRe = /id:\s*'([^']+)'/g
     const ids: string[] = []
     let m: RegExpExecArray | null
@@ -156,12 +186,18 @@ describe('remix palettes', () => {
       if (m[1] !== 'default') ids.push(m[1])
     }
     for (const id of ids) {
-      const tokens = parsePaletteBlock(css, id)
+      const tokens = parsePaletteBlock(palettesCss, id)
       const bg = tokens['cta-bg']
       const fg = tokens['cta-text'] ?? tokens.bg
       const ratio = contrastRatio(fg, bg)
       expect(ratio, `nav CTA ${id}: ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5)
     }
+  })
+
+  it('restores saved theme before palette on load', () => {
+    const init = readFileSync(path.join(root, 'public/js/site-init.js'), 'utf8')
+    expect(init.indexOf('efortune-theme')).toBeLessThan(init.indexOf('efortune-palette'))
+    expect(init).not.toMatch(/setAttribute\('data-theme',\s*meta\.mode\)/)
   })
 
   it('persists palette key in site-prefs', () => {

@@ -24,9 +24,15 @@
       return
     }
     root.setAttribute('data-palette', id)
-    if (meta.mode === 'light' || meta.mode === 'dark') {
-      root.setAttribute('data-theme', meta.mode)
+  }
+
+  try {
+    var storedTheme = localStorage.getItem(themeKey)
+    if (storedTheme === 'light' || storedTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', storedTheme)
     }
+  } catch (_err) {
+    /* private mode — system default via CSS */
   }
 
   try {
@@ -34,17 +40,6 @@
     applyPalette(storedPalette)
   } catch (_p) {
     /* private mode */
-  }
-
-  if (!document.documentElement.getAttribute('data-theme')) {
-    try {
-      var storedTheme = localStorage.getItem(themeKey)
-      if (storedTheme === 'light' || storedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', storedTheme)
-      }
-    } catch (_err) {
-      /* private mode */
-    }
   }
 
   var bg = 'dots'
