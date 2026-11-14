@@ -62,6 +62,7 @@ for (const width of WIDTHS) {
           'primary CTA horizontal clearance to toggle',
         ).toBeGreaterThanOrEqual(8)
         if (
+          (width === 320 && height === 568) ||
           (width === 375 && height === 667) ||
           (width === 390 && height === 740)
         ) {

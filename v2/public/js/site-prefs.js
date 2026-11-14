@@ -39,8 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function syncTurnstile(theme) {
     var nodes = document.querySelectorAll('.cf-turnstile')
+    var ts = typeof window !== 'undefined' ? window.turnstile : null
     for (var i = 0; i < nodes.length; i++) {
-      nodes[i].setAttribute('data-theme', theme)
+      var el = nodes[i]
+      el.setAttribute('data-theme', theme)
+      if (!ts || typeof ts.reset !== 'function') continue
+      var wid = el.getAttribute('data-widget-id')
+      if (wid) {
+        try {
+          ts.reset(wid)
+        } catch (_tsErr) {
+          /* widget not ready */
+        }
+      }
     }
   }
 
@@ -220,8 +231,11 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.style.setProperty('--bp-swatch-ink', sw[2])
     btn.addEventListener('click', function () {
       applyPalette(id)
-      closePaletteSubpanel()
-      if (isMobilePrefs()) closeMobilePanel()
+      if (isMobilePrefs()) {
+        btn.focus()
+      } else {
+        closePaletteSubpanel()
+      }
     })
     palettePanel.appendChild(btn)
     paletteButtons.push(btn)
@@ -263,6 +277,16 @@ document.addEventListener('DOMContentLoaded', function () {
   host.appendChild(controlsPanel)
   document.body.appendChild(host)
 
+  var pointerDownInsideHost = false
+
+  host.addEventListener(
+    'pointerdown',
+    function (ev) {
+      pointerDownInsideHost = host.contains(ev.target)
+    },
+    true,
+  )
+
   document.addEventListener('click', function (ev) {
     if (host.contains(ev.target)) return
     if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
@@ -277,9 +301,15 @@ document.addEventListener('DOMContentLoaded', function () {
     'focusout',
     function (ev) {
       if (!isMobilePrefs() || !host.classList.contains('bp-site-prefs--open')) return
-      var next = ev.relatedTarget
-      if (next && host.contains(next)) return
-      closeMobilePanel()
+      if (!ev.target || !host.contains(ev.target)) return
+      window.setTimeout(function () {
+        if (!host.classList.contains('bp-site-prefs--open')) return
+        var active = document.activeElement
+        if (active && host.contains(active)) return
+        if (pointerDownInsideHost) return
+        closeMobilePanel()
+        mobileToggle.focus()
+      }, 0)
     },
     true,
   )

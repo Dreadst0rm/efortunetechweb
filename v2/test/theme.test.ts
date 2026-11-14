@@ -63,5 +63,8 @@ describe('color theme', () => {
     expect(prefs).toContain('Grey')
     expect(prefs).toContain('Slate')
     expect(prefs).toContain('syncTurnstile')
+    expect(prefs).toContain('pointerDownInsideHost')
+    expect(prefs).toContain('window.setTimeout')
+    expect(prefs).not.toMatch(/relatedTarget[\s\S]{0,80}closeMobilePanel/)
   })
 })

@@ -8,7 +8,12 @@ test('1024x768 keeps desktop hero title scale and centered frame', async ({ page
   const titleSize = await page.locator('.bp-title').evaluate((el) =>
     parseFloat(getComputedStyle(el).fontSize),
   )
-  expect(titleSize, 'title should use desktop clamp, not phone 1.35rem cap').toBeGreaterThan(28)
+  expect(titleSize, 'title should use desktop clamp, not phone 1.35rem cap').toBeGreaterThanOrEqual(48)
+
+  const subSize = await page.locator('.bp-sub').evaluate((el) =>
+    parseFloat(getComputedStyle(el).fontSize),
+  )
+  expect(subSize).toBeGreaterThanOrEqual(18)
 
   const heroTextAlign = await page.locator('.bp-hero').evaluate((el) => getComputedStyle(el).textAlign)
   expect(heroTextAlign).toBe('center')
