@@ -39,19 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function syncTurnstile(theme) {
     var nodes = document.querySelectorAll('.cf-turnstile')
-    var ts = typeof window !== 'undefined' ? window.turnstile : null
     for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i]
-      el.setAttribute('data-theme', theme)
-      if (!ts || typeof ts.reset !== 'function') continue
-      var wid = el.getAttribute('data-widget-id')
-      if (wid) {
-        try {
-          ts.reset(wid)
-        } catch (_tsErr) {
-          /* widget not ready */
-        }
-      }
+      nodes[i].setAttribute('data-theme', theme)
     }
   }
 
@@ -279,7 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var pointerDownInsideHost = false
 
-  host.addEventListener(
+  document.addEventListener(
     'pointerdown',
     function (ev) {
       pointerDownInsideHost = host.contains(ev.target)
@@ -308,8 +297,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (active && host.contains(active)) return
         if (pointerDownInsideHost) return
         closeMobilePanel()
-        mobileToggle.focus()
       }, 0)
+    },
+    true,
+  )
+
+  document.addEventListener(
+    'keydown',
+    function () {
+      pointerDownInsideHost = false
     },
     true,
   )

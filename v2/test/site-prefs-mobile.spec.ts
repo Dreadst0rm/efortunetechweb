@@ -68,6 +68,9 @@ for (const width of WIDTHS) {
         ) {
           expect(primary.y, 'primary CTA visible in first screen').toBeLessThan(height)
         }
+        if (width === 320 && height === 568 && secondary) {
+          expect(secondary.y, 'secondary CTA visible in first screen').toBeLessThan(height)
+        }
       }
       if (secondary) {
         expect(overlaps(toggle!, secondary), 'toggle vs secondary CTA').toBe(false)

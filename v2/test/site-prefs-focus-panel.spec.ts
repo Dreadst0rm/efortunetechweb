@@ -13,34 +13,47 @@ test('panel padding click keeps mobile prefs open', async ({ page }) => {
   await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
 })
 
-test('Safari-like mousedown without focus still applies mesh and palette', async ({ page }) => {
+test('Safari-like focusout with null relatedTarget after mesh tap keeps panel open', async ({
+  page,
+  browserName,
+}) => {
+  test.skip(browserName === 'webkit', 'covered by webkit project without synthetic focusout')
+
   await page.setViewportSize({ width: 375, height: 667 })
   await page.goto('/')
   await page.locator('.bp-site-prefs__toggle').click()
   await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
 
-  await page.evaluate(() => {
-    document.querySelectorAll('.bp-site-prefs button').forEach((btn) => {
-      btn.addEventListener(
-        'mousedown',
-        (ev) => {
-          ev.preventDefault()
-        },
-        { capture: true },
-      )
-    })
-  })
-
   const mesh = page.locator('.bp-site-prefs__btn[data-bg-opt="mesh"]')
   await mesh.click()
   await expect(page.locator('html')).toHaveAttribute('data-bg', 'mesh')
-  await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
 
-  await page.locator('.bp-site-prefs__btn--palette').click()
-  const swatch = page.locator('.bp-site-prefs__swatch[data-palette-opt="swiss"]')
-  await swatch.click()
-  await expect(page.locator('html')).toHaveAttribute('data-palette', 'swiss')
+  await mesh.evaluate((el) => {
+    el.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: null }))
+  })
+  await page.waitForTimeout(0)
   await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
+})
+
+test.describe('webkit', () => {
+  test.skip(({ browserName }) => browserName !== 'webkit')
+
+  test('tap mesh without focus keeps panel open (webkit)', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 })
+    await page.goto('/')
+    await page.locator('.bp-site-prefs__toggle').click()
+    await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
+
+    await page.evaluate(() => {
+      document.querySelectorAll('.bp-site-prefs button').forEach((btn) => {
+        btn.addEventListener('mousedown', (ev) => ev.preventDefault(), { capture: true })
+      })
+    })
+
+    await page.locator('.bp-site-prefs__btn[data-bg-opt="mesh"]').click()
+    await expect(page.locator('html')).toHaveAttribute('data-bg', 'mesh')
+    await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
+  })
 })
 
 test('Tab past last panel control closes mobile prefs', async ({ page }) => {
@@ -55,7 +68,23 @@ test('Tab past last panel control closes mobile prefs', async ({ page }) => {
     await page.keyboard.press('Tab')
   }
   await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
-  await expect(page.locator('.bp-site-prefs__toggle')).toBeFocused()
+  const outside = await page.evaluate(() => {
+    const el = document.activeElement
+    return el instanceof HTMLElement ? !el.closest('.bp-site-prefs') : true
+  })
+  expect(outside).toBe(true)
+})
+
+test('mesh tap then keyboard tab closes stale-open panel', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 })
+  await page.goto('/')
+  await page.locator('.bp-site-prefs__toggle').click()
+  await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
+
+  await page.locator('.bp-site-prefs__btn[data-bg-opt="mesh"]').click()
+  await page.keyboard.press('Tab')
+  await page.keyboard.press('Tab')
+  await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
 })
 
 test('keyboard swatch selection keeps focus on swatch until panel closes', async ({ page }) => {

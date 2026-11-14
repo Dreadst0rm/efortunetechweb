@@ -23,6 +23,19 @@ test('mobile prefs tab order moves forward through panel controls', async ({ pag
   await page.keyboard.press('Shift+Tab')
   await expect(page.locator('.bp-site-prefs__btn--fill')).toBeFocused()
 
+  await page.locator('.bp-site-prefs__toggle').focus()
+  await page.keyboard.press('Shift+Tab')
+  await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
+  const notToggle = await page.evaluate(
+    () => !(document.activeElement instanceof HTMLElement) ||
+      !document.activeElement.classList.contains('bp-site-prefs__toggle'),
+  )
+  expect(notToggle).toBe(true)
+
+  await page.locator('.bp-site-prefs__toggle').focus()
+  await page.keyboard.press('Enter')
+  await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
+
   await page.keyboard.press('Escape')
   await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
   await expect(page.locator('.bp-site-prefs__toggle')).toBeFocused()
