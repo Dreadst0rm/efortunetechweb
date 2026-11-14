@@ -273,6 +273,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!palettePanel.hidden) closePaletteSubpanel()
   })
 
+  host.addEventListener(
+    'focusout',
+    function (ev) {
+      if (!isMobilePrefs() || !host.classList.contains('bp-site-prefs--open')) return
+      var next = ev.relatedTarget
+      if (next && host.contains(next)) return
+      closeMobilePanel()
+    },
+    true,
+  )
+
   document.addEventListener('keydown', function (ev) {
     if (ev.key !== 'Escape') return
     if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {

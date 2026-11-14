@@ -19,19 +19,23 @@ test('mobile prefs tab order moves forward through panel controls', async ({ pag
       : null
   })
   expect(afterTab?.className).toContain('bp-site-prefs__btn--palette')
+
+  await page.keyboard.press('Shift+Tab')
+  await expect(page.locator('.bp-site-prefs__btn--fill')).toBeFocused()
+
+  await page.keyboard.press('Escape')
+  await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
+  await expect(page.locator('.bp-site-prefs__toggle')).toBeFocused()
 })
 
-test('outside tap on focusable target keeps focus on that target', async ({ page }) => {
+test('outside tap on non-navigating control keeps focus there', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 })
-  await page.goto('/')
+  await page.goto('/contact.html')
   await page.locator('.bp-site-prefs__toggle').click()
   await expect(page.locator('.bp-site-prefs')).toHaveClass(/bp-site-prefs--open/)
 
-  const navLink = page.locator('.site-nav__links a').first()
-  await navLink.click()
+  const name = page.locator('input[name="name"]')
+  await name.click()
   await expect(page.locator('.bp-site-prefs')).not.toHaveClass(/bp-site-prefs--open/)
-  const focusStolenByToggle = await page.evaluate(
-    () => document.activeElement?.classList.contains('bp-site-prefs__toggle') === true,
-  )
-  expect(focusStolenByToggle, 'outside tap should not force focus back to toggle').toBe(false)
+  await expect(name).toBeFocused()
 })

@@ -26,6 +26,20 @@
     root.setAttribute('data-palette', id)
   }
 
+  function resolvedTheme() {
+    var attr = document.documentElement.getAttribute('data-theme')
+    if (attr === 'light' || attr === 'dark') return attr
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+
+  function syncTurnstileAndWidgets() {
+    var theme = resolvedTheme()
+    var nodes = document.querySelectorAll('.cf-turnstile')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('data-theme', theme)
+    }
+  }
+
   try {
     var storedTheme = localStorage.getItem(themeKey)
     if (storedTheme === 'light' || storedTheme === 'dark') {
@@ -34,6 +48,8 @@
   } catch (_err) {
     /* private mode — system default via CSS */
   }
+
+  syncTurnstileAndWidgets()
 
   try {
     var storedPalette = localStorage.getItem(paletteKey) || 'default'
@@ -60,4 +76,6 @@
     /* private mode */
   }
   document.documentElement.setAttribute('data-bg', bg)
+
+  document.addEventListener('DOMContentLoaded', syncTurnstileAndWidgets)
 })()

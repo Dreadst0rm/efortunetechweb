@@ -200,6 +200,13 @@ describe('remix palettes', () => {
     expect(init).not.toMatch(/setAttribute\('data-theme',\s*meta\.mode\)/)
   })
 
+  it('syncs Turnstile data-theme on startup without persisting theme from palette', () => {
+    const init = readFileSync(path.join(root, 'public/js/site-init.js'), 'utf8')
+    expect(init).toContain('syncTurnstileAndWidgets')
+    expect(init).toMatch(/setAttribute\('data-theme',\s*theme\)/)
+    expect(init).toContain("document.addEventListener('DOMContentLoaded', syncTurnstileAndWidgets)")
+  })
+
   it('defines semantic contrast tokens on every remix palette', () => {
     const palettesCss = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
     const catalogSrc = readFileSync(path.join(root, 'public/js/palette-catalog.js'), 'utf8')

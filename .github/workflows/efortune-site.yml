@@ -41,7 +41,7 @@ jobs:
           cache-dependency-path: v2/package-lock.json
       - run: npm ci
       - run: npm run build
-      - run: npm test
+      - run: npm run test:unit
       - name: Deploy to Cloudflare Workers
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN_EFORTUNE_SITE }}

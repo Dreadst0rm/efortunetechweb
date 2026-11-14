@@ -19,6 +19,10 @@ function toBox(raw: { x: number; y: number; width: number; height: number } | nu
   return raw && raw.width > 0 && raw.height > 0 ? raw : null
 }
 
+function horizontalGapBetween(left: Box, right: Box): number {
+  return right.x - (left.x + left.width)
+}
+
 for (const width of WIDTHS) {
   for (const height of HEIGHTS) {
     test(`mobile display options at ${width}x${height}`, async ({ page }) => {
@@ -53,6 +57,10 @@ for (const width of WIDTHS) {
 
       if (primary) {
         expect(overlaps(toggle!, primary), 'toggle vs primary CTA').toBe(false)
+        expect(
+          horizontalGapBetween(primary, toggle!),
+          'primary CTA horizontal clearance to toggle',
+        ).toBeGreaterThanOrEqual(8)
         if (
           (width === 375 && height === 667) ||
           (width === 390 && height === 740)
@@ -60,7 +68,15 @@ for (const width of WIDTHS) {
           expect(primary.y, 'primary CTA visible in first screen').toBeLessThan(height)
         }
       }
-      if (secondary) expect(overlaps(toggle!, secondary), 'toggle vs secondary CTA').toBe(false)
+      if (secondary) {
+        expect(overlaps(toggle!, secondary), 'toggle vs secondary CTA').toBe(false)
+        if (primary && secondary.x + secondary.width <= toggle!.x) {
+          expect(
+            horizontalGapBetween(secondary, toggle!),
+            'secondary CTA horizontal clearance to toggle',
+          ).toBeGreaterThanOrEqual(8)
+        }
+      }
       if (sub) expect(overlaps(toggle!, sub), 'toggle vs subhead').toBe(false)
       if (linkedIn && linkedIn.y < height) {
         expect(overlaps(toggle!, linkedIn), 'toggle vs LinkedIn').toBe(false)

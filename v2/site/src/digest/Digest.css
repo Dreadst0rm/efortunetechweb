@@ -134,6 +134,15 @@
   color: var(--color-text-muted);
 }
 
+.bp-digest__bottom a {
+  color: var(--color-link);
+  font-weight: 600;
+}
+
+.bp-digest__bottom a:hover {
+  color: var(--color-link-hover);
+}
+
 .bp-digest__pager {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
