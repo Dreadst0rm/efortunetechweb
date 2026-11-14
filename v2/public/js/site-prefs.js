@@ -59,9 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
       root.removeAttribute('data-palette')
     } else {
       root.setAttribute('data-palette', id)
-      if (meta.mode === 'light' || meta.mode === 'dark') {
-        applyTheme(meta.mode)
-      }
     }
     try {
       localStorage.setItem(paletteKey, id)
@@ -108,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var current = resolvedPalette()
     for (var j = 0; j < paletteButtons.length; j++) {
       var bid = paletteButtons[j].getAttribute('data-palette-opt')
-      paletteButtons[j].setAttribute('aria-pressed', bid === current ? 'true' : 'false')
+      paletteButtons[j].setAttribute('aria-selected', bid === current ? 'true' : 'false')
     }
   }
 

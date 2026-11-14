@@ -22,6 +22,18 @@ function contrastRatio(fg: string, bg: string): number {
   return (hi + 0.05) / (lo + 0.05)
 }
 
+function parsePaletteBlock(css: string, id: string): Record<string, string> {
+  const re = new RegExp(`html\\[data-palette='${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}'\\]\\s*\\{([^}]+)\\}`)
+  const match = re.exec(css)
+  if (!match) throw new Error(`missing palette block: ${id}`)
+  const tokens: Record<string, string> = {}
+  for (const line of match[1].split('\n')) {
+    const m = /--color-([\w-]+):\s*([^;]+);/.exec(line)
+    if (m) tokens[m[1]] = m[2].trim()
+  }
+  return tokens
+}
+
 const paletteContrast: Record<string, [string, string][]> = {
   swiss: [
     ['#111111', '#fafafa'],
@@ -134,9 +146,29 @@ describe('remix palettes', () => {
     }
   })
 
+  it('meets WCAG AA contrast for nav Contact CTA in every remix palette', () => {
+    const css = readFileSync(path.join(root, 'site/src/styles/palettes.css'), 'utf8')
+    const catalogSrc = readFileSync(path.join(root, 'public/js/palette-catalog.js'), 'utf8')
+    const idRe = /id:\s*'([^']+)'/g
+    const ids: string[] = []
+    let m: RegExpExecArray | null
+    while ((m = idRe.exec(catalogSrc))) {
+      if (m[1] !== 'default') ids.push(m[1])
+    }
+    for (const id of ids) {
+      const tokens = parsePaletteBlock(css, id)
+      const bg = tokens['cta-bg']
+      const fg = tokens['cta-text'] ?? tokens.bg
+      const ratio = contrastRatio(fg, bg)
+      expect(ratio, `nav CTA ${id}: ${fg} on ${bg}`).toBeGreaterThanOrEqual(4.5)
+    }
+  })
+
   it('persists palette key in site-prefs', () => {
     const prefs = readFileSync(path.join(root, 'public/js/site-prefs.js'), 'utf8')
     expect(prefs).toContain('efortune-palette')
+    expect(prefs).not.toMatch(/applyTheme\(meta\.mode\)/)
+    expect(prefs).toContain("setAttribute('aria-selected'")
     expect(existsSync(path.join(root, 'public/js/palette-catalog.js'))).toBe(true)
   })
 })

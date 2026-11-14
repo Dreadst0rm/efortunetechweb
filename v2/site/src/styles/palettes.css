@@ -380,12 +380,6 @@ html[data-palette='blueprint'] {
 
 /* Remix palettes: dark nav Contact uses accent (readable on dark surfaces). */
 html[data-palette]:not([data-palette='default']) .site-nav__cta {
-  background: var(--color-accent);
+  background: var(--color-cta-bg);
   color: var(--color-cta-text, var(--color-bg)) !important;
-}
-
-html[data-palette='brutalist'] .site-nav__cta,
-html[data-palette='aurora-glass'] .site-nav__cta,
-html[data-palette='terminal'] .site-nav__cta {
-  color: var(--color-bg) !important;
 }
