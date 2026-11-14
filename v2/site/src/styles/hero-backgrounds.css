@@ -83,6 +83,13 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   bottom: 1rem;
   z-index: 50;
   display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 0;
+}
+
+.bp-site-prefs__panel {
+  display: flex;
   align-items: center;
   gap: 0.35rem;
   padding: 0.35rem 0.45rem;
@@ -91,6 +98,10 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   background: color-mix(in srgb, var(--color-surface) 94%, transparent);
   box-shadow: 0 4px 20px color-mix(in srgb, var(--color-primary) 12%, transparent);
   backdrop-filter: blur(8px);
+}
+
+.bp-site-prefs__toggle {
+  display: none;
 }
 
 .bp-site-prefs__sep {
@@ -126,9 +137,147 @@ html[data-bg='mesh'] .bp-hero__bg::after {
   min-width: 3.25rem;
 }
 
-.bp-site-prefs__btn:focus-visible {
+.bp-site-prefs__palette-wrap {
+  position: relative;
+}
+
+.bp-site-prefs__palette-panel[hidden] {
+  display: none;
+}
+
+.bp-site-prefs__palette-panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 0.45rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(2rem, 1fr));
+  gap: 0.35rem;
+  padding: 0.5rem;
+  min-width: 10.5rem;
+  max-height: min(50vh, 14rem);
+  overflow: auto;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-surface) 96%, transparent);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.bp-site-prefs__swatch {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 8px;
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    var(--bp-swatch-bg, #ccc) 0%,
+    var(--bp-swatch-bg, #ccc) 38%,
+    var(--bp-swatch-accent, #999) 38%,
+    var(--bp-swatch-accent, #999) 62%,
+    var(--bp-swatch-ink, #111) 62%
+  );
+}
+
+.bp-site-prefs__swatch[aria-selected='true'] {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+}
+
+.bp-site-prefs__swatch:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.bp-site-prefs__btn:focus-visible,
+.bp-site-prefs__toggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: max(3.75rem, calc(44px + 1.25rem + env(safe-area-inset-bottom, 0px)));
+  }
+
+  .bp-site-prefs {
+    right: max(0.65rem, env(safe-area-inset-right, 0px));
+    bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .bp-site-prefs__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-surface) 94%, transparent);
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-primary) 12%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--color-text);
+    font: inherit;
+    font-size: 1.15rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .bp-site-prefs__panel {
+    display: none;
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 0.5rem);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 14px;
+    min-width: min(16rem, calc(100vw - 1.3rem));
+    max-width: calc(100vw - 1.3rem);
+    max-height: min(70dvh, calc(100dvh - 5rem));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .bp-site-prefs.bp-site-prefs--open .bp-site-prefs__panel {
+    display: flex;
+  }
+
+  .bp-site-prefs__sep {
+    width: auto;
+    height: 1px;
+    margin: 0.15rem 0;
+  }
+
+  .bp-site-prefs__bg {
+    justify-content: center;
+  }
+
+  .bp-site-prefs__btn {
+    font-size: 0.72rem;
+    min-height: 36px;
+  }
+
+  .bp-site-prefs__palette-panel {
+    position: static;
+    bottom: auto;
+    right: auto;
+    max-width: none;
+    max-height: none;
+    margin-top: 0.25rem;
+    grid-template-columns: repeat(4, minmax(2rem, 1fr));
+  }
+
+  .bp-site-prefs__swatch {
+    width: 2rem;
+    height: 2rem;
+    min-width: 2rem;
+    min-height: 2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

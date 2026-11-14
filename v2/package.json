@@ -9,7 +9,7 @@
     "copy:public": "node site/scripts/copy-public.mjs",
     "bundle-contact-html": "SITE_ROOT=../dist node worker/scripts/bundle-contact-html.js",
     "build": "node site/scripts/clean-dist.mjs && npm run copy:public && npm run build:css && npm run build:islands && npm run prerender && npm run bundle-contact-html",
-    "test": "vitest run && node --test worker/test/*.test.js",
+    "test": "vitest run && node --test worker/test/*.test.js && playwright test",
     "lint": "oxlint site",
     "dev:css": "vite build --config site/vite.css.config.ts --watch",
     "dev:worker": "wrangler dev",
@@ -22,6 +22,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/node": "^24.19.2",
@@ -30,6 +31,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "jsdom": "^31.0.0",
     "oxlint": "^1.90.0",
+    "serve": "^14.2.4",
     "tsx": "^4.20.5",
     "typescript": "~7.0.2",
     "vite": "^8.3.6",

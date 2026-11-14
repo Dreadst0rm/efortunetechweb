@@ -1,9 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
   var themeKey = 'efortune-theme'
+  var paletteKey = 'efortune-palette'
   var bgKey = 'efortune-bg'
+  var mobileMq = window.matchMedia('(max-width: 768px)')
+
+  function isMobilePrefs() {
+    return mobileMq.matches
+  }
+
+  function paletteIds() {
+    return window.EFORTUNE_PALETTE_IDS || ['default']
+  }
+
+  function paletteCatalog() {
+    return window.EFORTUNE_PALETTES || { default: { id: 'default', label: 'Grey / Slate', mode: null } }
+  }
 
   function systemTheme() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+
+  function resolvedPalette() {
+    var id = document.documentElement.getAttribute('data-palette')
+    if (!id) return 'default'
+    return paletteIds().indexOf(id) >= 0 ? id : 'default'
   }
 
   function resolvedTheme() {
@@ -32,14 +52,26 @@ document.addEventListener('DOMContentLoaded', function () {
       /* private mode */
     }
     syncTurnstile(theme)
-    if (fillBtn) {
-      fillBtn.textContent = theme === 'dark' ? 'Slate' : 'Grey'
-      fillBtn.setAttribute(
-        'aria-label',
-        theme === 'dark' ? 'Using Slate (dark). Switch to Grey' : 'Using Grey (light). Switch to Slate',
-      )
-      fillBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false')
+    refreshFillLabel()
+  }
+
+  function applyPalette(id) {
+    var catalog = paletteCatalog()
+    if (!catalog[id]) id = 'default'
+    var meta = catalog[id]
+    var root = document.documentElement
+    if (id === 'default') {
+      root.removeAttribute('data-palette')
+    } else {
+      root.setAttribute('data-palette', id)
     }
+    try {
+      localStorage.setItem(paletteKey, id)
+    } catch (_err2) {
+      /* private mode */
+    }
+    refreshFillLabel()
+    refreshPaletteSelection()
   }
 
   function applyBg(id) {
@@ -55,18 +87,139 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  function refreshFillLabel() {
+    if (!fillBtn) return
+    var pal = resolvedPalette()
+    if (pal !== 'default') {
+      var label = paletteCatalog()[pal].label
+      fillBtn.textContent = label.length > 10 ? label.slice(0, 9) + '…' : label
+      fillBtn.setAttribute('aria-label', 'Using ' + label + ' palette. Click for Grey or Slate')
+      fillBtn.setAttribute('aria-pressed', 'true')
+      return
+    }
+    var theme = resolvedTheme()
+    fillBtn.textContent = theme === 'dark' ? 'Slate' : 'Grey'
+    fillBtn.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Using Slate (dark). Switch to Grey' : 'Using Grey (light). Switch to Slate',
+    )
+    fillBtn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false')
+  }
+
+  function refreshPaletteSelection() {
+    var current = resolvedPalette()
+    for (var j = 0; j < paletteButtons.length; j++) {
+      var bid = paletteButtons[j].getAttribute('data-palette-opt')
+      paletteButtons[j].setAttribute('aria-selected', bid === current ? 'true' : 'false')
+    }
+  }
+
+  function closePaletteSubpanel() {
+    palettePanel.hidden = true
+    paletteToggle.setAttribute('aria-expanded', 'false')
+  }
+
+  function closeMobilePanel() {
+    host.classList.remove('bp-site-prefs--open')
+    mobileToggle.setAttribute('aria-expanded', 'false')
+    closePaletteSubpanel()
+  }
+
+  function openMobilePanel() {
+    host.classList.add('bp-site-prefs--open')
+    mobileToggle.setAttribute('aria-expanded', 'true')
+  }
+
   var host = document.createElement('div')
   host.className = 'bp-site-prefs'
   host.setAttribute('role', 'group')
   host.setAttribute('aria-label', 'Site appearance')
 
+  var mobileToggle = document.createElement('button')
+  mobileToggle.type = 'button'
+  mobileToggle.className = 'bp-site-prefs__toggle'
+  mobileToggle.textContent = '◐'
+  mobileToggle.setAttribute('aria-label', 'Display options')
+  mobileToggle.setAttribute('aria-expanded', 'false')
+  mobileToggle.setAttribute('aria-controls', 'bp-site-prefs-panel')
+  mobileToggle.addEventListener('click', function (ev) {
+    ev.stopPropagation()
+    if (host.classList.contains('bp-site-prefs--open')) {
+      closeMobilePanel()
+      mobileToggle.focus()
+    } else {
+      openMobilePanel()
+    }
+  })
+
+  var controlsPanel = document.createElement('div')
+  controlsPanel.id = 'bp-site-prefs-panel'
+  controlsPanel.className = 'bp-site-prefs__panel'
+
   var fillBtn = document.createElement('button')
   fillBtn.type = 'button'
   fillBtn.className = 'bp-site-prefs__btn bp-site-prefs__btn--fill'
   fillBtn.addEventListener('click', function () {
+    var pal = resolvedPalette()
+    if (pal !== 'default') {
+      applyPalette('default')
+      return
+    }
     var next = resolvedTheme() === 'dark' ? 'light' : 'dark'
     applyTheme(next)
   })
+
+  var paletteWrap = document.createElement('div')
+  paletteWrap.className = 'bp-site-prefs__palette-wrap'
+
+  var paletteToggle = document.createElement('button')
+  paletteToggle.type = 'button'
+  paletteToggle.className = 'bp-site-prefs__btn bp-site-prefs__btn--palette'
+  paletteToggle.textContent = 'Colors'
+  paletteToggle.setAttribute('aria-expanded', 'false')
+  paletteToggle.setAttribute('aria-haspopup', 'true')
+  paletteToggle.setAttribute('aria-controls', 'bp-site-prefs-palette-panel')
+  paletteToggle.addEventListener('click', function (ev) {
+    ev.stopPropagation()
+    var open = palettePanel.hidden
+    palettePanel.hidden = !open
+    paletteToggle.setAttribute('aria-expanded', open ? 'true' : 'false')
+  })
+
+  var palettePanel = document.createElement('div')
+  palettePanel.id = 'bp-site-prefs-palette-panel'
+  palettePanel.className = 'bp-site-prefs__palette-panel'
+  palettePanel.hidden = true
+  palettePanel.setAttribute('role', 'listbox')
+  palettePanel.setAttribute('aria-label', 'Color palettes')
+
+  var paletteButtons = []
+  paletteIds().forEach(function (id) {
+    var meta = paletteCatalog()[id]
+    if (!meta) return
+    var btn = document.createElement('button')
+    btn.type = 'button'
+    btn.className = 'bp-site-prefs__swatch'
+    btn.setAttribute('data-palette-opt', id)
+    btn.setAttribute('role', 'option')
+    btn.setAttribute('title', meta.label)
+    btn.setAttribute('aria-label', meta.label)
+    var sw = meta.swatch || ['#ccc', '#999', '#111']
+    btn.style.setProperty('--bp-swatch-bg', sw[0])
+    btn.style.setProperty('--bp-swatch-accent', sw[1])
+    btn.style.setProperty('--bp-swatch-ink', sw[2])
+    btn.addEventListener('click', function () {
+      applyPalette(id)
+      closePaletteSubpanel()
+      if (isMobilePrefs()) closeMobilePanel()
+      mobileToggle.focus()
+    })
+    palettePanel.appendChild(btn)
+    paletteButtons.push(btn)
+  })
+
+  paletteWrap.appendChild(paletteToggle)
+  paletteWrap.appendChild(palettePanel)
 
   var sep = document.createElement('span')
   sep.className = 'bp-site-prefs__sep'
@@ -92,11 +245,45 @@ document.addEventListener('DOMContentLoaded', function () {
     bgButtons.push(btn)
   })
 
-  host.appendChild(fillBtn)
-  host.appendChild(sep)
-  host.appendChild(bgRow)
+  controlsPanel.appendChild(fillBtn)
+  controlsPanel.appendChild(paletteWrap)
+  controlsPanel.appendChild(sep)
+  controlsPanel.appendChild(bgRow)
+
+  host.appendChild(controlsPanel)
+  host.appendChild(mobileToggle)
   document.body.appendChild(host)
 
-  applyTheme(resolvedTheme())
+  document.addEventListener('click', function (ev) {
+    if (host.contains(ev.target)) return
+    if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
+      closeMobilePanel()
+      mobileToggle.focus()
+      return
+    }
+    if (!palettePanel.hidden) closePaletteSubpanel()
+  })
+
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Escape') return
+    if (isMobilePrefs() && host.classList.contains('bp-site-prefs--open')) {
+      ev.preventDefault()
+      closeMobilePanel()
+      mobileToggle.focus()
+      return
+    }
+    if (!palettePanel.hidden) {
+      closePaletteSubpanel()
+      paletteToggle.focus()
+    }
+  })
+
+  mobileMq.addEventListener('change', function () {
+    closeMobilePanel()
+    closePaletteSubpanel()
+  })
+
+  refreshFillLabel()
   applyBg(resolvedBg())
+  refreshPaletteSelection()
 })

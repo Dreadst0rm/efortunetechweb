@@ -24,6 +24,7 @@ function contrastRatio(fg: string, bg: string): number {
 describe('color theme', () => {
   it('loads site-init before CSS and site-prefs in production', () => {
     const index = readFileSync(path.join(dist, 'index.html'), 'utf8')
+    expect(index).toMatch(/palette-catalog\.js/)
     expect(index).toMatch(/site-init\.js/)
     expect(index).toMatch(/site-prefs\.js/)
     expect(index.indexOf('site-init.js')).toBeLessThan(index.indexOf('site.css'))
