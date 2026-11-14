@@ -9,7 +9,6 @@
 
 import { CONTACT_HTML } from './contact-html.js';
 import {
-  CONTENT_SECURITY_POLICY,
   EMAIL_RE,
   EXPECTED_ACTION,
   isAllowedOrigin,
@@ -23,6 +22,7 @@ import {
   stripControls,
   verifyTurnstile,
 } from './contact-validation.js';
+import { htmlSecurityResponse } from './html-csp.js';
 
 const DOMAIN = 'efortune.tech';
 const SITE = 'efortune.tech';
@@ -45,7 +45,6 @@ export const BASE_HEADERS = {
   'referrer-policy': 'strict-origin-when-cross-origin',
   'x-frame-options': 'DENY',
   'strict-transport-security': 'max-age=31536000',
-  'content-security-policy': CONTENT_SECURITY_POLICY,
 };
 
 const TURNSTILE_TOKEN_ERROR =
@@ -67,9 +66,9 @@ function formError(message, status = 400, { values = {}, contactHtml = '' } = {}
     values,
     title: `Message not sent | ${SITE}`,
   });
-  return new Response(html, {
-    status,
-    headers: { ...BASE_HEADERS, 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' },
+  return htmlSecurityResponse(html, status, {
+    ...BASE_HEADERS,
+    'cache-control': 'no-store',
   });
 }
 

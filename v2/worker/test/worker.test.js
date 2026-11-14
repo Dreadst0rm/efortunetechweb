@@ -386,19 +386,11 @@ describe('widget markup, client script, and CSP', () => {
     assert.match(CONTACT_JS, /e\.persisted/);
   });
 
-  it('uses a Worker CSP that allows Turnstile plus the existing contact-page assets', () => {
-    assert.equal(BASE_HEADERS['content-security-policy'], CONTENT_SECURITY_POLICY);
+  it('does not attach a static CSP on base headers (HTML uses per-response nonces)', () => {
+    assert.equal(BASE_HEADERS['content-security-policy'], undefined);
+    assert.match(CONTENT_SECURITY_POLICY, /script-src[^;]*'nonce-/);
     assert.match(CONTENT_SECURITY_POLICY, /script-src[^;]*https:\/\/challenges\.cloudflare\.com/);
-    assert.match(
-      CONTENT_SECURITY_POLICY,
-      /script-src[^;]*https:\/\/static\.cloudflareinsights\.com/,
-    );
     assert.doesNotMatch(CONTENT_SECURITY_POLICY, /script-src[^;]*'unsafe-inline'/);
-    assert.match(CONTENT_SECURITY_POLICY, /frame-src[^;]*https:\/\/challenges\.cloudflare\.com/);
-    assert.match(CONTENT_SECURITY_POLICY, /connect-src[^;]*https:\/\/challenges\.cloudflare\.com/);
-    assert.match(CONTENT_SECURITY_POLICY, /connect-src[^;]*https:\/\/cloudflareinsights\.com/);
-    assert.match(CONTENT_SECURITY_POLICY, /style-src[^;]*https:\/\/fonts\.googleapis\.com/);
-    assert.match(CONTENT_SECURITY_POLICY, /font-src[^;]*https:\/\/fonts\.gstatic\.com/);
   });
 });
 
@@ -426,5 +418,7 @@ describe('wrangler.jsonc', () => {
     assert.doesNotMatch(raw, /v2\.efortune\.tech/);
     assert.match(raw, /"SITE_ORIGIN":\s*"https:\/\/efortune\.tech"/);
     assert.doesNotMatch(raw, /"routes"/);
+    assert.match(raw, /"run_worker_first":\s*\[/);
+    assert.match(raw, /"!\/js\/\*\*"/);
   });
 });

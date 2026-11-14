@@ -27,18 +27,12 @@ export const EXPECTED_HOSTNAMES = parseAllowedHosts(DEFAULT_ALLOWED_HOSTS);
 function productionOriginsForHosts(hosts) {
   return new Set(hosts.map((h) => `https://${h}`));
 }
-export const CONTENT_SECURITY_POLICY = [
-  "default-src 'self'",
-  "img-src 'self' data:",
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' data: https://fonts.gstatic.com",
-  "script-src 'self' https://challenges.cloudflare.com https://static.cloudflareinsights.com",
-  "frame-src https://challenges.cloudflare.com",
-  "connect-src 'self' https://challenges.cloudflare.com https://cloudflareinsights.com",
-  "form-action 'self'",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-].join('; ');
+import { buildContentSecurityPolicy, generateCspNonce } from './html-csp.js';
+
+export { buildContentSecurityPolicy, generateCspNonce };
+
+/** Fixed nonce for unit tests that assert CSP shape (not used in production HTML). */
+export const CONTENT_SECURITY_POLICY = buildContentSecurityPolicy('static-unit-test-nonce');
 
 /**
  * Accept https origins whose host is in allowedHosts (from ALLOWED_HOSTS).
