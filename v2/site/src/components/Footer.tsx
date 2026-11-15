@@ -5,8 +5,8 @@ export default function Footer() {
         <div>
           <strong>efortune.tech</strong>
           <p>
-            Fractional CIO and vCIO leadership for companies of 60 to 900 people—where your
-            technology money should go to grow the business.
+            Fractional CIO and vCIO services for companies of 50 to 2,000 employees. Together we
+            decide where your technology money goes so it grows the business.
           </p>
         </div>
         <div>
@@ -28,7 +28,9 @@ export default function Footer() {
               <a href="/insights.html">Insights</a>
             </li>
             <li>
-              <a href="/digest/">Digest</a>
+              <a href="https://digest.efortune.tech" rel="noopener noreferrer">
+                Digest
+              </a>
             </li>
           </ul>
         </div>

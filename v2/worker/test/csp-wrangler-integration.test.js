@@ -112,6 +112,13 @@ describe('wrangler dev HTML CSP', { timeout: 45_000 }, () => {
         assert.match(html, new RegExp(`nonce="${nonce}"`), `${path} script tags`);
       }
 
+      const digestRss = await fetch(`${origin}/digest/rss.xml`, { redirect: 'manual' });
+      assert.equal(digestRss.status, 301);
+      assert.equal(
+        digestRss.headers.get('location'),
+        'https://digest.efortune.tech/rss.xml',
+      );
+
       const asset = await fetch(`${origin}/js/site-init.js`);
       assert.equal(asset.status, 200);
       const csp = asset.headers.get('content-security-policy') || '';

@@ -16,8 +16,6 @@ import PricingPage from '../src/pages/PricingPage'
 import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
-import { renderDigest } from './render-digest'
-import { digestUpdatePath } from '../src/digest/dates'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const dist = path.join(root, 'dist')
@@ -132,8 +130,6 @@ function writePage({ out, active, body, seo }: Route) {
 for (const r of routes) writePage(r)
 
 const siteOrigin = process.env.SITE_ORIGIN ?? 'https://efortune.tech'
-const contentRoot = path.join(root, 'site', 'content')
-const { updates: digestUpdates } = renderDigest(dist, contentRoot, siteOrigin)
 
 const sitemapUrls: string[] = []
 for (const [file, seo] of Object.entries(pages)) {
@@ -141,15 +137,6 @@ for (const [file, seo] of Object.entries(pages)) {
   const loc = `${siteOrigin}${seo.canonicalPath === '/' ? '/' : seo.canonicalPath}`
   sitemapUrls.push(`  <url><loc>${loc}</loc><changefreq>monthly</changefreq></url>`)
 }
-sitemapUrls.push(
-  `  <url><loc>${siteOrigin}/digest/</loc><changefreq>daily</changefreq></url>`,
-)
-for (const issue of digestUpdates) {
-  sitemapUrls.push(
-    `  <url><loc>${siteOrigin}${digestUpdatePath(issue.data.date)}</loc><changefreq>never</changefreq></url>`,
-  )
-}
-
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemapUrls.join('\n')}

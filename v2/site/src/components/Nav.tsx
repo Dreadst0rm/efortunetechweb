@@ -13,7 +13,11 @@ const links: { page: NavPage; href: string; label: string }[] = [
   { page: 'services', href: '/services.html', label: 'Services' },
   { page: 'pricing', href: '/pricing.html', label: 'Pricing' },
   { page: 'case-studies', href: '/case-studies.html', label: 'Case studies' },
-  { page: 'digest', href: '/digest/', label: 'Digest' },
+  {
+    page: 'digest',
+    href: 'https://digest.efortune.tech',
+    label: 'Digest',
+  },
   { page: 'about', href: '/about.html', label: 'About' },
   { page: 'contact', href: '/contact.html', label: 'Contact' },
 ]

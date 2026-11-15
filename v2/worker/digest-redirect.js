@@ -1,39 +1,40 @@
 /**
- * Legacy digest.efortune.tech URL → efortune.tech path (no hostname in wrangler routes).
+ * Redirect stale on-site /digest/* URLs to the live Digest at digest.efortune.tech.
  */
 
-export const DIGEST_LEGACY_HOST = 'digest.efortune.tech';
+export const DIGEST_ORIGIN = 'https://digest.efortune.tech';
 
 /** @param {string} pathname */
-export function mapDigestLegacyPath(pathname) {
+export function mapOnsiteDigestPath(pathname) {
   const raw = pathname || '/';
-  const trimmed = raw.replace(/\/+$/, '') || '/';
+  if (raw === '/digest' || raw === '/digest/') {
+    return `${DIGEST_ORIGIN}/`;
+  }
+  if (raw === '/digest/rss.xml') {
+    return `${DIGEST_ORIGIN}/rss.xml`;
+  }
 
-  if (trimmed === '/' || trimmed === '/about') return '/digest/';
-  if (trimmed === '/rss.xml') return '/digest/rss.xml';
-  if (trimmed === '/sitemap.xml') return '/sitemap.xml';
-
-  const updatesMatch = /^\/updates\/(\d{4}-\d{2}-\d{2})\/?$/.exec(raw);
+  const updatesMatch = /^\/digest\/updates\/(\d{4}-\d{2}-\d{2})\/?$/.exec(raw);
   if (updatesMatch) {
-    return `/digest/updates/${updatesMatch[1]}/`;
+    return `${DIGEST_ORIGIN}/updates/${updatesMatch[1]}/`;
   }
 
-  if (raw.startsWith('/updates/')) {
-    const tail = raw.slice('/updates/'.length).replace(/\/+$/, '');
-    if (/^\d{4}-\d{2}-\d{2}$/.test(tail)) {
-      return `/digest/updates/${tail}/`;
-    }
+  if (raw.startsWith('/digest/')) {
+    const tail = raw.slice('/digest'.length) || '/';
+    const normalized = tail.startsWith('/') ? tail : `/${tail}`;
+    return new URL(normalized, DIGEST_ORIGIN).toString();
   }
 
-  return `/digest${raw.endsWith('/') ? raw : `${raw}/`}`;
+  return null;
 }
 
 /**
  * @param {URL} requestUrl
- * @param {string} siteOrigin e.g. https://efortune.tech
+ * @returns {string | null}
  */
-export function digestLegacyRedirectUrl(requestUrl, siteOrigin = 'https://efortune.tech') {
-  if (requestUrl.hostname !== DIGEST_LEGACY_HOST) return null;
-  const targetPath = mapDigestLegacyPath(requestUrl.pathname);
-  return new URL(targetPath, siteOrigin.replace(/\/$/, '')).toString();
+export function digestOffsiteRedirectUrl(requestUrl) {
+  const target = mapOnsiteDigestPath(requestUrl.pathname);
+  if (!target) return null;
+  if (!requestUrl.search) return target;
+  return `${target}${requestUrl.search}`;
 }

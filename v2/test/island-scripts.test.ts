@@ -13,11 +13,10 @@ function gzipKb(file: string): number {
 const islands = {
   hero: 'assets/islands/hero.js',
   caseStudies: 'assets/islands/case-studies.js',
-  digest: 'assets/islands/digest.js',
   quickCheck: 'assets/islands/quick-check.js',
 } as const
 
-const preactIslands = ['caseStudies', 'digest', 'quickCheck'] as const
+const preactIslands = ['caseStudies', 'quickCheck'] as const
 
 describe('per-page island bundles', () => {
   for (const [name, file] of Object.entries(islands)) {
@@ -54,10 +53,6 @@ describe('per-page island bundles', () => {
 
     const services = readFileSync(path.join(dist, 'services.html'), 'utf8')
     expect(services).not.toContain('assets/islands/')
-
-    const digest = readFileSync(path.join(dist, 'digest/index.html'), 'utf8')
-    expect(digest).toContain('assets/islands/digest.js')
-    expect(digest).not.toContain('assets/islands/hero.js')
 
     const contact = readFileSync(path.join(dist, 'contact.html'), 'utf8')
     expect(contact).toContain('assets/islands/quick-check.js')

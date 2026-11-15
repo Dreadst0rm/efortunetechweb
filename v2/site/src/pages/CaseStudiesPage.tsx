@@ -28,7 +28,8 @@ export default function CaseStudiesPage() {
       ))}
 
       <p className="bp-inline-cta">
-        <a href="/contact.html">Discuss something similar</a>
+        If you lead a company of 50 to 2,000 employees and want to work like this together,{' '}
+        <a href="/contact.html">let&apos;s talk</a>.
       </p>
     </article>
   )

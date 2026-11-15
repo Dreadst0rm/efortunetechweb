@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
@@ -21,9 +21,11 @@ const requiredPages = [
   'sitemap.xml',
   'robots.txt',
   'assets/site.css',
-  'digest/index.html',
-  'digest/rss.xml',
-  'digest/index.json',
+  'favicon.ico',
+  'apple-touch-icon.png',
+  'assets/ed-fortune.jpg',
+  'assets/ed-fortune.webp',
+  'assets/og-card.jpg',
 ]
 
 describe('build output', () => {
@@ -33,11 +35,8 @@ describe('build output', () => {
     }
   })
 
-  it('prerenders 25 digest issue pages', () => {
-    const dir = path.join(dist, 'digest', 'updates')
-    expect(existsSync(dir)).toBe(true)
-    const issues = readdirSync(dir).filter((d) => existsSync(path.join(dir, d, 'index.html')))
-    expect(issues).toHaveLength(25)
+  it('does not ship on-site digest pages', () => {
+    expect(existsSync(path.join(dist, 'digest'))).toBe(false)
   })
 
   it('does not ship a global client app bundle', () => {

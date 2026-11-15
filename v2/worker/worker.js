@@ -4,20 +4,12 @@
 
 import { EmailMessage } from 'cloudflare:email';
 import { handleContact } from './contact-handler.js';
-import { digestLegacyRedirectUrl } from './digest-redirect.js';
+import { digestOffsiteRedirectUrl } from './digest-redirect.js';
 import { applyHtmlNonceTransform, generateCspNonce, isHtmlResponse } from './html-csp.js';
 import { handleQuickCheck } from './quick-check.js';
 
 async function defaultSendEmail(env, { from, to, raw }) {
   await env.CONTACT_EMAIL.send(new EmailMessage(from, to, raw));
-}
-
-function siteOrigin(env, requestUrl) {
-  const configured = env?.SITE_ORIGIN;
-  if (configured && typeof configured === 'string') {
-    return configured.replace(/\/$/, '');
-  }
-  return requestUrl.origin;
 }
 
 /** @param {string} pathname */
@@ -48,9 +40,9 @@ export default {
       return Response.redirect(httpsUrl.toString(), 301);
     }
 
-    const legacyRedirect = digestLegacyRedirectUrl(url, siteOrigin(env, url));
-    if (legacyRedirect) {
-      return Response.redirect(legacyRedirect, 301);
+    const digestRedirect = digestOffsiteRedirectUrl(url);
+    if (digestRedirect) {
+      return Response.redirect(digestRedirect, 301);
     }
 
     if (url.pathname === '/api/contact') {
@@ -80,12 +72,6 @@ export default {
           headers: notFound.headers,
         });
       }
-    }
-
-    if (url.pathname === '/digest/rss.xml' && response.ok) {
-      const headers = new Headers(response.headers);
-      headers.set('content-type', 'application/rss+xml; charset=utf-8');
-      return new Response(response.body, { status: response.status, headers });
     }
 
     return withHtmlCsp(response);

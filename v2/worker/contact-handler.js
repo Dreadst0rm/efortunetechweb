@@ -29,6 +29,7 @@ const SITE = 'efortune.tech';
 const HELLO = 'hello@efortune.tech';
 const DEST = 'ed@efortune.tech';
 const FROM = 'noreply@fortwarp.com';
+const FROM_DISPLAY = 'efortune.tech Contact';
 
 const LIM = {
   name: 100,
@@ -182,7 +183,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
   const subjectPrefix = possibleSpam ? '[possible spam] ' : '';
   const subject = `${subjectPrefix}efortune.tech contact form: ${esc(d.name)}`;
   const raw = [
-    `From: ${SITE} website <${from}>`,
+    `From: ${FROM_DISPLAY} <${from}>`,
     `To: ${HELLO}`,
     `Reply-To: ${esc(d.email)}`,
     `Subject: =?UTF-8?B?${b64(subject).replace(/\r\n/g, '')}?=`,

@@ -7,8 +7,9 @@ export default function ServicesPage() {
       <header>
         <h1>Services</h1>
         <p className="bp-lead">
-          Fractional CIO and vCIO leadership across development, infrastructure, operations, and
-          security—with AI folded in where it helps, always with guardrails.
+          Fractional CIO and vCIO leadership for companies of 50 to 2,000 employees, across
+          development, infrastructure, operations, and security—with AI folded in where it helps,
+          always with guardrails.
         </p>
       </header>
 

@@ -1,31 +1,49 @@
+import { strict as assert } from 'node:assert';
 import { describe, it } from 'node:test';
-import assert from 'node:assert/strict';
-import { DIGEST_LEGACY_HOST, digestLegacyRedirectUrl, mapDigestLegacyPath } from '../digest-redirect.js';
+import {
+  DIGEST_ORIGIN,
+  digestOffsiteRedirectUrl,
+  mapOnsiteDigestPath,
+} from '../digest-redirect.js';
 
-describe('mapDigestLegacyPath', () => {
-  it('maps digest.efortune.tech paths to /digest/ tree', () => {
-    assert.equal(mapDigestLegacyPath('/'), '/digest/');
-    assert.equal(mapDigestLegacyPath('/about/'), '/digest/');
-    assert.equal(mapDigestLegacyPath('/rss.xml'), '/digest/rss.xml');
-    assert.equal(mapDigestLegacyPath('/sitemap.xml'), '/sitemap.xml');
-    assert.equal(mapDigestLegacyPath('/updates/2026-10-23/'), '/digest/updates/2026-10-23/');
-    assert.equal(mapDigestLegacyPath('/updates/2026-10-23'), '/digest/updates/2026-10-23/');
+describe('mapOnsiteDigestPath', () => {
+  it('maps on-site /digest/* paths to digest.efortune.tech', () => {
+    assert.equal(mapOnsiteDigestPath('/digest/'), `${DIGEST_ORIGIN}/`);
+    assert.equal(mapOnsiteDigestPath('/digest'), `${DIGEST_ORIGIN}/`);
+    assert.equal(mapOnsiteDigestPath('/digest/rss.xml'), `${DIGEST_ORIGIN}/rss.xml`);
+    assert.equal(
+      mapOnsiteDigestPath('/digest/updates/2026-10-23/'),
+      `${DIGEST_ORIGIN}/updates/2026-10-23/`,
+    );
+    assert.equal(mapOnsiteDigestPath('/digest/updates/2026-10-23'), `${DIGEST_ORIGIN}/updates/2026-10-23/`);
+  });
+
+  it('returns null for non-digest paths', () => {
+    assert.equal(mapOnsiteDigestPath('/'), null);
+    assert.equal(mapOnsiteDigestPath('/contact.html'), null);
   });
 });
 
-describe('digestLegacyRedirectUrl', () => {
-  it('returns null for other hosts', () => {
+describe('digestOffsiteRedirectUrl', () => {
+  it('redirects efortune.tech /digest/ URLs only', () => {
     assert.equal(
-      digestLegacyRedirectUrl(new URL('https://efortune.tech/digest/')),
+      digestOffsiteRedirectUrl(new URL('https://efortune.tech/digest/')),
+      `${DIGEST_ORIGIN}/`,
+    );
+    assert.equal(
+      digestOffsiteRedirectUrl(new URL('https://digest.efortune.tech/')),
       null,
+    );
+    assert.equal(
+      digestOffsiteRedirectUrl(new URL('https://efortune.tech/digest/updates/2026-09-06/')),
+      `${DIGEST_ORIGIN}/updates/2026-09-06/`,
     );
   });
 
-  it('builds absolute redirect URLs on efortune.tech', () => {
-    const url = digestLegacyRedirectUrl(
-      new URL(`https://${DIGEST_LEGACY_HOST}/updates/2026-09-06/`),
-      'https://efortune.tech',
+  it('preserves query strings', () => {
+    assert.equal(
+      digestOffsiteRedirectUrl(new URL('https://efortune.tech/digest/?tag=ai')),
+      `${DIGEST_ORIGIN}/?tag=ai`,
     );
-    assert.equal(url, 'https://efortune.tech/digest/updates/2026-09-06/');
   });
 });

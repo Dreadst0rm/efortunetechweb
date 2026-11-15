@@ -13,7 +13,7 @@ import { buildWebAnalyticsHead } from './analytics'
 import { SITE_PREFS_HEAD } from './siteBuild'
 
 const origin = 'https://efortune.tech'
-const defaultImage = `${origin}/icons.svg`
+const defaultImage = `${origin}/assets/og-card.jpg`
 const cfAnalyticsToken = process.env.CF_WEB_ANALYTICS_TOKEN
 const webAnalyticsHead = buildWebAnalyticsHead(cfAnalyticsToken)
 
@@ -28,7 +28,7 @@ export const pages: Record<string, PageSeo> = {
     title: 'Fractional CIO & vCIO | efortune.tech',
     moduleScripts: ['/assets/islands/hero.js'],
     description:
-      'Senior technology leadership without the full-time hire. Fractional CIO and vCIO services for companies of 60 to 900 people.',
+      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
     canonicalPath: '/',
     ogImage: defaultImage,
   },
@@ -121,7 +121,9 @@ export function renderHead(seo: PageSeo): string {
   <meta name="twitter:title" content="${escapeHtml(seo.title)}">
   <meta name="twitter:description" content="${escapeHtml(seo.description)}">
   <meta name="twitter:image" content="${escapeHtml(ogImage)}">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   ${SITE_PREFS_HEAD}
   <link rel="stylesheet" href="/assets/site.css">
   ${webAnalyticsHead}

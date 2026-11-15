@@ -324,7 +324,9 @@ describe('interest and company_size validation', () => {
 
   it('accepts empty or known company size values', () => {
     assert.equal(isValidCompanySize(''), true);
-    assert.equal(isValidCompanySize('60-199'), true);
+    assert.equal(isValidCompanySize('50-199'), true);
+    assert.equal(isValidCompanySize('1000-2000'), true);
+    assert.equal(isValidCompanySize('1-59'), false);
     assert.equal(isValidCompanySize('huge'), false);
   });
 });

@@ -156,7 +156,7 @@ describe('origin, referer, and honeypot', () => {
     assert.equal(sent[0].from, 'noreply@fortwarp.com');
     assert.equal(sent[0].to, 'ed@efortune.tech');
     assert.equal(sent[0].subject, 'efortune.tech contact form: Ed Fortune');
-    assert.match(sent[0].raw, /^From: efortune\.tech website <noreply@fortwarp\.com>\r$/m);
+    assert.match(sent[0].raw, /^From: efortune\.tech Contact <noreply@fortwarp\.com>\r$/m);
     assert.match(sent[0].raw, /^To: hello@efortune\.tech\r$/m);
     assert.match(sent[0].raw, /^Reply-To: ed@example\.com\r$/m);
     assert.match(sent[0].text, /New contact form message from efortune\.tech/);
@@ -271,7 +271,7 @@ describe('field handling', () => {
     assert.doesNotMatch(sent[0].subject, /\r|\n/);
     assert.doesNotMatch(sent[0].text, /\r/);
     assert.doesNotMatch(sent[0].raw, /\nBcc:|\rBcc:/i);
-    assert.match(sent[0].raw, /^From: efortune\.tech website <noreply@fortwarp\.com>\r$/m);
+    assert.match(sent[0].raw, /^From: efortune\.tech Contact <noreply@fortwarp\.com>\r$/m);
     assert.match(sent[0].raw, /^Reply-To: ed@example\.com\r$/m);
     assert.match(sent[0].text, /Name: EdBcc: evil@x.com/);
     assert.match(sent[0].text, /Company: AcmeCorp/);

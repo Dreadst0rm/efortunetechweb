@@ -13,7 +13,6 @@ const pagesToScan = [
   'about.html',
   'services.html',
   'case-studies.html',
-  'digest/index.html',
 ]
 
 describe('v2 has no published phone number', () => {
