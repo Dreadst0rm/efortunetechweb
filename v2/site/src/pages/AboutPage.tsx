@@ -13,7 +13,16 @@ export default function AboutPage() {
           </p>
         </div>
         <figure className="bp-about-page__photo">
-          <img src="/assets/hero.png" alt="Ed Fortune" width={320} height={320} loading="lazy" />
+          <picture>
+            <source srcSet="/assets/ed-fortune.webp" type="image/webp" />
+            <img
+              src="/assets/ed-fortune.jpg"
+              alt="Ed Fortune, Principal Consultant"
+              width={601}
+              height={853}
+              loading="lazy"
+            />
+          </picture>
         </figure>
       </header>
 

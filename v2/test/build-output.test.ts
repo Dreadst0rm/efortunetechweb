@@ -23,6 +23,9 @@ const requiredPages = [
   'assets/site.css',
   'favicon.ico',
   'apple-touch-icon.png',
+  'assets/ed-fortune.jpg',
+  'assets/ed-fortune.webp',
+  'assets/og-card.jpg',
 ]
 
 describe('build output', () => {

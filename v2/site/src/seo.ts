@@ -13,7 +13,7 @@ import { buildWebAnalyticsHead } from './analytics'
 import { SITE_PREFS_HEAD } from './siteBuild'
 
 const origin = 'https://efortune.tech'
-const defaultImage = `${origin}/icons.svg`
+const defaultImage = `${origin}/assets/og-card.jpg`
 const cfAnalyticsToken = process.env.CF_WEB_ANALYTICS_TOKEN
 const webAnalyticsHead = buildWebAnalyticsHead(cfAnalyticsToken)
 
