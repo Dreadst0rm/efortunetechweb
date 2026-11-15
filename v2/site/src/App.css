@@ -314,10 +314,37 @@ html[data-theme='dark'] .site-nav__cta {
   margin-top: 2rem;
 }
 
+.bp-inline-cta a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.bp-inline-cta a:hover {
+  color: var(--color-link-hover);
+}
+
 .bp-work-card__link {
   display: inline-block;
   margin-top: 0.75rem;
   font-size: 0.9rem;
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.bp-work-card__link:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+.bp-contact-aside a {
+  color: var(--color-link);
+  font-weight: 600;
+}
+
+.bp-contact-aside a:hover {
+  color: var(--color-link-hover);
 }
 
 .bp-cs-detail {

@@ -1,7 +1,44 @@
 (function () {
   var themeKey = 'efortune-theme'
+  var paletteKey = 'efortune-palette'
   var bgKey = 'efortune-bg'
   var bgValid = { dots: 1, mesh: 1 }
+
+  function catalog() {
+    return window.EFORTUNE_PALETTES || {}
+  }
+
+  function paletteIds() {
+    return window.EFORTUNE_PALETTE_IDS || ['default']
+  }
+
+  function applyPalette(id) {
+    var root = document.documentElement
+    var meta = catalog()[id]
+    if (!id || id === 'default' || !meta) {
+      root.removeAttribute('data-palette')
+      return
+    }
+    if (paletteIds().indexOf(id) === -1) {
+      root.removeAttribute('data-palette')
+      return
+    }
+    root.setAttribute('data-palette', id)
+  }
+
+  function resolvedTheme() {
+    var attr = document.documentElement.getAttribute('data-theme')
+    if (attr === 'light' || attr === 'dark') return attr
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  }
+
+  function syncTurnstileAndWidgets() {
+    var theme = resolvedTheme()
+    var nodes = document.querySelectorAll('.cf-turnstile')
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].setAttribute('data-theme', theme)
+    }
+  }
 
   try {
     var storedTheme = localStorage.getItem(themeKey)
@@ -9,6 +46,15 @@
       document.documentElement.setAttribute('data-theme', storedTheme)
     }
   } catch (_err) {
+    /* private mode — system default via CSS */
+  }
+
+  syncTurnstileAndWidgets()
+
+  try {
+    var storedPalette = localStorage.getItem(paletteKey) || 'default'
+    applyPalette(storedPalette)
+  } catch (_p) {
     /* private mode */
   }
 
@@ -30,4 +76,6 @@
     /* private mode */
   }
   document.documentElement.setAttribute('data-bg', bg)
+
+  document.addEventListener('DOMContentLoaded', syncTurnstileAndWidgets)
 })()

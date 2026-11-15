@@ -3,3 +3,5 @@ dist/
 worker/contact-html.js
 .wrangler/
 *.log
+test-results/
+playwright-report/

@@ -9,6 +9,7 @@ html {
 }
 
 html[data-theme='light'] {
+  color-scheme: light;
   --color-bg: #e9ecef;
   --color-surface: #f3f4f6;
   --color-surface-muted: #e9ecef;
@@ -79,6 +80,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
+  color-scheme: dark;
   --color-bg: #0b1220;
   --color-surface: #121a2b;
   --color-surface-muted: #0f1626;

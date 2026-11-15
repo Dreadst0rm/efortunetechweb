@@ -1,4 +1,5 @@
 export const SITE_PREFS_HEAD = `
+  <script src="/js/palette-catalog.js"></script>
   <script src="/js/site-init.js"></script>
   <script src="/js/site-prefs.js" defer></script>
 `.trim()
