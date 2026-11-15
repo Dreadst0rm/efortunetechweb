@@ -18,7 +18,7 @@ Automatic Web Analytics injection from the Cloudflare dashboard loads `https://s
    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"…","spa":false}'></script>
    ```
 
-4. CSP (Worker `CONTENT_SECURITY_POLICY` and `public/_headers`) already allows:
+4. CSP (Worker `buildContentSecurityPolicy(nonce)` on HTML responses) already allows:
    - `script-src … https://static.cloudflareinsights.com`
    - `connect-src … https://cloudflareinsights.com`
 
@@ -28,3 +28,7 @@ If the token is unset, no analytics script is emitted (local builds and CI stay 
 
 - Dashboard “automatic” injection with inline loader (blocked by CSP without weakening policy).
 - `'unsafe-inline'` or hash workarounds for Cloudflare’s injected loader — use the manual beacon instead.
+
+## Bot Management JavaScript Detections
+
+HTML responses get a **per-request CSP nonce** in the Worker (`html-csp.js`): `script-src` includes `'self'`, `'nonce-…'`, Turnstile, and analytics hosts so Cloudflare can inject JS Detections on `/cdn-cgi/challenge-platform/` without `'unsafe-inline'`. Nonces are added to each `<script>` tag via `HTMLRewriter`. See [Cloudflare JS Detections + CSP](https://developers.cloudflare.com/cloudflare-challenges/challenge-types/javascript-detections/#if-you-have-a-content-security-policy-csp).
