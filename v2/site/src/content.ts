@@ -6,7 +6,7 @@ export const site = {
     kicker: 'Fractional CIO · vCIO · Technology leadership',
     h1: 'Senior technology leadership, without the full-time hire.',
     subhead:
-      'Fractional CIO and vCIO services for companies as small as 50 to large 2000 employee organizations. I decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO services for companies as small as 50 to large 2000 employee organizations. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
     trackRecord:
       '20+ years leading technology at an HR/payroll software company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
   },
