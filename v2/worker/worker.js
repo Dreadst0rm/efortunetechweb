@@ -5,6 +5,7 @@
 import { EmailMessage } from 'cloudflare:email';
 import { handleContact } from './contact-handler.js';
 import { digestLegacyRedirectUrl } from './digest-redirect.js';
+import { applyHtmlNonceTransform, generateCspNonce, isHtmlResponse } from './html-csp.js';
 import { handleQuickCheck } from './quick-check.js';
 
 async function defaultSendEmail(env, { from, to, raw }) {
@@ -29,6 +30,12 @@ function assetPathname(pathname) {
 
 function isLocalHostname(hostname) {
   return hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+}
+
+function withHtmlCsp(response) {
+  if (!isHtmlResponse(response)) return response;
+  const nonce = generateCspNonce();
+  return applyHtmlNonceTransform(response, nonce);
 }
 
 export default {
@@ -68,7 +75,7 @@ export default {
         new Request(new URL('/404.html', url.origin), request),
       );
       if (notFound.ok) {
-        return new Response(notFound.body, {
+        response = new Response(notFound.body, {
           status: 404,
           headers: notFound.headers,
         });
@@ -81,6 +88,6 @@ export default {
       return new Response(response.body, { status: response.status, headers });
     }
 
-    return response;
+    return withHtmlCsp(response);
   },
 };
