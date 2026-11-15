@@ -5,7 +5,17 @@ on:
     paths:
       - 'v2/**'
       - '.github/workflows/efortune-site.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'v2/**'
+      - '.github/workflows/efortune-site.yml'
   workflow_dispatch:
+
+concurrency:
+  group: efortune-site-v2-deploy
+  cancel-in-progress: false
 
 defaults:
   run:
@@ -29,7 +39,7 @@ jobs:
       - run: npm test
 
   deploy:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
