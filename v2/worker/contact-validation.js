@@ -107,7 +107,14 @@ export const VALID_INTERESTS = new Set([
   'not-sure',
 ]);
 
-export const VALID_COMPANY_SIZES = new Set(['1-59', '60-199', '200-499', '500-899', '900+']);
+export const VALID_COMPANY_SIZES = new Set([
+  'under-50',
+  '50-199',
+  '200-499',
+  '500-999',
+  '1000-2000',
+  'over-2000',
+]);
 
 export function isValidInterest(value) {
   const v = String(value ?? '').trim();

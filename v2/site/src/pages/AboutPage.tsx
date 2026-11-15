@@ -7,8 +7,9 @@ export default function AboutPage() {
         <div>
           <h1>About Ed Fortune</h1>
           <p className="bp-lead">
-            I help leadership teams of 60 to 900 people decide where technology money goes so it
-            grows the business—without hiring a full-time CIO.
+            Together we decide where technology money goes so it grows the business. Fractional CIO
+            and vCIO services for leadership teams of 50 to 2,000 employees, without a full-time
+            hire.
           </p>
         </div>
         <figure className="bp-about-page__photo">

@@ -36,14 +36,14 @@ export const pricingTiers = [
         title: 'Fractional CIO',
         price: '$4,000–$12,000/month',
         detail:
-          'For growing companies with no CIO. I decide where technology money goes so it grows the company: roadmap, budget priorities, vendor choices, and plain reporting to leadership.',
+          'For growing companies of 50 to 2,000 employees with no CIO. Together we decide where technology money goes so it grows the business: roadmap, budget priorities, vendor choices, and plain reporting to leadership.',
         cta: { label: 'Talk about a fractional CIO', href: '/contact.html?interest=fractional-cio' },
       },
       {
         title: 'vCIO alongside your MSP',
         price: '$4,900–$9,900/month',
         detail:
-          'Day-to-day IT run by an MSP; I set direction and priorities while the MSP keeps running the work—no change of provider.',
+          'Day-to-day IT run by an MSP; we set direction and priorities together while the MSP keeps running the work—no change of provider.',
         cta: {
           label: 'Add a vCIO alongside your MSP',
           href: '/contact.html?interest=vcio-msp',

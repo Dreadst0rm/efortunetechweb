@@ -6,7 +6,7 @@ export const site = {
     kicker: 'Fractional CIO · vCIO · Technology leadership',
     h1: 'Senior technology leadership, without the full-time hire.',
     subhead:
-      'Fractional CIO and vCIO services for companies as small as 50 to large 2000 employee organizations. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO services for companies as small as 50 to large 2,000 employee organizations. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
     trackRecord:
       '20+ years leading technology at an HR/payroll software company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
   },
@@ -175,9 +175,10 @@ export const contactInterests = [
 ] as const
 
 export const companySizes = [
-  { value: '1-59', label: '1–59 employees' },
-  { value: '60-199', label: '60–199 employees' },
+  { value: 'under-50', label: 'Fewer than 50 employees' },
+  { value: '50-199', label: '50–199 employees' },
   { value: '200-499', label: '200–499 employees' },
-  { value: '500-899', label: '500–899 employees' },
-  { value: '900+', label: '900+ employees' },
+  { value: '500-999', label: '500–999 employees' },
+  { value: '1000-2000', label: '1,000–2,000 employees' },
+  { value: 'over-2000', label: 'More than 2,000 employees' },
 ] as const

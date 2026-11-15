@@ -28,7 +28,7 @@ const DOMAIN = 'efortune.tech';
 const SITE = 'efortune.tech';
 const HELLO = 'hello@efortune.tech';
 const DEST = 'ed@efortune.tech';
-const FROM = 'noreply@fortwarp.com';
+const FROM = 'noreply@efortune.tech';
 
 const LIM = {
   name: 100,
