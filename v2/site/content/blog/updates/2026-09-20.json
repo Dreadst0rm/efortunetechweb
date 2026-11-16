@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-20",
+  "title": "Astra enterprise share, ten days that changed AI, slowdown lawsuit, OpenCodeReview",
+  "summary": "Four Overheard picks for Sep 20: Reuters on Anthropic weighing a new model as GPT-6 Astra gains enterprise traction; Reuters’ “ten days that changed the course of AI” feature centered on the Astra launch; Fortune on a class action alleging coordinated AI slowdown; InfoQ on Alibaba open-sourcing OpenCodeReview.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "Reuters (Sep 19 exclusive): Anthropic is considering releasing a new model as GPT-6 Astra gains enterprise traction — citing Ramp figures of roughly 13% Astra vs ~8% Claude Fable in tracked AI spend, and OpenRouter spend flipping toward OpenAI for the first time in 2.5+ years (figures as reported by Reuters; IPO timing may slip).",
+        "Reuters (Sep 19): “Ten days that changed the course of AI” frames the Sep 3 Astra launch as a spark for control concerns, researcher exits, and industry slowdown talk — with Nvidia’s Jensen Huang still dismissing a pause.",
+        "Fortune (Sep 19): Class action in N.D. Cal. claims Anthropic, OpenAI, SpaceXAI, and Google illegally coordinated an AI slowdown after Amodei’s Sep 12 essay — brought on behalf of paid ChatGPT/Claude/Grok/Gemini subscribers (allegations in a filing, not adjudicated findings).",
+        "InfoQ (Sep 20): Alibaba open-sources OpenCodeReview — a deterministic harness plus LLM agent for code review, with vendor-claimed better F1 than Claude Code at roughly 1/9 the tokens, plus hooks for Claude Code / Codex / Cursor."
+      ],
+      "sources": [
+        {
+          "label": "Reuters — Anthropic vs Astra enterprise share",
+          "url": "https://www.reuters.com/business/anthropic-considers-releasing-new-ai-model-ahead-ipo-sources-say-2026-09-19/"
+        },
+        {
+          "label": "Reuters — Ten days that changed the course of AI",
+          "url": "https://www.reuters.com/business/media-telecom/ten-days-that-changed-course-ai-2026-09-19/"
+        },
+        {
+          "label": "Fortune — AI slowdown antitrust lawsuit",
+          "url": "https://fortune.com/2026/09/19/lawsuit-anthropic-openai-spacexai-google-antitrust-laws-ai-slowdown-subscription-value/"
+        },
+        {
+          "label": "InfoQ — Alibaba OpenCodeReview",
+          "url": "https://www.infoq.com/news/2026/09/alibaba-opencodereview/"
+        }
+      ]
+    },
+    {
+      "heading": "What this week means for operators",
+      "bullets": [
+        "Astra is now a competitive and narrative center of gravity — enterprise share reporting and a major feature both put the Sep 3 launch at the front of the week’s AI politics.",
+        "The Fortune suit is a legal counterweight to “slow down for safety” messaging — treat claims as allegations until a court rules.",
+        "OpenCodeReview keeps the coding-agent race on the desk: open harness + model, not only closed copilots — another reminder that tooling moves faster than operating maturity.",
+        "When the headlines outrun your team’s meaning layer and control plane, grab the AI Maturity Starter Pack — primer, practice checklist, and relationship scorecard — on https://secure.efortune.tech/series/ai-maturity/"
+      ],
+      "sources": [
+        {
+          "label": "Reuters — Ten days that changed AI",
+          "url": "https://www.reuters.com/business/media-telecom/ten-days-that-changed-course-ai-2026-09-19/"
+        },
+        {
+          "label": "Secure — AI Maturity Starter Pack",
+          "url": "https://secure.efortune.tech/series/ai-maturity/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Sep 20 Overheard: Astra’s enterprise share and the ten-day cascade; a slowdown antitrust suit; and Alibaba’s OpenCodeReview. Read the primary links, then unlock the Starter Pack on Secure when you want Monday moves — not just the news cycle: https://secure.efortune.tech/series/ai-maturity/"
+}

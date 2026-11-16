@@ -116,7 +116,7 @@ describe('wrangler dev HTML CSP', { timeout: 45_000 }, () => {
       assert.equal(digestRss.status, 301);
       assert.equal(
         digestRss.headers.get('location'),
-        'https://digest.efortune.tech/rss.xml',
+        `${origin}/blog/rss.xml`,
       );
 
       const asset = await fetch(`${origin}/js/site-init.js`);

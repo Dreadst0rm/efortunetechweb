@@ -28,9 +28,7 @@ export default function Footer() {
               <a href="/insights.html">Insights</a>
             </li>
             <li>
-              <a href="https://digest.efortune.tech" rel="noopener noreferrer">
-                Digest
-              </a>
+              <a href="/blog/">Blog</a>
             </li>
           </ul>
         </div>

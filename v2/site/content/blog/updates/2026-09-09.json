@@ -1,0 +1,151 @@
+{
+  "date": "2026-09-09",
+  "title": "WireGuard mesh pick + Authentik SSO for Coolify",
+  "summary": "Three WireGuard control planes compared (NetBird recommended), the broader zero-trust VPN landscape for SMB interconnect, and exact Authentik SSO settings for Coolify dashboard login.",
+  "tone": "recommendation",
+  "sections": [
+    {
+      "heading": "Zero-trust VPN landscape (SMB interconnect)",
+      "bullets": [
+        "Best fits for sites + servers + people: WireGuard mesh + IdP (NetBird, Tailscale, Headscale) vs app/edge ZTNA (Cloudflare Zero Trust, Twingate).",
+        "Coolify one-click today: netbird-client, tailscale-client, cloudflared, wireguard-easy — not NetBird/Headscale control planes.",
+        "Pros — NetBird: Authentik-native, mesh + routes, SaaS or self-host. Tailscale: polish, Authentik supported, Coolify client. Cloudflare ZT: free tier edge/Access companion.",
+        "Cons — Tailscale: SaaS control plane + seat cost. Twingate: Authentik not a supported IdP. Headscale: lean but no first-party UI; OIDC groups cannot drive ACLs.",
+        "Recommendation: lead with NetBird; Cloudflare Tunnel as edge companion; Tailscale only if polish > sovereignty."
+      ],
+      "sources": [
+        {
+          "label": "NetBird how it works",
+          "url": "https://docs.netbird.io/about-netbird/how-netbird-works"
+        },
+        {
+          "label": "NetBird pricing",
+          "url": "https://netbird.io/pricing"
+        },
+        {
+          "label": "Tailscale pricing",
+          "url": "https://tailscale.com/pricing"
+        },
+        {
+          "label": "Cloudflare Zero Trust plans",
+          "url": "https://www.cloudflare.com/plans/zero-trust-services/"
+        },
+        {
+          "label": "Coolify Netbird-Client",
+          "url": "https://coolify.io/docs/services/netbird-client"
+        },
+        {
+          "label": "Twingate identity providers",
+          "url": "https://www.twingate.com/docs/identity-providers"
+        }
+      ]
+    },
+    {
+      "heading": "NetBird vs Defguard vs Headscale",
+      "bullets": [
+        "NetBird: full mesh (own clients + control plane); P2P WireGuard + relay; routing peers / exit nodes; first-class Authentik.",
+        "Defguard: hub-and-spoke gateway VPN + IAM; per-connection WireGuard MFA; external OIDC/Authentik needs Business tier; not any-to-any mesh.",
+        "Headscale: Tailscale control server only + official Tailscale clients; Authentik supported; OIDC groups cannot be used in ACLs; no first-party admin UI.",
+        "Coolify: NetBird client one-click; Defguard/Headscale server not one-click.",
+        "Rank for this stack: 1) NetBird 2) Headscale 3) Defguard (only if connect-time MFA / gateway model outweighs mesh)."
+      ],
+      "sources": [
+        {
+          "label": "NetBird Authentik IdP",
+          "url": "https://docs.netbird.io/selfhosted/identity-providers"
+        },
+        {
+          "label": "NetBird self-host quickstart",
+          "url": "https://docs.netbird.io/selfhosted/selfhosted-quickstart"
+        },
+        {
+          "label": "Defguard architecture",
+          "url": "https://docs.defguard.net/in-depth/architecture"
+        },
+        {
+          "label": "Defguard external OpenID",
+          "url": "https://docs.defguard.net/features/external-openid-providers"
+        },
+        {
+          "label": "Defguard pricing",
+          "url": "https://defguard.net/pricing/"
+        },
+        {
+          "label": "Headscale features",
+          "url": "https://juanfont.github.io/headscale/0.26.0/about/features/"
+        },
+        {
+          "label": "Headscale OIDC / Authentik",
+          "url": "https://headscale.net/0.27.1/ref/oidc/"
+        }
+      ]
+    },
+    {
+      "heading": "Authentik SSO for Coolify (what to put where)",
+      "bullets": [
+        "Use Coolify Settings → OAuth → Authentik (named card), Coolify ≥ v4.3.0 — not generic OIDC and not Traefik forward-auth for dashboard login.",
+        "Redirect URI (Authentik Strict + Coolify field): `{Coolify origin}/auth/authentik/callback`.",
+        "Coolify Base URL: the Authentik origin only — no `/application/o/slug/`.",
+        "Authentik: Confidential OAuth2/OIDC; scopes openid profile email; bind coolify-admins; MFA on Authentik flow (Coolify 2FA is password-only).",
+        "After accounts exist: Registration Allowed = off; keep break-glass local admin password.",
+        "Coolify matches by email only — no IdP group → Coolify role mapping."
+      ],
+      "sources": [
+        {
+          "label": "Coolify Authentik SSO",
+          "url": "https://next.coolify.io/docs/core/security/authentication/sso/authentik"
+        },
+        {
+          "label": "Coolify SSO overview",
+          "url": "https://next.coolify.io/docs/core/security/authentication/sso/overview"
+        },
+        {
+          "label": "Authentik create OAuth2 provider",
+          "url": "https://docs.goauthentik.io/add-secure-apps/providers/oauth2/create-oauth2-provider/"
+        },
+        {
+          "label": "Traefik protect with Authentik (separate)",
+          "url": "https://next.coolify.io/docs/core/networking/proxy/traefik/protect-services-with-authentik"
+        }
+      ]
+    },
+    {
+      "heading": "Overheard — Astra Critical-cyber and Coxon exit",
+      "bullets": [
+        "BleepingComputer: GPT-6 Astra is OpenAI’s first broadly deployed Critical-cyber model; found zero-days in evals; harder to monitor than Sol.",
+        "POLITICO: Jacob Coxon resigns from Anthropic over “gambling with our lives” toward self-improving SI; Hubinger concurs (>10% extinction risk).",
+        "Korea Herald: Samsung–Mistral on-prem chip design/manufacturing AI partnership (beyond Series D).",
+        "HN: “I resigned from Anthropic today” — 608 points, ~821 comments.",
+        "HN: POLITICO write-up of Coxon exit (~70 / ~93).",
+        "HN: BBC Hubinger piece (~33 / ~85)."
+      ],
+      "sources": [
+        {
+          "label": "BleepingComputer — Astra Critical-cyber",
+          "url": "https://www.bleepingcomputer.com/news/artificial-intelligence/openai-says-gpt-6-astra-can-find-zero-days-but-is-also-harder-to-monitor/"
+        },
+        {
+          "label": "POLITICO — Coxon resigns Anthropic",
+          "url": "https://www.politico.eu/article/anthropic-openai-researcher-jacob-coxon-warns-ai-could-kill-humans/"
+        },
+        {
+          "label": "Korea Herald — Samsung–Mistral chip AI",
+          "url": "https://www.koreaherald.com/article/10866843"
+        },
+        {
+          "label": "HN — Coxon resignation",
+          "url": "https://news.ycombinator.com/item?id=49619227"
+        },
+        {
+          "label": "HN — POLITICO Coxon",
+          "url": "https://news.ycombinator.com/item?id=49623306"
+        },
+        {
+          "label": "HN — BBC Hubinger",
+          "url": "https://news.ycombinator.com/item?id=49624255"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "For mesh interconnect pick NetBird; treat Defguard as hub-VPN+MFA and Headscale as Tailscale-compatible minimalism. Wire Coolify dashboard login through Authentik with the exact callback and Base URL above, MFA enforced in Authentik. Overheard: Astra crossed Critical-cyber; Coxon left Anthropic over SI risk."
+}

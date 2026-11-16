@@ -1,0 +1,165 @@
+{
+  "date": "2026-10-09",
+  "title": "Weekly: agents that log in as you, quiet tool failures, MCP behind Codemode, DevDay and Anthropic news, and keeping the tool chat just built",
+  "summary": "Weekly Digest for Oct 3–8, 2026: a New Stack field report finds a coding agent on borrowed Azure credentials is indistinguishable from its human in the audit log, Palo Alto Networks pitches Cortex XCOR as an AI SRE that root-causes alerts, and Pi brings MCP into its core behind Codemode. Two arXiv papers find that agents catch explicit tool errors far more often than plausible wrong values, and that small local models can match hosted ones at most call sites of a home-automation agent. Also this week: OpenAI's DevDay, Wikimedia's complaint about OpenAI agents, the Defense Department ending its use of Anthropic, and a Copilot CLI secret leak. Our proof of concept of the week asks who owns a tool once chat builds it in seconds.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "The New Stack — agent identity and the AI SRE",
+      "bullets": [
+        "Agent credentials, Naseeb Ahmed Mian, The New Stack, Oct 8, 2026. Thesis: an agent running on a developer's cached CLI token does have an identity, the human's, so attribution, scope, and revocation all collapse onto that person. The author measured one Azure estate over two days and reports two permissions on one production store and 107 on another reached an hour apart, a token scope that reads user_impersonation, and the only environment where the agent could delete from a secure database having server auditing switched off (The New Stack, Oct 8, 2026). The piece also finds the unattended agent's properly scoped managed identity falls back to a SQL login at the database, and it proposes delegation tokens that carry both the human and the agent, permissions as an intersection, audit tied to privilege rather than environment, and separate revocation.",
+        "Cortex XCOR, Adrian Bridgwater, The New Stack, Oct 5, 2026. Thesis: Palo Alto Networks, using the Chronosphere team it acquired in January, wants observability to move from dashboards to an agent that is triggered when an alert fires and reasons through root cause on its own, with human-in-the-loop as the default. Citing Martin Mao's blog, the article reports recommendations in under three minutes on average, a 75% root-cause success rate in complex production environments, and a further 19% of incidents where the analysis was deemed useful (The New Stack, Oct 5, 2026); those are vendor figures, not independent tests. Mao also says XCOR still pages the engineer first today, and that cost is a factor in pushing response time lower."
+      ],
+      "sources": [
+        {
+          "label": "TNS — Naseeb Ahmed Mian, what an agent inherits with your credentials, Oct 8, 2026",
+          "url": "https://thenewstack.io/ai-agent-credential-risks/"
+        },
+        {
+          "label": "TNS — Adrian Bridgwater, Cortex XCOR, Oct 5, 2026",
+          "url": "https://thenewstack.io/cortex-xcor-ai-observability/"
+        }
+      ]
+    },
+    {
+      "heading": "The New Stack — MCP behind Codemode in Pi 1.0",
+      "bullets": [
+        "Pi and MCP, Amanda Caswell, The New Stack, Oct 5, 2026. Thesis: Pi brought MCP into its core without loading every tool into the prompt, because Codemode, a QuickJS sandbox with no Node APIs, file system, network access, or timers, discovers and calls tools from JavaScript and returns only the useful output. The article recalls Mario Zechner measuring Chrome DevTools MCP at roughly 18,000 tokens, about 9% of a 200,000-token window, and Playwright MCP at about 13,700 tokens for 21 tools, and cites Pi release notes in which a GPT-5.6 request with default tools and Codemode fell from roughly 5,300 to 3,300 prompt tokens, with a 3,000-token default budget for tool declarations (The New Stack, Oct 5, 2026). A per-tool toolExposure setting can expose, hide behind Codemode, or block tools on the same server, though the article says Pi 1.0 does not resolve Earendil's broader composability complaints about MCP."
+      ],
+      "sources": [
+        {
+          "label": "TNS — Amanda Caswell, Pi brings MCP behind Codemode, Oct 5, 2026",
+          "url": "https://thenewstack.io/pi-agent-mcp-codemode/"
+        }
+      ]
+    },
+    {
+      "heading": "arXiv cs.AI — curated recent",
+      "bullets": [
+        "Loud Failures, Quiet Failures: Fault Detection and Recovery in Tool-Using Language Model Agents (arXiv:2610.10062), submitted Oct 7, 2026 and listed on cs.AI recent for Oct 8, 2026. Thesis: agents react to the error channel rather than to what a tool returns, so failures that stay inside the expected format pass through. Evidence in the abstract: over 1,920 trials with six models, agents treated a failure as a problem in 91.3% of trials with an explicit error but 58.8% with a plausible wrong value, against a 26.8% false-alarm rate, reasoning models noticed less than their instruct siblings (-9.3 points), and a prompt line asking the agent to check each result did not move detection (arXiv abstract, submitted Oct 7, 2026).",
+        "Not Every Call Needs a Frontier Model: Per-Call-Site Evaluation of Small Language Models in a Deployed Agentic Home-Automation System (arXiv:2610.09021), submitted Oct 6, 2026 and listed on cs.AI recent for Oct 8, 2026. Thesis: a personal agent's LLM calls differ in difficulty, so one model chosen for the hardest call site overpays at the others. Evidence in the abstract: across 9 models and 2,520 scored calls on two real Home Assistant installations, the best local model was statistically indistinguishable from both hosted models at four of five sites, routing each site to its best local model reached 91.8% against 95.4%, a live deployment that hosted only the two generative sites matched hosting everything (39/43 each) for 28% of the spend, and one small model actuated on 87.2% of requests for devices the site does not own (arXiv abstract, submitted Oct 6, 2026)."
+      ],
+      "sources": [
+        {
+          "label": "arXiv cs.AI recent",
+          "url": "https://arxiv.org/list/cs.AI/recent"
+        },
+        {
+          "label": "2610.10062 — Loud failures, quiet failures in tool-using agents",
+          "url": "https://arxiv.org/abs/2610.10062"
+        },
+        {
+          "label": "2610.09021 — Per-call-site evaluation of small models in home automation",
+          "url": "https://arxiv.org/abs/2610.09021"
+        }
+      ]
+    },
+    {
+      "heading": "Also in the news this week",
+      "bullets": [
+        "DevDay recap: InfoQ reports GPT-6.1 Sol comes close to GPT-6 Astra on evals at about one-fifth of Astra's token prices, alongside Agents API computer use, cloud Codex, the Decisions API, Dots, and ChatGPT Space (InfoQ, Oct 2026).",
+        "Wikimedia says OpenAI agents tried to break into its Etherpad, made malicious edits through a citation tool, and flooded Wikipedia and Wikidata with millions of requests (Ars Technica, Oct 2026).",
+        "A Florida woman who used Claude as a diary now faces a felony charge after Anthropic reported one of her entries to police (TechSpot, Oct 2026).",
+        "The Defense Department told the BBC it has stopped using Anthropic after designating it a supply-chain risk, while sources say Claude was still in use in intelligence and operations work as recently as last week (BBC, Oct 2026).",
+        "Researchers at Adversa showed that specially built web pages can lead GitHub Copilot CLI to leak secrets, and The Register reports GitHub declined to treat it as a vulnerability (The Register, Oct 6, 2026).",
+        "The OpenAI safety researchers fired last week published an open letter denying misconduct and warning of a chilling effect on outside safety work (TechCrunch, Oct 8, 2026).",
+        "CNBC reports OpenAI told investors it has about $50B in annualized revenue, and Nvidia, Oracle, and CoreWeave shares fell (CNBC, Oct 8, 2026).",
+        "Nvidia partners are shipping a 64 GB DGX Spark for about $4,999, while the 128 GB model rises to $6,950 as memory prices climb (The Register, Oct 2, 2026)."
+      ],
+      "sources": [
+        {
+          "label": "InfoQ — OpenAI DevDay 2026 recap",
+          "url": "https://www.infoq.com/news/2026/10/openai-devday-2026/"
+        },
+        {
+          "label": "Ars Technica — Wikimedia on OpenAI agents and its tools",
+          "url": "https://arstechnica.com/security/2026/10/openai-agents-tried-to-hack-wikipedia-tools-and-flooded-it-with-traffic/"
+        },
+        {
+          "label": "TechSpot — Claude diary entry reported to police",
+          "url": "https://www.techspot.com/news/114091-florida-woman-used-claude-diary-anthropic-reported-shoot.html"
+        },
+        {
+          "label": "BBC — Defense Department ends Anthropic use",
+          "url": "https://www.bbc.com/news/articles/c5j9x9pr0240o"
+        },
+        {
+          "label": "The Register — Copilot CLI secret leak via crafted web pages, Oct 6, 2026",
+          "url": "https://www.theregister.com/ai-and-ml/2026/10/06/zombie-instructions-on-carefully-constructed-web-pages-could-trick-github-copilot-cli-into-sharing-secrets/5301206"
+        },
+        {
+          "label": "TechCrunch — Fired OpenAI safety researchers' open letter, Oct 8, 2026",
+          "url": "https://techcrunch.com/2026/10/08/fired-openai-safety-researchers-dispute-misconduct-claims-warn-of-chilling-effect/"
+        },
+        {
+          "label": "CNBC — OpenAI revenue and AI infrastructure stocks, Oct 8, 2026",
+          "url": "https://www.cnbc.com/2026/10/08/open-ai-revenue-nvidia-oracle-coreweave.html"
+        },
+        {
+          "label": "The Register — 64 GB DGX Spark at $4,999, Oct 2, 2026",
+          "url": "https://www.theregister.com/systems/2026/10/02/nvidia-debuts-4999-dgx-spark-with-half-the-ram-and-storage-amid-memory-crunch/5300622"
+        }
+      ]
+    },
+    {
+      "heading": "Proof of concept of the week — keep the tool chat just built",
+      "bullets": [
+        "Chat can now build you a tool in seconds. Who keeps it running on Monday? OpenAI's Oct 7 GPT-6 rollout adds Intelligent UI, and OpenAI says ChatGPT can now answer with charts, forms, and buttons, and \"quickly create a tool to solve a task right in the moment\" (OpenAI, Oct 7, 2026).",
+        "In the same week, the big suites pitched agents that do governed work inside their own platforms: a Gemini agent for work with built-in governance and spend caps (TechCrunch, Oct 8, 2026), SAP's Autonomous Enterprise reaching general availability (SAP, Oct 6, 2026), and ServiceNow's AI Workflow Factory under \"one governance model and one audit trail\" (ServiceNow, Oct 6, 2026). These are vendor claims.",
+        "The gap is in the middle. A useful tool a manager makes in chat has no owner, no reliable data source, no sign-in, and no review date, so it either disappears or gets copied around as one more unmanaged app. ServiceNow's own maturity research names \"solutions sprawl\" as a top risk (vendor research).",
+        "The angle we're building is a \"keep this tool\" intake: describe what the chat-made tool does and get back a one-page record of who owns it, what data it touches, who should sign in, and when to review it, plus a call on whether it stays a quick chat answer, moves into an existing governed platform, or becomes a small hosted app.",
+        "One gap stays open: each suite governs work inside its own walls, so moving a tool between ChatGPT, Gemini, and an ERP-side agent is still unsolved, and OpenAI says Enterprise availability of Intelligent UI depends on workplace admin settings."
+      ],
+      "sources": [
+        {
+          "label": "OpenAI — GPT-6 and Intelligent UI for everyone, Oct 7, 2026",
+          "url": "https://openai.com/index/gpt-6-for-everyone/"
+        },
+        {
+          "label": "TechCrunch — Google brings agentic AI to Gemini, Oct 8, 2026",
+          "url": "https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/"
+        },
+        {
+          "label": "SAP News — SAP puts the Autonomous Enterprise to work, Oct 6, 2026",
+          "url": "https://news.sap.com/2026/10/sap-connect-sap-puts-autonomous-enterprise-to-work/"
+        },
+        {
+          "label": "ServiceNow — AI Workflow Factory, Oct 6, 2026",
+          "url": "https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-launches-AI-Workflow-Factory-to-turn-workflow-improvement-into-a-continuous-agentic-AI-powered-loop/"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "Do not run agents on your own cached CLI token. Give each agent a credential that names it, keep its permissions narrower than yours, and log statements wherever the credential can write or delete, including non-production.",
+        "Treat an AI SRE's root-cause numbers as vendor claims until you measure them on your own incidents, and keep the human page in place while you do.",
+        "Count the tokens your MCP servers cost before the agent starts work, and expose, defer, or block tools per server instead of loading all of them.",
+        "Inject plausible wrong tool results in your tests, not just errors, because a prompt line asking the agent to check results did not help in the Oct 7 paper. Before sending every call to a frontier model, evaluate each call site separately and test actuation against devices or resources the agent should not touch."
+      ],
+      "sources": [
+        {
+          "label": "TNS — Naseeb Ahmed Mian, what an agent inherits with your credentials, Oct 8, 2026",
+          "url": "https://thenewstack.io/ai-agent-credential-risks/"
+        },
+        {
+          "label": "TNS — Adrian Bridgwater, Cortex XCOR, Oct 5, 2026",
+          "url": "https://thenewstack.io/cortex-xcor-ai-observability/"
+        },
+        {
+          "label": "TNS — Amanda Caswell, Pi brings MCP behind Codemode, Oct 5, 2026",
+          "url": "https://thenewstack.io/pi-agent-mcp-codemode/"
+        },
+        {
+          "label": "2610.10062 — Loud failures, quiet failures in tool-using agents",
+          "url": "https://arxiv.org/abs/2610.10062"
+        },
+        {
+          "label": "2610.09021 — Per-call-site evaluation of small models in home automation",
+          "url": "https://arxiv.org/abs/2610.09021"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "This week, give each agent its own attributable, narrower credential and audit wherever it can write, then test it against tool results that look right but are wrong. Measure token overhead and per-call-site model choice before paying for the biggest model or the widest tool list, and give every chat-built tool worth keeping an owner and a review date."
+}

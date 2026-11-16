@@ -35,7 +35,10 @@ describe('build output', () => {
     }
   })
 
-  it('does not ship on-site digest pages', () => {
+  it('ships blog index, RSS, and at least one post', () => {
+    expect(existsSync(path.join(dist, 'blog', 'index.html'))).toBe(true)
+    expect(existsSync(path.join(dist, 'blog', 'rss.xml'))).toBe(true)
+    expect(existsSync(path.join(dist, 'blog', 'updates', '2026-11-13', 'index.html'))).toBe(true)
     expect(existsSync(path.join(dist, 'digest'))).toBe(false)
   })
 
