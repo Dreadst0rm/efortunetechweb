@@ -36,6 +36,8 @@ jobs:
       - run: npm ci
       - run: npx playwright install chromium --with-deps
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm test
 
   deploy:
@@ -51,6 +53,8 @@ jobs:
           cache-dependency-path: v2/package-lock.json
       - run: npm ci
       - run: npm run build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run test:unit
       - name: Deploy to Cloudflare Workers
         env:
