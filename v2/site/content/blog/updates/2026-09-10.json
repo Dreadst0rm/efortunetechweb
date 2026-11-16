@@ -1,0 +1,88 @@
+{
+  "date": "2026-09-10",
+  "title": "Most reliable ways to reach Grok Bots outside the desktop app",
+  "summary": "Ranked paths for talking to Grok Bots away from the desktop window: mobile companion first, then Slack/channel listeners, event routines, and webhook wakes — not undocumented gateways or custom Slack apps.",
+  "tone": "practical",
+  "sections": [
+    {
+      "heading": "Best paths (ranked)",
+      "bullets": [
+        "1) iOS / Android companion apps — same Bots and threads as desktop; cloud work continues if the phone sleeps. Official FAQ: primary place to talk to Grok Bot alongside desktop.",
+        "2) Connected messaging channels (Slack, Teams where supported) — channel listener routines wake a Bot; for Slack invite @Cursor into the channel (/invite @Cursor). Text/attachments only (no in-app widgets).",
+        "3) Event listeners on routines — GitHub, Slack/Teams patterns, Linear/Sentry/PagerDuty when connected; high reliability when scoped correctly.",
+        "4) Webhook routines — Add trigger → Webhook → URL + bearer key; good for wake + saved prompt from n8n/Actions/etc., not a full duplex chat API. Protect the key; optional Hookdeck in front."
+      ],
+      "sources": [
+        {
+          "label": "Grok Bot FAQ — where to talk",
+          "url": "https://docs.x.ai/grok-bot/faq"
+        },
+        {
+          "label": "Cursor forum: message Grok Bot from outside",
+          "url": "https://forum.cursor.com/t/grok-bot-can-i-send-it-a-message-from-outside/168199"
+        },
+        {
+          "label": "Hookdeck + Grok Bot webhooks",
+          "url": "https://hookdeck.com/webhooks/platforms/using-hookdeck-with-grok-bot-reliable-webhook-triggers"
+        }
+      ]
+    },
+    {
+      "heading": "Pros / cons by path",
+      "bullets": [
+        "Mobile — Pros: real conversation UX, synced threads. Cons: still the Grok Bot product, not email/SMS.",
+        "Slack/channels — Pros: meets you at work; reliable when Cursor is invited. Cons: uses Cursor’s Slack app, not your custom Slack bot.",
+        "Event listeners — Pros: first-party, no polling. Cons: only for supported event shapes.",
+        "Webhooks — Pros: wake from anywhere. Cons: routine wake ≠ desktop chat session; key security matters."
+      ],
+      "sources": [
+        {
+          "label": "Grok Bot FAQ",
+          "url": "https://docs.x.ai/grok-bot/faq"
+        },
+        {
+          "label": "Eric Zakariasson — webhook wake announcement context",
+          "url": "https://bittide.aicompass.dev/article/f656f636-1e8f-40e6-b7e2-f41d354dc0f0"
+        }
+      ]
+    },
+    {
+      "heading": "What is not reliable",
+      "bullets": [
+        "Undocumented local/gateway hacks — break across updates.",
+        "Custom Slack app ≠ Cursor Slack — built-in listeners will not hear it.",
+        "Email/SMS as a first-class Bot inbox — not a core Grok Bot chat surface today.",
+        "Expecting webhook = full chat API — it runs a saved routine prompt."
+      ],
+      "sources": [
+        {
+          "label": "Cursor forum thread (outside messaging)",
+          "url": "https://forum.cursor.com/t/grok-bot-can-i-send-it-a-message-from-outside/168199"
+        }
+      ]
+    },
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "ENISA testing GPT-6 Astra alongside Anthropic Mythos 5 after Commission confirmation; Astra access ~1 week post-launch vs months for Mythos.",
+        "Reuters: ENISA granted Mythos 5 access and is testing it; also granted GPT-6 Astra access.",
+        "Raschka on GPT-6 Astra looped transformers vs hidden-reasoning rumors; ~470-pt HN thread."
+      ],
+      "sources": [
+        {
+          "label": "TNW — ENISA testing Astra and Mythos 5",
+          "url": "https://thenextweb.com/news/eu-cybersecurity-agency-is-now-testing-mythos-5-and-gpt-6-astra-the-commission-says"
+        },
+        {
+          "label": "Reuters — ENISA Mythos 5 and Astra access",
+          "url": "https://www.reuters.com/technology/eus-cybersecurity-agency-granted-access-mythos-5-ai-model-commission-says-2026-09-10/"
+        },
+        {
+          "label": "HN — Raschka on Astra looped transformers",
+          "url": "https://news.ycombinator.com/item?id=49627370"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Day to day use the mobile app; at work use Slack + @Cursor + a listener routine; for automation use webhooks or GitHub/Slack events — optionally via n8n on Coolify. Overheard picks: ENISA testing Astra/Mythos 5, and Raschka’s HN thread on Astra architecture."
+}

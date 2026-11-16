@@ -49,7 +49,10 @@ describe('per-page island bundles', () => {
   it('loads only the expected scripts per page', () => {
     const index = readFileSync(path.join(dist, 'index.html'), 'utf8')
     expect(index).toContain('assets/islands/hero.js')
-    expect(index).not.toContain('assets/islands/digest.js')
+    expect(index).not.toContain('assets/islands/blog-filters.js')
+
+    const blog = readFileSync(path.join(dist, 'blog', 'index.html'), 'utf8')
+    expect(blog).toContain('assets/islands/blog-filters.js')
 
     const services = readFileSync(path.join(dist, 'services.html'), 'utf8')
     expect(services).not.toContain('assets/islands/')

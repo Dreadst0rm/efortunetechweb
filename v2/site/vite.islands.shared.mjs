@@ -21,4 +21,5 @@ export const preactIslandConfig = {
 export const islandEntries = {
   'case-studies': path.join(siteRoot, 'src/islands/case-studies-island.tsx'),
   'quick-check': path.join(siteRoot, 'src/islands/quick-check-island.tsx'),
+  'blog-filters': path.join(siteRoot, 'src/islands/blog-filters-island.tsx'),
 }

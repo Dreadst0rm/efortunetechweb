@@ -1,0 +1,154 @@
+{
+  "date": "2026-09-14",
+  "title": "NetBird VPS vs Proxmox, Coolify API/MCP, ransomware backups, Cloudflare Tunnel",
+  "summary": "Four Ed-selected topics: prefer a public VPS for NetBird self-host now (Proxmox later with stable IP + UDP 3478); drive Coolify via scoped API tokens, IP allowlist, and official MCP/CLI (read-first); why ransomware still empties “good” backups — and where the recoverability playbook lives; reduce Coolify dashboard exposure with Cloudflare Tunnel while keeping 80/443 for apps. Overheard: Astra rollout guide + Siri↔Claude/ChatGPT swap coverage.",
+  "tone": "recommendation",
+  "sections": [
+    {
+      "heading": "NetBird self-host designs: VPS vs Proxmox",
+      "bullets": [
+        "Two SMB-sized designs with Authentik + Coolify: (A) NetBird control plane on a public VPS; (B) NetBird on a Proxmox VM behind edge NAT — Coolify hosts join as netbird-client in both.",
+        "Shared requirements (official self-host path): public reachability on TCP 80/443 and UDP 3478 (embedded STUN cannot ride an HTTP reverse proxy); public DNS; Traefik (or equivalent) for HTTP/2 + gRPC; Authentik as Generic OIDC IdP.",
+        "Design A — VPS Pros: matches NetBird quickstart; clean public ports; isolates mesh control plane from Coolify/SMB blast radius. Cons: VPS cost; relay bandwidth; single-region SPOF until external relays.",
+        "Design B — Proxmox Pros: on-prem control plane; snapshots/PBS; no VPS bill. Cons: needs stable public IP (or 1:1 NAT) with inbound UDP 3478; CGNAT/residential is painful; mesh uptime couples to site power/ISP; prefer a VM over LXC for the server stack.",
+        "Coolify ships netbird-client one-click, not NetBird server — join hosts with a setup key and NB_MANAGEMENT_URL at your self-hosted management.",
+        "Recommendation: Design A (public VPS) for Ed now — least friction for 80/443 + UDP 3478 and keeps the control plane off Coolify’s app host. Revisit Proxmox only with confirmed inbound UDP 3478 and a real sovereignty need."
+      ],
+      "sources": [
+        {
+          "label": "NetBird — self-hosting quickstart",
+          "url": "https://docs.netbird.io/selfhosted/selfhosted-quickstart"
+        },
+        {
+          "label": "NetBird — configuration files (STUN UDP 3478)",
+          "url": "https://docs.netbird.io/selfhosted/maintenance/configuration-files"
+        },
+        {
+          "label": "NetBird — Authentik IdP (self-hosted)",
+          "url": "https://docs.netbird.io/selfhosted/identity-providers/authentik"
+        },
+        {
+          "label": "NetBird — install client on Proxmox VE",
+          "url": "https://docs.netbird.io/get-started/install/proxmox-ve"
+        },
+        {
+          "label": "NetBird — external reverse proxy",
+          "url": "https://docs.netbird.io/selfhosted/external-reverse-proxy"
+        }
+      ]
+    },
+    {
+      "heading": "Coolify API + MCP for Grok Bot automation",
+      "bullets": [
+        "Coolify REST API (`/api/v1/…`) uses Bearer tokens scoped to one team (`read`, `read:sensitive`, `write`, `deploy`, `root`). Enable API Access and Allowed IPs so only trusted egress reaches the API.",
+        "Official Coolify MCP: Streamable HTTP at `https://<instance>/mcp` with the same team token; start with `read` — sensitive values are redacted; revoke the token to cut MCP off.",
+        "Official coolify-cli covers scripted/CI over the same API. Community stdio MCP bridges exist; prefer first-party `/mcp` when the agent can reach the instance over HTTPS.",
+        "Pros: inventory, deploys, and troubleshooting without click-ops; scopes + IP allowlist limit blast radius. Cons: `root` / `write`+`read:sensitive` tokens are high-value if leaked; bad allowlists lock agents out or leave the API wide open.",
+        "Recommendation: restrictive IP allowlist; dedicated team token with `read` first (add `deploy` only when intentional); official MCP before community bridges; never put `root` or long-lived `read:sensitive` on an always-on agent."
+      ],
+      "sources": [
+        {
+          "label": "Coolify API introduction",
+          "url": "https://coolify.io/docs/api-reference/introduction"
+        },
+        {
+          "label": "Coolify API authorization (scoped tokens)",
+          "url": "https://coolify.io/docs/api-reference/authorization"
+        },
+        {
+          "label": "Coolify API IP allowlist",
+          "url": "https://coolify.io/docs/api/ip-allowlist"
+        },
+        {
+          "label": "Coolify MCP overview",
+          "url": "https://coolify.io/docs/integrations/mcp"
+        },
+        {
+          "label": "Coolify — how MCP works",
+          "url": "https://coolify.io/docs/mcp/how-mcp-works"
+        },
+        {
+          "label": "Coolify CLI overview",
+          "url": "https://coolify.io/docs/cli/what-is-the-coolify-cli"
+        },
+        {
+          "label": "GitHub — coollabsio/coolify-cli",
+          "url": "https://github.com/coollabsio/coolify-cli"
+        }
+      ]
+    },
+    {
+      "heading": "When ransomware hits — why “we have backups” still fails",
+      "bullets": [
+        "The scare that wakes boards: teams discover too late that “we have backups” still fails under ransomware — copies that live online with production get encrypted or deleted, and untested restores are not recoverability.",
+        "The non-negotiable (CISA-aligned): keep at least one copy attackers cannot reach from the production admin plane, and actually test a restore — a green backup job is not proof you can come back.",
+        "Coolify-specific trap: instance DB dumps without a separately saved `APP_KEY` (off-box) restore into an unreadable secrets vault — see Coolify’s own backup docs.",
+        "Want the full Backup & Crypto Resilience reference plan — frameworks, maturity questions, playbooks, and the ransomware before/after story? It’s on https://secure.efortune.tech/series/backup-crypto/"
+      ],
+      "sources": [
+        {
+          "label": "CISA — #StopRansomware Guide",
+          "url": "https://www.cisa.gov/stopransomware/ransomware-guide"
+        },
+        {
+          "label": "StopRansomware.gov",
+          "url": "https://www.stopransomware.gov"
+        },
+        {
+          "label": "Coolify — back up instance (incl. APP_KEY)",
+          "url": "https://coolify.io/docs/core/backup-and-recovery/instance-backup"
+        },
+        {
+          "label": "Secure — Backup & Crypto Resilience",
+          "url": "https://secure.efortune.tech/series/backup-crypto/"
+        }
+      ]
+    },
+    {
+      "heading": "Coolify Cloudflare Tunnel for dashboard exposure",
+      "bullets": [
+        "Official path: run `cloudflared` (Coolify one-click), point tunnel routes at `http://localhost:80` (Coolify proxy), publish apps via domains — Cloudflare terminates visitor HTTPS.",
+        "Dashboard exposure: default installs often leave UI/realtime on ~8000 / 6001 / 6002 reachable on the public IP even when apps use a custom domain.",
+        "Hardening: bind Coolify UI to localhost only (or override ports empty on `coolify` / `soketi`) so the dashboard is not on the public NIC — reach admin through tunnel/VPN while apps keep 80/443.",
+        "Pros: hides origin IP, helps CGNAT/home gear. Cons: depends on Cloudflare; tunnels bypass host firewall for tunneled paths; NetBird/STUN UDP still cannot ride an HTTP tunnel.",
+        "Recommendation: Tunnel (or CF proxy) for apps on 80/443; close or localhost-bind 8000/6001/6002; prefer VPN/ZTNA or strict allowlist for the Coolify dashboard — not public IP:8000."
+      ],
+      "sources": [
+        {
+          "label": "Coolify — Cloudflare Tunnels overview",
+          "url": "https://coolify.io/docs/integrations/networking/cloudflare/tunnels"
+        },
+        {
+          "label": "Coolify — Cloudflare Tunnel (all resources)",
+          "url": "https://coolify.io/docs/knowledge-base/cloudflare/tunnels/all-resource"
+        },
+        {
+          "label": "Coolify — custom compose overrides (port binding)",
+          "url": "https://coolify.io/docs/knowledge-base/custom-compose-overrides"
+        },
+        {
+          "label": "Coolify — Cloudflare Tunnel (single resource)",
+          "url": "https://coolify.io/docs/knowledge-base/cloudflare/tunnels/single-resource"
+        }
+      ]
+    },
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "Engadget: how GPT-6 Astra appears in ChatGPT (GPT-6 Pro), Plus via Work/Codex, usage burn vs Sol, API pricing.",
+        "MacRumors: iOS 27/macOS private APIs let Siri delegate to Claude or swap server model for ChatGPT-class."
+      ],
+      "sources": [
+        {
+          "label": "Engadget — How to use GPT-6 Astra",
+          "url": "https://www.engadget.com/2252859/how-to-use-gpt-6-astra-rollout-schedule/"
+        },
+        {
+          "label": "MacRumors — Siri can swap to Claude/ChatGPT",
+          "url": "https://www.macrumors.com/2026/09/14/siri-can-be-swapped-out-for-chatgpt-claude/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Host NetBird’s control plane on a public VPS for now (Proxmox later only with stable IP + inbound UDP 3478). Automate Coolify with scoped read-first API/MCP tokens plus an IP allowlist — not root tokens. Ransomware: don’t trust a green backup job — deepen recoverability on Secure’s Backup & Crypto series. Expose apps via Cloudflare Tunnel on 80/443; close Coolify’s 8000/6001/6002 and gate the dashboard with VPN/allowlist."
+}

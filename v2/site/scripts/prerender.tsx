@@ -16,6 +16,8 @@ import PricingPage from '../src/pages/PricingPage'
 import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
+import { renderBlog } from './render-blog.tsx'
+import { blogPostPath } from '../src/blog/dates'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 const dist = path.join(root, 'dist')
@@ -130,11 +132,17 @@ function writePage({ out, active, body, seo }: Route) {
 for (const r of routes) writePage(r)
 
 const siteOrigin = process.env.SITE_ORIGIN ?? 'https://efortune.tech'
+const { posts: blogPosts } = renderBlog(dist, path.join(root, 'site'), siteOrigin)
 
 const sitemapUrls: string[] = []
 for (const [file, seo] of Object.entries(pages)) {
   if (file === '404.html' || file === 'thanks.html') continue
   const loc = `${siteOrigin}${seo.canonicalPath === '/' ? '/' : seo.canonicalPath}`
+  sitemapUrls.push(`  <url><loc>${loc}</loc><changefreq>monthly</changefreq></url>`)
+}
+sitemapUrls.push(`  <url><loc>${siteOrigin}/blog/</loc><changefreq>weekly</changefreq></url>`)
+for (const post of blogPosts) {
+  const loc = `${siteOrigin}${blogPostPath(post.data.date)}`
   sitemapUrls.push(`  <url><loc>${loc}</loc><changefreq>monthly</changefreq></url>`)
 }
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-23",
+  "title": "Opus 5.5 vs GPT-6 Astra, Sol/Luna price cuts, Modal million-sandbox scale — plus harness/MCP arXiv cluster",
+  "summary": "Combined Digest for Sep 23: Overheard ranks 1–6 (Artificial Analysis Opus 5.5 vs GPT-6 Astra, Register frontier race, TechCrunch Sol/Luna, New Stack Opus lifecycle, InfoQ Modal sandboxes, Business Insider ChatGPT influencers) plus three arXiv cs.AI papers (Grow the Harness, A2M MCP hijack, CliffCompaction) and two New Stack harness/agent-ops pieces.",
+  "tone": "reception",
+  "sections": [
+    {
+      "heading": "Overheard — picks of the day",
+      "bullets": [
+        "Artificial Analysis: Claude Opus 5.5 (Adaptive Reasoning, Max Effort) leads GPT-6 Astra (max) on the Intelligence Index at 58 vs 53; Opus variants also show higher output speed (up to ~93 t/s vs ~53) and lower cost-per-task at low effort ($0.55 vs $0.82).",
+        "The Register (Sep 23): Despite a July open letter and Amodei’s Sep 12 “slow the pace” call, Anthropic and OpenAI shipped Opus 5.5 and GPT-6 Sol/Luna the same day — Anthropic’s release cadence now near-monthly; both labs are preparing for IPOs.",
+        "TechCrunch (Sep 22): OpenAI expands the GPT-6 family with Sol (coding/complex work) and Luna (high-volume clerical tasks), cutting API prices 50% vs the 5.6 series via caching/inference gains and claiming roughly half as many factuality mistakes for Sol vs its predecessor.",
+        "The New Stack: Opus 5.5 is pitched for full-lifecycle coding — design through test — matching Fable 5.1 on most work at ~40% less cost than Opus 5; operators still warn that “completed” is not the same as “correct,” so verification stays human-owned.",
+        "InfoQ (Sep 23): Modal rebuilt sandbox scheduling beyond Kubernetes — workers as source of truth, parallel schedulers — claiming 1 million concurrent sandboxes created in under a minute with median startup-to-code under 0.5 seconds.",
+        "Business Insider: OpenAI is scaling ChatGPT influencer sponsorships (HypeAuditor: 61 Instagram #ads in June → 122 in July → 141 in August), casting parenting/fitness/tech creators around “cool” and “good for the world” use cases while hiring creator-economy veterans (including Instagram’s Charles Porch)."
+      ],
+      "sources": [
+        {
+          "label": "Artificial Analysis — Opus 5.5 vs GPT-6 Astra",
+          "url": "https://artificialanalysis.ai/models/releases/comparisons/claude-opus-5-5-vs-gpt-6-astra"
+        },
+        {
+          "label": "The Register — frontier AI keeps racing",
+          "url": "https://www.theregister.com/ai-and-ml/2026/09/23/frontier-ai-keeps-racing-despite-calls-to-slow-down/5298448"
+        },
+        {
+          "label": "TechCrunch — GPT-6 Sol and Luna",
+          "url": "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/"
+        },
+        {
+          "label": "The New Stack — Opus 5.5 lifecycle coding",
+          "url": "https://thenewstack.io/claude-opus-5-5-lifecycle/"
+        },
+        {
+          "label": "InfoQ — Modal scaling sandboxes",
+          "url": "https://www.infoq.com/news/2026/09/modal-scaling-sandboxes/"
+        },
+        {
+          "label": "Business Insider — ChatGPT influencer strategy",
+          "url": "https://www.businessinsider.com/inside-open-ai-influencer-marketing-strategy-chatgpt-ads-sponsorships-instagram-2026-9"
+        }
+      ]
+    },
+    {
+      "heading": "arXiv cs.AI — curated recent",
+      "bullets": [
+        "Grow the Harness, Not the Context — reusable specialist agents (arXiv:2609.26760). Thesis: recurring agent control should become reusable executable harness code, not reconstructed in every context window. Evidence: Growing Harness beat or matched baselines on BrowseComp-Plus / WebArena across 4B–120B models while cutting LLM calls ~76–92% and inference cost ~74–99%; small models stayed effective where tool-calling collapsed.",
+        "A2M — trace-optimized agent hijacking in the MCP ecosystem (arXiv:2609.26761). Thesis: MCP agents that pick tools by semantic match face a supply-chain risk from attacker-controlled tool metadata and returns. Evidence: on LiveMCPBench, Attraction+Manipulation reached ~93.6% malicious tool invocation and ~74.4% mean attack success on GLM-4.6; transfer without re-opt still non-trivial. Public takeaway: don’t treat semantic tool match as trust.",
+        "CliffCompaction — cost-efficient compaction for long-horizon coding agents (arXiv:2609.26779). Thesis: long-horizon agents need compaction that only truncates/drops, never rewrites, to avoid context drift. Evidence: up to ~50% cost cut under bounded context; better Terminal-Bench efficiency; KernelBench CUDA speedups 2.23×@200 / 3.58×@400 steps; open scaffold-agnostic proxy for Claude Code / Codex harnesses."
+      ],
+      "sources": [
+        {
+          "label": "arXiv cs.AI recent",
+          "url": "https://arxiv.org/list/cs.AI/recent"
+        },
+        {
+          "label": "2609.26760 — Grow the Harness",
+          "url": "https://arxiv.org/abs/2609.26760"
+        },
+        {
+          "label": "2609.26761 — A2M MCP hijack",
+          "url": "https://arxiv.org/abs/2609.26761"
+        },
+        {
+          "label": "2609.26779 — CliffCompaction",
+          "url": "https://arxiv.org/abs/2609.26779"
+        }
+      ]
+    },
+    {
+      "heading": "The New Stack — harness & agent ops",
+      "bullets": [
+        "Why agent harnesses fail inside cloud-native systems. Thesis: coding agents need fast feedback loops to self-correct, and the hard part in cloud-native stacks is delivering that signal at agent speed and scale. The piece argues harness quality and distributed feedback matter more than raw model upgrades for production agents.",
+        "Anthropic made Opus 5.5 cheaper — then broke four agent dependencies. Thesis: cheaper Opus 5.5 still ships breaking changes to thinking, tool use, and computer use that can HTTP 400 existing agents. Shows model upgrades are harness/migration events, not drop-in swaps."
+      ],
+      "sources": [
+        {
+          "label": "TNS — agent harness distributed feedback",
+          "url": "https://thenewstack.io/agent-harness-distributed-feedback-problem/"
+        },
+        {
+          "label": "TNS — Opus 5.5 agent migration breaks",
+          "url": "https://thenewstack.io/claude-opus-agent-migration/"
+        }
+      ]
+    },
+    {
+      "heading": "What operators should take from this cluster",
+      "bullets": [
+        "Frontier launches (Opus 5.5, GPT-6 Astra/Sol/Luna) are arriving alongside cheaper tokens — treat price cuts as a cue to harden harnesses and migration checklists, not to skip them.",
+        "arXiv’s Grow the Harness and CliffCompaction rhyme with New Stack’s feedback-loop story: program the harness, compact without rewriting, and put runtime signal inside the agent loop.",
+        "A2M’s MCP hijack results make tool metadata and return paths a supply-chain control problem — vet tools, isolate runtimes, and don’t treat semantic tool match as trust.",
+        "Want MCP supply-chain controls and guarded agent playbooks you can run Monday? Members unlock them on https://secure.efortune.tech — start with the AI Maturity Starter Pack when meaning and tool trust are the bottleneck: https://secure.efortune.tech/series/ai-maturity/"
+      ],
+      "sources": [
+        {
+          "label": "Secure — member library",
+          "url": "https://secure.efortune.tech"
+        },
+        {
+          "label": "Secure — AI Maturity Starter Pack",
+          "url": "https://secure.efortune.tech/series/ai-maturity/"
+        }
+      ]
+    }
+  ],
+  "bottomLine": "Sep 23 pairs a frontier-model race day (Opus 5.5 vs GPT-6 Astra/Sol/Luna, Modal sandbox scale, ChatGPT influencer push) with a harness/MCP research cluster — Grow the Harness, A2M hijack, CliffCompaction, plus New Stack on distributed feedback and Opus migration breaks. Read the links, then unlock Secure when you’re ready to harden tool trust and harnesses: https://secure.efortune.tech"
+}

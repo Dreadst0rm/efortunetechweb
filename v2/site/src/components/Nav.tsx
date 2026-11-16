@@ -5,7 +5,7 @@ export type NavPage =
   | 'case-studies'
   | 'about'
   | 'insights'
-  | 'digest'
+  | 'blog'
   | 'contact'
 
 const links: { page: NavPage; href: string; label: string }[] = [
@@ -13,11 +13,7 @@ const links: { page: NavPage; href: string; label: string }[] = [
   { page: 'services', href: '/services.html', label: 'Services' },
   { page: 'pricing', href: '/pricing.html', label: 'Pricing' },
   { page: 'case-studies', href: '/case-studies.html', label: 'Case studies' },
-  {
-    page: 'digest',
-    href: 'https://digest.efortune.tech',
-    label: 'Digest',
-  },
+  { page: 'blog', href: '/blog/', label: 'Blog' },
   { page: 'about', href: '/about.html', label: 'About' },
   { page: 'contact', href: '/contact.html', label: 'Contact' },
 ]

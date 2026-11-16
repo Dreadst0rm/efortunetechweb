@@ -1,0 +1,52 @@
+{
+  "date": "2026-08-13",
+  "title": "Grok Bot reception: teammate pitch, independent caveats, chatbot confusion",
+  "summary": "Two days after launch, coverage agrees on the job: Grok Bot is a persistent worker with its own cloud computer, not a chat window that stops when you close the laptop. Product press leans on the teammate metaphor. Independent writeups accept the pitch and then ask about shared-machine risk, bundle pricing, and the name collision with Grok the chatbot. This brief is a reading of public coverage, not a usage report.",
+  "tone": "cautious",
+  "sections": [
+    {
+      "heading": "What product press is saying",
+      "bullets": [
+        "xAI’s own introduction frames Grok Bot as always-on agents that keep a dedicated cloud computer, sign into the tools you already use, and return when the work is done or a decision is needed.",
+        "The Verge treats the launch as a teammate product rather than a new chatbot: you assign work, the bot stays on the job after you step away, and multiple bots can coordinate in a shared thread.",
+        "Access is described as a beta bundled into existing high-tier plans (SuperGrok Heavy, Cursor Ultra, Cursor Teams Premium), not as a standalone SKU. Enterprise is a waitlist in the launch copy, not a general-availability claim.",
+        "The official story emphasizes internal prototype use (sales outreach, marketing, office ops, bug fixes) and the ability to follow along once, save a routine, and rerun it. Those are product claims, not third-party measured outcomes."
+      ],
+      "sources": [
+        {
+          "label": "Introducing Grok Bot (xAI)",
+          "url": "https://x.ai/news/introducing-grok-bot"
+        },
+        {
+          "label": "The Verge: Grok is now an AI teammate you can assign work",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/978666/spacexai-grok-bot-ai-agent-beta-launch"
+        }
+      ]
+    },
+    {
+      "heading": "Independent takes",
+      "bullets": [
+        "Hands-on and explainer pieces (Digital Trends and longer product reviews in the same vein as Continuum-style writeups) repeat the same distinction: the chatbot answers; the bot is supposed to finish the job on a machine that keeps running.",
+        "The useful independent questions are operational, not theatrical: one shared cloud computer per account, so files, browser sessions, and logins can be visible across every bot on that account.",
+        "Reviewers also flag the bundle: this is not priced as a cheap add-on. If you are already on a qualifying Cursor or SuperGrok plan, the experiment is incremental. If you are not, the seat cost is the first filter.",
+        "None of the pieces cited here publish audited task-completion rates, error rates, or hours-saved figures. Treat any numeric productivity claim you see elsewhere as unverified unless a source shows its method."
+      ],
+      "sources": [
+        {
+          "label": "Digital Trends: Grok Bot wants to take work off your plate",
+          "url": "https://www.digitaltrends.com/computing/grok-bot-wants-to-take-work-off-your-plate-not-just-answer-your-queries/"
+        }
+      ]
+    },
+    {
+      "heading": "Brand confusion with the Grok chatbot",
+      "bullets": [
+        "The name does most of the damage. People who already use Grok as a chat model will hear “Grok Bot” as a skin, a mobile wrapper, or a new personality, not as a separate product with a computer, connectors, and approval gates.",
+        "A practical test for SMB ops: if the task dies when the chat tab closes, you wanted the chatbot. If the task should keep going overnight inside email, CRM, or a browser session, you are talking about the bot.",
+        "Internal language should stay literal. Say “assign the inbox bot” or “ask Grok in chat,” not “have Grok handle it,” until the team can hear the difference without a lecture.",
+        "Security conversations should start from the shared-machine model in public coverage, not from chatbot data-retention folklore. The blast radius is the accounts you sign the computer into."
+      ]
+    }
+  ],
+  "bottomLine": "Read Grok Bot as a delegated worker on a shared cloud machine, bundled into expensive existing seats, not as “Grok with extra steps.” Pilot one bounded workflow (a morning digest, a CRM cleanup, a watch-the-inbox job) with approvals left on. Keep chatbot Q&A and bot tasking as two different sentences. Do not staff a process on launch anecdotes or unsourced productivity numbers."
+}
