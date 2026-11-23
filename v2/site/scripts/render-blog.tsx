@@ -58,6 +58,7 @@ export function renderBlog(dist: string, contentRoot: string, siteOrigin: string
       sectionText: u.data.sections
         .map((s) => `${s.heading}\n${s.bullets.join('\n')}`)
         .join('\n'),
+      sectionHeadings: u.data.sections.map((s) => s.heading).join('\n'),
     }),
   )
   const blogDir = path.join(dist, 'blog')

@@ -12,19 +12,47 @@ export type DigestFilterQuery = {
   to?: string
 }
 
-const TOPIC_RULES: { topic: string; pattern: RegExp }[] = [
+type TopicRule = {
+  topic: string
+  pattern: RegExp
+  /** When set, only title, summary, and section headings are scanned (reduces stray mentions in bullets). */
+  primaryOnly?: boolean
+}
+
+const TOPIC_RULES: TopicRule[] = [
   { topic: 'cloud', pattern: /\b(cloud|aws|azure|gcp|kubernetes|k8s|finops)\b/i },
-  { topic: 'ai', pattern: /\b(ai|ml|llm|agent|model|copilot|gpt)\b/i },
+  {
+    topic: 'ai',
+    pattern:
+      /\b(ai\b|llm|gpt-?\d|chatgpt|openai|anthropic|claude|gemini|grok\b|genai|generative ai|machine learning|copilot|deepseek|mistral|a(i|l)ops|agi\b|agents?\b)\b/i,
+    primaryOnly: true,
+  },
   { topic: 'security', pattern: /\b(security|spf|dmarc|dnssec|vulnerability|zero trust)\b/i },
-  { topic: 'architecture', pattern: /\b(architecture|monolith|microservice|event[- ]driven|platform)\b/i },
+  {
+    topic: 'architecture',
+    pattern: /\b(architecture|monolith|microservice|event[- ]driven|platform)\b/i,
+  },
   { topic: 'devops', pattern: /\b(devops|deploy|ci\/cd|sre|observability)\b/i },
 ]
 
-export function deriveTopics(...texts: string[]): string[] {
-  const blob = texts.join('\n')
+export type DigestTopicSource = {
+  title: string
+  summary: string
+  sectionText?: string
+  sectionHeadings?: string
+}
+
+function topicSourceBlob(rule: TopicRule, source: DigestTopicSource): string {
+  if (rule.primaryOnly) {
+    return [source.title, source.summary, source.sectionHeadings ?? ''].join('\n')
+  }
+  return [source.title, source.summary, source.sectionText ?? ''].join('\n')
+}
+
+export function deriveTopics(source: DigestTopicSource): string[] {
   const found = new Set<string>()
-  for (const { topic, pattern } of TOPIC_RULES) {
-    if (pattern.test(blob)) found.add(topic)
+  for (const rule of TOPIC_RULES) {
+    if (rule.pattern.test(topicSourceBlob(rule, source))) found.add(rule.topic)
   }
   return [...found].sort()
 }
@@ -34,13 +62,29 @@ export function buildDigestIndexEntry(input: {
   title: string
   summary: string
   sectionText?: string
+  sectionHeadings?: string
 }): DigestIndexEntry {
   return {
     date: input.date,
     title: input.title,
     summary: input.summary,
-    topics: deriveTopics(input.title, input.summary, input.sectionText ?? ''),
+    topics: deriveTopics({
+      title: input.title,
+      summary: input.summary,
+      sectionText: input.sectionText,
+      sectionHeadings: input.sectionHeadings,
+    }),
   }
+}
+
+export function isDigestFilterActive(query: DigestFilterQuery): boolean {
+  return Boolean(
+    (query.q ?? '').trim() || (query.topics?.length ?? 0) > 0 || query.from || query.to,
+  )
+}
+
+export function clearDigestFilterQuery(): DigestFilterQuery {
+  return {}
 }
 
 export function filterDigestIndex(

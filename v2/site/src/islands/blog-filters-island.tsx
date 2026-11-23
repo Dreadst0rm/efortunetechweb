@@ -1,55 +1,143 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import type { DigestIndexEntry } from '../blog/blogFilter'
 import {
   digestSearchParamsToString,
   filterDigestIndex,
+  isDigestFilterActive,
   parseDigestSearchParams,
 } from '../blog/blogFilter'
+import { applyDigestVisibility } from '../blog/blogFilterDom'
 
 const TOPICS = ['cloud', 'ai', 'security', 'architecture', 'devops'] as const
+function filterQueryFromState(q: string, topics: string[], from: string, to: string) {
+  return {
+    q: q || undefined,
+    topics: topics.length ? topics : undefined,
+    from: from || undefined,
+    to: to || undefined,
+  }
+}
 
-function DigestFiltersApp({
-  index,
-}: {
-  index: DigestIndexEntry[]
-}) {
+function DigestFiltersApp({ index }: { index: DigestIndexEntry[] }) {
   const [q, setQ] = useState('')
   const [topics, setTopics] = useState<string[]>([])
   const [from, setFrom] = useState('')
   const [to, setTo] = useState('')
+  const historyLock = useRef(false)
+  const historyReady = useRef(false)
+  const skipDiscretePush = useRef(true)
+  const searchBranchOpen = useRef(false)
+  const lastPushedUrl = useRef<string | null>(null)
+  const filterRef = useRef({ q, topics, from, to })
+  filterRef.current = { q, topics, from, to }
 
-  useEffect(() => {
-    const parsed = parseDigestSearchParams(window.location.search)
+  const currentFilterUrl = useCallback(() => {
+    const params = digestSearchParamsToString(
+      filterQueryFromState(
+        filterRef.current.q,
+        filterRef.current.topics,
+        filterRef.current.from,
+        filterRef.current.to,
+      ),
+    )
+    return `${window.location.pathname}${params}`
+  }, [])
+
+  const replaceFilterUrl = useCallback(() => {
+    if (historyLock.current) return
+    const next = currentFilterUrl()
+    const current = `${window.location.pathname}${window.location.search}`
+    if (current === next) return
+    window.history.replaceState({ digestFilters: true }, '', next)
+  }, [currentFilterUrl])
+
+  const pushFilterHistory = useCallback(() => {
+    if (historyLock.current) return
+    const next = currentFilterUrl()
+    if (lastPushedUrl.current === next) return
+    window.history.pushState({ digestFilters: true }, '', next)
+    lastPushedUrl.current = next
+  }, [currentFilterUrl])
+
+  const applyUrlToState = useCallback((search: string) => {
+    const parsed = parseDigestSearchParams(search)
+    historyLock.current = true
     setQ(parsed.q ?? '')
     setTopics(parsed.topics ?? [])
     setFrom(parsed.from ?? '')
     setTo(parsed.to ?? '')
+    lastPushedUrl.current = `${window.location.pathname}${search}`
+    searchBranchOpen.current = Boolean((parseDigestSearchParams(search).q ?? '').trim())
+    queueMicrotask(() => {
+      historyLock.current = false
+    })
   }, [])
 
+  useEffect(() => {
+    applyUrlToState(window.location.search)
+    const onPop = () => applyUrlToState(window.location.search)
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [applyUrlToState])
+
   const filteredDates = useMemo(() => {
-    const ids = filterDigestIndex(index, { q, topics, from: from || undefined, to: to || undefined })
+    const ids = filterDigestIndex(index, filterQueryFromState(q, topics, from, to))
     return new Set(ids.map((i) => i.date))
   }, [index, q, topics, from, to])
 
   useEffect(() => {
-    const params = digestSearchParamsToString({
-      q: q || undefined,
-      topics: topics.length ? topics : undefined,
-      from: from || undefined,
-      to: to || undefined,
-    })
-    const next = `${window.location.pathname}${params}`
-    window.history.replaceState({}, '', next)
+    applyDigestVisibility(document, filteredDates)
+  }, [filteredDates])
 
-    const cards = document.querySelectorAll<HTMLElement>('[data-digest-date]')
-    for (const el of cards) {
-      const date = el.getAttribute('data-digest-date')
-      if (!date) continue
-      const show = filteredDates.has(date)
-      el.hidden = !show
+  useEffect(() => {
+    if (!historyReady.current) {
+      replaceFilterUrl()
+      historyReady.current = true
+      lastPushedUrl.current = currentFilterUrl()
+      return
     }
-  }, [filteredDates, q, topics, from, to])
+
+    const hasQ = q.trim().length > 0
+    if (hasQ && !searchBranchOpen.current) {
+      const snapshot = `${window.location.pathname}${window.location.search}`
+      window.history.pushState({ digestFilters: true }, '', snapshot)
+      lastPushedUrl.current = snapshot
+      searchBranchOpen.current = true
+    } else if (!hasQ) {
+      searchBranchOpen.current = false
+    }
+    replaceFilterUrl()
+  }, [q, replaceFilterUrl, currentFilterUrl, pushFilterHistory])
+
+  useEffect(() => {
+    if (!historyReady.current) return
+    replaceFilterUrl()
+    if (skipDiscretePush.current) {
+      skipDiscretePush.current = false
+      return
+    }
+    searchBranchOpen.current = false
+    pushFilterHistory()
+  }, [topics, from, to, replaceFilterUrl, pushFilterHistory])
+
+  const active = isDigestFilterActive(filterQueryFromState(q, topics, from, to))
+
+  const clearAll = useCallback(() => {
+    setQ('')
+    setTopics([])
+    setFrom('')
+    setTo('')
+  }, [])
+
+  useEffect(() => {
+    const emptyClear = document.getElementById('blog-filter-empty-clear')
+    if (!emptyClear) return
+    emptyClear.addEventListener('click', clearAll)
+    return () => emptyClear.removeEventListener('click', clearAll)
+  }, [clearAll])
+
+  const clearTopics = () => setTopics([])
 
   const toggleTopic = (t: string) => {
     setTopics((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
@@ -57,6 +145,16 @@ function DigestFiltersApp({
 
   return (
     <div className="bp-digest-filters" role="search" aria-label="Filter blog posts">
+      <div className="bp-digest-filters__toolbar">
+        <p className="bp-digest-filters__status" role="status" aria-live="polite">
+          Showing {filteredDates.size} of {index.length} posts
+        </p>
+        {active ? (
+          <button type="button" className="bp-digest-filters__clear" onClick={clearAll}>
+            Clear filters
+          </button>
+        ) : null}
+      </div>
       <label className="bp-digest-filters__field">
         <span>Search</span>
         <input
@@ -70,6 +168,14 @@ function DigestFiltersApp({
       <fieldset className="bp-digest-filters__topics">
         <legend>Topics</legend>
         <div className="bp-digest-filters__chips">
+          <button
+            type="button"
+            className={topics.length === 0 ? 'bp-chip bp-chip--on' : 'bp-chip'}
+            aria-pressed={topics.length === 0}
+            onClick={clearTopics}
+          >
+            All
+          </button>
           {TOPICS.map((t) => (
             <button
               key={t}
@@ -93,9 +199,6 @@ function DigestFiltersApp({
           <input type="date" value={to} onChange={(e) => setTo(e.target.value)} />
         </label>
       </div>
-      <p className="bp-digest-filters__status" role="status" aria-live="polite">
-        Showing {filteredDates.size} of {index.length} posts
-      </p>
     </div>
   )
 }

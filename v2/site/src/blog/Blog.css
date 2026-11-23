@@ -32,6 +32,11 @@
   contain: layout;
 }
 
+.bp-digest__card[hidden],
+.bp-digest__section[hidden] {
+  display: none;
+}
+
 .bp-digest__card {
   display: block;
   border: 1px solid var(--color-border);

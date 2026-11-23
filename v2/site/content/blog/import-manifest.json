@@ -1,7 +1,7 @@
 {
-  "importedAt": "2026-11-16T06:14:37.336Z",
+  "importedAt": "2026-11-23T23:44:24.069Z",
   "source": "https://github.com/Dreadst0rm/daily-pulse/tree/main/content/updates",
-  "postCount": 27,
+  "postCount": 28,
   "dates": [
     "2026-08-13",
     "2026-09-06",
@@ -29,7 +29,10 @@
     "2026-10-16",
     "2026-10-23",
     "2026-10-30",
-    "2026-11-13"
+    "2026-11-13",
+    "2026-11-20"
   ],
-  "failed": []
+  "failed": [],
+  "remoteFailed": false,
+  "remoteError": null
 }
