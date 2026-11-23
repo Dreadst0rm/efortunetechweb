@@ -10,6 +10,7 @@ import {
 import { applyDigestVisibility } from '../blog/blogFilterDom'
 
 const TOPICS = ['cloud', 'ai', 'security', 'architecture', 'devops'] as const
+
 function filterQueryFromState(q: string, topics: string[], from: string, to: string) {
   return {
     q: q || undefined,
@@ -19,15 +20,26 @@ function filterQueryFromState(q: string, topics: string[], from: string, to: str
   }
 }
 
+function readFilterStateFromLocation(): { q: string; topics: string[]; from: string; to: string } {
+  const parsed = parseDigestSearchParams(window.location.search)
+  return {
+    q: parsed.q ?? '',
+    topics: parsed.topics ?? [],
+    from: parsed.from ?? '',
+    to: parsed.to ?? '',
+  }
+}
+
 function DigestFiltersApp({ index }: { index: DigestIndexEntry[] }) {
-  const [q, setQ] = useState('')
-  const [topics, setTopics] = useState<string[]>([])
-  const [from, setFrom] = useState('')
-  const [to, setTo] = useState('')
+  const initial = readFilterStateFromLocation()
+  const [q, setQ] = useState(initial.q)
+  const [topics, setTopics] = useState(initial.topics)
+  const [from, setFrom] = useState(initial.from)
+  const [to, setTo] = useState(initial.to)
   const historyLock = useRef(false)
   const historyReady = useRef(false)
   const skipDiscretePush = useRef(true)
-  const searchBranchOpen = useRef(false)
+  const searchBranchOpen = useRef(Boolean(initial.q.trim()))
   const lastPushedUrl = useRef<string | null>(null)
   const filterRef = useRef({ q, topics, from, to })
   filterRef.current = { q, topics, from, to }
@@ -68,18 +80,22 @@ function DigestFiltersApp({ index }: { index: DigestIndexEntry[] }) {
     setFrom(parsed.from ?? '')
     setTo(parsed.to ?? '')
     lastPushedUrl.current = `${window.location.pathname}${search}`
-    searchBranchOpen.current = Boolean((parseDigestSearchParams(search).q ?? '').trim())
+    searchBranchOpen.current = Boolean((parsed.q ?? '').trim())
     queueMicrotask(() => {
       historyLock.current = false
     })
   }, [])
 
   useEffect(() => {
-    applyUrlToState(window.location.search)
     const onPop = () => applyUrlToState(window.location.search)
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [applyUrlToState])
+
+  useEffect(() => {
+    lastPushedUrl.current = `${window.location.pathname}${window.location.search}`
+    historyReady.current = true
+  }, [])
 
   const filteredDates = useMemo(() => {
     const ids = filterDigestIndex(index, filterQueryFromState(q, topics, from, to))
@@ -91,12 +107,7 @@ function DigestFiltersApp({ index }: { index: DigestIndexEntry[] }) {
   }, [filteredDates])
 
   useEffect(() => {
-    if (!historyReady.current) {
-      replaceFilterUrl()
-      historyReady.current = true
-      lastPushedUrl.current = currentFilterUrl()
-      return
-    }
+    if (!historyReady.current) return
 
     const hasQ = q.trim().length > 0
     if (hasQ && !searchBranchOpen.current) {
@@ -108,18 +119,17 @@ function DigestFiltersApp({ index }: { index: DigestIndexEntry[] }) {
       searchBranchOpen.current = false
     }
     replaceFilterUrl()
-  }, [q, replaceFilterUrl, currentFilterUrl, pushFilterHistory])
+  }, [q, replaceFilterUrl])
 
   useEffect(() => {
     if (!historyReady.current) return
-    replaceFilterUrl()
     if (skipDiscretePush.current) {
       skipDiscretePush.current = false
       return
     }
     searchBranchOpen.current = false
     pushFilterHistory()
-  }, [topics, from, to, replaceFilterUrl, pushFilterHistory])
+  }, [topics, from, to, pushFilterHistory])
 
   const active = isDigestFilterActive(filterQueryFromState(q, topics, from, to))
 

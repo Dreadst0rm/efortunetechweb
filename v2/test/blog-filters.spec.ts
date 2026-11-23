@@ -72,6 +72,47 @@ test.describe('blog filters', () => {
     await expect(page.getByText(`Showing ${total} of ${total}`)).toBeVisible()
   })
 
+  test('back from topic filter restores unfiltered blog', async ({ page }) => {
+    await waitForBlogFilters(page)
+    const total = await page.locator('[data-digest-date]').count()
+    await page.getByRole('button', { name: 'ai', exact: true }).click()
+    await expect.poll(() => visibleCardCount(page)).toBeLessThan(total)
+    await expect(page).toHaveURL(/\?topic=ai/)
+    await page.goBack()
+    await expect(page).not.toHaveURL(/topic=/)
+    await expect.poll(() => visibleCardCount(page)).toBe(total)
+    await expect(page.getByText(`Showing ${total} of ${total}`)).toBeVisible()
+  })
+
+  test('back steps through consecutive topic filters', async ({ page }) => {
+    await waitForBlogFilters(page)
+    const total = await page.locator('[data-digest-date]').count()
+    await page.getByRole('button', { name: 'ai', exact: true }).click()
+    await expect.poll(() => visibleCardCount(page)).toBeLessThan(total)
+    const aiVisible = await visibleCardCount(page)
+    await page.getByRole('button', { name: 'security', exact: true }).click()
+    await expect.poll(() => visibleCardCount(page)).not.toBe(aiVisible)
+    await expect(page).toHaveURL(/topic=/)
+    await page.goBack()
+    await expect(page).toHaveURL(/\?topic=ai/)
+    await expect.poll(() => visibleCardCount(page)).toBe(aiVisible)
+    await page.goBack()
+    await expect(page).not.toHaveURL(/topic=/)
+    await expect.poll(() => visibleCardCount(page)).toBe(total)
+  })
+
+  test('shared filtered URL does not push duplicate history on load', async ({ page }) => {
+    await page.goto('/blog/?topic=ai')
+    await page.waitForSelector('.bp-digest-filters__status')
+    const lenAfterLoad = await page.evaluate(() => history.length)
+    await page.waitForTimeout(400)
+    const lenAfterHydrate = await page.evaluate(() => history.length)
+    expect(lenAfterHydrate).toBe(lenAfterLoad)
+    await expect(page).toHaveURL(/\?topic=ai/)
+    const total = await page.locator('[data-digest-date]').count()
+    await expect.poll(() => visibleCardCount(page)).toBeLessThan(total)
+  })
+
   test('browser back and forward restore filter state', async ({ page }) => {
     await waitForBlogFilters(page)
     await page.getByRole('button', { name: 'security', exact: true }).click()
