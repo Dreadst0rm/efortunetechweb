@@ -13,6 +13,7 @@ import ThanksPage from '../src/pages/ThanksPage'
 import CaseStudiesPage from '../src/pages/CaseStudiesPage'
 import ServicesPage from '../src/pages/ServicesPage'
 import PricingPage from '../src/pages/PricingPage'
+import QuarterlyInitiativePage from '../src/pages/QuarterlyInitiativePage'
 import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
@@ -46,6 +47,7 @@ const routes: Route[] = [
   route('404.html', 'home', <NotFoundPage />),
   route('services.html', 'services', <ServicesPage />),
   route('pricing.html', 'pricing', <PricingPage />),
+  route('quarterly-initiative/index.html', 'home', <QuarterlyInitiativePage />),
   route('case-studies.html', 'case-studies', <CaseStudiesPage />),
   route('about.html', 'about', <AboutPage />),
   route(

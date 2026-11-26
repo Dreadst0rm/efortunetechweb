@@ -71,6 +71,13 @@ export const pages: Record<string, PageSeo> = {
       'Hourly, advisory, fractional, vCIO, project, and interim CIO options from $150/hour through $20,000+/month.',
     canonicalPath: '/pricing.html',
   },
+  'quarterly-initiative/index.html': {
+    title: 'The $99.99 Quarterly Initiative | Efortune LLC',
+    description:
+      'One focused technology initiative per quarter, led by a senior technology executive. Strategy session, roadmap, and check-in for $99.99.',
+    canonicalPath: '/quarterly-initiative',
+    ogImage: defaultImage,
+  },
   'about.html': {
     title: 'About Ed Fortune | Fractional CIO',
     description:

@@ -7,7 +7,14 @@ type ThemeCase = {
   palette?: string
 }
 
-const pages = ['/', '/contact.html', '/pricing.html', '/case-studies.html', '/blog/'] as const
+const pages = [
+  '/',
+  '/contact.html',
+  '/pricing.html',
+  '/case-studies.html',
+  '/quarterly-initiative',
+  '/blog/',
+] as const
 
 const cases: ThemeCase[] = [
   { savedTheme: 'light', emulatedScheme: 'dark' },

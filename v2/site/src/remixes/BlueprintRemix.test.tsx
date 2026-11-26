@@ -12,4 +12,12 @@ describe('BlueprintRemix', () => {
       }),
     ).toBeInTheDocument()
   })
+
+  it('shows the quarterly initiative badge above hero actions', () => {
+    render(<BlueprintRemix />)
+    const badge = screen.getByRole('link', {
+      name: 'See the $99.99 Quarterly Initiative offer',
+    })
+    expect(badge).toHaveAttribute('href', '/quarterly-initiative')
+  })
 })

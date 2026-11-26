@@ -1,5 +1,6 @@
 import Cta from '../components/Cta'
 import HeroBlueprintDraw from '../components/HeroBlueprintDraw'
+import QuarterlyInitiativeBadge from '../components/QuarterlyInitiativeBadge'
 import Testimonials from '../components/Testimonials'
 import { featuredUseCases, pillars, site } from '../content'
 
@@ -14,6 +15,7 @@ export default function BlueprintRemix() {
           <div className="bp-title-frame">
             <h1 className="bp-title">{site.hero.h1}</h1>
           </div>
+          <QuarterlyInitiativeBadge />
           <p className="bp-sub">{site.hero.subhead}</p>
           <div className="bp-hero__actions" aria-label="Primary actions">
             <a className="bp-hero__btn bp-hero__btn--primary" href="/contact.html?interest=fractional-cio">
