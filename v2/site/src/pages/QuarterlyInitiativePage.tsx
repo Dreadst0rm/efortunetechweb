@@ -90,7 +90,7 @@ export default function QuarterlyInitiativePage() {
         <div className="bp-hero__content">
           <div className="bp-title-frame">
             <h1 id="qi-hero-title" className="bp-title">
-              One quarter. One big technology win. $99.99.
+              One quarter. One big technology win. $9,999.99.
             </h1>
           </div>
           <QuarterlyInitiativeBadge />
@@ -114,7 +114,7 @@ export default function QuarterlyInitiativePage() {
       <article className="bp-article qi-page__body">
         <section className="qi-section" aria-labelledby="qi-offer-title">
           <h2 id="qi-offer-title">The offer</h2>
-          <p className="bp-lead">Here's everything you get for $99.99.</p>
+          <p className="bp-lead">Here's everything you get for $9,999.99.</p>
           <ol className="qi-offer-list">
             {offerItems.map((item) => (
               <li key={item.title}>
@@ -176,7 +176,7 @@ export default function QuarterlyInitiativePage() {
 
         <section className="qi-section qi-section--cta" aria-labelledby="qi-cta-title">
           <h2 id="qi-cta-title">Pick your first initiative</h2>
-          <p className="bp-lead">Book your $99.99 strategy session today.</p>
+          <p className="bp-lead">Book your $9,999.99 strategy session today.</p>
           <p>
             No long-term contract. Just one quarter, one clear goal, and a senior technology leader
             in your corner.

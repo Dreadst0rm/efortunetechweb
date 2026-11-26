@@ -72,9 +72,9 @@ export const pages: Record<string, PageSeo> = {
     canonicalPath: '/pricing.html',
   },
   'quarterly-initiative/index.html': {
-    title: 'The $99.99 Quarterly Initiative | Efortune LLC',
+    title: 'The $9,999.99 Quarterly Initiative | Efortune LLC',
     description:
-      'One focused technology initiative per quarter, led by a senior technology executive. Strategy session, roadmap, and check-in for $99.99.',
+      'One focused technology initiative per quarter, led by a senior technology executive. Strategy session, roadmap, and check-in for $9,999.99.',
     canonicalPath: '/quarterly-initiative',
     ogImage: defaultImage,
   },
