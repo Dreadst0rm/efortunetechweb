@@ -98,7 +98,7 @@ export default function QuarterlyInitiativePage() {
             Most growing companies don't need more technology. They need someone senior to decide what
             matters, set the plan, and keep it moving. That's what you get here: executive-level
             technology leadership, focused on one initiative that moves your business forward this
-            quarter, at an introductory price that makes saying yes easy.
+            quarter, at one fixed price.
           </p>
           <div className="bp-hero__actions" aria-label="Primary actions">
             <a className="bp-hero__btn bp-hero__btn--primary" href={CONTACT_BOOK}>
@@ -123,8 +123,7 @@ export default function QuarterlyInitiativePage() {
             ))}
           </ol>
           <p className="qi-footnote">
-            This is an introductory price for new clients. Work of this depth normally runs well into
-            four figures.
+            This fixed price is for new clients. Similar project engagements are typically $10,000–$50,000.
           </p>
         </section>
 
