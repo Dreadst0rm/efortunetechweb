@@ -104,6 +104,7 @@ export const VALID_INTERESTS = new Set([
   'vcio-msp',
   'project',
   'interim-cio',
+  'quarterly-initiative',
   'not-sure',
 ]);
 
