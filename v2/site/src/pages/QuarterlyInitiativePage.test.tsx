@@ -12,7 +12,7 @@ describe('QuarterlyInitiativePage', () => {
       }),
     ).toBeInTheDocument()
     const badge = screen.getByRole('link', {
-      name: 'See the $99.99 Quarterly Initiative offer',
+      name: 'See the $9,999.99 Quarterly Initiative offer',
     })
     expect(badge).toHaveAttribute('href', '/quarterly-initiative')
     expect(screen.getByRole('link', { name: 'Start my quarter' })).toHaveAttribute(
