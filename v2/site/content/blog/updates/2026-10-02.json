@@ -104,7 +104,7 @@
     {
       "heading": "On Secure",
       "bullets": [
-        "Most agent \"memory\" is a vector database and a hope. Our new member guide lays out a self-hosted design that holds up when facts change, when exact strings matter, and when someone tries to poison what your agent remembers: Postgres and pgvector as one store, versioned facts with receipts, gated writes, and a reflection loop that turns lessons into reviewed skills. A deeper guide on the full architecture, schema, and security checklist on Secure. is in the Secure library",
+        "Most agent \"memory\" is a vector database and a hope. Our new member guide lays out a self-hosted design that holds up when facts change, when exact strings matter, and when someone tries to poison what your agent remembers: Postgres and pgvector as one store, versioned facts with receipts, gated writes, and a reflection loop that turns lessons into reviewed skills. A deeper guide on the full architecture, schema, and security checklist is in the Secure library",
         "Read Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
       ],
       "sources": [
@@ -146,5 +146,5 @@
       ]
     }
   ],
-  "bottomLine": "This week, separate each coding agent's database from the one you mean to keep, and generate the SDK, CLI, and docs agents read inside a pipeline you run. Then check two assumptions before you add machinery: a heavier harness may not beat a minimal coding agent, and a latent link between aligned agents can still raise harmful compliance. The public pitch is a fence outside the chat, not another rule inside the prompt. A deeper guide on Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/ is in the Secure library"
+  "bottomLine": "This week, separate each coding agent's database from the one you mean to keep, and generate the SDK, CLI, and docs agents read inside a pipeline you run. Then check two assumptions before you add machinery: a heavier harness may not beat a minimal coding agent, and a latent link between aligned agents can still raise harmful compliance. The public pitch is a fence outside the chat, not another rule inside the prompt. A deeper guide on Persistent Memory for AI Agents is in the Secure library: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
 }
