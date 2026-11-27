@@ -68,11 +68,11 @@
         "Storefronts are drawing hard lines on third-party shopping agents (Amazon vs Muse) while hyperscalers keep their own — treat agent identity, credential custody, and opt-out as product controls, not footnotes.",
         "Human-in-the-loop training still needs actual humans: contractors using AI to rate AI is both an ops hygiene fail and a model-quality risk.",
         "arXiv’s cluster rhymes with the same bet as guarded observability: history limits, admission control for self-edits, and harness discipline beat open-ended autonomy.",
-        "Want the operating playbooks behind gated remediation and AI maturity? Members unlock guarded observability and the AI Maturity Starter Pack on https://secure.efortune.tech"
+        "Want the operating playbooks behind gated remediation and AI maturity? A deeper guide on guarded observability and the AI Maturity Starter Pack is in the Secure library: https://secure.efortune.tech"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {

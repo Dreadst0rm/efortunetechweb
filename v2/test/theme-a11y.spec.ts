@@ -13,6 +13,14 @@ const pages = [
   '/pricing.html',
   '/case-studies.html',
   '/quarterly-initiative',
+  '/hands-on',
+  '/resilience-and-recovery',
+  '/performance-and-scale',
+  '/security-hardening',
+  '/monitoring',
+  '/ai-practice',
+  '/cloud-migration',
+  '/zero-trust',
   '/blog/',
 ] as const
 

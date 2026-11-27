@@ -18,6 +18,7 @@ import {
   isAllowedOrigin,
   isGibberishMessage,
   isValidCompanySize,
+  isValidProjectTopic,
   isValidInterest,
   readBoundedFormData,
   renderContactFormError,
@@ -319,7 +320,19 @@ describe('interest and company_size validation', () => {
   it('accepts empty or known interest values', () => {
     assert.equal(isValidInterest(''), true);
     assert.equal(isValidInterest('fractional-cio'), true);
+    assert.equal(isValidInterest('resilience-snapshot'), true);
+    assert.equal(isValidInterest('ai-practice'), true);
+    assert.equal(isValidInterest('cyber-insurance-readiness'), true);
     assert.equal(isValidInterest('cloud'), false);
+  });
+
+  it('accepts empty or known project topic values', () => {
+    assert.equal(isValidProjectTopic(''), true);
+    assert.equal(isValidProjectTopic('resilience'), true);
+    assert.equal(isValidProjectTopic('performance-scale'), true);
+    assert.equal(isValidProjectTopic('zero-trust'), true);
+    assert.equal(isValidProjectTopic('cyber-insurance'), true);
+    assert.equal(isValidProjectTopic('cloud'), false);
   });
 
   it('accepts empty or known company size values', () => {

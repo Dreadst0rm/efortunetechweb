@@ -98,6 +98,12 @@ export const OFFICIAL_TEST_SECRETS = new Set([
 export const EMAIL_RE = /^[^\s@<>()",;:\x00-\x1f]+@[^\s@<>()",;:\x00-\x1f]+\.[A-Za-z]{2,}$/;
 
 export const VALID_INTERESTS = new Set([
+  'resilience-snapshot',
+  'ai-practice',
+  'technology-direction',
+  'cloud-move',
+  'zero-trust',
+  'cyber-insurance-readiness',
   'hourly',
   'advisory-retainer',
   'fractional-cio',
@@ -106,6 +112,18 @@ export const VALID_INTERESTS = new Set([
   'interim-cio',
   'quarterly-initiative',
   'not-sure',
+]);
+
+export const VALID_PROJECT_TOPICS = new Set([
+  'resilience',
+  'disaster-recovery',
+  'performance-scale',
+  'security',
+  'ai-practice',
+  'technology-direction',
+  'cloud-move',
+  'zero-trust',
+  'cyber-insurance',
 ]);
 
 export const VALID_COMPANY_SIZES = new Set([
@@ -127,6 +145,12 @@ export function isValidCompanySize(value) {
   const v = String(value ?? '').trim();
   if (!v) return true;
   return VALID_COMPANY_SIZES.has(v);
+}
+
+export function isValidProjectTopic(value) {
+  const v = String(value ?? '').trim();
+  if (!v) return true;
+  return VALID_PROJECT_TOPICS.has(v);
 }
 
 export function escapeHtml(value) {

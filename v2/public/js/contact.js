@@ -11,6 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
       sel.value = interest;
     }
   }
+  const topic = params.get('topic');
+  if (topic) {
+    const topicSel = form.querySelector('select[name="project_topic"]');
+    if (topicSel && topicSel.querySelector(`option[value="${CSS.escape(topic)}"]`)) {
+      topicSel.value = topic;
+    }
+  }
 
   form.addEventListener('submit', function () {
     const btn = form.querySelector('button[type="submit"]');

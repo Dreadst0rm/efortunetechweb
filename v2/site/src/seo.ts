@@ -28,7 +28,7 @@ export const pages: Record<string, PageSeo> = {
     title: 'Fractional CIO & vCIO | efortune.tech',
     moduleScripts: ['/assets/islands/hero.js'],
     description:
-      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO for companies of 50 to 2,000 employees—hands-on expertise that is hard to hire: stability, security, scalability, and resiliency.',
     canonicalPath: '/',
     ogImage: defaultImage,
   },
@@ -71,10 +71,66 @@ export const pages: Record<string, PageSeo> = {
       'Hourly, advisory, fractional, vCIO, project, and interim CIO options from $150/hour through $20,000+/month.',
     canonicalPath: '/pricing.html',
   },
-  'quarterly-initiative/index.html': {
-    title: 'The $9,999.99 Quarterly Initiative | Efortune LLC',
+  'hands-on/index.html': {
+    title: 'Expertise that’s hard to hire | efortune.tech',
     description:
-      'One focused technology initiative per quarter, led by a senior technology executive. Strategy session, roadmap, and check-in for $9,999.99.',
+      'Hands-on stability, security, scalability, and resiliency—AI practice, cloud moves, zero trust, security roadmaps, and fixed-price technical projects.',
+    canonicalPath: '/hands-on',
+    ogImage: defaultImage,
+  },
+  'resilience-and-recovery/index.html': {
+    title: 'Resilience & disaster recovery projects | efortune.tech',
+    description:
+      'Ride the storm when your cloud provider does not—multi-cloud backups, tested restores, and runbooks from $15,000–$20,000.',
+    canonicalPath: '/resilience-and-recovery',
+    ogImage: defaultImage,
+  },
+  'performance-and-scale/index.html': {
+    title: 'Performance & scale — load-test-and-fix | efortune.tech',
+    description:
+      'Measure, fix, and prove faster response times before growth breaks what you have. Fixed projects from $12,000–$25,000.',
+    canonicalPath: '/performance-and-scale',
+    ogImage: defaultImage,
+  },
+  'security-hardening/index.html': {
+    title: 'Cyber protection & 3–5 year security roadmap | efortune.tech',
+    description:
+      'Near-term hardening plus a 3–5 year protection plan—help closing gaps and preparing evidence for cyber insurance applications without promising coverage.',
+    canonicalPath: '/security-hardening',
+    ogImage: defaultImage,
+  },
+  'ai-practice/index.html': {
+    title: 'AI as a practice | efortune.tech',
+    description:
+      'Stand up AI as an ongoing capability: use cases, guardrails, governance, data safety, and measuring payoff—not one-off tools.',
+    canonicalPath: '/ai-practice',
+    ogImage: defaultImage,
+  },
+  'cloud-migration/index.html': {
+    title: 'Cloud migration & consolidation | efortune.tech',
+    description:
+      'Plan and lead cloud moves with cost control, failover, and runbooks your team can operate.',
+    canonicalPath: '/cloud-migration',
+    ogImage: defaultImage,
+  },
+  'zero-trust/index.html': {
+    title: 'Zero trust access (replace the VPN) | efortune.tech',
+    description:
+      'Identity-based access to apps—fewer open doors, better remote work, vendor-neutral design.',
+    canonicalPath: '/zero-trust',
+    ogImage: defaultImage,
+  },
+  'monitoring/index.html': {
+    title: 'Monitoring & Keystone | efortune.tech',
+    description:
+      'Know email and domain problems before customers do—Keystone monitoring plus the same hands-on ladder for deeper fixes.',
+    canonicalPath: '/monitoring',
+    ogImage: defaultImage,
+  },
+  'quarterly-initiative/index.html': {
+    title: 'The $9,500 Quarterly Initiative | Efortune LLC',
+    description:
+      'Any one hands-on lineup project for $9,500: assessment, roadmap, verified delivery, executive readout, runbooks, 30-day support, and industry peer evaluation ($3,800 value included). No long-term contract.',
     canonicalPath: '/quarterly-initiative',
     ogImage: defaultImage,
   },

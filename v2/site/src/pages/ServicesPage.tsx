@@ -7,9 +7,9 @@ export default function ServicesPage() {
       <header>
         <h1>Services</h1>
         <p className="bp-lead">
-          Fractional CIO and vCIO leadership for companies of 50 to 2,000 employees, across
-          development, infrastructure, operations, and security—with AI folded in where it helps,
-          always with guardrails.
+          Straightforward options from an hour of advice through interim CIO coverage, including
+          resilience, disaster recovery, performance, scale, and security—with hands-on delivery when
+          the work needs a senior engineer in the room.
         </p>
       </header>
 
@@ -39,7 +39,7 @@ export default function ServicesPage() {
       </section>
 
       <p className="bp-inline-cta">
-        <a href="/contact.html">Book a 30-minute call</a>
+        <a href="/contact.html?interest=resilience-snapshot">Book a free Resilience Snapshot</a>
       </p>
     </article>
   )

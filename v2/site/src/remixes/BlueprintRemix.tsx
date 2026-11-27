@@ -16,13 +16,14 @@ export default function BlueprintRemix() {
             <h1 className="bp-title">{site.hero.h1}</h1>
           </div>
           <QuarterlyInitiativeBadge />
+          <p className="bp-hero__tagline">{site.hero.tagline}</p>
           <p className="bp-sub">{site.hero.subhead}</p>
           <div className="bp-hero__actions" aria-label="Primary actions">
-            <a className="bp-hero__btn bp-hero__btn--primary" href="/contact.html?interest=fractional-cio">
-              Talk about a fractional CIO
+            <a className="bp-hero__btn bp-hero__btn--primary" href={site.cta.href}>
+              {site.cta.label}
             </a>
-            <a className="bp-hero__btn bp-hero__btn--secondary" href="/contact.html#quick-check-island">
-              Check your domain free
+            <a className="bp-hero__btn bp-hero__btn--secondary" href={site.cta.secondaryHref}>
+              {site.cta.secondaryLabel}
             </a>
           </div>
           <p className="bp-hero__pricing">
@@ -38,8 +39,12 @@ export default function BlueprintRemix() {
       </section>
 
       <section className="bp-services" id="pillars">
-        <p className="bp-services__kicker">How I help</p>
-        <h2 className="bp-services__title">Four pillars</h2>
+        <p className="bp-services__kicker">Expertise that&apos;s hard to hire</p>
+        <h2 className="bp-services__title">Stability, security, scalability, resiliency</h2>
+        <p className="bp-services__lead">
+          Fixed-price hands-on projects and ongoing leadership—{' '}
+          <a href="/hands-on">see the full offer lineup</a>.
+        </p>
         <div className="bp-services__grid">
           {pillars.map((p) => (
             <article key={p.id} className="bp-service-card">
@@ -72,7 +77,7 @@ export default function BlueprintRemix() {
         </p>
       </section>
 
-      <Testimonials variant="bp" kicker="What leaders say" />
+      <Testimonials variant="bp" kicker="What colleagues say" title="What colleagues say" />
 
       <Cta variant="bp" />
     </div>

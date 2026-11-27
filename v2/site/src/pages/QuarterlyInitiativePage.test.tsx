@@ -8,14 +8,18 @@ describe('QuarterlyInitiativePage', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /one quarter\. one big technology win/i,
+        name: /any one lineup project/i,
       }),
     ).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { level: 2, name: /what your \$9,500 project includes/i }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(/industry peer evaluation/i).length).toBeGreaterThan(0)
     const badge = screen.getByRole('link', {
-      name: 'See the $9,999.99 Quarterly Initiative offer',
+      name: /Quarterly Initiative: any one lineup project/i,
     })
     expect(badge).toHaveAttribute('href', '/quarterly-initiative')
-    expect(screen.getByRole('link', { name: 'Start my quarter' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Start my project' })).toHaveAttribute(
       'href',
       '/contact.html?interest=quarterly-initiative',
     )

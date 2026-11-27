@@ -1,7 +1,7 @@
 {
   "date": "2026-10-02",
   "title": "Weekly: a Postgres branch per coding agent, Cloudflare's Forge and EmDash 1.0, a fence outside the chat, and persistent agent memory",
-  "summary": "Weekly Digest for Sep 26–Oct 1, 2026: pgEdge Starfleet gives each coding agent its own copy-on-write Postgres branch, Cloudflare open-sourced the Forge generation pipeline and shipped EmDash 1.0, and two Sep 30 arXiv papers find that latent multi-agent links can raise harmful compliance and that heavier ML-engineering harnesses did not beat a minimal coding agent. The week's public pitch is an Agent Boundary Scorecard: score whether writes, secrets, and outbound access sit outside the chat. Members can read Persistent Memory for AI Agents on Secure.",
+  "summary": "Weekly Digest for Sep 26–Oct 1, 2026: pgEdge Starfleet gives each coding agent its own copy-on-write Postgres branch, Cloudflare open-sourced the Forge generation pipeline and shipped EmDash 1.0, and two Sep 30 arXiv papers find that latent multi-agent links can raise harmful compliance and that heavier ML-engineering harnesses did not beat a minimal coding agent. The week's public pitch is an Agent Boundary Scorecard: score whether writes, secrets, and outbound access sit outside the chat. A deeper guide on persistent memory for AI agents is in the Secure library.",
   "tone": "reception",
   "sections": [
     {
@@ -104,7 +104,7 @@
     {
       "heading": "On Secure",
       "bullets": [
-        "Most agent \"memory\" is a vector database and a hope. Our new member guide lays out a self-hosted design that holds up when facts change, when exact strings matter, and when someone tries to poison what your agent remembers: Postgres and pgvector as one store, versioned facts with receipts, gated writes, and a reflection loop that turns lessons into reviewed skills. Members can read the full architecture, schema, and security checklist on Secure.",
+        "Most agent \"memory\" is a vector database and a hope. Our new member guide lays out a self-hosted design that holds up when facts change, when exact strings matter, and when someone tries to poison what your agent remembers: Postgres and pgvector as one store, versioned facts with receipts, gated writes, and a reflection loop that turns lessons into reviewed skills. A deeper guide on the full architecture, schema, and security checklist on Secure. is in the Secure library",
         "Read Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
       ],
       "sources": [
@@ -146,5 +146,5 @@
       ]
     }
   ],
-  "bottomLine": "This week, separate each coding agent's database from the one you mean to keep, and generate the SDK, CLI, and docs agents read inside a pipeline you run. Then check two assumptions before you add machinery: a heavier harness may not beat a minimal coding agent, and a latent link between aligned agents can still raise harmful compliance. The public pitch is a fence outside the chat, not another rule inside the prompt. Members can read Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/"
+  "bottomLine": "This week, separate each coding agent's database from the one you mean to keep, and generate the SDK, CLI, and docs agents read inside a pipeline you run. Then check two assumptions before you add machinery: a heavier harness may not beat a minimal coding agent, and a latent link between aligned agents can still raise harmful compliance. The public pitch is a fence outside the chat, not another rule inside the prompt. A deeper guide on Persistent Memory for AI Agents on Secure: https://secure.efortune.tech/guides/agent-memory-reference-architecture/ is in the Secure library"
 }

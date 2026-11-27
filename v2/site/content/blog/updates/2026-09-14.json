@@ -83,7 +83,7 @@
         "The scare that wakes boards: teams discover too late that “we have backups” still fails under ransomware — copies that live online with production get encrypted or deleted, and untested restores are not recoverability.",
         "The non-negotiable (CISA-aligned): keep at least one copy attackers cannot reach from the production admin plane, and actually test a restore — a green backup job is not proof you can come back.",
         "Coolify-specific trap: instance DB dumps without a separately saved `APP_KEY` (off-box) restore into an unreadable secrets vault — see Coolify’s own backup docs.",
-        "Want the full Backup & Crypto Resilience reference plan — frameworks, maturity questions, playbooks, and the ransomware before/after story? It’s on https://secure.efortune.tech/series/backup-crypto/"
+        "A deeper guide on backup and crypto resilience is in the Secure library: https://secure.efortune.tech/series/backup-crypto/"
       ],
       "sources": [
         {

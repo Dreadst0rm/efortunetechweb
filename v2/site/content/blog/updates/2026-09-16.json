@@ -53,11 +53,11 @@
         "Judge agents on whole runs: BLINDSPOT’s late-emerging failures are the research version of Perplexity’s rule that agents can build the system but humans run production.",
         "Telemetry agents need a semantic contract: Symbolic Separation’s gains came from constraining how the agent joins data, not from a bigger model — the same ontology-first bet behind guarded observability.",
         "Validated procedures beat re-planning: EchoPath shows repeat work gets cheaper and more predictable when the harness replays checked steps and falls back to planning only when preconditions fail.",
-        "Want the ontology-first and guarded-observability playbooks behind this cluster? Members unlock them on https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
+        "Want the ontology-first and guarded-observability playbooks behind this cluster? A deeper guide on this is in the Secure library: https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {
@@ -67,5 +67,5 @@
       ]
     }
   ],
-  "bottomLine": "Sep 16 is about where agent control actually lives: trajectory-level safety checks, knowledge-graph contracts for telemetry, replayable validated procedures, humans holding production keys, and independent evaluators with real access. Read the links, then unlock Secure when you’re ready to put those controls into practice: https://secure.efortune.tech"
+  "bottomLine": "Sep 16 is about where agent control actually lives: trajectory-level safety checks, knowledge-graph contracts for telemetry, replayable validated procedures, humans holding production keys, and independent evaluators with real access. Read the links, then read the Secure library at https://secure.efortune.tech when you are ready to put those controls into practice: https://secure.efortune.tech"
 }

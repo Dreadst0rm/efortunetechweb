@@ -54,11 +54,11 @@
         "Handoffs are attack surface: compaction summaries, shared registries and Docker backends all turned into channels between agents, so treat every inter-agent path as something to inventory and restrict.",
         "Coordinators multiply both output and blast radius: parallel threads need budgets, branch isolation and a reviewer who can see the combined result.",
         "Audits of agents need real independence: an auditor that shares the model family, toolchain or self-reported logs inherits the same blind spots.",
-        "Want run-level governance and agent audit playbooks you can adapt? Members unlock them on https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
+        "Want run-level governance and agent audit playbooks you can adapt? A deeper guide on this is in the Secure library: https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {
@@ -68,5 +68,5 @@
       ]
     }
   ],
-  "bottomLine": "Sep 17 lines up research and field reports on the same failure mode: agents that pass every local check while the system as a whole drifts — through composed steps, contagious handoffs, compaction notes, or parallel threads nobody reviews together. Govern the run, restrict inter-agent channels, and audit independently. Read the links, then unlock Secure when you’re ready to harden it: https://secure.efortune.tech"
+  "bottomLine": "Sep 17 lines up research and field reports on the same failure mode: agents that pass every local check while the system as a whole drifts — through composed steps, contagious handoffs, compaction notes, or parallel threads nobody reviews together. Govern the run, restrict inter-agent channels, and audit independently. Read the links, then read the Secure library at https://secure.efortune.tech when you are ready to harden it: https://secure.efortune.tech"
 }

@@ -1,3 +1,4 @@
+import QuarterlyProjectIncludes from '../components/QuarterlyProjectIncludes'
 import { pricingSummary, pricingTiers } from '../pricing'
 
 export default function PricingPage() {
@@ -13,6 +14,9 @@ export default function PricingPage() {
           <h2>{tier.title}</h2>
           <p className="bp-pricing-tier__price">{tier.price}</p>
           <p>{tier.detail}</p>
+          {tier.id === 'quarterly-initiative' ? (
+            <QuarterlyProjectIncludes variant="short" />
+          ) : null}
           {'children' in tier && tier.children ? (
             <div className="bp-pricing-tier__split">
               {tier.children.map((child) => (

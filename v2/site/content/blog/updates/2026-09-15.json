@@ -11,7 +11,7 @@
         "Two pains that still burn budget: old AI — score dashboards when investigators need join paths across silos; new AI — copilots / naive RAG without shared vocabulary → hallucinations, wrong grain, PoC purgatory.",
         "Mid-market reality: steep enterprise ontology platforms vs shallow auto-GraphRAG. The edge is relationship literacy and ontology-lite practices — not another horizontal “AI platform.”",
         "Move now: keep classical ML where scores beat explanations; invest meaning/relationships where multi-hop GenAI fails — not “replace all ML with graphs.”",
-        "Want the Starter Pack — primer, practice checklist, and relationship scorecard that turn this into next-week action? It’s waiting on https://secure.efortune.tech"
+        "A deeper AI Maturity Starter Pack is in the Secure library: https://secure.efortune.tech/series/ai-maturity/"
       ],
       "sources": [
         {
@@ -39,7 +39,7 @@
         "The pattern in one line: human-modeled metrics/definitions → inferred context with authority and permissions → coworkers/agents on that unified context (Databricks names this Metric Views / Genie Ontology / Genie One).",
         "Why dual-stack still wins: that pattern grounds agents; it does not replace classical ML scores.",
         "You don’t need a Lakehouse to start — Fabric, Bedrock GraphRAG, and Palantir are parallel futures; mid-market teams still win by learning the pattern first.",
-        "Read the full companion chapter on Secure — constitution, living graph, and AI coworkers translated for operators who aren’t all-in on one vendor: https://secure.efortune.tech/guides/ai-maturity-databricks-shaped-future/"
+        "A deeper companion chapter is in the Secure library — constitution, living graph, and AI coworkers translated for operators who aren’t all-in on one vendor: https://secure.efortune.tech/guides/ai-maturity-databricks-shaped-future/"
       ],
       "sources": [
         {
@@ -98,7 +98,7 @@
         "The observability frontier isn’t another dashboard pack — it’s closing the loop from signal to explanation to guarded action, without unsupervised self-heal of unknown unknowns.",
         "What durable teams bet on: assisted investigation, human/policy-gated remediation, and progressive delivery rollback — real before “fully autonomous ops.”",
         "Public anchors worth watching: OpenTelemetry Profiles public Alpha (experiment, not critical path); progressive delivery Analysis already rolls back without GenAI risk.",
-        "Ready for the operating playbook behind that loop? Members get it on https://secure.efortune.tech — start with the observability series, then the guarded-action chapter."
+        "A deeper operating playbook is in the Secure library: https://secure.efortune.tech — start with the observability series, then the guarded-action chapter."
       ],
       "sources": [
         {
@@ -110,7 +110,7 @@
           "url": "https://argoproj.github.io/argo-rollouts/"
         },
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         }
       ]

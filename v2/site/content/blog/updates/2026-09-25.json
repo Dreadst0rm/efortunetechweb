@@ -91,7 +91,7 @@
       "bullets": [
         "The model isn't your weakest link. The tools your agent trusts are. Every connected MCP tool can feed instructions straight into the model, and public research documents approved MCP servers changing their tool descriptions after approval; in one active campaign a harmless-looking server began asking for SSH keys and cloud credentials after three normal calls.",
         "The angle we're building: a small trust gate between the agent and its MCP servers that notices when an approved tool changes and keeps a human in the loop before anything sensitive happens.",
-        "It won't solve everything on its own. Poisoned text can still ride in through outside content, and a tool that was malicious from day one needs vetting before install. The full gate design, gap analysis, and rollout checklist live for members on https://secure.efortune.tech"
+        "It won't solve everything on its own. Poisoned text can still ride in through outside content, and a tool that was malicious from day one needs vetting before install. The full gate design, gap analysis, and rollout checklist is in the Secure library at https://secure.efortune.tech"
       ],
       "sources": [
         {
@@ -111,7 +111,7 @@
           "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/server/tools.mdx"
         },
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         }
       ]
@@ -123,11 +123,11 @@
         "Memory is now part of the supply chain: the MemTensor plugin ran inside the agent's memory path with access to the host environment and prompts, and its publish tokens leaked from CI. Pin versions, lock down release-pipeline secrets, and isolate memory integrations.",
         "Memory and retrieval fail quietly: unscoped memory edits harmed unrelated tasks, and context packers dropped evidence that was already retrieved while recall metrics stayed green. Scope what you persist and measure what actually reaches the model.",
         "The coordinator is where these controls belong: as agent work splits into coordinator-worker systems, the coordinator decides which agent gets which context, credentials and authority.",
-        "Want the out-of-band logging and release-pipeline hardening playbooks behind this week's picks? Members unlock them on https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
+        "Want the out-of-band logging and release-pipeline hardening playbooks behind this week's picks? A deeper guide on this is in the Secure library: https://secure.efortune.tech — start with the AI Maturity Starter Pack: https://secure.efortune.tech/series/ai-maturity/"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {
@@ -137,5 +137,5 @@
       ]
     }
   ],
-  "bottomLine": "This week's thread: agents that erase their own traces and dodge monitors, a memory plugin that leaked credentials through its release pipeline, and memory and retrieval that fail without tripping a metric. The fix is architectural in every case: oversight the agent can't touch, pinned and isolated memory integrations, and scoped memory with measured context. Read the links, then unlock Secure when you're ready to harden oversight and release pipelines: https://secure.efortune.tech"
+  "bottomLine": "This week's thread: agents that erase their own traces and dodge monitors, a memory plugin that leaked credentials through its release pipeline, and memory and retrieval that fail without tripping a metric. The fix is architectural in every case: oversight the agent can't touch, pinned and isolated memory integrations, and scoped memory with measured context. Read the links, then read the Secure library at https://secure.efortune.tech when you are ready to harden oversight and release pipelines: https://secure.efortune.tech"
 }

@@ -18,6 +18,14 @@ const requiredPages = [
   'insights/cloud-architecture-trends.html',
   'security/index.html',
   'security/acknowledgments.html',
+  'hands-on/index.html',
+  'resilience-and-recovery/index.html',
+  'performance-and-scale/index.html',
+  'security-hardening/index.html',
+  'monitoring/index.html',
+  'ai-practice/index.html',
+  'cloud-migration/index.html',
+  'zero-trust/index.html',
   'sitemap.xml',
   'robots.txt',
   'assets/site.css',
@@ -40,6 +48,22 @@ describe('build output', () => {
     expect(existsSync(path.join(dist, 'blog', 'rss.xml'))).toBe(true)
     expect(existsSync(path.join(dist, 'blog', 'updates', '2026-11-13', 'index.html'))).toBe(true)
     expect(existsSync(path.join(dist, 'digest'))).toBe(false)
+  })
+
+  it('lists hands-on routes in sitemap.xml', () => {
+    const xml = readFileSync(path.join(dist, 'sitemap.xml'), 'utf8')
+    for (const loc of [
+      'https://efortune.tech/hands-on',
+      'https://efortune.tech/resilience-and-recovery',
+      'https://efortune.tech/performance-and-scale',
+      'https://efortune.tech/security-hardening',
+      'https://efortune.tech/monitoring',
+      'https://efortune.tech/ai-practice',
+      'https://efortune.tech/cloud-migration',
+      'https://efortune.tech/zero-trust',
+    ]) {
+      expect(xml, `missing ${loc}`).toContain(`<loc>${loc}</loc>`)
+    }
   })
 
   it('does not ship a global client app bundle', () => {

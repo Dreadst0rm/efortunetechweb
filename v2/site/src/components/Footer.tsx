@@ -19,7 +19,13 @@ export default function Footer() {
               <a href="/services.html">Services</a>
             </li>
             <li>
+              <a href="/hands-on">Hands-on</a>
+            </li>
+            <li>
               <a href="/pricing.html">Pricing</a>
+            </li>
+            <li>
+              <a href="/quarterly-initiative">Quarterly Initiative</a>
             </li>
             <li>
               <a href="/case-studies.html">Case studies</a>

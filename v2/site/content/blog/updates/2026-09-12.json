@@ -11,7 +11,7 @@
         "What’s getting real: assisted investigation and gated remediation on top of OpenTelemetry and progressive delivery.",
         "What’s still oversold: unsupervised self-healing of unknown unknowns across heterogeneous stacks.",
         "Bet: prefer assisted RCA and human-gated action; treat open-ended autonomy as earned, not a SKU.",
-        "Want the operating playbook behind that loop? It’s on https://secure.efortune.tech — members get the depth Digest can’t hold."
+        "A deeper operating playbook on this topic is in the Secure library: https://secure.efortune.tech"
       ],
       "sources": [
         {
@@ -23,7 +23,7 @@
           "url": "https://argoproj.github.io/argo-rollouts/"
         },
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         }
       ]
