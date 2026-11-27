@@ -1,4 +1,5 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 export default function CloudMigrationPage() {
   return (
@@ -30,8 +31,8 @@ export default function CloudMigrationPage() {
             <li>Runbooks and handoff so your team or MSP can operate what we land.</li>
           </ul>
           <p>
-            <strong>Fixed project:</strong> typically $10,000–$50,000 depending on scope; priced in writing before work
-            starts.
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract}{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

@@ -1,4 +1,5 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 export default function AiPracticePage() {
   return (
@@ -30,8 +31,8 @@ export default function AiPracticePage() {
             <li>Safe adoption patterns from organizations your size—reduces risk without pretending AI is risk-free.</li>
           </ul>
           <p>
-            <strong>Typical engagement:</strong> fixed-scope project or Quarterly Initiative focus area; scope in
-            writing before kickoff.
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract}{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

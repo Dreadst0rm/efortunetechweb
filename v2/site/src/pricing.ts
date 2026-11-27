@@ -23,7 +23,7 @@ export const pricingTiers = [
     title: 'Quarterly Initiative',
     price: '$9,999.99',
     detail:
-      'One focused quarter: strategy session, written roadmap, 30-day check-in, and one measurable win in resilience, recovery, performance, scale, security, or cost—no long-term contract.',
+      'Any one project from the hands-on lineup: strategy session, defined success outcome, delivery through the quarter, and a full industry evaluation report ($3,800 value included). No long-term contract.',
     cta: {
       label: 'Start your quarter',
       href: '/contact.html?interest=quarterly-initiative',
@@ -67,7 +67,7 @@ export const pricingTiers = [
     title: 'Project-based',
     price: '$10,000–$50,000 total',
     detail:
-      'A focused technical project or assessment: disaster recovery and backups, performance and scale, a cybersecurity overhaul, ERP selection, or technology review for a merger or acquisition.',
+      'Larger multi-part work: disaster recovery and backups, performance and scale, a cybersecurity overhaul, ERP selection, or technology review for a merger or acquisition. For one lineup project, see the Quarterly Initiative.',
     cta: { label: 'Scope a project', href: '/contact.html?interest=project' },
   },
   {

@@ -1,4 +1,5 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 export default function PerformanceScalePage() {
   return (
@@ -29,7 +30,9 @@ export default function PerformanceScalePage() {
             <li>Capacity notes so the next growth spike is planned, not discovered at 2 a.m.</li>
           </ul>
           <p>
-            <strong>Fixed project:</strong> $12,000–$25,000 depending on stack and traffic shape.
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract} Larger scoped engagements:
+            $12,000–$25,000 depending on stack and traffic shape.{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

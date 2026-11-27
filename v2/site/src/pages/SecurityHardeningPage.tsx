@@ -1,5 +1,6 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
 import { cyberInsuranceReference } from '../handsOn'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 export default function SecurityHardeningPage() {
   return (
@@ -46,7 +47,9 @@ export default function SecurityHardeningPage() {
             <li>One credential set per service—no shared admin passwords across the stack.</li>
           </ul>
           <p>
-            <strong>Fixed project:</strong> $10,000–$20,000 depending on environment complexity.
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract} Larger near-term hardening:{' '}
+            $10,000–$20,000 depending on environment complexity.{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

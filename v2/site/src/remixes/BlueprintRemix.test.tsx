@@ -16,7 +16,7 @@ describe('BlueprintRemix', () => {
   it('shows the quarterly initiative badge above hero actions', () => {
     render(<BlueprintRemix />)
     const badge = screen.getByRole('link', {
-      name: 'See the $9,999.99 Quarterly Initiative offer',
+      name: /Quarterly Initiative: any one lineup project/i,
     })
     expect(badge).toHaveAttribute('href', '/quarterly-initiative')
   })

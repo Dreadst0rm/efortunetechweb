@@ -1,25 +1,13 @@
 import QuarterlyInitiativeBadge from '../components/QuarterlyInitiativeBadge'
+import {
+  QUARTERLY_INITIATIVE_PRICE,
+  quarterlyInitiativeOfferItems,
+  quarterlyInitiativePitch,
+  quarterlyLargerProjectsNote,
+  quarterlyNoContract,
+} from '../quarterlyInitiative'
 
 const CONTACT_BOOK = '/contact.html?interest=quarterly-initiative'
-
-const offerItems = [
-  {
-    title: 'A one-hour strategy session',
-    body: 'We dig into your systems, your team, and your goals, and find where technology is holding you back or costing you money.',
-  },
-  {
-    title: 'One quarterly initiative, scoped for results',
-    body: 'You choose the focus. We turn it into a clear, measurable goal you can actually finish in 90 days.',
-  },
-  {
-    title: 'A written roadmap',
-    body: 'Priorities, quick wins, risks, and a realistic budget, written in plain language your team and your IT provider can act on right away.',
-  },
-  {
-    title: 'A 30-day check-in',
-    body: "We review progress, clear blockers, and adjust the plan, so the roadmap doesn't end up in a drawer.",
-  },
-] as const
 
 const initiatives = [
   {
@@ -58,20 +46,20 @@ const initiatives = [
 
 const processSteps = [
   {
-    title: 'Pick and scope',
-    body: "You choose the initiative. Together we define what success looks like and how we'll measure it.",
+    title: 'Pick from the lineup',
+    body: 'Choose any one project on the hands-on offer list—or we map your priority to the closest fit.',
   },
   {
-    title: 'Assess and plan',
-    body: 'We review your systems, people, and vendors, then hand you a roadmap built for your business, not a generic checklist.',
+    title: 'Define success and delivery',
+    body: 'We agree on the outcome, timeline, and who does what before kickoff. No surprise scope.',
   },
   {
-    title: 'Carry it out, with steering',
-    body: 'I lead the initiative with your team or your IT provider. I help do the technical work, make the calls that need a senior voice, and clear roadblocks so the quarter actually finishes.',
+    title: 'Deliver through the quarter',
+    body: 'I lead with your team or IT provider, hands-on where it counts, until the agreed outcome is met.',
   },
   {
-    title: 'Review and choose next',
-    body: "We measure what changed, share what we learned, and line up the next quarter's win.",
+    title: 'Industry evaluation',
+    body: 'You receive a full report on peers, competition, and future readiness—the included evaluation valued at $3,800 on its own.',
   },
 ] as const
 
@@ -82,7 +70,7 @@ const partnerPoints = [
   },
   {
     title: 'Momentum that compounds',
-    body: 'Each quarter builds on the last. A steady technology leader beats starting from scratch every time.',
+    body: 'Each quarter can build on the last. A steady technology leader beats starting from scratch every time.',
   },
   {
     title: 'Executive leadership without a full-time hire',
@@ -102,20 +90,18 @@ export default function QuarterlyInitiativePage() {
         <div className="bp-hero__content">
           <div className="bp-title-frame">
             <h1 id="qi-hero-title" className="bp-title">
-              One quarter. One big technology win. $9,999.99.
+              Any one lineup project. {QUARTERLY_INITIATIVE_PRICE}.
             </h1>
           </div>
           <QuarterlyInitiativeBadge />
-          <p className="bp-sub">
-            Most growing companies don't need more technology. They need someone senior to decide what
-            matters, set the plan, and keep it moving. That's what you get here: executive-level
-            technology leadership, focused on one initiative that moves your business forward this
-            quarter—including resilience, recovery, performance, scale, or security—for a fixed
-            $9,999.99.
+          <p className="bp-sub">{quarterlyInitiativePitch}</p>
+          <p className="qi-no-contract">{quarterlyNoContract}</p>
+          <p className="bp-inline-cta">
+            <a href="/hands-on">See expertise that&apos;s hard to hire</a>
           </p>
           <div className="bp-hero__actions" aria-label="Primary actions">
             <a className="bp-hero__btn bp-hero__btn--primary" href={CONTACT_BOOK}>
-              Start my quarter
+              Start my project
             </a>
             <a className="bp-hero__btn bp-hero__btn--secondary" href="#qi-process">
               See how it works
@@ -127,24 +113,22 @@ export default function QuarterlyInitiativePage() {
       <article className="bp-article qi-page__body">
         <section className="qi-section" aria-labelledby="qi-offer-title">
           <h2 id="qi-offer-title">The offer</h2>
-          <p className="bp-lead">Here's everything you get for $9,999.99.</p>
+          <p className="bp-lead">Here&apos;s everything included for {QUARTERLY_INITIATIVE_PRICE}.</p>
           <ol className="qi-offer-list">
-            {offerItems.map((item) => (
+            {quarterlyInitiativeOfferItems.map((item) => (
               <li key={item.title}>
                 <strong>{item.title}:</strong> {item.body}
               </li>
             ))}
           </ol>
-          <p className="qi-footnote">
-            This is a fixed-price first quarter for new clients. Similar project work usually starts at
-            $10,000 and can run to $50,000, depending on scope.
-          </p>
+          <p className="qi-footnote">{quarterlyLargerProjectsNote}</p>
         </section>
 
         <section className="qi-section" aria-labelledby="qi-initiatives-title">
-          <h2 id="qi-initiatives-title">Choose your initiative</h2>
+          <h2 id="qi-initiatives-title">Choose your project</h2>
           <p className="bp-lead">
-            Pick the one that matters most right now. You can take on another next quarter.
+            Examples of what you can tackle in one quarter—or{' '}
+            <a href="/hands-on">browse the full hands-on lineup</a>.
           </p>
           <div className="qi-initiative-grid">
             {initiatives.map((item) => (
@@ -157,7 +141,7 @@ export default function QuarterlyInitiativePage() {
         </section>
 
         <section className="qi-section" id="qi-process" aria-labelledby="qi-process-title">
-          <h2 id="qi-process-title">How each quarter works</h2>
+          <h2 id="qi-process-title">How it works</h2>
           <ol className="qi-process-list">
             {processSteps.map((step, index) => (
               <li key={step.title}>
@@ -189,15 +173,12 @@ export default function QuarterlyInitiativePage() {
         </section>
 
         <section className="qi-section qi-section--cta" aria-labelledby="qi-cta-title">
-          <h2 id="qi-cta-title">Pick your first initiative</h2>
+          <h2 id="qi-cta-title">Pick your project</h2>
           <p className="bp-lead">
-            Start your $9,999.99 quarter: strategy session, a written roadmap, and a 30-day check-in
-            included.
+            {QUARTERLY_INITIATIVE_PRICE}: strategy session, defined success outcome, delivery through the quarter,
+            and the industry evaluation report included.
           </p>
-          <p>
-            No long-term contract. Just one quarter, one clear goal, and a senior technology leader
-            in your corner.
-          </p>
+          <p>{quarterlyNoContract}</p>
           <p>
             <a className="bp-hero__btn bp-hero__btn--primary" href={CONTACT_BOOK}>
               Book my strategy session

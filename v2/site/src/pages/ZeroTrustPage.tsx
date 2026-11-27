@@ -1,4 +1,5 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 export default function ZeroTrustPage() {
   return (
@@ -30,8 +31,8 @@ export default function ZeroTrustPage() {
             <li>Documentation your IT partner can operate—no proprietary lock-in required in the write-up.</li>
           </ul>
           <p>
-            <strong>Fixed project:</strong> typically $10,000–$50,000 depending on app count and identity maturity; scoped
-            in writing.
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract}{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

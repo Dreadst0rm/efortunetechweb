@@ -54,8 +54,9 @@ export default function HandsOnHubPage() {
         <section aria-labelledby="ho-lineup-title">
           <h2 id="ho-lineup-title">The offer lineup</h2>
           <p className="bp-lead">
-            Each engagement starts the same way: a free Resilience Snapshot, then a written fixed-price
-            scope—or a retainer when you need a technology leader on call.
+            Start with a free Resilience Snapshot, deliver any one lineup project for $9,999.99 through the{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative</a> (industry evaluation included), or scope a larger
+            multi-part project on <a href="/pricing.html">pricing</a>.
           </p>
           <div className="ho-offer-list">
             {hubPrimaryOffers.map((offer) => (

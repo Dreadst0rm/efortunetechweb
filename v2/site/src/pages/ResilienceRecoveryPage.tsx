@@ -1,5 +1,6 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
 import { outageReferences } from '../handsOn'
+import { quarterlyNoContract, startWithQuarterlyLine } from '../quarterlyInitiative'
 
 const PROJECT_PRICE = '$15,000–$20,000 depending on industry'
 
@@ -32,7 +33,8 @@ export default function ResilienceRecoveryPage() {
             <li>Plain-English report plus technical appendix for your IT partner or internal team.</li>
           </ul>
           <p>
-            <strong>Fixed project:</strong> {PROJECT_PRICE}
+            <strong>{startWithQuarterlyLine}</strong> {quarterlyNoContract} Larger scoped engagements:{' '}
+            {PROJECT_PRICE}. <a href="/quarterly-initiative">Quarterly Initiative details</a>.
           </p>
         </section>
 

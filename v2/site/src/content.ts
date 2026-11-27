@@ -10,7 +10,7 @@ export const site = {
     subhead:
       'Fractional CIO and vCIO services for companies of 50 to 2,000 employees—plus hands-on expertise that is hard to hire: stability, security, scalability, and resiliency.',
     trackRecord:
-      '20+ years leading technology at an HR/payroll software company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
+      '20+ years leading technology at a payroll SaaS company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
   },
   cta: {
     kicker: 'Book a free Resilience Snapshot',
@@ -72,7 +72,7 @@ export const featuredUseCases = [
   {
     title: 'Scaling IT through a decade of fast growth',
     blurb:
-      'An HR and payroll software company growing about 40% a year needed infrastructure, security, and audits that kept pace—99.9% SLA for 10 years.',
+      'A payroll SaaS company growing about 40% a year needed infrastructure, security, and audits that kept pace—99.9% SLA for 10 years.',
     href: '/case-studies.html#case-2',
   },
   {
@@ -108,11 +108,10 @@ export const caseStudies: CaseStudy[] = [
     id: 'case-2',
     title: 'Scaling IT and security through a decade of fast growth',
     pillars: ['Operations', 'Security', 'Development'],
-    companyType: 'HR and payroll software company (from startup stage)',
+    companyType: 'Payroll SaaS company (from startup stage)',
     problem:
       'Workforce growing about 40% a year needed infrastructure, security, and audits that kept up.',
     did: 'I scaled infrastructure, set up the security team, automated SOC 2 and PCI audit controls, and moved releases to short agile cycles with automated database deployments.',
-    // TODO(Ed): confirm startup-to-valuation figures with current public wording.
     outcome:
       '99.9% SLA for 10 years; quarterly to biweekly releases; helped grow from a $5M startup to a $100M valuation.',
   },
