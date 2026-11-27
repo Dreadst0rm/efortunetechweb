@@ -1,5 +1,6 @@
 import { HandsOnLadder, HandsOnPageActions, HowIWorkStrip } from '../components/HandsOnShared'
 import HubOfferLinks from '../components/HubOfferLinks'
+import QuarterlyProjectIncludes from '../components/QuarterlyProjectIncludes'
 import {
   hardToHireOutcomes,
   handsOnTechnicalPages,
@@ -54,10 +55,11 @@ export default function HandsOnHubPage() {
         <section aria-labelledby="ho-lineup-title">
           <h2 id="ho-lineup-title">The offer lineup</h2>
           <p className="bp-lead">
-            Start with a free Resilience Snapshot, deliver any one lineup project for $9,999.99 through the{' '}
-            <a href="/quarterly-initiative">Quarterly Initiative</a> (industry evaluation included), or scope a larger
-            multi-part project on <a href="/pricing.html">pricing</a>.
+            Start with a free Resilience Snapshot, deliver any one lineup project for $9,500 through the{' '}
+            <a href="/quarterly-initiative">Quarterly Initiative</a>, or scope a larger multi-part project on{' '}
+            <a href="/pricing.html">pricing</a>.
           </p>
+          <QuarterlyProjectIncludes variant="short" showNoContract />
           <div className="ho-offer-list">
             {hubPrimaryOffers.map((offer) => (
               <article key={offer.id} className="ho-offer bp-service-card" id={offer.id}>

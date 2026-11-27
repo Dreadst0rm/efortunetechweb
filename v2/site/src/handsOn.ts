@@ -53,7 +53,7 @@ export const hubPrimaryOffers = [
     title: 'Technology direction',
     outcomes: ['stability'] as const,
     summary:
-      'A senior roadmap and decision-making partner when you do not have a full-time CIO or CTO—or start any one lineup project for $9,999.99 through the Quarterly Initiative.',
+      'A senior roadmap and decision-making partner when you do not have a full-time CIO or CTO—or start any one lineup project for $9,500 through the Quarterly Initiative.',
     links: [
       { type: 'page', href: '/pricing.html', label: 'Fractional and advisory pricing' },
       { type: 'page', href: '/quarterly-initiative', label: 'Quarterly Initiative' },
@@ -155,7 +155,7 @@ export const hubComparisonRows = [
     need: 'Want one project from the lineup delivered?',
     offer: 'Quarterly Initiative',
     price:
-      '$9,999.99 — one project, agreed outcome & delivery, industry evaluation included ($3,800 value)',
+      '$9,500 — one project, full includes list, industry peer evaluation ($3,800 value)',
   },
   {
     need: 'Need a technology leader on call?',

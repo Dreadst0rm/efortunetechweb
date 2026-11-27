@@ -116,6 +116,43 @@
   font-style: italic;
 }
 
+.qi-includes {
+  margin-top: 0.5rem;
+}
+
+.qi-includes--short {
+  margin-top: 1rem;
+}
+
+.qi-includes__kicker {
+  margin: 0 0 0.5rem;
+}
+
+.qi-includes__short-list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+  columns: 1;
+}
+
+@media (min-width: 640px) {
+  .qi-includes__short-list {
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+}
+
+.qi-includes__short-list li {
+  break-inside: avoid;
+  margin: 0.35rem 0;
+  font-size: 0.95rem;
+}
+
+.qi-includes__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.95rem;
+  color: var(--color-text-subtle);
+}
+
 .qi-offer-list,
 .qi-partner-list {
   margin: 1rem 0 0;

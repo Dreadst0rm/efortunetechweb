@@ -1,30 +1,47 @@
-/** Shared Quarterly Initiative ($9,999.99) copy — one project from the hands-on lineup. */
+/** Shared Quarterly Initiative ($9,500) copy — one project from the hands-on lineup. */
 
-export const QUARTERLY_INITIATIVE_PRICE = '$9,999.99'
+export const QUARTERLY_INITIATIVE_PRICE = '$9,500'
 
 export const INDUSTRY_EVALUATION_VALUE = '$3,800'
 
 export const quarterlyInitiativePitch =
-  'Pick any one project from the hands-on lineup. We agree on a defined success outcome and delivery up front, execute through the quarter, and finish with a full industry evaluation report.'
+  'Pick any one project from the hands-on lineup. We agree on a defined success outcome and delivery up front, execute through the quarter, and finish with a full industry peer evaluation. Includes everything listed below.'
 
-export const quarterlyInitiativeOfferItems = [
+export const quarterlyProjectIncludesHeading = `What your ${QUARTERLY_INITIATIVE_PRICE} project includes`
+
+export const quarterlyProjectIncludes = [
   {
-    title: 'Strategy session',
-    body: 'We align on which lineup project fits now, what success looks like, and how we will measure it before work starts.',
+    title: 'Current-state assessment',
+    body: 'We review the systems, risks and gaps that matter for the chosen outcome.',
   },
   {
-    title: 'Defined success outcome',
-    body: 'One clear, measurable result—written down so leadership and your IT partner know what “done” means.',
+    title: 'Roadmap',
+    body: 'A prioritized plan (near-term fixes through 3–5 year direction) with owners and sequencing.',
   },
   {
-    title: 'Delivery through the quarter',
-    body: 'I lead the work with your team or your IT provider: hands-on when needed, steering always, roadblocks cleared so the project actually finishes.',
+    title: 'Defined-outcome delivery',
+    body: 'One project with an agreed success outcome, delivered and verified.',
   },
   {
-    title: 'Industry evaluation report (included)',
-    body: `How you compare to peer companies, how you stack up against competition, and how well you are set up for the future. Valued at ${INDUSTRY_EVALUATION_VALUE} on its own—included at no extra charge.`,
+    title: 'Executive readout',
+    body: 'A leadership/board-ready briefing of findings, decisions and next steps.',
+  },
+  {
+    title: 'Runbooks and knowledge transfer',
+    body: 'Documentation and a handoff session so your team or MSP can run what was built.',
+  },
+  {
+    title: '30 days of post-delivery support',
+    body: 'Questions and adjustments after handoff.',
+  },
+  {
+    title: 'Industry peer evaluation (closing report)',
+    body: `How you compare with peer companies and competitors and how ready you are for the future, valued at ${INDUSTRY_EVALUATION_VALUE} on its own.`,
   },
 ] as const
+
+/** Short labels for pricing glance and hub. */
+export const quarterlyProjectIncludesShort = quarterlyProjectIncludes.map((item) => item.title)
 
 export const startWithQuarterlyLine = `Start with any one project for ${QUARTERLY_INITIATIVE_PRICE}.`
 
@@ -32,3 +49,6 @@ export const quarterlyNoContract = 'No long-term contract.'
 
 export const quarterlyLargerProjectsNote =
   'Larger multi-part projects are scoped separately on the project tier ($10,000–$50,000 total).'
+
+export const quarterlyPricingBlurb =
+  'Any one project from the hands-on lineup. Assessment, roadmap, verified delivery, executive readout, runbooks and handoff, 30-day post-delivery support, and industry peer evaluation included.'

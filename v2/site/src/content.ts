@@ -187,7 +187,7 @@ export const contactInterests = [
   { value: 'vcio-msp', label: 'vCIO alongside my MSP' },
   { value: 'project', label: 'A project' },
   { value: 'interim-cio', label: 'Interim CIO' },
-  { value: 'quarterly-initiative', label: 'Quarterly Initiative ($9,999.99)' },
+  { value: 'quarterly-initiative', label: 'Quarterly Initiative ($9,500)' },
   { value: 'not-sure', label: 'Not sure' },
 ] as const
 

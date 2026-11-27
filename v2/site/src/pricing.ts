@@ -21,9 +21,9 @@ export const pricingTiers = [
   {
     id: 'quarterly-initiative',
     title: 'Quarterly Initiative',
-    price: '$9,999.99',
+    price: '$9,500',
     detail:
-      'Any one project from the hands-on lineup: strategy session, defined success outcome, delivery through the quarter, and a full industry evaluation report ($3,800 value included). No long-term contract.',
+      'Any one project from the hands-on lineup: assessment, roadmap, verified delivery, executive readout, runbooks and handoff, 30-day post-delivery support, and industry peer evaluation ($3,800 value included). No long-term contract.',
     cta: {
       label: 'Start your quarter',
       href: '/contact.html?interest=quarterly-initiative',

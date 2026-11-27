@@ -128,9 +128,9 @@ export const pages: Record<string, PageSeo> = {
     ogImage: defaultImage,
   },
   'quarterly-initiative/index.html': {
-    title: 'The $9,999.99 Quarterly Initiative | Efortune LLC',
+    title: 'The $9,500 Quarterly Initiative | Efortune LLC',
     description:
-      'Any one hands-on lineup project for $9,999.99: strategy session, defined success outcome, delivery, and industry evaluation report ($3,800 value included). No long-term contract.',
+      'Any one hands-on lineup project for $9,500: assessment, roadmap, verified delivery, executive readout, runbooks, 30-day support, and industry peer evaluation ($3,800 value included). No long-term contract.',
     canonicalPath: '/quarterly-initiative',
     ogImage: defaultImage,
   },

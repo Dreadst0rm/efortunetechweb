@@ -11,7 +11,10 @@ describe('QuarterlyInitiativePage', () => {
         name: /any one lineup project/i,
       }),
     ).toBeInTheDocument()
-    expect(screen.getAllByText(/industry evaluation/i).length).toBeGreaterThan(0)
+    expect(
+      screen.getByRole('heading', { level: 2, name: /what your \$9,500 project includes/i }),
+    ).toBeInTheDocument()
+    expect(screen.getAllByText(/industry peer evaluation/i).length).toBeGreaterThan(0)
     const badge = screen.getByRole('link', {
       name: /Quarterly Initiative: any one lineup project/i,
     })

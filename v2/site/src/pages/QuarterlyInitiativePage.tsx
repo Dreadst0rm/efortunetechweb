@@ -1,7 +1,7 @@
 import QuarterlyInitiativeBadge from '../components/QuarterlyInitiativeBadge'
+import QuarterlyProjectIncludes from '../components/QuarterlyProjectIncludes'
 import {
   QUARTERLY_INITIATIVE_PRICE,
-  quarterlyInitiativeOfferItems,
   quarterlyInitiativePitch,
   quarterlyLargerProjectsNote,
   quarterlyNoContract,
@@ -111,16 +111,8 @@ export default function QuarterlyInitiativePage() {
       </section>
 
       <article className="bp-article qi-page__body">
-        <section className="qi-section" aria-labelledby="qi-offer-title">
-          <h2 id="qi-offer-title">The offer</h2>
-          <p className="bp-lead">Here&apos;s everything included for {QUARTERLY_INITIATIVE_PRICE}.</p>
-          <ol className="qi-offer-list">
-            {quarterlyInitiativeOfferItems.map((item) => (
-              <li key={item.title}>
-                <strong>{item.title}:</strong> {item.body}
-              </li>
-            ))}
-          </ol>
+        <section className="qi-section">
+          <QuarterlyProjectIncludes showNoContract />
           <p className="qi-footnote">{quarterlyLargerProjectsNote}</p>
         </section>
 
@@ -175,8 +167,8 @@ export default function QuarterlyInitiativePage() {
         <section className="qi-section qi-section--cta" aria-labelledby="qi-cta-title">
           <h2 id="qi-cta-title">Pick your project</h2>
           <p className="bp-lead">
-            {QUARTERLY_INITIATIVE_PRICE}: strategy session, defined success outcome, delivery through the quarter,
-            and the industry evaluation report included.
+            {QUARTERLY_INITIATIVE_PRICE} for any one hands-on lineup project—including assessment, roadmap, delivery,
+            executive readout, runbooks, 30-day support, and the closing industry peer evaluation.
           </p>
           <p>{quarterlyNoContract}</p>
           <p>

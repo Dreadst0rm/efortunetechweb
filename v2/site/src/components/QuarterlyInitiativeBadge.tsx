@@ -1,5 +1,5 @@
 const BADGE_HREF = '/quarterly-initiative'
-const BADGE_LABEL = 'Quarterly Initiative: any one lineup project for $9,999.99'
+const BADGE_LABEL = 'Quarterly Initiative: any one lineup project for $9,500'
 
 function CompassBracketIcon() {
   return (
@@ -34,7 +34,7 @@ export default function QuarterlyInitiativeBadge() {
         <CompassBracketIcon />
         <span className="qi-offer-badge__copy">
           <span className="qi-offer-badge__title">
-            Quarterly Initiative, <strong className="qi-offer-badge__price">$9,999.99</strong>
+            Quarterly Initiative, <strong className="qi-offer-badge__price">$9,500</strong>
           </span>
           <span className="qi-offer-badge__hint">One project + industry evaluation included</span>
         </span>
