@@ -47,7 +47,7 @@
         "Classical ML did not die — forests and anomaly scores still win many needle-in-haystack jobs. What’s shifting is ambition: from feature-table scores to entities, relationships, and governed meaning GenAI can be held to.",
         "Two pains that still burn budget: old AI — dashboards that flag weirdness when investigators need join paths across silos; new AI — copilots and naive RAG without shared vocabulary → hallucinated metrics, wrong grain, PoC purgatory.",
         "Hyperscalers and graph vendors are packaging “meaning at the data layer” for agents (GraphRAG, semantic layers, ontology product narratives). Mid-market teams still need a way to start without a Palantir-sized program.",
-        "Ready for Monday moves? The AI Maturity Starter Pack — primer, practice checklist, and relationship scorecard — is live for members on https://secure.efortune.tech/series/ai-maturity/"
+        "A deeper AI Maturity Starter Pack is in the Secure library: https://secure.efortune.tech/series/ai-maturity/"
       ],
       "sources": [
         {
@@ -74,7 +74,7 @@
         "The observability frontier isn’t another dashboard pack — it’s closing the loop from signal to grounded explanation to guarded action, without unsupervised self-heal of unknown unknowns.",
         "What’s getting real: assisted investigation (agents that draft cited RCA) and gated remediation on top of progressive delivery — treat vendor MTTR claims as vendor-reported until you measure them.",
         "What’s still oversold: open-ended autonomous ops across heterogeneous stacks. Prefer human/policy gates and canary abort before you buy “self-healing at scale.”",
-        "Want the operating playbook behind that loop? Members deepen on https://secure.efortune.tech — weather-report observability, then guarded action when you’re ready to run it."
+        "A deeper operating playbook is in the Secure library: https://secure.efortune.tech — weather-report observability, then guarded action when you’re ready to run it."
       ],
       "sources": [
         {
@@ -86,11 +86,11 @@
           "url": "https://argoproj.github.io/argo-rollouts/"
         },
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         }
       ]
     }
   ],
-  "bottomLine": "News desk: agent sandbox escapes and tracking cookies sit beside Huang’s go-fast policy line, Qwen image weights, and P2P permanence for open models. Ops desk: land AI maturity with the Starter Pack and close observability with assisted investigation plus gated remediation — unlock both on https://secure.efortune.tech/series/ai-maturity/ and https://secure.efortune.tech"
+  "bottomLine": "News desk: agent sandbox escapes and tracking cookies sit beside Huang’s go-fast policy line, Qwen image weights, and P2P permanence for open models. Ops desk: land AI maturity with the Starter Pack and close observability with assisted investigation plus gated remediation — read more in the Secure library: https://secure.efortune.tech/series/ai-maturity/ and https://secure.efortune.tech"
 }

@@ -9,6 +9,6 @@ describe('Work', () => {
       screen.getByRole('heading', { level: 2, name: /featured use cases/i })
     ).toBeInTheDocument()
     expect(screen.getByText('02 · Proof of Delivery')).toBeInTheDocument()
-    expect(screen.getAllByRole('article')).toHaveLength(3)
+    expect(screen.getAllByRole('article')).toHaveLength(4)
   })
 })

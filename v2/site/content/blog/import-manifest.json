@@ -1,6 +1,6 @@
 {
-  "importedAt": "2026-11-23T23:44:24.069Z",
-  "source": "https://github.com/Dreadst0rm/daily-pulse/tree/main/content/updates",
+  "importedAt": "2026-11-27T00:49:46.239Z",
+  "source": "committed fallback (https://github.com/Dreadst0rm/daily-pulse/tree/main/content/updates)",
   "postCount": 28,
   "dates": [
     "2026-08-13",
@@ -33,6 +33,6 @@
     "2026-11-20"
   ],
   "failed": [],
-  "remoteFailed": false,
-  "remoteError": null
+  "remoteFailed": true,
+  "remoteError": "GitHub list failed: 404 {\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/contents#get-repository-content\",\"status\":\"404\"}"
 }

@@ -5,15 +5,19 @@ export const site = {
   hero: {
     kicker: 'Fractional CIO · vCIO · Technology leadership',
     h1: 'Senior technology leadership, without the full-time hire.',
+    tagline:
+      'Outages, slowdowns and breaches are business problems. I fix them hands-on, then make sure they stay fixed.',
     subhead:
-      'Fractional CIO and vCIO services for companies as small as 50 to large 2,000 employee organizations. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees. I help you decide where technology money goes, and I lead the work that makes systems more resilient, recoverable, faster, and safer.',
     trackRecord:
       '20+ years leading technology at an HR/payroll software company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
   },
   cta: {
-    kicker: 'Book a 30-minute call',
-    label: 'Contact me',
-    href: '/contact.html',
+    kicker: 'Book a free Resilience Snapshot',
+    label: 'Book a free Resilience Snapshot',
+    href: '/contact.html?interest=resilience-snapshot',
+    secondaryLabel: 'See fixed-price projects',
+    secondaryHref: '/hands-on',
   },
 }
 
@@ -30,14 +34,14 @@ export const pillars = [
     id: 'infrastructure',
     title: 'Infrastructure platforms',
     blurb:
-      'Cloud moves and consolidation, network modernization (SD-WAN), and Microsoft 365 and Azure platforms—with AI used safely, not randomly.',
+      'Cloud moves and consolidation, network modernization, and Microsoft 365 and Azure platforms, built to stay up, fail over cleanly, and grow with you, with AI used only where it is safe.',
     proof: 'Phased AWS/GCP and Kubernetes migration; SD-WAN replacing costly private circuits.',
   },
   {
     id: 'operations',
     title: 'Operations',
     blurb:
-      'Monitoring teams actually use, cloud and vendor cost control, and reliability through fast growth.',
+      'Keep systems fast and reliable as you grow: monitoring your team will actually use, cost control, performance when it slips, and capacity planning before the next spike.',
     proof:
       '25% better availability and response times and $4M cost avoidance; 99.9% SLA through a decade of 40% yearly growth.',
   },
@@ -45,7 +49,7 @@ export const pillars = [
     id: 'security',
     title: 'Security',
     blurb:
-      'Identity and passwordless sign-in, compliance readiness (PCI, SSAE16/SOC, GDPR, FIPS), email and domain protection with Keystone.',
+      'Close the gaps attackers look for first: stronger sign-in, email and domain protection with Keystone, and audit readiness (PCI, SOC 2, GDPR, and federal encryption requirements) sized for a company like yours.',
     proof:
       'Built a security team and automated audit controls; FIPS work that kept $10M in yearly revenue.',
   },
@@ -53,6 +57,12 @@ export const pillars = [
 
 /** Short cards on the home page */
 export const featuredUseCases = [
+  {
+    title: 'Modernizing network, identity, and resiliency',
+    blurb:
+      'A national building-products distributor needed one Microsoft platform, a modern network, and an identity and recovery plan that held up under scrutiny.',
+    href: '/case-studies.html#case-5',
+  },
   {
     title: 'Rescuing a stalled business application',
     blurb:
@@ -66,7 +76,7 @@ export const featuredUseCases = [
     href: '/case-studies.html#case-2',
   },
   {
-    title: 'Cloud move with observability',
+    title: 'Cloud move with faster response times',
     blurb:
       'An enterprise email-security vendor moved to AWS/GCP on Kubernetes with shared dashboards—25% better availability and $4M cost avoided.',
     href: '/case-studies.html#case-3',
@@ -101,13 +111,14 @@ export const caseStudies: CaseStudy[] = [
     companyType: 'HR and payroll software company (from startup stage)',
     problem:
       'Workforce growing about 40% a year needed infrastructure, security, and audits that kept up.',
-    did: 'I scaled infrastructure, set up the security team, automated SSAE16 and PCI audit controls, and moved releases to short agile cycles with automated database deployments.',
+    did: 'I scaled infrastructure, set up the security team, automated SOC 2 and PCI audit controls, and moved releases to short agile cycles with automated database deployments.',
+    // TODO(Ed): confirm startup-to-valuation figures with current public wording.
     outcome:
       '99.9% SLA for 10 years; quarterly to biweekly releases; helped grow from a $5M startup to a $100M valuation.',
   },
   {
     id: 'case-3',
-    title: 'Moving to the cloud and making it observable',
+    title: 'Cloud move with faster response times and shared observability',
     pillars: ['Infrastructure platforms', 'Operations'],
     companyType: 'Enterprise email-security vendor',
     problem:
@@ -132,9 +143,9 @@ export const caseStudies: CaseStudy[] = [
     companyType: 'National building-products distributor',
     problem:
       'Scattered point tools, costly private network circuits, sign-in setup needing a long-term plan.',
-    did: 'I led consolidation onto one Microsoft platform, designed SD-WAN to replace the circuits, built the identity roadmap, and advised on data center evacuation, Microsoft 365 backups, server upgrades, segmentation, and endpoint tools.',
+    did: 'I led the move onto one Microsoft platform, designed a modern network to replace costly private circuits, and built the identity roadmap. I also helped the team plan how to leave a data center, back up Microsoft 365, and restore operations if a site went down.',
     outcome:
-      'Lower total cost of ownership and better network resiliency; technology choices the team called unbiased.',
+      'Lower running cost, a more resilient network, and a clearer plan to recover if something failed. The team called the technology choices unbiased.',
   },
   {
     id: 'case-6',
@@ -153,18 +164,19 @@ export const testimonials = [
   {
     quote:
       'Having Ed as an advisor on these initiatives helped my team make unbiased decisions about the technology we wanted to leverage.',
-    author: 'Chris Lofy',
+    author: 'Chris',
     role: 'Infrastructure leader, national building-products distributor',
   },
   {
     quote:
       'His cross-functional experience, dogged nature, and insightful genius created powerful, cost-saving solutions that were repeatable across the enterprise.',
-    author: 'Doug Dexter',
+    author: 'Doug',
     role: 'Colleague, enterprise email-security vendor',
   },
 ] as const
 
 export const contactInterests = [
+  { value: 'resilience-snapshot', label: 'Free Resilience Snapshot' },
   { value: 'hourly', label: 'Hourly advice' },
   { value: 'advisory-retainer', label: 'Advisory retainer' },
   { value: 'fractional-cio', label: 'Fractional CIO' },
@@ -173,6 +185,13 @@ export const contactInterests = [
   { value: 'interim-cio', label: 'Interim CIO' },
   { value: 'quarterly-initiative', label: 'Quarterly Initiative ($9,999.99)' },
   { value: 'not-sure', label: 'Not sure' },
+] as const
+
+export const contactTopics = [
+  { value: 'resilience', label: 'Resilience' },
+  { value: 'disaster-recovery', label: 'Disaster recovery' },
+  { value: 'performance-scale', label: 'Performance and scale' },
+  { value: 'security', label: 'Security' },
 ] as const
 
 export const companySizes = [

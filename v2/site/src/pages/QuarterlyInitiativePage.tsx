@@ -23,8 +23,20 @@ const offerItems = [
 
 const initiatives = [
   {
-    title: 'AI resiliency',
+    title: 'Safe AI adoption',
     body: 'Put AI to work where it pays off, with the guardrails that keep your data, your customers, and your reputation safe.',
+  },
+  {
+    title: 'IT resilience',
+    body: 'Find the weak points in your systems and build a setup that stays up when something fails.',
+  },
+  {
+    title: 'Disaster recovery',
+    body: "Know how you'll restore email, files, and critical systems, and test that the plan actually works.",
+  },
+  {
+    title: 'Performance and scale',
+    body: "Speed up what's slow, and get ready for growth before it breaks what you have.",
   },
   {
     title: 'Cloud',
@@ -55,7 +67,7 @@ const processSteps = [
   },
   {
     title: 'Carry it out, with steering',
-    body: 'Your team or your IT provider does the work. We keep it on track, make the calls that need a senior voice, and remove roadblocks.',
+    body: 'I lead the initiative with your team or your IT provider. I help do the technical work, make the calls that need a senior voice, and clear roadblocks so the quarter actually finishes.',
   },
   {
     title: 'Review and choose next',
@@ -98,7 +110,8 @@ export default function QuarterlyInitiativePage() {
             Most growing companies don't need more technology. They need someone senior to decide what
             matters, set the plan, and keep it moving. That's what you get here: executive-level
             technology leadership, focused on one initiative that moves your business forward this
-            quarter, at an introductory price that makes saying yes easy.
+            quarter—including resilience, recovery, performance, scale, or security—for a fixed
+            $9,999.99.
           </p>
           <div className="bp-hero__actions" aria-label="Primary actions">
             <a className="bp-hero__btn bp-hero__btn--primary" href={CONTACT_BOOK}>
@@ -123,8 +136,8 @@ export default function QuarterlyInitiativePage() {
             ))}
           </ol>
           <p className="qi-footnote">
-            This is an introductory price for new clients. Work of this depth normally runs well into
-            four figures.
+            This is a fixed-price first quarter for new clients. Similar project work usually starts at
+            $10,000 and can run to $50,000, depending on scope.
           </p>
         </section>
 
@@ -163,7 +176,8 @@ export default function QuarterlyInitiativePage() {
         <section className="qi-section" aria-labelledby="qi-partner-title">
           <h2 id="qi-partner-title">From one quarter to a technology partner</h2>
           <p className="bp-lead">
-            The Quarterly Initiative is how most clients start. It's not where they stop.
+            A good way to start working together. Many teams continue with advisory or fractional
+            leadership after the first quarter.
           </p>
           <ul className="qi-partner-list">
             {partnerPoints.map((item) => (
@@ -176,7 +190,10 @@ export default function QuarterlyInitiativePage() {
 
         <section className="qi-section qi-section--cta" aria-labelledby="qi-cta-title">
           <h2 id="qi-cta-title">Pick your first initiative</h2>
-          <p className="bp-lead">Book your $9,999.99 strategy session today.</p>
+          <p className="bp-lead">
+            Start your $9,999.99 quarter: strategy session, a written roadmap, and a 30-day check-in
+            included.
+          </p>
           <p>
             No long-term contract. Just one quarter, one clear goal, and a senior technology leader
             in your corner.

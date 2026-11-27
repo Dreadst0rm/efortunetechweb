@@ -6,7 +6,7 @@ describe('Testimonials', () => {
   it('renders the section title and quotes', () => {
     render(<Testimonials variant="ns" kicker="03 · In Their Words" />)
     expect(
-      screen.getByRole('heading', { level: 2, name: /what clients say/i })
+      screen.getByRole('heading', { level: 2, name: /what colleagues say/i })
     ).toBeInTheDocument()
     expect(screen.getByText('03 · In Their Words')).toBeInTheDocument()
     expect(screen.getAllByRole('figure')).toHaveLength(2)

@@ -28,6 +28,11 @@ const marketingPages = [
   'insights/cloud-architecture-trends.html',
   'security/index.html',
   'security/acknowledgments.html',
+  'hands-on/index.html',
+  'resilience-and-recovery/index.html',
+  'performance-and-scale/index.html',
+  'security-hardening/index.html',
+  'monitoring/index.html',
   '404.html',
 ]
 

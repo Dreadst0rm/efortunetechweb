@@ -16,6 +16,7 @@ import {
   isGibberishMessage,
   isValidCompanySize,
   isValidInterest,
+  isValidProjectTopic,
   readBoundedFormData,
   renderContactFormError,
   requestClientOrigin,
@@ -37,6 +38,7 @@ const LIM = {
   company: 150,
   company_size: 20,
   interest: 60,
+  project_topic: 40,
   driving: 2000,
   message: 5000,
 };
@@ -145,6 +147,9 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
   if (!isValidCompanySize(d.company_size)) {
     return fail('Please choose a valid company size.');
   }
+  if (!isValidProjectTopic(d.project_topic)) {
+    return fail('Please choose a valid project topic.');
+  }
 
   const possibleSpam = isGibberishMessage(d.message);
 
@@ -176,6 +181,7 @@ export async function handleContact(req, env, { sendEmail, fetchImpl, timeoutMs,
     `New contact form message from ${DOMAIN}\n\nName: ${d.name}\nEmail: ${d.email}\nCompany: ${d.company || '-'}\n` +
     (d.company_size ? `Company size: ${d.company_size}\n` : '') +
     (d.interest ? `Interest: ${d.interest}\n` : '') +
+    (d.project_topic ? `Project topic: ${d.project_topic}\n` : '') +
     (d.driving ? `What's driving this now:\n${d.driving}\n\n` : '') +
     `IP: ${req.headers.get('cf-connecting-ip') || '-'}\n\nMessage:\n${d.message}\n`;
   const from = FROM;

@@ -28,7 +28,7 @@ export const pages: Record<string, PageSeo> = {
     title: 'Fractional CIO & vCIO | efortune.tech',
     moduleScripts: ['/assets/islands/hero.js'],
     description:
-      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees. Together we decide where your technology money goes so it grows the business, using 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO for companies of 50 to 2,000 employees. Hands-on resilience, recovery, performance, scale, and security—with 20+ years leading development, infrastructure, operations, and security.',
     canonicalPath: '/',
     ogImage: defaultImage,
   },
@@ -70,6 +70,41 @@ export const pages: Record<string, PageSeo> = {
     description:
       'Hourly, advisory, fractional, vCIO, project, and interim CIO options from $150/hour through $20,000+/month.',
     canonicalPath: '/pricing.html',
+  },
+  'hands-on/index.html': {
+    title: 'Hands-on technical projects | efortune.tech',
+    description:
+      'Fixed-scope resilience, recovery, performance, and security projects from a senior engineer who builds it himself.',
+    canonicalPath: '/hands-on',
+    ogImage: defaultImage,
+  },
+  'resilience-and-recovery/index.html': {
+    title: 'Resilience & disaster recovery projects | efortune.tech',
+    description:
+      'Ride the storm when your cloud provider does not—multi-cloud backups, tested restores, and runbooks from $15,000–$20,000.',
+    canonicalPath: '/resilience-and-recovery',
+    ogImage: defaultImage,
+  },
+  'performance-and-scale/index.html': {
+    title: 'Performance & scale — load-test-and-fix | efortune.tech',
+    description:
+      'Measure, fix, and prove faster response times before growth breaks what you have. Fixed projects from $12,000–$25,000.',
+    canonicalPath: '/performance-and-scale',
+    ogImage: defaultImage,
+  },
+  'security-hardening/index.html': {
+    title: 'Security hardening projects | efortune.tech',
+    description:
+      'Identity, backups, patching, and separate credentials per service—fixed projects from $10,000–$20,000 that reduce risk.',
+    canonicalPath: '/security-hardening',
+    ogImage: defaultImage,
+  },
+  'monitoring/index.html': {
+    title: 'Monitoring & Keystone | efortune.tech',
+    description:
+      'Know email and domain problems before customers do—Keystone monitoring plus the same hands-on ladder for deeper fixes.',
+    canonicalPath: '/monitoring',
+    ogImage: defaultImage,
   },
   'quarterly-initiative/index.html': {
     title: 'The $9,999.99 Quarterly Initiative | Efortune LLC',

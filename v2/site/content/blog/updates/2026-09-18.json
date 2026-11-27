@@ -54,11 +54,11 @@
         "Resolve before you gate: tool hallucination, especially across merged MCP servers, is a registry problem that allow-lists and policy gates never see.",
         "Harness choices are budget choices: context management, planning and tool surface should be tuned per model and budget, not copied wholesale.",
         "Supply chain is a build-path problem: one governed image path beats hundreds of hand-maintained Dockerfiles when a patch has to land everywhere.",
-        "Want the observability playbooks for profiling and gating agent workloads? Members unlock them on https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
+        "Want the observability playbooks for profiling and gating agent workloads? A deeper guide on this is in the Secure library: https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {
@@ -68,5 +68,5 @@
       ]
     }
   ],
-  "bottomLine": "Sep 18 is an operations day for agents: profile them across runs, resolve tool calls against a closed registry before any gate, tune harness components per model and budget, measure what inference really costs per token, and put container builds on one governed path. Read the links, then unlock Secure when you’re ready to instrument and harden: https://secure.efortune.tech"
+  "bottomLine": "Sep 18 is an operations day for agents: profile them across runs, resolve tool calls against a closed registry before any gate, tune harness components per model and budget, measure what inference really costs per token, and put container builds on one governed path. Read the links, then read the Secure library at https://secure.efortune.tech when you are ready to instrument and harden: https://secure.efortune.tech"
 }

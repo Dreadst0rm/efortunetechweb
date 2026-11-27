@@ -23,7 +23,7 @@
     {
       "heading": "On Secure",
       "bullets": [
-        "Our ideas get you 50% of the way there, and the knowledge on Secure gives you 100% of what you need to make the jump to the future. The guide is Decisions API and the fast decision model: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
+        "A deeper guide on the Decisions API and the fast decision model is in the Secure library: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
       ],
       "sources": [
         {
@@ -33,5 +33,5 @@
       ]
     }
   ],
-  "bottomLine": "Our ideas get you 50% of the way there, and the knowledge on Secure gives you 100% of what you need to make the jump to the future. The guide is Decisions API and the fast decision model: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
+  "bottomLine": "A deeper guide on the Decisions API and the fast decision model is in the Secure library: https://secure.efortune.tech/guides/decisions-api-and-the-fast-decision-model/"
 }

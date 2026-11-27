@@ -14,6 +14,11 @@ import CaseStudiesPage from '../src/pages/CaseStudiesPage'
 import ServicesPage from '../src/pages/ServicesPage'
 import PricingPage from '../src/pages/PricingPage'
 import QuarterlyInitiativePage from '../src/pages/QuarterlyInitiativePage'
+import HandsOnHubPage from '../src/pages/HandsOnHubPage'
+import ResilienceRecoveryPage from '../src/pages/ResilienceRecoveryPage'
+import PerformanceScalePage from '../src/pages/PerformanceScalePage'
+import SecurityHardeningPage from '../src/pages/SecurityHardeningPage'
+import MonitoringPage from '../src/pages/MonitoringPage'
 import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
@@ -48,6 +53,11 @@ const routes: Route[] = [
   route('services.html', 'services', <ServicesPage />),
   route('pricing.html', 'pricing', <PricingPage />),
   route('quarterly-initiative/index.html', 'home', <QuarterlyInitiativePage />),
+  route('hands-on/index.html', 'hands-on', <HandsOnHubPage />),
+  route('resilience-and-recovery/index.html', 'hands-on', <ResilienceRecoveryPage />),
+  route('performance-and-scale/index.html', 'hands-on', <PerformanceScalePage />),
+  route('security-hardening/index.html', 'hands-on', <SecurityHardeningPage />),
+  route('monitoring/index.html', 'hands-on', <MonitoringPage />),
   route('case-studies.html', 'case-studies', <CaseStudiesPage />),
   route('about.html', 'about', <AboutPage />),
   route(
@@ -88,6 +98,10 @@ const routes: Route[] = [
         Report security issues to{' '}
         <a href="mailto:hello@efortune.tech">hello@efortune.tech</a>. I respond as quickly as
         possible and coordinate disclosure with reporters.
+      </p>
+      <p>
+        Looking for hands-on security hardening for your business? See{' '}
+        <a href="/security-hardening">security hardening services</a>.
       </p>
       <p>
         <a href="/security/acknowledgments.html">Security acknowledgments</a>

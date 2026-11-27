@@ -1,6 +1,6 @@
 export const blogSite = {
   name: 'Blog',
-  tagline: 'Research and reception notes, published one day at a time.',
+  tagline: 'Research and reception notes, published about once a week.',
   description:
-    'Short daily briefs on product reception, research, and independent coverage from efortune.tech.',
+    'Weekly briefs on product reception, research, and independent coverage from efortune.tech.',
 } as const

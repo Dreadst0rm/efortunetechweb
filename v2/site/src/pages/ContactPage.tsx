@@ -1,4 +1,4 @@
-import { companySizes, contactInterests } from '../content'
+import { companySizes, contactInterests, contactTopics } from '../content'
 
 const SITEKEY = '0x4AAAAAAF8HJhDrsUWEA8c6'
 
@@ -63,6 +63,14 @@ export default function ContactPage() {
                   {contactInterests.map((i) => (
                     <option key={i.value} value={i.value}>
                       {i.label}
+                    </option>
+                  ))}
+                </select>
+                <select name="project_topic" aria-label="Project topic" defaultValue="">
+                  <option value="">Project topic (optional)</option>
+                  {contactTopics.map((t) => (
+                    <option key={t.value} value={t.value}>
+                      {t.label}
                     </option>
                   ))}
                 </select>

@@ -135,11 +135,11 @@
         "A self-hosted PaaS is only as safe as its patch cadence: pick the platform with the automation surface you’ll actually use, then treat its advisory feed as a standing work queue.",
         "Most “it’s up but broken” failures on Coolify are routing and identity edges: gRPC needs h2c, forward-auth needs the right outpost address, and dashboard SSO is not app protection.",
         "Fewer sources of truth means fewer drift incidents: deploy from where the code lives, and add mirrors only on purpose.",
-        "Want the observability and recovery playbooks that keep a self-hosted stack honest? Members unlock them on https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
+        "Want the observability and recovery playbooks that keep a self-hosted stack honest? A deeper guide on this is in the Secure library: https://secure.efortune.tech — start with the Observability series: https://secure.efortune.tech/series/observability/"
       ],
       "sources": [
         {
-          "label": "Secure — member library",
+          "label": "Secure library",
           "url": "https://secure.efortune.tech"
         },
         {
@@ -149,5 +149,5 @@
       ]
     }
   ],
-  "bottomLine": "For most small teams, Coolify stays the pick as long as you patch aggressively, with Dokploy as the staged alternative only if Swarm or overhead forces the move. Give NetBird a Traefik h2c router for gRPC, gate apps with Authentik forward-auth (separate from dashboard SSO), and deploy Origin-hosted apps with SSH deploy keys instead of mirrors. Read the docs linked above, then unlock Secure when you’re ready to operationalize: https://secure.efortune.tech"
+  "bottomLine": "For most small teams, Coolify stays the pick as long as you patch aggressively, with Dokploy as the staged alternative only if Swarm or overhead forces the move. Give NetBird a Traefik h2c router for gRPC, gate apps with Authentik forward-auth (separate from dashboard SSO), and deploy Origin-hosted apps with SSH deploy keys instead of mirrors. Read the docs linked above, then read the Secure library at https://secure.efortune.tech when you are ready to operationalize: https://secure.efortune.tech"
 }

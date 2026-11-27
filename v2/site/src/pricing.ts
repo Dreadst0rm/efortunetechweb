@@ -1,6 +1,6 @@
 export const pricingSummary = {
   intro:
-    'Straightforward options from an hour of advice through interim CIO coverage. Every engagement starts with a conversation so scope matches what you actually need.',
+    'Straightforward options from an hour of advice through a focused project or interim CIO coverage, including resilience, disaster recovery, performance, scale, and security.',
   keystone: {
     title: 'Free domain check',
     blurb:
@@ -17,6 +17,17 @@ export const pricingTiers = [
     detail:
       'Depending on technical depth; ad hoc questions, reviews, and short assessments.',
     cta: { label: 'Book an hour', href: '/contact.html?interest=hourly' },
+  },
+  {
+    id: 'quarterly-initiative',
+    title: 'Quarterly Initiative',
+    price: '$9,999.99',
+    detail:
+      'One focused quarter: strategy session, written roadmap, 30-day check-in, and one measurable win in resilience, recovery, performance, scale, security, or cost—no long-term contract.',
+    cta: {
+      label: 'Start your quarter',
+      href: '/contact.html?interest=quarterly-initiative',
+    },
   },
   {
     id: 'advisory',
@@ -56,7 +67,7 @@ export const pricingTiers = [
     title: 'Project-based',
     price: '$10,000–$50,000 total',
     detail:
-      'ERP selection, cybersecurity overhaul, M&A technology due diligence, or a full technology assessment.',
+      'A focused technical project or assessment: disaster recovery and backups, performance and scale, a cybersecurity overhaul, ERP selection, or technology review for a merger or acquisition.',
     cta: { label: 'Scope a project', href: '/contact.html?interest=project' },
   },
   {
