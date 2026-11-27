@@ -33,6 +33,9 @@ const marketingPages = [
   'performance-and-scale/index.html',
   'security-hardening/index.html',
   'monitoring/index.html',
+  'ai-practice/index.html',
+  'cloud-migration/index.html',
+  'zero-trust/index.html',
   '404.html',
 ]
 

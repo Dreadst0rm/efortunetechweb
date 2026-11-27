@@ -8,7 +8,7 @@ export const site = {
     tagline:
       'Outages, slowdowns and breaches are business problems. I fix them hands-on, then make sure they stay fixed.',
     subhead:
-      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees. I help you decide where technology money goes, and I lead the work that makes systems more resilient, recoverable, faster, and safer.',
+      'Fractional CIO and vCIO services for companies of 50 to 2,000 employees—plus hands-on expertise that is hard to hire: stability, security, scalability, and resiliency.',
     trackRecord:
       '20+ years leading technology at an HR/payroll software company, a cybersecurity software vendor, a design-software company, an enterprise email-security vendor, and a national building-products distributor.',
   },
@@ -16,7 +16,7 @@ export const site = {
     kicker: 'Book a free Resilience Snapshot',
     label: 'Book a free Resilience Snapshot',
     href: '/contact.html?interest=resilience-snapshot',
-    secondaryLabel: 'See fixed-price projects',
+    secondaryLabel: 'See what’s hard to hire',
     secondaryHref: '/hands-on',
   },
 }
@@ -26,7 +26,7 @@ export const pillars = [
     id: 'development',
     title: 'Development',
     blurb:
-      'Rescue stalled projects, reset scope, and release faster with less risk—architecture that fits your team size, using AI safely where it helps.',
+      'Rescue stalled projects and stand up AI as a practice—with guardrails, governance, and use cases that pay off, not one-off experiments.',
     proof:
       'Stalled business application delivered in 9 months after 3+ years of failed attempts; release cadence moved from quarterly to biweekly.',
   },
@@ -177,6 +177,11 @@ export const testimonials = [
 
 export const contactInterests = [
   { value: 'resilience-snapshot', label: 'Free Resilience Snapshot' },
+  { value: 'ai-practice', label: 'AI as a practice' },
+  { value: 'technology-direction', label: 'Technology direction' },
+  { value: 'cloud-move', label: 'Cloud migration' },
+  { value: 'zero-trust', label: 'Zero trust access' },
+  { value: 'cyber-insurance-readiness', label: 'Cyber insurance readiness' },
   { value: 'hourly', label: 'Hourly advice' },
   { value: 'advisory-retainer', label: 'Advisory retainer' },
   { value: 'fractional-cio', label: 'Fractional CIO' },
@@ -192,6 +197,11 @@ export const contactTopics = [
   { value: 'disaster-recovery', label: 'Disaster recovery' },
   { value: 'performance-scale', label: 'Performance and scale' },
   { value: 'security', label: 'Security' },
+  { value: 'ai-practice', label: 'AI practice' },
+  { value: 'technology-direction', label: 'Technology direction' },
+  { value: 'cloud-move', label: 'Cloud move' },
+  { value: 'zero-trust', label: 'Zero trust' },
+  { value: 'cyber-insurance', label: 'Cyber insurance readiness' },
 ] as const
 
 export const companySizes = [

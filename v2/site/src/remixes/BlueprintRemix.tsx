@@ -39,8 +39,12 @@ export default function BlueprintRemix() {
       </section>
 
       <section className="bp-services" id="pillars">
-        <p className="bp-services__kicker">How I help</p>
-        <h2 className="bp-services__title">Four pillars</h2>
+        <p className="bp-services__kicker">Expertise that&apos;s hard to hire</p>
+        <h2 className="bp-services__title">Stability, security, scalability, resiliency</h2>
+        <p className="bp-services__lead">
+          Fixed-price hands-on projects and ongoing leadership—{' '}
+          <a href="/hands-on">see the full offer lineup</a>.
+        </p>
         <div className="bp-services__grid">
           {pillars.map((p) => (
             <article key={p.id} className="bp-service-card">

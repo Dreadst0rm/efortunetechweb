@@ -8,9 +8,107 @@ export const primaryCta = {
 } as const
 
 export const secondaryCta = {
-  label: 'See fixed-price projects',
+  label: 'See what’s hard to hire',
   href: '/hands-on',
 } as const
+
+export const hardToHireOutcomes = [
+  {
+    id: 'stability',
+    title: 'Stability',
+    body: 'Systems stay up, costs stay predictable, and your team is not fighting the same fire every week.',
+  },
+  {
+    id: 'security',
+    title: 'Security',
+    body: 'Fewer open doors, evidence you can show an auditor or insurer, and a plan that outlasts this year’s tools.',
+  },
+  {
+    id: 'scalability',
+    title: 'Scalability',
+    body: 'Growth does not slow the business down—capacity, cloud spend, and architecture keep pace.',
+  },
+  {
+    id: 'resiliency',
+    title: 'Resiliency',
+    body: 'When something fails—a provider, a site, or a bad deploy—you know how to restore and keep working.',
+  },
+] as const
+
+export type HubOfferLink =
+  | { type: 'page'; href: string; label: string }
+  | { type: 'contact'; interest: string; label: string }
+
+export const hubPrimaryOffers = [
+  {
+    id: 'ai-practice',
+    title: 'AI as a practice',
+    outcomes: ['scalability', 'stability'] as const,
+    summary:
+      'Stand up AI as an ongoing capability: use-case selection, guardrails, data safety, governance, and measuring payoff—not one-off tools your team forgets in a month.',
+    links: [{ type: 'page', href: '/ai-practice', label: 'AI as a practice' }] as const satisfies readonly HubOfferLink[],
+  },
+  {
+    id: 'technology-direction',
+    title: 'Technology direction',
+    outcomes: ['stability'] as const,
+    summary:
+      'A senior roadmap and decision-making partner when you do not have a full-time CIO or CTO—priorities, vendor choices, and plain reporting leadership can act on.',
+    links: [
+      { type: 'page', href: '/pricing.html', label: 'Fractional and advisory pricing' },
+      { type: 'page', href: '/quarterly-initiative', label: 'Quarterly Initiative' },
+      { type: 'contact', interest: 'technology-direction', label: 'Talk about technology direction' },
+    ] as const satisfies readonly HubOfferLink[],
+  },
+  {
+    id: 'cloud-migration',
+    title: 'Cloud moves',
+    outcomes: ['scalability', 'resiliency'] as const,
+    summary:
+      'Planning and leading migration and consolidation to cloud—with cost control, failover, and a team that knows how to run what you land.',
+    links: [{ type: 'page', href: '/cloud-migration', label: 'Cloud migration and consolidation' }] as const satisfies readonly HubOfferLink[],
+  },
+  {
+    id: 'zero-trust',
+    title: 'Zero trust access (replace the VPN)',
+    outcomes: ['security', 'stability'] as const,
+    summary:
+      'Identity-based access to apps instead of a wide-open VPN—fewer standing doors, better remote-work experience, vendor-neutral design.',
+    links: [{ type: 'page', href: '/zero-trust', label: 'Zero trust access' }] as const satisfies readonly HubOfferLink[],
+  },
+  {
+    id: 'security-roadmap',
+    title: 'Cyber protection and a 3–5 year security roadmap',
+    outcomes: ['security'] as const,
+    summary:
+      'Near-term hardening plus a written protection plan for the next 3–5 years—including help answering cyber insurance application questions and closing control gaps.',
+    links: [
+      { type: 'page', href: '/security-hardening', label: 'Security roadmap and hardening' },
+      { type: 'contact', interest: 'cyber-insurance-readiness', label: 'Cyber insurance readiness' },
+    ] as const satisfies readonly HubOfferLink[],
+  },
+] as const
+
+export const handsOnTechnicalPages = [
+  {
+    href: '/resilience-and-recovery',
+    label: 'Resilience & recovery',
+    blurb: 'Backups, restore testing, and runbooks when a provider or site fails.',
+    outcomes: ['resiliency'] as const,
+  },
+  {
+    href: '/performance-and-scale',
+    label: 'Performance & scale',
+    blurb: 'Load-test-and-fix before growth breaks what you have.',
+    outcomes: ['scalability'] as const,
+  },
+  {
+    href: '/monitoring',
+    label: 'Monitoring',
+    blurb: 'Catch email, domain, and health issues before customers do.',
+    outcomes: ['stability'] as const,
+  },
+] as const
 
 export const engagementLadder = [
   {
@@ -70,13 +168,6 @@ export const hubComparisonRows = [
   },
 ] as const
 
-export const handsOnServiceLinks = [
-  { href: '/resilience-and-recovery', label: 'Resilience & recovery' },
-  { href: '/performance-and-scale', label: 'Performance & scale' },
-  { href: '/security-hardening', label: 'Security hardening' },
-  { href: '/monitoring', label: 'Monitoring' },
-] as const
-
 /** Verified news sources for outage references on public pages. */
 export const outageReferences = [
   {
@@ -88,3 +179,9 @@ export const outageReferences = [
     href: 'https://www.reuters.com/technology/crowdstrike-says-actively-working-with-customers-impacted-by-outage-2024-07-19/',
   },
 ] as const
+
+/** General reference for controls insurers often ask about (not a guarantee of coverage). */
+export const cyberInsuranceReference = {
+  label: 'CISA — cybersecurity best practices',
+  href: 'https://www.cisa.gov/resources-tools/resources/cybersecurity-best-practices',
+} as const

@@ -23,6 +23,9 @@ const requiredPages = [
   'performance-and-scale/index.html',
   'security-hardening/index.html',
   'monitoring/index.html',
+  'ai-practice/index.html',
+  'cloud-migration/index.html',
+  'zero-trust/index.html',
   'sitemap.xml',
   'robots.txt',
   'assets/site.css',
@@ -55,6 +58,9 @@ describe('build output', () => {
       'https://efortune.tech/performance-and-scale',
       'https://efortune.tech/security-hardening',
       'https://efortune.tech/monitoring',
+      'https://efortune.tech/ai-practice',
+      'https://efortune.tech/cloud-migration',
+      'https://efortune.tech/zero-trust',
     ]) {
       expect(xml, `missing ${loc}`).toContain(`<loc>${loc}</loc>`)
     }

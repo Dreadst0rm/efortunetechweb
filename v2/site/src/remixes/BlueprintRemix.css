@@ -73,6 +73,12 @@
   background: var(--color-bg);
 }
 
+.bp-services__lead {
+  margin: 0 0 1.5rem;
+  max-width: 42rem;
+  color: var(--color-text-muted);
+}
+
 .bp-services__title {
   font-size: 2rem;
 }

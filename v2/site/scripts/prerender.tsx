@@ -19,6 +19,9 @@ import ResilienceRecoveryPage from '../src/pages/ResilienceRecoveryPage'
 import PerformanceScalePage from '../src/pages/PerformanceScalePage'
 import SecurityHardeningPage from '../src/pages/SecurityHardeningPage'
 import MonitoringPage from '../src/pages/MonitoringPage'
+import AiPracticePage from '../src/pages/AiPracticePage'
+import CloudMigrationPage from '../src/pages/CloudMigrationPage'
+import ZeroTrustPage from '../src/pages/ZeroTrustPage'
 import AboutPage from '../src/pages/AboutPage'
 import { pages, renderHead, type PageSeo } from '../src/seo'
 import { htmlRootAttrs } from '../src/siteBuild'
@@ -58,6 +61,9 @@ const routes: Route[] = [
   route('performance-and-scale/index.html', 'hands-on', <PerformanceScalePage />),
   route('security-hardening/index.html', 'hands-on', <SecurityHardeningPage />),
   route('monitoring/index.html', 'hands-on', <MonitoringPage />),
+  route('ai-practice/index.html', 'hands-on', <AiPracticePage />),
+  route('cloud-migration/index.html', 'hands-on', <CloudMigrationPage />),
+  route('zero-trust/index.html', 'hands-on', <ZeroTrustPage />),
   route('case-studies.html', 'case-studies', <CaseStudiesPage />),
   route('about.html', 'about', <AboutPage />),
   route(
@@ -101,7 +107,7 @@ const routes: Route[] = [
       </p>
       <p>
         Looking for hands-on security hardening for your business? See{' '}
-        <a href="/security-hardening">security hardening services</a>.
+        <a href="/security-hardening">security roadmap and hardening services</a>.
       </p>
       <p>
         <a href="/security/acknowledgments.html">Security acknowledgments</a>

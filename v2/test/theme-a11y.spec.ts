@@ -18,6 +18,9 @@ const pages = [
   '/performance-and-scale',
   '/security-hardening',
   '/monitoring',
+  '/ai-practice',
+  '/cloud-migration',
+  '/zero-trust',
   '/blog/',
 ] as const
 

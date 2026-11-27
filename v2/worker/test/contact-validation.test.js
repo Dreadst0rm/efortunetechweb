@@ -321,6 +321,8 @@ describe('interest and company_size validation', () => {
     assert.equal(isValidInterest(''), true);
     assert.equal(isValidInterest('fractional-cio'), true);
     assert.equal(isValidInterest('resilience-snapshot'), true);
+    assert.equal(isValidInterest('ai-practice'), true);
+    assert.equal(isValidInterest('cyber-insurance-readiness'), true);
     assert.equal(isValidInterest('cloud'), false);
   });
 
@@ -328,6 +330,8 @@ describe('interest and company_size validation', () => {
     assert.equal(isValidProjectTopic(''), true);
     assert.equal(isValidProjectTopic('resilience'), true);
     assert.equal(isValidProjectTopic('performance-scale'), true);
+    assert.equal(isValidProjectTopic('zero-trust'), true);
+    assert.equal(isValidProjectTopic('cyber-insurance'), true);
     assert.equal(isValidProjectTopic('cloud'), false);
   });
 

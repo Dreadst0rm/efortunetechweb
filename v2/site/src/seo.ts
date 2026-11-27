@@ -28,7 +28,7 @@ export const pages: Record<string, PageSeo> = {
     title: 'Fractional CIO & vCIO | efortune.tech',
     moduleScripts: ['/assets/islands/hero.js'],
     description:
-      'Fractional CIO and vCIO for companies of 50 to 2,000 employees. Hands-on resilience, recovery, performance, scale, and security—with 20+ years leading development, infrastructure, operations, and security.',
+      'Fractional CIO and vCIO for companies of 50 to 2,000 employees—hands-on expertise that is hard to hire: stability, security, scalability, and resiliency.',
     canonicalPath: '/',
     ogImage: defaultImage,
   },
@@ -72,9 +72,9 @@ export const pages: Record<string, PageSeo> = {
     canonicalPath: '/pricing.html',
   },
   'hands-on/index.html': {
-    title: 'Hands-on technical projects | efortune.tech',
+    title: 'Expertise that’s hard to hire | efortune.tech',
     description:
-      'Fixed-scope resilience, recovery, performance, and security projects from a senior engineer who builds it himself.',
+      'Hands-on stability, security, scalability, and resiliency—AI practice, cloud moves, zero trust, security roadmaps, and fixed-price technical projects.',
     canonicalPath: '/hands-on',
     ogImage: defaultImage,
   },
@@ -93,10 +93,31 @@ export const pages: Record<string, PageSeo> = {
     ogImage: defaultImage,
   },
   'security-hardening/index.html': {
-    title: 'Security hardening projects | efortune.tech',
+    title: 'Cyber protection & 3–5 year security roadmap | efortune.tech',
     description:
-      'Identity, backups, patching, and separate credentials per service—fixed projects from $10,000–$20,000 that reduce risk.',
+      'Near-term hardening plus a 3–5 year protection plan—help closing gaps and preparing evidence for cyber insurance applications without promising coverage.',
     canonicalPath: '/security-hardening',
+    ogImage: defaultImage,
+  },
+  'ai-practice/index.html': {
+    title: 'AI as a practice | efortune.tech',
+    description:
+      'Stand up AI as an ongoing capability: use cases, guardrails, governance, data safety, and measuring payoff—not one-off tools.',
+    canonicalPath: '/ai-practice',
+    ogImage: defaultImage,
+  },
+  'cloud-migration/index.html': {
+    title: 'Cloud migration & consolidation | efortune.tech',
+    description:
+      'Plan and lead cloud moves with cost control, failover, and runbooks your team can operate.',
+    canonicalPath: '/cloud-migration',
+    ogImage: defaultImage,
+  },
+  'zero-trust/index.html': {
+    title: 'Zero trust access (replace the VPN) | efortune.tech',
+    description:
+      'Identity-based access to apps—fewer open doors, better remote work, vendor-neutral design.',
+    canonicalPath: '/zero-trust',
     ogImage: defaultImage,
   },
   'monitoring/index.html': {

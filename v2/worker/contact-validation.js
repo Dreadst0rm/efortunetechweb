@@ -99,6 +99,11 @@ export const EMAIL_RE = /^[^\s@<>()",;:\x00-\x1f]+@[^\s@<>()",;:\x00-\x1f]+\.[A-
 
 export const VALID_INTERESTS = new Set([
   'resilience-snapshot',
+  'ai-practice',
+  'technology-direction',
+  'cloud-move',
+  'zero-trust',
+  'cyber-insurance-readiness',
   'hourly',
   'advisory-retainer',
   'fractional-cio',
@@ -114,6 +119,11 @@ export const VALID_PROJECT_TOPICS = new Set([
   'disaster-recovery',
   'performance-scale',
   'security',
+  'ai-practice',
+  'technology-direction',
+  'cloud-move',
+  'zero-trust',
+  'cyber-insurance',
 ]);
 
 export const VALID_COMPANY_SIZES = new Set([
